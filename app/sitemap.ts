@@ -15,8 +15,9 @@ const calculators = [
   "ihbar",
   "kidem-ihbar",
   "yas",
+  "yillik-izin",
+  "kredi-borc",
 ];
-
 export default function sitemap(): MetadataRoute.Sitemap {
   const mainPages: MetadataRoute.Sitemap = [
     {

@@ -15,6 +15,7 @@ import NoticeCalculator from "@/components/calculators/NoticeCalculator";
 import KidemIhbarCalculator from "@/components/calculators/KidemIhbarCalculator";
 import AgeCalculator from "@/components/calculators/AgeCalculator";
 import AnnualLeaveCalculator from "@/components/calculators/AnnualLeaveCalculator";
+import BankLoanCalculator from "@/components/calculators/BankLoanCalculator";
 
 /* =========================================================
    HESAPLAMA BİLEŞENLERİ
@@ -32,6 +33,7 @@ const componentMap: Record<string, ComponentType> = {
   "kidem-ihbar": KidemIhbarCalculator,
   yas: AgeCalculator,
   "yillik-izin": AnnualLeaveCalculator,
+  "kredi-borc": BankLoanCalculator,
 };
 
 /* =========================================================
@@ -491,6 +493,53 @@ const seoContents: Record<string, SeoContent> = {
           "18 yaş ve altındaki çalışanların yıllık izni kaç gündür?",
         answer:
           "18 yaş ve daha küçük yaştaki çalışanlarda yıllık ücretli izin süresi 20 günden az olamaz.",
+      },
+    ],
+  },
+
+  /* =======================================================
+     KREDİ / BANKA BORÇ
+  ======================================================= */
+
+  "kredi-borc": {
+    title:
+      "Kredi ve Banka Borç Hesaplama 2026 | Aylık Taksit ve Geri Ödeme",
+    description:
+      "Kredi borç hesaplama aracı ile kredi tutarı, aylık faiz ve vade bilgilerine göre aylık taksit, toplam faiz, toplam geri ödeme ve ödeme planını hesaplayın.",
+    intro:
+      "Kredi ve banka borç hesaplama aracımız, girdiğiniz kredi tutarı, aylık faiz oranı ve vade bilgilerine göre temel bir eşit taksitli ödeme planı oluşturur.",
+    howItWorks: [
+      "Kredi türünü seçin.",
+      "Kredi tutarını girin.",
+      "Aylık faiz oranını girin.",
+      "Vade süresini ay olarak belirleyin.",
+      "Başlangıç tarihini seçin.",
+      "Aylık taksit ve ayrıntılı ödeme planını görüntüleyin.",
+    ],
+    faqs: [
+      {
+        question:
+          "Kredi aylık taksiti nasıl hesaplanır?",
+        answer:
+          "Aylık taksit, kredi anaparası, aylık faiz oranı ve vade kullanılarak eşit taksitli temel amortisman yöntemiyle hesaplanır.",
+      },
+      {
+        question:
+          "Toplam geri ödeme nedir?",
+        answer:
+          "Kredi süresince ödenen tüm taksitlerin toplamıdır.",
+      },
+      {
+        question:
+          "Toplam faiz nasıl hesaplanır?",
+        answer:
+          "Temel hesaplamada toplam geri ödemeden kredi anaparası çıkarılarak toplam faiz bulunur.",
+      },
+      {
+        question:
+          "Bu hesaplama bankanın kesin ödeme planı mıdır?",
+        answer:
+          "Hayır. Sonuç, kullanıcının girdiği faiz oranına göre oluşturulan temel bir ödeme planıdır. Bankaya göre uygulanabilecek diğer maliyetler ayrıca değişebilir.",
       },
     ],
   },

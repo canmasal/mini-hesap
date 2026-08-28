@@ -71,7 +71,7 @@ export const calculators = [
       "Kıdem ve ihbar tazminatınızı aynı ekranda ayrı ayrı ve birlikte hesaplayın.",
   },
 
-  {
+    {
     slug: "yas",
     icon: "🎂",
     title: "Yaş Hesaplama",
@@ -85,5 +85,13 @@ export const calculators = [
     title: "Yıllık İzin Hesaplama",
     description:
       "İşe giriş tarihinize, hizmet sürenize ve yaşınıza göre yıllık ücretli izin hakkınızı hesaplayın.",
+  },
+
+  {
+    slug: "kredi-borc",
+    icon: "🏦",
+    title: "Kredi / Banka Borç Hesaplama",
+    description:
+      "Kredi tutarı, faiz ve vadeye göre aylık taksit, toplam faiz, toplam geri ödeme ve ödeme planını hesaplayın.",
   },
 ] as const;
