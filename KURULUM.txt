@@ -1,0 +1,24 @@
+MINIHESAP KURULUM
+
+1) ZIP'i aç.
+2) İçindeki "mini-hesap" klasörünü VS Code ile aç.
+3) VS Code terminalinde:
+   npm install
+4) Kurulum bitince:
+   npm run dev
+5) http://localhost:3000 adresini aç.
+
+Doğru klasör yapısı:
+
+mini-hesap/
+  app/
+  components/
+  data/
+  lib/
+    calculations/
+      netSalary.ts
+  public/
+  package.json
+  tsconfig.json
+
+İkinci bir mini-hesap klasörü oluşturma.
