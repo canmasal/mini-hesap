@@ -55,11 +55,19 @@ export const calculators = [
     description:
       "Hizmet süresine göre ihbar tazminatınızı hesaplayın.",
   },
-  {
+   {
     slug: "kidem-ihbar",
     icon: "🤝",
     title: "Kıdem + İhbar Birlikte",
     description:
       "Kıdem ve ihbar tazminatınızı aynı ekranda hesaplayın.",
   },
-] as const;
+
+  {
+    slug: "yas",
+    icon: "🎂",
+    title: "Yaş Hesaplama",
+    description:
+      "Doğum tarihinize göre yaşınızı yıl, ay ve gün olarak hesaplayın.",
+  },
+];

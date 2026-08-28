@@ -13,6 +13,11 @@ import OvertimeCalculator from "@/components/calculators/OvertimeCalculator";
 import SeveranceCalculator from "@/components/calculators/SeveranceCalculator";
 import NoticeCalculator from "@/components/calculators/NoticeCalculator";
 import KidemIhbarCalculator from "@/components/calculators/KidemIhbarCalculator";
+import AgeCalculator from "@/components/calculators/AgeCalculator";
+
+/* =========================================================
+   HESAPLAMA BİLEŞENLERİ
+========================================================= */
 
 const componentMap: Record<string, ComponentType> = {
   "net-maas": NetSalaryCalculator,
@@ -24,7 +29,12 @@ const componentMap: Record<string, ComponentType> = {
   kidem: SeveranceCalculator,
   ihbar: NoticeCalculator,
   "kidem-ihbar": KidemIhbarCalculator,
+  yas: AgeCalculator,
 };
+
+/* =========================================================
+   SEO TİPLERİ
+========================================================= */
 
 type FaqItem = {
   question: string;
@@ -39,287 +49,408 @@ type SeoContent = {
   faqs: FaqItem[];
 };
 
+/* =========================================================
+   SEO İÇERİKLERİ
+========================================================= */
+
 const seoContents: Record<string, SeoContent> = {
+  /* =======================================================
+     NET MAAŞ
+  ======================================================= */
+
   "net-maas": {
-    title: "Net Maaş Hesaplama 2026 | Brüt Maaştan Net Maaş",
+    title:
+      "Net Maaş Hesaplama 2026 | Brüt Maaştan Net Maaş",
     description:
       "2026 net maaş hesaplama aracı ile brüt maaşınızı girerek tahmini net maaşınızı ve kesinti detaylarını hesaplayın.",
     intro:
-      "Net maaş hesaplama aracımız, brüt ücretiniz üzerinden SGK, işsizlik sigortası, gelir vergisi ve diğer temel kesinti kalemlerini dikkate alarak tahmini net maaşı görmenizi sağlar.",
+      "Net maaş hesaplama aracımız, brüt ücretiniz üzerinden temel kesinti kalemlerini dikkate alarak tahmini net maaşınızı görmenizi sağlar.",
     howItWorks: [
       "Brüt maaşınızı girin.",
-      "Hesaplamak istediğiniz ayı seçin.",
+      "Hesaplama ayını seçin.",
       "Varsa önceki kümülatif vergi matrahınızı girin.",
-      "Hesapla düğmesine basarak sonuç ve kesinti detaylarını görüntüleyin.",
+      "Hesapla butonuna basarak sonucu görüntüleyin.",
     ],
     faqs: [
       {
-        question: "Brüt maaş ile net maaş arasındaki fark nedir?",
+        question:
+          "Brüt maaş ile net maaş arasındaki fark nedir?",
         answer:
-          "Brüt maaş, kesintiler uygulanmadan önceki ücret tutarıdır. Net maaş ise ilgili kesintiler ve istisnalar sonrasında çalışanın eline geçen tutardır.",
+          "Brüt maaş kesintiler uygulanmadan önceki ücret tutarıdır. Net maaş ise ilgili kesintiler ve istisnalar sonrasında çalışanın eline geçen tutardır.",
       },
       {
-        question: "Kümülatif vergi matrahı neden önemlidir?",
+        question:
+          "Kümülatif vergi matrahı neden önemlidir?",
         answer:
-          "Ücret gelirlerinde yıl içinde biriken kümülatif vergi matrahı, gelir vergisinin hangi dilimlerden hesaplanacağını etkileyebilir.",
+          "Yıl içinde biriken kümülatif vergi matrahı, gelir vergisinin hangi dilimlerden hesaplanacağını etkileyebilir.",
       },
       {
-        question: "Net maaş her ay aynı olur mu?",
+        question:
+          "Net maaş her ay aynı olur mu?",
         answer:
-          "Her zaman aynı olmayabilir. Vergi dilimi değişiklikleri, prim, ikramiye ve diğer ücret unsurları aylık net maaşı etkileyebilir.",
+          "Vergi dilimi, prim, ikramiye ve diğer ücret unsurları nedeniyle aylık net maaş değişebilir.",
       },
     ],
   },
 
+  /* =======================================================
+     YÜZDE
+  ======================================================= */
+
   yuzde: {
-    title: "Yüzde Hesaplama | Yüzde Artış ve Azalış Hesapla",
+    title:
+      "Yüzde Hesaplama | Yüzde Artış ve Azalış Hesapla",
     description:
       "Yüzde hesaplama aracı ile bir sayının yüzdesini, yüzde artışını ve yüzde azalışını hızlıca hesaplayın.",
     intro:
-      "Yüzde hesaplama aracı ile günlük hayatta sık kullanılan yüzde işlemlerini hızlı ve anlaşılır şekilde yapabilirsiniz.",
+      "Yüzde hesaplama aracıyla günlük hayatta sık kullanılan yüzde işlemlerini hızlı ve anlaşılır şekilde yapabilirsiniz.",
     howItWorks: [
       "Ana tutarı girin.",
-      "Yüzde oranını yazın.",
-      "Yüzde tutarını ve artış veya azalış sonucunu görüntüleyin.",
+      "Yüzde oranını girin.",
+      "Yüzde tutarını görüntüleyin.",
+      "Artış veya azalış sonucunu inceleyin.",
     ],
     faqs: [
       {
-        question: "Bir sayının yüzdesi nasıl hesaplanır?",
+        question:
+          "Bir sayının yüzdesi nasıl hesaplanır?",
         answer:
-          "Ana tutar, yüzde oranıyla çarpılır ve 100'e bölünür.",
+          "Ana tutar yüzde oranıyla çarpılır ve 100'e bölünür.",
       },
       {
-        question: "Yüzde artış nasıl hesaplanır?",
+        question:
+          "Yüzde artış nasıl hesaplanır?",
         answer:
-          "Ana tutara, ana tutarın ilgili yüzde oranındaki artış miktarı eklenir.",
+          "Ana tutarın ilgili yüzde oranındaki artış miktarı bulunur ve ana tutara eklenir.",
       },
       {
-        question: "Yüzde azalış nasıl hesaplanır?",
+        question:
+          "Yüzde azalış nasıl hesaplanır?",
         answer:
-          "Ana tutardan, ana tutarın ilgili yüzde oranındaki azalış miktarı çıkarılır.",
+          "Ana tutarın ilgili yüzde oranındaki azalış miktarı bulunur ve ana tutardan çıkarılır.",
       },
     ],
   },
 
+  /* =======================================================
+     KDV
+  ======================================================= */
+
   kdv: {
-    title: "KDV Hesaplama 2026 | KDV Dahil ve Hariç Hesapla",
+    title:
+      "KDV Hesaplama 2026 | KDV Dahil ve Hariç Hesapla",
     description:
       "KDV hesaplama aracı ile KDV dahil ve KDV hariç tutarı, KDV miktarını ve genel toplamı hesaplayın.",
     intro:
-      "KDV hesaplama aracımız sayesinde bir tutarın KDV dahil veya hariç karşılığını ve KDV miktarını hızlıca bulabilirsiniz.",
+      "KDV hesaplama aracımız ile bir tutarın KDV dahil veya KDV hariç karşılığını kolayca hesaplayabilirsiniz.",
     howItWorks: [
       "Tutarı girin.",
       "KDV oranını seçin.",
-      "Tutarın KDV dahil veya hariç olduğunu belirtin.",
-      "KDV ve toplam tutarı görüntüleyin.",
+      "Tutarın KDV dahil veya hariç olduğunu seçin.",
+      "KDV ve genel toplamı görüntüleyin.",
     ],
     faqs: [
       {
-        question: "KDV dahil tutardan KDV hariç tutar nasıl bulunur?",
+        question:
+          "KDV dahil tutardan KDV hariç tutar nasıl bulunur?",
         answer:
-          "KDV dahil toplam, seçilen KDV oranı kullanılarak ters hesaplamayla KDV hariç tutar ve KDV olarak ayrıştırılır.",
+          "KDV dahil toplam, seçilen KDV oranı kullanılarak ters hesaplama ile KDV hariç tutara ve KDV miktarına ayrılır.",
       },
       {
-        question: "KDV hariç 1.000 TL'nin %20 KDV'si nedir?",
+        question:
+          "1000 TL'nin %20 KDV'si kaç TL'dir?",
         answer:
-          "1.000 TL üzerinden %20 KDV 200 TL'dir. KDV dahil toplam 1.200 TL olur.",
+          "1000 TL'nin %20 KDV'si 200 TL'dir. KDV dahil toplam 1200 TL olur.",
       },
       {
-        question: "Hangi KDV oranını kullanmalıyım?",
+        question:
+          "KDV oranı neden ürüne göre değişebilir?",
         answer:
-          "Uygulanacak oran ürün veya hizmete göre değişebilir. Hesaplama sırasında ilgili oranı seçmelisiniz.",
+          "Uygulanan KDV oranı ürün veya hizmetin tabi olduğu mevzuata göre değişebilir.",
       },
     ],
   },
 
+  /* =======================================================
+     İNDİRİM
+  ======================================================= */
+
   indirim: {
-    title: "İndirim Hesaplama | İndirimli Fiyat Hesapla",
+    title:
+      "İndirim Hesaplama | İndirimli Fiyat Hesapla",
     description:
-      "İndirim hesaplama aracı ile indirim oranını, indirim tutarını ve indirim sonrası ödenecek fiyatı hesaplayın.",
+      "İndirim hesaplama aracı ile indirim oranını, indirim tutarını ve indirim sonrası fiyatı hesaplayın.",
     intro:
-      "Bir ürünün indirimli fiyatını öğrenmek için normal fiyatı ve indirim oranını girmeniz yeterlidir.",
+      "Normal fiyatı ve indirim oranını girerek indirim miktarını ve ödenecek son fiyatı kolayca bulabilirsiniz.",
     howItWorks: [
       "Normal fiyatı girin.",
       "İndirim oranını yüzde olarak yazın.",
-      "İndirim tutarını ve ödenecek son fiyatı görüntüleyin.",
+      "İndirim tutarını görüntüleyin.",
+      "İndirimli fiyatı görüntüleyin.",
     ],
     faqs: [
       {
-        question: "%20 indirim nasıl hesaplanır?",
+        question:
+          "%20 indirim nasıl hesaplanır?",
         answer:
-          "Ürün fiyatının %20'si indirim miktarıdır. Bu tutar normal fiyattan çıkarıldığında indirimli fiyat bulunur.",
+          "Normal fiyatın %20'si indirim miktarıdır ve normal fiyattan çıkarıldığında indirimli fiyat bulunur.",
       },
       {
-        question: "İndirim tutarı nedir?",
+        question:
+          "İndirim tutarı nedir?",
         answer:
-          "Normal fiyat üzerinden uygulanan yüzde oranının parasal karşılığıdır.",
+          "Normal fiyat üzerinden uygulanan indirim oranının parasal karşılığıdır.",
       },
       {
-        question: "İndirimli fiyat nasıl bulunur?",
+        question:
+          "İndirimli fiyat nasıl bulunur?",
         answer:
-          "Normal fiyattan hesaplanan indirim tutarı çıkarılır.",
+          "Normal fiyattan hesaplanan indirim miktarı çıkarılır.",
       },
     ],
   },
 
+  /* =======================================================
+     KİRA
+  ======================================================= */
+
   "kira-artisi": {
-    title: "Kira Artış Hesaplama 2026 | Yeni Kira Hesapla",
+    title:
+      "Kira Artış Hesaplama 2026 | Yeni Kira Hesapla",
     description:
       "Kira artış hesaplama aracı ile mevcut kira ve girdiğiniz artış oranına göre yeni kira tutarını hesaplayın.",
     intro:
-      "Mevcut kira tutarınızı ve uygulamak istediğiniz artış oranını girerek yeni aylık kira bedelini ve yıllık farkı hesaplayabilirsiniz.",
+      "Mevcut kira tutarı ve artış oranını girerek yeni aylık kira tutarını ve yıllık farkı hesaplayabilirsiniz.",
     howItWorks: [
       "Mevcut kira tutarını girin.",
       "Artış oranını yüzde olarak yazın.",
-      "Yeni aylık kira tutarını görüntüleyin.",
+      "Yeni kira tutarını görüntüleyin.",
       "Yıllık farkı inceleyin.",
     ],
     faqs: [
       {
-        question: "Kira artışı nasıl hesaplanır?",
+        question:
+          "Kira artışı nasıl hesaplanır?",
         answer:
-          "Mevcut kira tutarı, seçilen artış oranına göre hesaplanan artış miktarı kadar yükseltilir.",
+          "Mevcut kira tutarına seçilen artış oranına göre hesaplanan artış miktarı eklenir.",
       },
       {
-        question: "Kira artış oranı her zaman aynı mıdır?",
+        question:
+          "Kira artış oranı her zaman aynı mıdır?",
         answer:
-          "Hayır. Uygulanabilecek yasal oran ve sözleşme koşulları döneme ve duruma göre değişebilir.",
+          "Hayır. Uygulanabilecek oran dönemsel yasal düzenlemelere ve sözleşme koşullarına göre değişebilir.",
       },
       {
-        question: "Yıllık kira farkı nasıl hesaplanır?",
+        question:
+          "Yıllık kira farkı nasıl hesaplanır?",
         answer:
-          "Aylık artış tutarı 12 ay üzerinden hesaplanarak yıllık fark bulunur.",
+          "Aylık artış tutarı 12 ay üzerinden hesaplanır.",
       },
     ],
   },
 
+  /* =======================================================
+     FAZLA MESAİ
+  ======================================================= */
+
   "fazla-mesai": {
-    title: "Fazla Mesai Hesaplama | Fazla Mesai Ücreti",
+    title:
+      "Fazla Mesai Hesaplama | Fazla Mesai Ücreti",
     description:
       "Fazla mesai hesaplama aracı ile aylık brüt ücret, mesai saati ve katsayı üzerinden tahmini fazla mesai ücretini hesaplayın.",
     intro:
-      "Fazla mesai hesaplama aracı, girdiğiniz ücret ve saat bilgileri üzerinden temel fazla mesai tutarını hesaplar.",
+      "Aylık brüt ücretinizi, fazla mesai saatinizi ve katsayıyı girerek temel fazla mesai tutarını hesaplayabilirsiniz.",
     howItWorks: [
-      "Aylık brüt maaşınızı girin.",
-      "Fazla mesai saatinizi girin.",
+      "Aylık brüt maaşı girin.",
+      "Fazla mesai saatini girin.",
       "Mesai katsayısını seçin.",
       "Tahmini fazla mesai tutarını görüntüleyin.",
     ],
     faqs: [
       {
-        question: "Fazla mesai ücreti nasıl hesaplanır?",
+        question:
+          "Fazla mesai ücreti nasıl hesaplanır?",
         answer:
-          "Temel hesaplama mantığında saatlik ücret bulunur, ilgili katsayı uygulanır ve fazla mesai saatiyle çarpılır.",
+          "Temel hesaplamada saatlik ücret bulunur, ilgili katsayı uygulanır ve fazla mesai saatiyle çarpılır.",
       },
       {
-        question: "1,5 kat fazla mesai ne demektir?",
+        question:
+          "1,5 kat fazla mesai ne demektir?",
         answer:
-          "Saatlik temel ücretin 1,5 katı üzerinden hesaplanan fazla çalışma ücretini ifade eder.",
+          "Temel saatlik ücretin 1,5 katı üzerinden hesaplama yapılması anlamına gelir.",
       },
       {
-        question: "Fazla mesai sonucu net midir?",
+        question:
+          "Fazla mesai sonucu net midir?",
         answer:
-          "Bu araç temel brüt tutarı hesaplar. Vergi ve diğer bordro kesintileri ayrıca değerlendirilebilir.",
+          "Bu araç temel brüt tutarı hesaplar. Vergi ve diğer bordro kesintileri ayrıca değerlendirilmelidir.",
       },
     ],
   },
 
+  /* =======================================================
+     KIDEM
+  ======================================================= */
+
   kidem: {
-    title: "Kıdem Tazminatı Hesaplama 2026",
+    title:
+      "Kıdem Tazminatı Hesaplama 2026",
     description:
       "Kıdem tazminatı hesaplama aracı ile işe giriş ve çıkış tarihleri, brüt ücret ve düzenli yan haklara göre tahmini kıdem tazminatınızı hesaplayın.",
     intro:
-      "Kıdem tazminatı hesabında çalışma süresi, kıdeme esas ücret, düzenli yan haklar ve ilgili dönemdeki kıdem tazminatı tavanı önem taşır.",
+      "Kıdem hesabında çalışma süresi, kıdeme esas ücret, düzenli yan haklar ve ilgili dönemdeki kıdem tazminatı tavanı önemlidir.",
     howItWorks: [
       "Son brüt ücretinizi girin.",
-      "İşe giriş ve işten çıkış tarihlerini seçin.",
-      "Varsa düzenli yemek, yol ve diğer yan hakları girin.",
+      "İşe giriş ve çıkış tarihlerini seçin.",
+      "Varsa düzenli yan haklarınızı girin.",
       "Çalışma süresini yıl, ay ve gün olarak görüntüleyin.",
-      "Kıdeme esas ücret, brüt kıdem, damga vergisi ve net kıdem tutarını inceleyin.",
+      "Kıdem tazminatı detaylarını inceleyin.",
     ],
     faqs: [
       {
-        question: "Kıdem tazminatı nasıl hesaplanır?",
+        question:
+          "Kıdem tazminatı nasıl hesaplanır?",
         answer:
-          "Temel hesaplamada kıdeme esas ücret ve çalışma süresi dikkate alınır. Her tam hizmet yılı için 30 günlük ücret esas alınır ve artan süre orantılı olarak hesaplanır.",
+          "Temel hesaplamada kıdeme esas ücret ve hizmet süresi dikkate alınır. Her tam yıl için 30 günlük ücret esas alınır ve artan süre orantılı hesaplanır.",
       },
       {
-        question: "Kıdem tazminatı tavanı nedir?",
+        question:
+          "Kıdem tazminatı tavanı nedir?",
         answer:
-          "Kıdem tazminatına esas alınabilecek ücretin ilgili dönemde ulaşabileceği yasal üst sınırdır.",
+          "Kıdem tazminatına esas alınabilecek ücretin ilgili dönem için belirlenen yasal üst sınırıdır.",
       },
       {
-        question: "Yol ve yemek yardımı kıdem hesabına dahil edilir mi?",
+        question:
+          "Yol ve yemek yardımı kıdem hesabına dahil edilir mi?",
         answer:
-          "Düzenli ve para veya para ile ölçülebilen bazı menfaatler koşullarına göre hesaba dahil edilebilir.",
+          "Düzenli olarak sağlanan ve para veya para ile ölçülebilen bazı menfaatler koşullarına göre hesaba dahil edilebilir.",
       },
     ],
   },
 
+  /* =======================================================
+     İHBAR
+  ======================================================= */
+
   ihbar: {
-    title: "İhbar Tazminatı Hesaplama 2026",
+    title:
+      "İhbar Tazminatı Hesaplama 2026",
     description:
       "İhbar tazminatı hesaplama aracı ile çalışma süresine göre ihbar süresini ve tahmini ihbar tazminatını hesaplayın.",
     intro:
-      "İhbar tazminatı hesabında hizmet süresi, bildirim süresi, ücret ve bazı düzenli ücret niteliğindeki ödemeler önem taşır.",
+      "Hizmet sürenizi ve ücret bilgilerinizi girerek temel ihbar sürenizi ve tahmini ihbar tazminatınızı hesaplayabilirsiniz.",
     howItWorks: [
       "Brüt ücretinizi girin.",
-      "İşe giriş ve işten çıkış tarihlerini seçin.",
-      "Varsa düzenli yan hakları girin.",
-      "Hizmet süresine göre ihbar süresini görüntüleyin.",
-      "Brüt ve tahmini net ihbar tazminatı sonuçlarını inceleyin.",
+      "İşe giriş ve çıkış tarihlerini seçin.",
+      "Varsa düzenli yan haklarınızı girin.",
+      "İhbar süresini otomatik olarak görüntüleyin.",
+      "Tahmini tazminat tutarını inceleyin.",
     ],
     faqs: [
       {
-        question: "İhbar süresi nasıl belirlenir?",
+        question:
+          "İhbar süresi nasıl belirlenir?",
         answer:
           "Belirsiz süreli iş sözleşmelerinde hizmet süresine göre kanuni bildirim süreleri uygulanır.",
       },
       {
-        question: "En uzun kanuni ihbar süresi kaç haftadır?",
+        question:
+          "En uzun kanuni ihbar süresi kaç haftadır?",
         answer:
           "Üç yıldan fazla hizmet süresinde kanuni bildirim süresi 8 haftadır.",
       },
       {
-        question: "İhbar tazminatı vergilendirilir mi?",
+        question:
+          "İhbar tazminatı vergilendirilir mi?",
         answer:
-          "İhbar tazminatı ücret niteliğinde değerlendirilebildiğinden vergi hesaplaması ilgili ödeme ve ücret matrahına göre değişebilir.",
+          "İhbar tazminatı ücret niteliğinde değerlendirilebildiğinden ilgili vergi ve kesintiler ödeme koşullarına göre değişebilir.",
       },
     ],
   },
 
+  /* =======================================================
+     KIDEM + İHBAR
+  ======================================================= */
+
   "kidem-ihbar": {
-    title: "Kıdem ve İhbar Tazminatı Hesaplama 2026",
+    title:
+      "Kıdem ve İhbar Tazminatı Hesaplama 2026",
     description:
       "Kıdem ve ihbar tazminatınızı tek ekranda hesaplayın. Çalışma süresi, kıdeme esas ücret, ihbar süresi ve toplam tahmini tazminatı görün.",
     intro:
-      "Kıdem + İhbar Hesaplama aracımız iki hesaplamayı tek ekranda değerlendirmenize yardımcı olur.",
+      "Kıdem + İhbar hesaplama aracımız, iki tazminatı aynı ekranda ayrı ayrı değerlendirmenize yardımcı olur.",
     howItWorks: [
       "Son brüt ücretinizi girin.",
-      "İşe giriş ve işten çıkış tarihlerini seçin.",
-      "Varsa düzenli yan haklarınızı girin.",
-      "Gerekliyse önceki kümülatif vergi matrahını girin.",
-      "Kıdem, ihbar ve toplam sonuçları ayrı ayrı inceleyin.",
+      "İşe giriş ve çıkış tarihlerini seçin.",
+      "Varsa düzenli yan hakları girin.",
+      "Gerekliyse kümülatif vergi matrahını girin.",
+      "Kıdem, ihbar ve toplam sonuçları görüntüleyin.",
     ],
     faqs: [
       {
-        question: "Kıdem ve ihbar tazminatı aynı şey midir?",
+        question:
+          "Kıdem ve ihbar tazminatı aynı şey midir?",
         answer:
-          "Hayır. Kıdem tazminatı ile ihbar tazminatının şartları ve hesaplama esasları farklıdır.",
+          "Hayır. Kıdem ve ihbar tazminatlarının şartları ve hesaplama yöntemleri farklıdır.",
       },
       {
-        question: "Kıdem ve ihbar aynı anda alınabilir mi?",
+        question:
+          "Kıdem ve ihbar aynı anda alınabilir mi?",
         answer:
-          "Somut fesih durumuna ve ilgili hukuki şartlara göre her iki tazminata da hak kazanılması mümkün olabilir.",
+          "Somut fesih şekline ve hukuki şartlara göre her iki tazminata da hak kazanılması mümkün olabilir.",
       },
       {
-        question: "Toplam tazminat nasıl hesaplanır?",
+        question:
+          "Toplam tazminat nasıl hesaplanır?",
         answer:
           "Kıdem ve ihbar tutarları ayrı hesaplanır ve ilgili kesintiler dikkate alınarak toplam sonuç gösterilebilir.",
       },
     ],
   },
+
+  /* =======================================================
+     YAŞ
+  ======================================================= */
+
+  yas: {
+    title:
+      "Yaş Hesaplama 2026 | Doğum Tarihine Göre Yaşını Hesapla",
+    description:
+      "Yaş hesaplama aracı ile doğum tarihinizi girerek yaşınızı yıl, ay ve gün olarak hesaplayın. Bir sonraki doğum gününüze kalan süreyi görün.",
+    intro:
+      "Yaş hesaplama aracımız, doğum tarihi ile seçilen hesaplama tarihi arasındaki süreyi yıl, ay ve gün olarak gösterir.",
+    howItWorks: [
+      "Doğum tarihinizi girin.",
+      "Hesaplama tarihini seçin.",
+      "Yaşınızı yıl, ay ve gün olarak görüntüleyin.",
+      "Bir sonraki doğum gününüze kalan süreyi inceleyin.",
+    ],
+    faqs: [
+      {
+        question:
+          "Yaş nasıl hesaplanır?",
+        answer:
+          "Yaş, doğum tarihi ile hesaplama tarihi arasındaki takvim farkına göre yıl, ay ve gün şeklinde hesaplanır.",
+      },
+      {
+        question:
+          "Yaşımı toplam gün olarak görebilir miyim?",
+        answer:
+          "Evet. Araç doğum tarihinden hesaplama tarihine kadar geçen toplam gün sayısını da gösterir.",
+      },
+      {
+        question:
+          "Bir sonraki doğum günümü hesaplayabilir miyim?",
+        answer:
+          "Evet. Sonuç bölümünde bir sonraki doğum gününüz ve kalan gün sayısı gösterilir.",
+      },
+    ],
+  },
 };
+
+/* =========================================================
+   JSON-LD
+========================================================= */
 
 function JsonLd({
   calculator,
@@ -337,18 +468,21 @@ function JsonLd({
   const pageUrl =
     `${baseUrl}/hesaplamalar/${slug}`;
 
-  const webpageSchema = {
+  const webPageSchema = {
     "@context": "https://schema.org",
     "@type": "WebPage",
+
     name: seo.title,
     description: seo.description,
     url: pageUrl,
     inLanguage: "tr-TR",
+
     isPartOf: {
       "@type": "WebSite",
       name: "MiniHesap",
       url: baseUrl,
     },
+
     about: {
       "@type": "Thing",
       name: calculator.title,
@@ -358,14 +492,19 @@ function JsonLd({
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: seo.faqs.map((faq) => ({
-      "@type": "Question",
-      name: faq.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: faq.answer,
-      },
-    })),
+
+    mainEntity: seo.faqs.map(
+      (faq) => ({
+        "@type": "Question",
+
+        name: faq.question,
+
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: faq.answer,
+        },
+      })
+    ),
   };
 
   return (
@@ -373,23 +512,29 @@ function JsonLd({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(
-            webpageSchema
-          ),
+          __html:
+            JSON.stringify(
+              webPageSchema
+            ),
         }}
       />
 
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(
-            faqSchema
-          ),
+          __html:
+            JSON.stringify(
+              faqSchema
+            ),
         }}
       />
     </>
   );
 }
+
+/* =========================================================
+   STATIC PARAMS
+========================================================= */
 
 export function generateStaticParams() {
   return calculators.map(
@@ -399,6 +544,10 @@ export function generateStaticParams() {
   );
 }
 
+/* =========================================================
+   METADATA
+========================================================= */
+
 export async function generateMetadata({
   params,
 }: {
@@ -406,7 +555,8 @@ export async function generateMetadata({
     slug: string;
   }>;
 }): Promise<Metadata> {
-  const { slug } = await params;
+  const { slug } =
+    await params;
 
   const calculator =
     calculators.find(
@@ -417,10 +567,14 @@ export async function generateMetadata({
   const seo =
     seoContents[slug];
 
-  if (!calculator || !seo) {
+  if (
+    !calculator ||
+    !seo
+  ) {
     return {
       title:
         "MiniHesap | Hesaplama Araçları",
+
       description:
         "MiniHesap hesaplama araçları.",
     };
@@ -428,7 +582,9 @@ export async function generateMetadata({
 
   return {
     title: seo.title,
-    description: seo.description,
+
+    description:
+      seo.description,
 
     alternates: {
       canonical:
@@ -437,18 +593,31 @@ export async function generateMetadata({
 
     openGraph: {
       title: seo.title,
-      description: seo.description,
+
+      description:
+        seo.description,
+
       type: "website",
-      locale: "tr_TR",
-      siteName: "MiniHesap",
+
+      locale:
+        "tr_TR",
+
+      siteName:
+        "MiniHesap",
+
       url:
         `/hesaplamalar/${slug}`,
     },
 
     twitter: {
-      card: "summary",
-      title: seo.title,
-      description: seo.description,
+      card:
+        "summary_large_image",
+
+      title:
+        seo.title,
+
+      description:
+        seo.description,
     },
 
     robots: {
@@ -457,6 +626,10 @@ export async function generateMetadata({
     },
   };
 }
+
+/* =========================================================
+   SAYFA
+========================================================= */
 
 export default async function CalculatorPage({
   params,
@@ -491,19 +664,21 @@ export default async function CalculatorPage({
   return (
     <main className="page">
 
-      {/* =========================
+      {/* ===================================================
           JSON-LD
-      ========================= */}
+      =================================================== */}
 
       <JsonLd
-        calculator={calculator}
+        calculator={
+          calculator
+        }
         seo={seo}
         slug={slug}
       />
 
-      {/* =========================
-          HESAPLAYICI
-      ========================= */}
+      {/* ===================================================
+          HESAPLAMA
+      =================================================== */}
 
       <div className="container">
 
@@ -520,16 +695,18 @@ export default async function CalculatorPage({
         </h1>
 
         <p className="page-lead">
-          {calculator.description}
+          {
+            calculator.description
+          }
         </p>
 
         <Calculator />
 
       </div>
 
-      {/* =========================
+      {/* ===================================================
           SEO İÇERİĞİ
-      ========================= */}
+      =================================================== */}
 
       <section
         className="section"
@@ -546,20 +723,25 @@ export default async function CalculatorPage({
             }}
           >
 
-            {/* GİRİŞ */}
+            {/* =================================================
+                GİRİŞ
+            ================================================= */}
 
             <article
               style={{
                 padding: 25,
                 borderRadius: 22,
-                background: "white",
+                background:
+                  "white",
                 border:
                   "1px solid #dce7df",
               }}
             >
 
               <div className="eyebrow">
-                {calculator.title.toUpperCase()}
+                {
+                  calculator.title.toUpperCase()
+                }
               </div>
 
               <h2
@@ -575,7 +757,8 @@ export default async function CalculatorPage({
               <p
                 style={{
                   margin: 0,
-                  color: "#617066",
+                  color:
+                    "#617066",
                   lineHeight: 1.8,
                 }}
               >
@@ -584,14 +767,17 @@ export default async function CalculatorPage({
 
             </article>
 
-            {/* NASIL HESAPLANIR */}
+            {/* =================================================
+                NASIL HESAPLANIR
+            ================================================= */}
 
             <article
               style={{
                 marginTop: 20,
                 padding: 25,
                 borderRadius: 22,
-                background: "white",
+                background:
+                  "white",
                 border:
                   "1px solid #dce7df",
               }}
@@ -608,32 +794,44 @@ export default async function CalculatorPage({
 
               <div
                 style={{
-                  display: "grid",
+                  display:
+                    "grid",
                   gap: 12,
                 }}
               >
+
                 {seo.howItWorks.map(
-                  (step, index) => (
+                  (
+                    step,
+                    index
+                  ) => (
                     <div
                       key={step}
                       style={{
-                        display: "flex",
+                        display:
+                          "flex",
                         gap: 14,
                         alignItems:
                           "flex-start",
-                        padding: 14,
-                        borderRadius: 15,
+                        padding:
+                          14,
+                        borderRadius:
+                          15,
                         background:
                           "#f8faf9",
                         border:
                           "1px solid #e5eee8",
                       }}
                     >
+
                       <div
                         style={{
-                          minWidth: 32,
-                          width: 32,
-                          height: 32,
+                          minWidth:
+                            32,
+                          width:
+                            32,
+                          height:
+                            32,
                           borderRadius:
                             "50%",
                           display:
@@ -644,7 +842,8 @@ export default async function CalculatorPage({
                             "#dcfce7",
                           color:
                             "#15803d",
-                          fontWeight: 900,
+                          fontWeight:
+                            900,
                         }}
                       >
                         {index + 1}
@@ -652,7 +851,8 @@ export default async function CalculatorPage({
 
                       <div
                         style={{
-                          paddingTop: 5,
+                          paddingTop:
+                            5,
                           color:
                             "#405248",
                           lineHeight:
@@ -661,14 +861,18 @@ export default async function CalculatorPage({
                       >
                         {step}
                       </div>
+
                     </div>
                   )
                 )}
+
               </div>
 
             </article>
 
-            {/* SSS */}
+            {/* =================================================
+                SSS
+            ================================================= */}
 
             <article
               style={{
@@ -697,10 +901,12 @@ export default async function CalculatorPage({
 
               <div
                 style={{
-                  display: "grid",
+                  display:
+                    "grid",
                   gap: 12,
                 }}
               >
+
                 {seo.faqs.map(
                   (faq) => (
                     <details
@@ -718,6 +924,7 @@ export default async function CalculatorPage({
                           "17px 20px",
                       }}
                     >
+
                       <summary
                         style={{
                           cursor:
@@ -728,7 +935,9 @@ export default async function CalculatorPage({
                             1.5,
                         }}
                       >
-                        {faq.question}
+                        {
+                          faq.question
+                        }
                       </summary>
 
                       <p
@@ -741,11 +950,15 @@ export default async function CalculatorPage({
                             "12px 0 0",
                         }}
                       >
-                        {faq.answer}
+                        {
+                          faq.answer
+                        }
                       </p>
+
                     </details>
                   )
                 )}
+
               </div>
 
             </article>
