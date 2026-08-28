@@ -14,6 +14,7 @@ import SeveranceCalculator from "@/components/calculators/SeveranceCalculator";
 import NoticeCalculator from "@/components/calculators/NoticeCalculator";
 import KidemIhbarCalculator from "@/components/calculators/KidemIhbarCalculator";
 import AgeCalculator from "@/components/calculators/AgeCalculator";
+import AnnualLeaveCalculator from "@/components/calculators/AnnualLeaveCalculator";
 
 /* =========================================================
    HESAPLAMA BİLEŞENLERİ
@@ -30,6 +31,7 @@ const componentMap: Record<string, ComponentType> = {
   ihbar: NoticeCalculator,
   "kidem-ihbar": KidemIhbarCalculator,
   yas: AgeCalculator,
+  "yillik-izin": AnnualLeaveCalculator,
 };
 
 /* =========================================================
@@ -446,6 +448,52 @@ const seoContents: Record<string, SeoContent> = {
       },
     ],
   },
+
+  /* =======================================================
+     YILLIK İZİN
+  ======================================================= */
+
+  "yillik-izin": {
+    title:
+      "Yıllık İzin Hesaplama 2026 | Yıllık Ücretli İzin Hesapla",
+    description:
+      "Yıllık izin hesaplama aracı ile işe giriş tarihinize, hizmet sürenize ve yaşınıza göre yıllık ücretli izin hakkınızı hesaplayın.",
+    intro:
+      "Yıllık izin hesaplama aracımız, işe giriş tarihi ve hesaplama tarihine göre çalışma sürenizi belirleyerek temel yıllık ücretli izin hakkınızı hesaplamanıza yardımcı olur.",
+    howItWorks: [
+      "İşe giriş tarihinizi girin.",
+      "Hesaplama tarihini seçin.",
+      "Doğum tarihinizi girin.",
+      "Kullanmış olduğunuz izin gününü girin.",
+      "Toplam yıllık izin hakkınızı ve kalan izin gününüzü görüntüleyin.",
+    ],
+    faqs: [
+      {
+        question:
+          "Yıllık izne ne zaman hak kazanılır?",
+        answer:
+          "Aynı işverene bağlı çalışma süresinin en az bir yılı doldurulmasıyla yıllık ücretli izin hakkı doğar.",
+      },
+      {
+        question:
+          "Yıllık izin süresi kaç gündür?",
+        answer:
+          "Temel yasal süreler hizmet süresine göre değişir. 1 ila 5 yıl arasında 14 gün, 5 yıldan fazla 15 yıldan az hizmette 20 gün, 15 yıl ve üzeri hizmette 26 gün asgari süredir.",
+      },
+      {
+        question:
+          "50 yaş ve üzerindeki çalışanların yıllık izni kaç gündür?",
+        answer:
+          "50 yaş ve üzerindeki çalışanlar için yıllık ücretli izin süresi 20 günden az olamaz.",
+      },
+      {
+        question:
+          "18 yaş ve altındaki çalışanların yıllık izni kaç gündür?",
+        answer:
+          "18 yaş ve daha küçük yaştaki çalışanlarda yıllık ücretli izin süresi 20 günden az olamaz.",
+      },
+    ],
+  },
 };
 
 /* =========================================================
@@ -471,7 +519,6 @@ function JsonLd({
   const webPageSchema = {
     "@context": "https://schema.org",
     "@type": "WebPage",
-
     name: seo.title,
     description: seo.description,
     url: pageUrl,
@@ -677,7 +724,7 @@ export default async function CalculatorPage({
       />
 
       {/* ===================================================
-          HESAPLAMA
+          HESAPLAMA ALANI
       =================================================== */}
 
       <div className="container">
