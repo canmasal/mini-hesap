@@ -14,6 +14,7 @@ const calculators = [
   "kidem",
   "ihbar",
   "kidem-ihbar",
+  "yas",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
