@@ -6,7 +6,7 @@ import { calculators } from "@/data/calculators";
 export const metadata: Metadata = {
   title: "Hesaplama Araçları | MiniHesap",
   description:
-    "Net maaş, kıdem tazminatı, ihbar tazminatı, KDV, yüzde, indirim, kira artışı, fazla mesai, yaş ve yıllık izin hesaplama araçlarını tek yerde kullanın.",
+    "Net maaş, kıdem tazminatı, ihbar tazminatı, KDV, yüzde, indirim, kira artışı, fazla mesai, yaş, yıllık izin, banka borç takip ve ön muhasebe hesaplama araçlarını tek yerde kullanın.",
   alternates: {
     canonical: "/hesaplamalar",
   },
@@ -17,6 +17,32 @@ export const metadata: Metadata = {
 };
 
 export default function HesaplamalarPage() {
+  /*
+   * Sonradan eklediğimiz özel MiniHesap araçları.
+   * Bunlar /hesaplamalar/[slug] altında değil,
+   * kendi özel sayfalarına gider.
+   */
+  const specialTools = [
+    {
+      slug: "borc-takip",
+      href: "/borc-takip",
+      icon: "🏦",
+      title: "Banka Borç Takip",
+      description:
+        "Banka, kredi kartı ve nakit avans borçlarınızı tek tabloda takip edin. Toplam borç, limit ve kullanılabilir limitinizi görün.",
+      button: "Borç Takip Et",
+    },
+    {
+      slug: "on-muhasebe",
+      href: "/on-muhasebe",
+      icon: "📊",
+      title: "Ön Muhasebe Takip",
+      description:
+        "Gelir, gider, KDV, belge, cari ve ödeme bilgilerinizi takip edin. Aylık ve yıllık finansal özetinizi görüntüleyin.",
+      button: "Ön Muhasebeyi Aç",
+    },
+  ];
+
   return (
     <main className="page">
 
@@ -42,8 +68,7 @@ export default function HesaplamalarPage() {
             <h1
               style={{
                 margin: "10px 0 14px",
-                fontSize:
-                  "clamp(34px, 5vw, 54px)",
+                fontSize: "clamp(34px, 5vw, 54px)",
                 lineHeight: 1.05,
               }}
             >
@@ -57,10 +82,8 @@ export default function HesaplamalarPage() {
                 margin: "0 auto",
               }}
             >
-              Günlük hayatta en çok ihtiyaç
-              duyulan hesaplamaları tek yerde
-              hızlı, kolay ve anlaşılır şekilde
-              yapın.
+              Günlük hayatta en çok ihtiyaç duyulan hesaplamaları
+              tek yerde hızlı, kolay ve anlaşılır şekilde yapın.
             </p>
           </div>
 
@@ -89,97 +112,203 @@ export default function HesaplamalarPage() {
               margin: "0 auto",
             }}
           >
-            {calculators.map(
-              (calculator) => (
-                <Link
-                  key={calculator.slug}
-                  href={`/hesaplamalar/${calculator.slug}`}
+
+            {/* =================================================
+                MEVCUT HESAPLAMALAR
+            ================================================= */}
+
+            {calculators.map((calculator) => (
+              <Link
+                key={calculator.slug}
+                href={`/hesaplamalar/${calculator.slug}`}
+                style={{
+                  textDecoration: "none",
+                  color: "inherit",
+                }}
+              >
+                <article
                   style={{
-                    textDecoration: "none",
-                    color: "inherit",
+                    height: "100%",
+                    padding: 24,
+                    borderRadius: 22,
+                    background: "#ffffff",
+                    border: "1px solid #dce7df",
+                    transition:
+                      "transform 0.2s ease, box-shadow 0.2s ease",
+                    boxShadow:
+                      "0 8px 25px rgba(16, 35, 26, 0.05)",
                   }}
                 >
-                  <article
+
+                  <div
                     style={{
-                      height: "100%",
-                      padding: 24,
-                      borderRadius: 22,
-                      background: "#ffffff",
-                      border:
-                        "1px solid #dce7df",
-                      transition:
-                        "transform 0.2s ease, box-shadow 0.2s ease",
-                      boxShadow:
-                        "0 8px 25px rgba(16, 35, 26, 0.05)",
+                      width: 58,
+                      height: 58,
+                      display: "grid",
+                      placeItems: "center",
+                      borderRadius: 18,
+                      background: "#effaf2",
+                      fontSize: 29,
+                      marginBottom: 18,
                     }}
                   >
-                    <div
-                      style={{
-                        width: 58,
-                        height: 58,
-                        display: "grid",
-                        placeItems: "center",
-                        borderRadius: 18,
-                        background: "#effaf2",
-                        fontSize: 29,
-                        marginBottom: 18,
-                      }}
-                    >
-                      {calculator.icon}
-                    </div>
+                    {calculator.icon}
+                  </div>
 
-                    <h2
-                      style={{
-                        margin: "0 0 10px",
-                        fontSize: 21,
-                        lineHeight: 1.2,
-                        color: "#10231a",
-                      }}
-                    >
-                      {calculator.title}
-                    </h2>
+                  <h2
+                    style={{
+                      margin: "0 0 10px",
+                      fontSize: 21,
+                      lineHeight: 1.2,
+                      color: "#10231a",
+                    }}
+                  >
+                    {calculator.title}
+                  </h2>
 
-                    <p
-                      style={{
-                        margin: "0 0 20px",
-                        color: "#617066",
-                        lineHeight: 1.65,
-                        fontSize: 14,
-                      }}
-                    >
-                      {calculator.description}
-                    </p>
+                  <p
+                    style={{
+                      margin: "0 0 20px",
+                      color: "#617066",
+                      lineHeight: 1.65,
+                      fontSize: 14,
+                    }}
+                  >
+                    {calculator.description}
+                  </p>
 
-                    <div
-                      style={{
-                        display:
-                          "inline-flex",
-                        alignItems: "center",
-                        gap: 7,
-                        padding:
-                          "10px 14px",
-                        borderRadius: 12,
-                        background:
-                          "#16a34a",
-                        color: "white",
-                        fontWeight: 800,
-                        fontSize: 13,
-                      }}
-                    >
-                      Hesapla
-                      <span>→</span>
-                    </div>
-                  </article>
-                </Link>
-              )
-            )}
+                  <div
+                    style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: 7,
+                      padding: "10px 14px",
+                      borderRadius: 12,
+                      background: "#16a34a",
+                      color: "white",
+                      fontWeight: 800,
+                      fontSize: 13,
+                    }}
+                  >
+                    Hesapla
+                    <span>→</span>
+                  </div>
+
+                </article>
+              </Link>
+            ))}
+
+            {/* =================================================
+                ÖZEL MİNİHESAP ARAÇLARI
+            ================================================= */}
+
+            {specialTools.map((tool) => (
+              <Link
+                key={tool.slug}
+                href={tool.href}
+                style={{
+                  textDecoration: "none",
+                  color: "inherit",
+                }}
+              >
+                <article
+                  style={{
+                    height: "100%",
+                    padding: 24,
+                    borderRadius: 22,
+                    background: "#ffffff",
+                    border: "1px solid #ccebd6",
+                    transition:
+                      "transform 0.2s ease, box-shadow 0.2s ease",
+                    boxShadow:
+                      "0 8px 25px rgba(16, 35, 26, 0.07)",
+                  }}
+                >
+
+                  {/* PREMIUM / ÖZEL ARAÇ ETİKETİ */}
+
+                  <div
+                    style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: 6,
+                      padding: "5px 9px",
+                      borderRadius: 8,
+                      background: "#effaf2",
+                      color: "#008a43",
+                      fontSize: 11,
+                      fontWeight: 800,
+                      marginBottom: 12,
+                    }}
+                  >
+                    MİNİHESAP FİNANS ARACI
+                  </div>
+
+                  <div
+                    style={{
+                      width: 58,
+                      height: 58,
+                      display: "grid",
+                      placeItems: "center",
+                      borderRadius: 18,
+                      background: "#effaf2",
+                      fontSize: 29,
+                      marginBottom: 18,
+                    }}
+                  >
+                    {tool.icon}
+                  </div>
+
+                  <h2
+                    style={{
+                      margin: "0 0 10px",
+                      fontSize: 21,
+                      lineHeight: 1.2,
+                      color: "#10231a",
+                    }}
+                  >
+                    {tool.title}
+                  </h2>
+
+                  <p
+                    style={{
+                      margin: "0 0 20px",
+                      color: "#617066",
+                      lineHeight: 1.65,
+                      fontSize: 14,
+                    }}
+                  >
+                    {tool.description}
+                  </p>
+
+                  <div
+                    style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: 7,
+                      padding: "10px 14px",
+                      borderRadius: 12,
+                      background: "#16a34a",
+                      color: "white",
+                      fontWeight: 800,
+                      fontSize: 13,
+                    }}
+                  >
+                    {tool.button}
+                    <span>→</span>
+                  </div>
+
+                </article>
+              </Link>
+            ))}
+
           </div>
 
         </div>
       </section>
 
       {/* =====================================================
-          SEO / ALT AÇIKLAMA
+          ALT SEO ALANI
       ===================================================== */}
 
       <section
@@ -198,23 +327,21 @@ export default function HesaplamalarPage() {
               padding: 28,
               borderRadius: 22,
               background: "#ffffff",
-              border:
-                "1px solid #dce7df",
+              border: "1px solid #dce7df",
             }}
           >
+
             <div className="eyebrow">
-              MINİHESAP
+              MİNİHESAP
             </div>
 
             <h2
               style={{
-                margin:
-                  "8px 0 14px",
+                margin: "8px 0 14px",
                 fontSize: 28,
               }}
             >
-              Günlük hesaplamalarınızı
-              kolaylaştırın
+              Günlük hesaplamalarınızı kolaylaştırın
             </h2>
 
             <p
@@ -224,14 +351,14 @@ export default function HesaplamalarPage() {
                 lineHeight: 1.8,
               }}
             >
-              MiniHesap; maaş, tazminat,
-              KDV, yüzde, indirim, kira
-              artışı, fazla mesai, yaş ve
-              yıllık izin gibi farklı
-              ihtiyaçlar için pratik
-              hesaplama araçlarını bir
-              araya getirir.
+              MiniHesap; maaş, tazminat, KDV, yüzde, indirim,
+              kira artışı, fazla mesai, yaş ve yıllık izin gibi
+              farklı ihtiyaçlar için pratik hesaplama araçlarını
+              bir araya getirir. Ayrıca banka borç takibi ve
+              ön muhasebe takibi için gelişmiş finans araçları
+              sunar.
             </p>
+
           </article>
 
         </div>
