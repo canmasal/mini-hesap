@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import { calculators } from "@/data/calculators";
+import AdSlot from "@/components/AdSlot";
 
 export const metadata: Metadata = {
   title: "Hesaplama Araçları | MiniHesap",
@@ -47,6 +48,14 @@ export default function HesaplamalarPage() {
     <main className="page">
 
       {/* =====================================================
+          ÜST REKLAM
+      ===================================================== */}
+
+      <div className="container">
+        <AdSlot position="top" />
+      </div>
+
+      {/* =====================================================
           BAŞLIK
       ===================================================== */}
 
@@ -61,6 +70,7 @@ export default function HesaplamalarPage() {
               paddingTop: 30,
             }}
           >
+
             <div className="eyebrow">
               POPÜLER HESAPLAMALAR
             </div>
@@ -85,6 +95,7 @@ export default function HesaplamalarPage() {
               Günlük hayatta en çok ihtiyaç duyulan hesaplamaları
               tek yerde hızlı, kolay ve anlaşılır şekilde yapın.
             </p>
+
           </div>
 
         </div>
@@ -225,7 +236,7 @@ export default function HesaplamalarPage() {
                   }}
                 >
 
-                  {/* PREMIUM / ÖZEL ARAÇ ETİKETİ */}
+                  {/* MİNİHESAP FİNANS ARACI ETİKETİ */}
 
                   <div
                     style={{
@@ -308,6 +319,14 @@ export default function HesaplamalarPage() {
       </section>
 
       {/* =====================================================
+          ORTA REKLAM
+      ===================================================== */}
+
+      <div className="container">
+        <AdSlot position="middle" />
+      </div>
+
+      {/* =====================================================
           ALT SEO ALANI
       ===================================================== */}
 
@@ -363,6 +382,14 @@ export default function HesaplamalarPage() {
 
         </div>
       </section>
+
+      {/* =====================================================
+          ALT REKLAM
+      ===================================================== */}
+
+      <div className="container">
+        <AdSlot position="bottom" />
+      </div>
 
     </main>
   );

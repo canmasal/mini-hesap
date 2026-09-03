@@ -1,9 +1,15 @@
 import CalculatorCard from "@/components/CalculatorCard";
 import { calculators } from "@/data/calculators";
-
+import AdSlot from "@/components/AdSlot";
 export default function HomePage() {
   return (
     <main>
+      
+  <div className="container">
+    <AdSlot position="top" />
+  </div>
+
+  <section className="hero"></section>
       <section className="hero">
         <div className="container hero-grid">
           <div>

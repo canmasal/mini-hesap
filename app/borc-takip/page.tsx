@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import BorcTakipDemo from "@/components/BorcTakipDemo";
-
+import AdBanner from "@/components/AdBanner";
 export const metadata: Metadata = {
   title: "Borç Takip Excel Şablonu | MiniHesap",
   description:
