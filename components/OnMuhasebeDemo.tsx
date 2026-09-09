@@ -29,56 +29,56 @@ type Totals = {
 const FREE_LIMIT = 100;
 
 const incomeCategories = [
-  "Mal Satışı",
-  "Hizmet Satışı",
-  "E-Ticaret Satışı",
-  "Proje / İş Geliri",
-  "Danışmanlık Geliri",
+  "Mal SatÄ±ÅŸÄ±",
+  "Hizmet SatÄ±ÅŸÄ±",
+  "E-Ticaret SatÄ±ÅŸÄ±",
+  "Proje / Ä°ÅŸ Geliri",
+  "DanÄ±ÅŸmanlÄ±k Geliri",
   "Kira Geliri",
   "Komisyon Geliri",
   "Faiz / Finansman Geliri",
-  "Diğer Faaliyet Geliri",
-  "Diğer Gelir",
+  "DiÄŸer Faaliyet Geliri",
+  "DiÄŸer Gelir",
 ];
 
 const expenseCategories = [
-  "Mal / Ticari Mal Alımı",
+  "Mal / Ticari Mal AlÄ±mÄ±",
   "Hammadde / Malzeme",
-  "Üretim Gideri",
-  "Taşeron / Dışarıdan Hizmet",
+  "Ãœretim Gideri",
+  "TaÅŸeron / DÄ±ÅŸarÄ±dan Hizmet",
   "Kargo / Nakliye",
   "Kira",
-  "Personel Ücretleri",
+  "Personel Ãœcretleri",
   "SGK / Prim",
   "Elektrik",
   "Su",
-  "Doğalgaz",
+  "DoÄŸalgaz",
   "Telefon",
-  "İnternet",
-  "Akaryakıt",
-  "Araç Giderleri",
-  "Bakım / Onarım",
-  "Ofis / Kırtasiye",
-  "Yazılım / Abonelik",
+  "Ä°nternet",
+  "AkaryakÄ±t",
+  "AraÃ§ Giderleri",
+  "BakÄ±m / OnarÄ±m",
+  "Ofis / KÄ±rtasiye",
+  "YazÄ±lÄ±m / Abonelik",
   "Reklam / Pazarlama",
-  "Muhasebe / Mali Müşavir",
-  "Banka Komisyonları",
+  "Muhasebe / Mali MÃ¼ÅŸavir",
+  "Banka KomisyonlarÄ±",
   "Sigorta",
-  "Vergi / Harç",
+  "Vergi / HarÃ§",
   "Seyahat / Konaklama",
   "Yemek / Temsil",
-  "Hukuk / Danışmanlık",
+  "Hukuk / DanÄ±ÅŸmanlÄ±k",
   "Amortisman",
   "Finansman / Kredi Faizi",
-  "Diğer Faaliyet Gideri",
-  "Diğer Gider",
+  "DiÄŸer Faaliyet Gideri",
+  "DiÄŸer Gider",
 ];
 
 const initialRows: RecordRow[] = [
   {
     date: "",
     type: "Gelir",
-    category: "Mal Satışı",
+    category: "Mal SatÄ±ÅŸÄ±",
     description: "",
     amount: 0,
     payment: "Banka",
@@ -104,11 +104,11 @@ const initialRows: RecordRow[] = [
   {
     date: "",
     type: "Gider",
-    category: "Personel Ücretleri",
+    category: "Personel Ãœcretleri",
     description: "",
     amount: 0,
     payment: "Banka",
-    documentType: "Diğer",
+    documentType: "DiÄŸer",
     documentNo: "",
     counterparty: "",
     dueDate: "",
@@ -117,7 +117,7 @@ const initialRows: RecordRow[] = [
   {
     date: "",
     type: "Gelir",
-    category: "Hizmet Satışı",
+    category: "Hizmet SatÄ±ÅŸÄ±",
     description: "",
     amount: 0,
     payment: "Banka",
@@ -130,11 +130,11 @@ const initialRows: RecordRow[] = [
   {
     date: "",
     type: "Gider",
-    category: "Diğer Gider",
+    category: "DiÄŸer Gider",
     description: "",
     amount: 0,
     payment: "Nakit",
-    documentType: "Fiş",
+    documentType: "FiÅŸ",
     documentNo: "",
     counterparty: "",
     dueDate: "",
@@ -240,7 +240,7 @@ const [usage, setUsage] = useState(() => {
       {
         date: "",
         type: "Gelir",
-        category: "Mal Satışı",
+        category: "Mal SatÄ±ÅŸÄ±",
         description: "",
         amount: 0,
         payment: "Banka",
@@ -293,7 +293,7 @@ const [usage, setUsage] = useState(() => {
         String(nextUsage)
       );
     } catch {
-      // localStorage kullanılamazsa uygulama çalışmaya devam eder.
+      // localStorage kullanÄ±lamazsa uygulama Ã§alÄ±ÅŸmaya devam eder.
     }
   };
 
@@ -361,7 +361,7 @@ const [usage, setUsage] = useState(() => {
               "0 12px 35px rgba(16, 35, 26, 0.06)",
           }}
         >
-          {/* ÜST BÖLÜM */}
+          {/* ÃœST BÃ–LÃœM */}
 
           <div
             style={{
@@ -375,7 +375,7 @@ const [usage, setUsage] = useState(() => {
           >
             <div>
               <div className="eyebrow">
-                ÜCRETSİZ DEMO
+                ÃœCRETSÄ°Z DEMO
               </div>
 
               <h2
@@ -386,7 +386,7 @@ const [usage, setUsage] = useState(() => {
                   lineHeight: 1.1,
                 }}
               >
-                Profesyonel Ön Muhasebe Takip
+                Profesyonel Ã–n Muhasebe Takip
               </h2>
 
               <p
@@ -397,7 +397,7 @@ const [usage, setUsage] = useState(() => {
                 }}
               >
                 Gelir, gider, fatura, cari ve
-                ödeme bilgilerinizi tek tabloda
+                Ã¶deme bilgilerinizi tek tabloda
                 takip edin.
               </p>
             </div>
@@ -425,7 +425,7 @@ const [usage, setUsage] = useState(() => {
                   color: "#617066",
                 }}
               >
-                ÜCRETSİZ KULLANIM
+                ÃœCRETSÄ°Z KULLANIM
               </div>
 
               <div
@@ -468,7 +468,7 @@ const [usage, setUsage] = useState(() => {
             </button>
           </div>
 
-          {/* BİLGİ */}
+          {/* BÄ°LGÄ° */}
 
           <div
             style={{
@@ -484,13 +484,13 @@ const [usage, setUsage] = useState(() => {
             }}
           >
             <strong>
-              Profesyonel kayıt mantığı:
+              Profesyonel kayÄ±t mantÄ±ÄŸÄ±:
             </strong>{" "}
-            İşlem türünü seçin, uygun kategoriyi
-            belirleyin; tutar, belge, cari, ödeme
-            ve vade bilgilerini girin. Sonuçlar
-            yalnızca hesaplama butonuna basıldığında
-            gösterilir.
+            Ä°ÅŸlem tÃ¼rÃ¼nÃ¼ seÃ§in, uygun kategoriyi
+            belirleyin; tutar, belge, cari, Ã¶deme
+            ve vade bilgilerini girin. SonuÃ§lar
+            yalnÄ±zca hesaplama butonuna basÄ±ldÄ±ÄŸÄ±nda
+            gÃ¶sterilir.
           </div>
 
           {/* TABLO */}
@@ -527,16 +527,16 @@ const [usage, setUsage] = useState(() => {
               <thead>
                 <tr>
                   {[
-                    "TARİH",
-                    "TÜR",
-                    "KATEGORİ",
-                    "AÇIKLAMA",
+                    "TARÄ°H",
+                    "TÃœR",
+                    "KATEGORÄ°",
+                    "AÃ‡IKLAMA",
                     "TUTAR",
                     "KDV",
                     "BELGE",
                     "BELGE NO",
-                    "CARİ / MÜŞTERİ",
-                    "ÖDEME",
+                    "CARÄ° / MÃœÅTERÄ°",
+                    "Ã–DEME",
                     "VADE",
                   ].map((title) => (
                     <th
@@ -575,7 +575,7 @@ const [usage, setUsage] = useState(() => {
 
                     return (
                       <tr key={index}>
-                        {/* TARİH */}
+                        {/* TARÄ°H */}
 
                         <td style={cellStyle}>
                           <input
@@ -592,7 +592,7 @@ const [usage, setUsage] = useState(() => {
                           />
                         </td>
 
-                        {/* TÜR */}
+                        {/* TÃœR */}
 
                         <td style={cellStyle}>
                           <select
@@ -616,7 +616,7 @@ const [usage, setUsage] = useState(() => {
                           </select>
                         </td>
 
-                        {/* KATEGORİ */}
+                        {/* KATEGORÄ° */}
 
                         <td style={cellStyle}>
                           <select
@@ -643,7 +643,7 @@ const [usage, setUsage] = useState(() => {
                           </select>
                         </td>
 
-                        {/* AÇIKLAMA */}
+                        {/* AÃ‡IKLAMA */}
 
                         <td style={cellStyle}>
                           <input
@@ -656,7 +656,7 @@ const [usage, setUsage] = useState(() => {
                                 event.target.value
                               )
                             }
-                            placeholder="Açıklama"
+                            placeholder="AÃ§Ä±klama"
                             style={inputStyle}
                           />
                         </td>
@@ -748,11 +748,11 @@ const [usage, setUsage] = useState(() => {
                             </option>
 
                             <option>
-                              e-Arşiv
+                              e-ArÅŸiv
                             </option>
 
                             <option>
-                              Fiş
+                              FiÅŸ
                             </option>
 
                             <option>
@@ -764,7 +764,7 @@ const [usage, setUsage] = useState(() => {
                             </option>
 
                             <option>
-                              Diğer
+                              DiÄŸer
                             </option>
                           </select>
                         </td>
@@ -787,7 +787,7 @@ const [usage, setUsage] = useState(() => {
                           />
                         </td>
 
-                        {/* CARİ */}
+                        {/* CARÄ° */}
 
                         <td style={cellStyle}>
                           <input
@@ -802,12 +802,12 @@ const [usage, setUsage] = useState(() => {
                                 event.target.value
                               )
                             }
-                            placeholder="Cari / müşteri"
+                            placeholder="Cari / mÃ¼ÅŸteri"
                             style={inputStyle}
                           />
                         </td>
 
-                        {/* ÖDEME */}
+                        {/* Ã–DEME */}
 
                         <td style={cellStyle}>
                           <select
@@ -830,7 +830,7 @@ const [usage, setUsage] = useState(() => {
                             </option>
 
                             <option>
-                              Kredi Kartı
+                              Kredi KartÄ±
                             </option>
 
                             <option>
@@ -838,7 +838,7 @@ const [usage, setUsage] = useState(() => {
                             </option>
 
                             <option>
-                              Çek
+                              Ã‡ek
                             </option>
 
                             <option>
@@ -846,7 +846,7 @@ const [usage, setUsage] = useState(() => {
                             </option>
 
                             <option>
-                              Diğer
+                              DiÄŸer
                             </option>
                           </select>
                         </td>
@@ -904,7 +904,7 @@ const [usage, setUsage] = useState(() => {
                 cursor: "pointer",
               }}
             >
-              + Satır Ekle
+              + SatÄ±r Ekle
             </button>
 
             <button
@@ -928,12 +928,12 @@ const [usage, setUsage] = useState(() => {
               }}
             >
               {usage >= FREE_LIMIT
-                ? "🔒 Premium'a Geç"
-                : "🧮 Gelir / Gideri Hesapla"}
+                ? "ğŸ”’ Premium'a GeÃ§"
+                : "ğŸ§® Gelir / Gideri Hesapla"}
             </button>
           </div>
 
-          {/* SONUÇ YOKSA */}
+          {/* SONUÃ‡ YOKSA */}
 
           {!calculated && (
             <div
@@ -953,19 +953,19 @@ const [usage, setUsage] = useState(() => {
                 fontSize: 12,
               }}
             >
-              👆 Kayıtlarınızı girin.
+              ğŸ‘† KayÄ±tlarÄ±nÄ±zÄ± girin.
               Toplam gelir, toplam
-              gider, net sonuç ve
-              kategori özetini görmek
-              için{" "}
+              gider, net sonuÃ§ ve
+              kategori Ã¶zetini gÃ¶rmek
+              iÃ§in{" "}
               <strong>
-                “Gelir / Gideri Hesapla”
+                â€œGelir / Gideri Hesaplaâ€
               </strong>{" "}
-              butonuna basın.
+              butonuna basÄ±n.
             </div>
           )}
 
-          {/* SONUÇLAR */}
+          {/* SONUÃ‡LAR */}
 
           {calculated && (
             <>
@@ -986,10 +986,10 @@ const [usage, setUsage] = useState(() => {
                   fontSize: 12,
                 }}
               >
-                ✅ Ön muhasebe özeti
-                hesaplandı.
+                âœ… Ã–n muhasebe Ã¶zeti
+                hesaplandÄ±.
                 <br />
-                Bu kullanımınız:{" "}
+                Bu kullanÄ±mÄ±nÄ±z:{" "}
                 {usage} / {FREE_LIMIT}
               </div>
 
@@ -1018,7 +1018,7 @@ const [usage, setUsage] = useState(() => {
                 />
 
                 <Summary
-                  title="Net Kâr / Zarar"
+                  title="Net KÃ¢r / Zarar"
                   value={money(
                     calculated.net
                   )}
@@ -1030,14 +1030,14 @@ const [usage, setUsage] = useState(() => {
                 />
 
                 <Summary
-                  title="Kâr Marjı"
+                  title="KÃ¢r MarjÄ±"
                   value={`${calculated.margin.toFixed(
                     2
                   )}%`}
                 />
               </div>
 
-              {/* KATEGORİ ÖZETİ */}
+              {/* KATEGORÄ° Ã–ZETÄ° */}
 
               {categorySummary.length >
                 0 && (
@@ -1059,7 +1059,7 @@ const [usage, setUsage] = useState(() => {
                       fontSize: 17,
                     }}
                   >
-                    📊 Kategori Özeti
+                    ğŸ“Š Kategori Ã–zeti
                   </h3>
 
                   <div
@@ -1142,7 +1142,7 @@ const [usage, setUsage] = useState(() => {
                 fontSize: 14,
               }}
             >
-              💎 Profesyonel Ön
+              ğŸ’ Profesyonel Ã–n
               Muhasebe Excel'i
             </div>
 
@@ -1161,27 +1161,27 @@ const [usage, setUsage] = useState(() => {
               }}
             >
               <div>
-                📊 Yıllık Dashboard
+                ğŸ“Š YÄ±llÄ±k Dashboard
               </div>
 
               <div>
-                📅 Aylık Gelir / Gider
+                ğŸ“… AylÄ±k Gelir / Gider
               </div>
 
               <div>
-                🏷️ Kategori Analizi
+                ğŸ·ï¸ Kategori Analizi
               </div>
 
               <div>
-                👥 Cari Takip
+                ğŸ‘¥ Cari Takip
               </div>
 
               <div>
-                💳 Ödeme Takibi
+                ğŸ’³ Ã–deme Takibi
               </div>
 
               <div>
-                📥 Excel Raporu
+                ğŸ“¥ Excel Raporu
               </div>
             </div>
           </div>
@@ -1225,7 +1225,7 @@ const [usage, setUsage] = useState(() => {
                 fontSize: 45,
               }}
             >
-              🔒
+              ğŸ”’
             </div>
 
             <div
@@ -1234,7 +1234,7 @@ const [usage, setUsage] = useState(() => {
                 marginTop: 8,
               }}
             >
-              MİNİHESAP PREMIUM
+              MÄ°NÄ°HESAP PREMIUM
             </div>
 
             <h2
@@ -1244,8 +1244,8 @@ const [usage, setUsage] = useState(() => {
                   "6px 0 12px",
               }}
             >
-              Ücretsiz kullanım
-              hakkınız doldu
+              Ãœcretsiz kullanÄ±m
+              hakkÄ±nÄ±z doldu
             </h2>
 
             <p
@@ -1256,10 +1256,10 @@ const [usage, setUsage] = useState(() => {
                   1.7,
               }}
             >
-              Profesyonel ön
+              Profesyonel Ã¶n
               muhasebe Excel'ini
-              kullanmak için
-              Premium sürümü
+              kullanmak iÃ§in
+              Premium sÃ¼rÃ¼mÃ¼
               inceleyebilirsiniz.
             </p>
 
@@ -1286,7 +1286,7 @@ const [usage, setUsage] = useState(() => {
                   "pointer",
               }}
             >
-              💎 Premium'u İncele
+              ğŸ’ Premium'u Ä°ncele
             </button>
 
             <button
