@@ -1,73 +1,49 @@
 import type { MetadataRoute } from "next";
 
-const baseUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ||
-  "http://localhost:3000";
+import { calculators } from "@/data/calculators";
 
-const calculators = [
-  "net-maas",
-  "yuzde",
-  "kdv",
-  "indirim",
-  "kira-artisi",
-  "fazla-mesai",
-  "kidem",
-  "ihbar",
-  "kidem-ihbar",
-  "yas",
-  "yillik-izin",
-  "kredi-borc",
-];
+const baseUrl =
+  process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  const mainPages: MetadataRoute.Sitemap = [
+  const now = new Date();
+
+  const staticPages: MetadataRoute.Sitemap = ([
+    { url: baseUrl, changeFrequency: "weekly", priority: 1 },
+    { url: `${baseUrl}/hesaplamalar`, changeFrequency: "weekly", priority: 0.9 },
+    { url: `${baseUrl}/borc-takip`, changeFrequency: "weekly", priority: 0.8 },
+    { url: `${baseUrl}/on-muhasebe`, changeFrequency: "weekly", priority: 0.8 },
     {
-      url: baseUrl,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 1,
-    },
-    {
-      url: `${baseUrl}/hesaplamalar`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/hakkimizda`,
-      lastModified: new Date(),
+      url: `${baseUrl}/premium/borc-takip`,
       changeFrequency: "monthly",
-      priority: 0.5,
+      priority: 0.7,
     },
     {
-      url: `${baseUrl}/iletisim`,
-      lastModified: new Date(),
+      url: `${baseUrl}/premium/on-muhasebe`,
       changeFrequency: "monthly",
-      priority: 0.4,
+      priority: 0.7,
     },
-    {
-      url: `${baseUrl}/gizlilik`,
-      lastModified: new Date(),
-      changeFrequency: "yearly",
-      priority: 0.2,
-    },
+    { url: `${baseUrl}/hakkimizda`, changeFrequency: "monthly", priority: 0.5 },
+    { url: `${baseUrl}/iletisim`, changeFrequency: "monthly", priority: 0.4 },
+    { url: `${baseUrl}/gizlilik`, changeFrequency: "yearly", priority: 0.2 },
     {
       url: `${baseUrl}/kullanim-sartlari`,
-      lastModified: new Date(),
       changeFrequency: "yearly",
       priority: 0.2,
     },
-  ];
+  ] satisfies Omit<MetadataRoute.Sitemap[number], "lastModified">[]).map(
+    (page) => ({ ...page, lastModified: now })
+  );
 
-  const calculatorPages: MetadataRoute.Sitemap =
-    calculators.map((slug) => ({
-      url: `${baseUrl}/hesaplamalar/${slug}`,
-      lastModified: new Date(),
+  /* Hesaplama sayfaları tek kaynaktan (data/calculators) türetilir */
+  const calculatorPages: MetadataRoute.Sitemap = calculators.map(
+    (calculator) => ({
+      url: `${baseUrl}/hesaplamalar/${calculator.slug}`,
+      lastModified: now,
       changeFrequency: "weekly",
       priority: 0.8,
-    }));
+    })
+  );
 
-  return [
-    ...mainPages,
-    ...calculatorPages,
-  ];
+  return [...staticPages, ...calculatorPages];
 }

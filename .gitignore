@@ -4,3 +4,10 @@ out
 .env*
 .DS_Store
 npm-debug.log*
+
+*.tsbuildinfo
+
+# Yerel yedekler ve büyük medya (repoya girmemeli)
+.backup-*/
+.vs/
+*.mp4

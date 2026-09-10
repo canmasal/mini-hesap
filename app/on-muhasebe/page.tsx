@@ -1,8 +1,12 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+
 import OnMuhasebeDemo from "@/components/OnMuhasebeDemo";
+import Breadcrumb from "@/components/Breadcrumb";
+import AdSlot from "@/components/AdSlot";
 
 export const metadata: Metadata = {
-  title: "Ön Muhasebe Takip | MiniHesap",
+  title: "Ön Muhasebe Takip",
   description:
     "Gelir ve giderlerinizi takip edin, aylık ön muhasebe özetinizi oluşturun. MiniHesap ön muhasebe aracını ücretsiz demo olarak deneyin.",
   alternates: {
@@ -17,14 +21,23 @@ export const metadata: Metadata = {
 export default function OnMuhasebePage() {
   return (
     <main className="page">
-      <section className="section">
+      <div className="container">
+        <Breadcrumb
+          items={[
+            { label: "Ana Sayfa", href: "/" },
+            { label: "Hesaplamalar", href: "/hesaplamalar" },
+            { label: "Ön Muhasebe Takip" },
+          ]}
+        />
+      </div>
+
+      <section className="section" style={{ paddingTop: 10 }}>
         <div className="container">
           <div
             style={{
               maxWidth: 900,
               margin: "0 auto",
               textAlign: "center",
-              paddingTop: 30,
             }}
           >
             <div className="eyebrow">
@@ -133,9 +146,31 @@ export default function OnMuhasebePage() {
                 </div>
               ))}
             </div>
+
+            <div
+              style={{
+                marginTop: 20,
+                display: "flex",
+                flexWrap: "wrap",
+                alignItems: "center",
+                gap: 12,
+              }}
+            >
+              <Link className="btn btn-green" href="/premium/on-muhasebe">
+                Premium sürümü incele →
+              </Link>
+
+              <span style={{ color: "var(--muted)", fontSize: 14 }}>
+                Yukarıdaki demo her zaman ücretsizdir.
+              </span>
+            </div>
           </article>
         </div>
       </section>
+
+      <div className="container">
+        <AdSlot position="bottom" />
+      </div>
     </main>
   );
 }

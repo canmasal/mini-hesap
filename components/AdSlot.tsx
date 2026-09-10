@@ -4,9 +4,7 @@ type AdSlotProps = {
   position?: "top" | "middle" | "bottom";
 };
 
-export default function AdSlot({
-  position = "middle",
-}: AdSlotProps) {
+export default function AdSlot({ position = "middle" }: AdSlotProps) {
   const heights = {
     top: 90,
     middle: 250,
@@ -14,16 +12,8 @@ export default function AdSlot({
   };
 
   return (
-    <div
-      style={{
-        width: "100%",
-        padding: "0 0 1px 0",
-      }}
-    >
-      <AdBanner
-        label="REKLAM"
-        minHeight={heights[position]}
-      />
+    <div className="ad-slot" style={{ width: "100%" }}>
+      <AdBanner label="REKLAM" minHeight={heights[position]} />
     </div>
   );
 }

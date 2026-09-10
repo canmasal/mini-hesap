@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Profesyonel Ön Muhasebe Excel | MiniHesap",
+  title: "Profesyonel Ön Muhasebe Excel'i",
   description:
     "MiniHesap profesyonel ön muhasebe Excel şablonu ile gelir, gider, KDV, cari, ödeme ve finansal raporlarınızı takip edin.",
   alternates: {

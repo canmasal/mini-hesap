@@ -2,7 +2,16 @@ import type { ComponentType } from "react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import { calculators } from "@/data/calculators";
+import Link from "next/link";
+
+import {
+  calculators,
+  getRelatedCalculators,
+} from "@/data/calculators";
+
+import AdSlot from "@/components/AdSlot";
+import Breadcrumb from "@/components/Breadcrumb";
+import CalculatorCard from "@/components/CalculatorCard";
 
 import NetSalaryCalculator from "@/components/calculators/NetSalaryCalculator";
 import PercentCalculator from "@/components/calculators/PercentCalculator";
@@ -603,6 +612,22 @@ function JsonLd({
     ),
   };
 
+  const appSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    name: calculator.title,
+    url: pageUrl,
+    applicationCategory: "FinanceApplication",
+    operatingSystem: "Web",
+    inLanguage: "tr-TR",
+    description: seo.description,
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "TRY",
+    },
+  };
+
   return (
     <>
       <script
@@ -611,6 +636,16 @@ function JsonLd({
           __html:
             JSON.stringify(
               webPageSchema
+            ),
+        }}
+      />
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html:
+            JSON.stringify(
+              appSchema
             ),
         }}
       />
@@ -757,6 +792,9 @@ export default async function CalculatorPage({
     notFound();
   }
 
+  const related =
+    getRelatedCalculators(slug);
+
   return (
     <main className="page">
 
@@ -778,15 +816,18 @@ export default async function CalculatorPage({
 
       <div className="container">
 
-        <a
-          className="eyebrow"
-          href="/hesaplamalar"
-        >
-          ← Tüm Hesaplamalara Dön
-        </a>
+        <Breadcrumb
+          items={[
+            { label: "Ana Sayfa", href: "/" },
+            { label: "Hesaplamalar", href: "/hesaplamalar" },
+            { label: calculator.title },
+          ]}
+        />
 
         <h1>
-          {calculator.icon}{" "}
+          <span aria-hidden="true">
+            {calculator.icon}
+          </span>{" "}
           {calculator.title}
         </h1>
 
@@ -797,6 +838,17 @@ export default async function CalculatorPage({
         </p>
 
         <Calculator />
+
+        <p className="notice notice-warn">
+          <strong>Bilgilendirme:</strong> Buradaki sonuçlar girdiğiniz
+          verilere göre üretilen <strong>tahmini</strong> değerlerdir; resmî
+          bordro, banka veya kurum hesaplaması yerine geçmez. Kesin tutarlar
+          için işvereninize, bankanıza veya mali müşavirinize danışın.
+        </p>
+
+        <div style={{ marginTop: 24 }}>
+          <AdSlot position="middle" />
+        </div>
 
       </div>
 
@@ -1063,6 +1115,56 @@ export default async function CalculatorPage({
 
         </div>
       </section>
+
+      {/* ===================================================
+          İLGİLİ HESAPLAMALAR
+      =================================================== */}
+
+      {related.length > 0 && (
+        <section
+          className="section"
+          style={{ paddingTop: 10 }}
+        >
+          <div className="container">
+
+            <div className="section-head">
+              <p className="eyebrow">DEVAM EDİN</p>
+              <h2>İlgili Hesaplama Araçları</h2>
+            </div>
+
+            <div className="cards">
+              {related.map((item) => (
+                <CalculatorCard
+                  key={item.slug}
+                  href={`/hesaplamalar/${item.slug}`}
+                  icon={item.icon}
+                  title={item.title}
+                  description={item.description}
+                />
+              ))}
+            </div>
+
+            <div
+              style={{
+                marginTop: 30,
+                textAlign: "center",
+              }}
+            >
+              <Link
+                className="btn btn-outline"
+                href="/hesaplamalar"
+              >
+                ← Tüm hesaplama araçlarını gör
+              </Link>
+            </div>
+
+          </div>
+        </section>
+      )}
+
+      <div className="container">
+        <AdSlot position="bottom" />
+      </div>
 
     </main>
   );

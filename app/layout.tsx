@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 import Header from "@/components/Header";
@@ -87,9 +87,43 @@ export const metadata: Metadata = {
   },
 
   alternates: {
-    canonical:
-      process.env.NEXT_PUBLIC_SITE_URL ||
-      "http://localhost:3000",
+    canonical: "/",
+  },
+
+  category: "finance",
+
+  applicationName: "MiniHesap",
+
+  formatDetection: {
+    telephone: false,
+    email: false,
+    address: false,
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#16a34a",
+  width: "device-width",
+  initialScale: 1,
+  colorScheme: "light",
+};
+
+/* Site geneli arama kutusu + kuruluş şeması */
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "MiniHesap",
+  url: siteUrl,
+  inLanguage: "tr-TR",
+  description:
+    "Net maaş, kıdem tazminatı, KDV, yüzde ve daha fazlası için ücretsiz online hesaplama araçları.",
+  publisher: {
+    "@type": "Organization",
+    name: "MiniHesap",
+    url: siteUrl,
   },
 };
 
@@ -101,9 +135,22 @@ export default function RootLayout({
   return (
     <html lang="tr">
       <body>
+        <a className="skip-link" href="#icerik">
+          İçeriğe atla
+        </a>
+
         <Header />
-        {children}
+
+        <div id="icerik">{children}</div>
+
         <Footer />
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(websiteSchema),
+          }}
+        />
       </body>
     </html>
   );

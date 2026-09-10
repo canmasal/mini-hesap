@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Profesyonel Borç Takip Excel'i | MiniHesap",
+  title: "Profesyonel Borç Takip Excel'i",
   description:
     "Banka, kredi kartı ve nakit avans borçlarınızı profesyonel Excel şablonu ile takip edin. Borç, limit, ödeme ve taksitlerinizi tek yerde yönetin.",
   alternates: {

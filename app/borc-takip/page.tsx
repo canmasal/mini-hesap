@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+
 import BorcTakipDemo from "@/components/BorcTakipDemo";
-import AdBanner from "@/components/AdBanner";
+import Breadcrumb from "@/components/Breadcrumb";
+import AdSlot from "@/components/AdSlot";
 export const metadata: Metadata = {
-  title: "Borç Takip Excel Şablonu | MiniHesap",
+  title: "Banka Borç Takip",
   description:
     "Tüm banka ve kredi kartı borçlarınızı tek tabloda takip edin. MiniHesap borç takip aracını ücretsiz demo olarak deneyin.",
   alternates: {
@@ -17,14 +20,23 @@ export const metadata: Metadata = {
 export default function BorcTakipPage() {
   return (
     <main className="page">
-      <section className="section">
+      <div className="container">
+        <Breadcrumb
+          items={[
+            { label: "Ana Sayfa", href: "/" },
+            { label: "Hesaplamalar", href: "/hesaplamalar" },
+            { label: "Banka Borç Takip" },
+          ]}
+        />
+      </div>
+
+      <section className="section" style={{ paddingTop: 10 }}>
         <div className="container">
           <div
             style={{
               maxWidth: 900,
               margin: "0 auto",
               textAlign: "center",
-              paddingTop: 30,
             }}
           >
             <div className="eyebrow">MİNİHESAP FİNANS ARAÇLARI</div>
@@ -112,20 +124,27 @@ export default function BorcTakipPage() {
             <div
               style={{
                 marginTop: 20,
-                padding: 15,
-                borderRadius: 14,
-                background: "#effaf2",
-                border: "1px solid #ccebd6",
-                color: "#166534",
-                fontWeight: 700,
+                display: "flex",
+                flexWrap: "wrap",
+                alignItems: "center",
+                gap: 12,
               }}
             >
-              🚀 Demo aşamasındayız. Ücretli indirilebilir sürüm daha sonra
-              aktif edilecek.
+              <Link className="btn btn-green" href="/premium/borc-takip">
+                Premium sürümü incele →
+              </Link>
+
+              <span style={{ color: "var(--muted)", fontSize: 14 }}>
+                Yukarıdaki demo her zaman ücretsizdir.
+              </span>
             </div>
           </article>
         </div>
       </section>
+
+      <div className="container">
+        <AdSlot position="bottom" />
+      </div>
     </main>
   );
 }

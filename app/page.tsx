@@ -1,55 +1,66 @@
+import Link from "next/link";
+
 import CalculatorCard from "@/components/CalculatorCard";
-import AdSlot from "@/components/AdSlot";
 import { calculators } from "@/data/calculators";
+import AdSlot from "@/components/AdSlot";
 
 const financeTools = [
   {
     href: "/borc-takip",
-    icon: "ğŸ¦",
-    title: "Banka BorÃ§ Takip",
+    icon: "🏦",
+    title: "Banka Borç Takip",
     description:
-      "Banka, kredi kartÄ± ve nakit avans borÃ§larÄ±nÄ±zÄ± tek tabloda takip edin. Toplam borÃ§, limit ve kullanÄ±labilir limitinizi gÃ¶rÃ¼n.",
-    link: "BorÃ§ Takibi AÃ§ â†’",
+      "Banka, kredi kartı ve nakit avans borçlarınızı tek tabloda takip edin; toplam borç ve kullanılabilir limitinizi görün.",
+    cta: "Borç Takip Et",
   },
   {
     href: "/on-muhasebe",
-    icon: "ğŸ“Š",
-    title: "Ã–n Muhasebe Takip",
+    icon: "📊",
+    title: "Ön Muhasebe Takip",
     description:
-      "Gelir, gider, KDV, belge, cari ve Ã¶deme bilgilerinizi dÃ¼zenli ÅŸekilde takip edin. Finansal Ã¶zetinizi tek ekranda gÃ¶rÃ¼n.",
-    link: "Ã–n Muhasebeyi AÃ§ â†’",
+      "Gelir, gider, KDV ve cari bilgilerinizi kaydedin; aylık kâr-zarar özetinizi anında görüntüleyin.",
+    cta: "Ön Muhasebeyi Aç",
   },
 ];
 
 export default function HomePage() {
   return (
     <main>
-      <div className="container ad-section">
-        <AdSlot position="top" />
-      </div>
-
       <section className="hero">
         <div className="container hero-grid">
           <div>
-            <div className="badge">âš¡ HÄ±zlÄ± â€¢ Kolay â€¢ Mobil Uyumlu</div>
+            <p className="badge">⚡ Hızlı • Kolay • Mobil Uyumlu</p>
 
             <h1>
-              HayatÄ±nÄ± KolaylaÅŸtÄ±ran
+              Hayatını Kolaylaştıran{" "}
               <span>Hesaplamalar Tek Yerde!</span>
             </h1>
 
             <p>
-              MaaÅŸ, fazla mesai, kÄ±dem, kira artÄ±ÅŸÄ±, KDV, yÃ¼zde ve daha
-              fazlasÄ±nÄ± anlaÅŸÄ±lÄ±r araÃ§larla hÄ±zlÄ±ca hesaplayÄ±n.
+              Maaş, fazla mesai, kıdem, kira artışı, KDV, yüzde ve daha
+              fazlasını anlaşılır araçlarla hızlıca hesaplayın.
             </p>
 
             <div className="hero-actions">
-              <a className="btn btn-green" href="/hesaplamalar">
-                Hemen BaÅŸla â†’
-              </a>
+              <Link className="btn btn-green" href="/hesaplamalar">
+                Hemen Başla →
+              </Link>
               <a className="btn btn-outline" href="#araclar">
-                AraÃ§larÄ± GÃ¶r
+                Araçları Gör
               </a>
+            </div>
+
+            <div className="trust-row">
+              <span>
+                <span aria-hidden="true">✅</span> Üyelik gerekmez
+              </span>
+              <span>
+                <span aria-hidden="true">🔒</span> Veriler cihazınızda kalır
+              </span>
+              <span>
+                <span aria-hidden="true">🆓</span> {calculators.length}+ ücretsiz
+                araç
+              </span>
             </div>
           </div>
 
@@ -58,23 +69,25 @@ export default function HomePage() {
               <div className="mock-top">
                 <div>
                   <div className="mock-sub">MiniHesap</div>
-                  <div className="mock-title">BugÃ¼n ne hesaplayacaÄŸÄ±z?</div>
+                  <div className="mock-title">Bugün ne hesaplayacağız?</div>
                 </div>
                 <div style={{ fontSize: 38 }} aria-hidden="true">
-                  ğŸ§®
+                  🧮
                 </div>
               </div>
 
               <div className="quick-grid">
                 {calculators.slice(0, 4).map((item) => (
-                  <a
+                  <Link
                     className="quick"
                     key={item.slug}
                     href={`/hesaplamalar/${item.slug}`}
                   >
-                    <div className="quick-icon">{item.icon}</div>
+                    <div className="quick-icon" aria-hidden="true">
+                      {item.icon}
+                    </div>
                     <div className="quick-title">{item.title}</div>
-                  </a>
+                  </Link>
                 ))}
               </div>
             </div>
@@ -82,14 +95,17 @@ export default function HomePage() {
         </div>
       </section>
 
+      <div className="container ad-slot">
+        <AdSlot position="top" />
+      </div>
+
       <section className="section section-white" id="araclar">
         <div className="container">
           <div className="section-head">
-            <div className="eyebrow">POPÃœLER ARAÃ‡LAR</div>
-            <h2>Hesaplama AraÃ§larÄ±</h2>
+            <p className="eyebrow">POPÜLER ARAÇLAR</p>
+            <h2>Hesaplama Araçları</h2>
             <p>
-              GÃ¼nlÃ¼k hayatta en Ã§ok ihtiyaÃ§ duyulan hesaplamalarÄ± tek yerde
-              hÄ±zlÄ± ve anlaÅŸÄ±lÄ±r ÅŸekilde kullanÄ±n.
+              Günlük hayatta en çok ihtiyaç duyulan hesaplamaları tek yerde bul.
             </p>
           </div>
 
@@ -107,29 +123,28 @@ export default function HomePage() {
         </div>
       </section>
 
-      <div className="container ad-section">
-        <AdSlot position="middle" />
-      </div>
-
       <section className="section">
         <div className="container">
           <div className="section-head">
-            <div className="eyebrow">MÄ°NÄ°HESAP ARAÃ‡LARI</div>
-            <h2>Finans Takibinizi de Tek Yerden YÃ¶netin</h2>
+            <p className="eyebrow">FİNANS ARAÇLARI</p>
+            <h2>Tek seferlik hesabın ötesi</h2>
             <p>
-              Sadece hesaplamakla kalmayÄ±n; borÃ§larÄ±nÄ±zÄ± ve iÅŸletme
-              gelir-giderinizi de dÃ¼zenli takip edin.
+              Borçlarınızı ve ön muhasebenizi düzenli olarak takip etmek için
+              hazırlanmış kapsamlı araçlar.
             </p>
           </div>
 
-          <div className="finance-grid">
+          <div className="cards">
             {financeTools.map((tool) => (
-              <a className="finance-card" key={tool.href} href={tool.href}>
-                <div className="finance-card-icon">{tool.icon}</div>
-                <h3>{tool.title}</h3>
-                <p>{tool.description}</p>
-                <div className="finance-card-link">{tool.link}</div>
-              </a>
+              <CalculatorCard
+                key={tool.href}
+                href={tool.href}
+                icon={tool.icon}
+                title={tool.title}
+                description={tool.description}
+                cta={tool.cta}
+                badge="MİNİHESAP FİNANS ARACI"
+              />
             ))}
           </div>
         </div>
@@ -138,52 +153,42 @@ export default function HomePage() {
       <section className="section section-white">
         <div className="container">
           <div className="section-head">
-            <div className="eyebrow">NEDEN MÄ°NÄ°HESAP?</div>
-            <h2>Sade, hÄ±zlÄ± ve eriÅŸilebilir</h2>
-            <p>
-              Gereksiz karmaÅŸayÄ± kaldÄ±rÄ±p ihtiyacÄ±nÄ±z olan sonucu Ã¶ne
-              Ã§Ä±karÄ±yoruz.
-            </p>
+            <p className="eyebrow">NEDEN MİNİHESAP?</p>
+            <h2>Sade, hızlı ve erişilebilir</h2>
           </div>
 
           <div className="feature-grid">
             <div className="feature">
               <div className="feature-icon" aria-hidden="true">
-                âš¡
+                ⚡
               </div>
-              <h3>HÄ±zlÄ± SonuÃ§</h3>
-              <p>
-                Gereksiz adÄ±mlarla uÄŸraÅŸmadan ihtiyacÄ±nÄ±z olan hesaplamaya
-                ulaÅŸÄ±n.
-              </p>
+              <h3>Hızlı</h3>
+              <p>Gereksiz adımlarla uğraşmadan sonuca ulaşın.</p>
             </div>
 
             <div className="feature">
               <div className="feature-icon" aria-hidden="true">
-                ğŸ“±
+                📱
               </div>
-              <h3>Her Cihazda</h3>
-              <p>
-                Telefon, tablet ve bilgisayarda rahat kullanÄ±lacak responsive
-                yapÄ±.
-              </p>
+              <h3>Her Yerde</h3>
+              <p>Telefon, tablet ve bilgisayarda rahatça kullanın.</p>
             </div>
 
             <div className="feature">
               <div className="feature-icon" aria-hidden="true">
-                ğŸ§©
+                🔒
               </div>
-              <h3>Tek Merkez</h3>
+              <h3>Gizli</h3>
               <p>
-                Hesaplama, borÃ§ takip ve Ã¶n muhasebe araÃ§larÄ±nÄ± tek platformda
-                bir araya getirin.
+                Girdiğiniz bilgiler sunucuya gönderilmez, tarayıcınızda
+                hesaplanır.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      <div className="container ad-section">
+      <div className="container ad-slot">
         <AdSlot position="bottom" />
       </div>
     </main>
