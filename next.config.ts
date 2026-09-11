@@ -56,6 +56,16 @@ const nextConfig: NextConfig = {
    */
   allowedDevOrigins: ["172.19.16.33", "localhost", "127.0.0.1"],
 
+  /*
+   * /api/premium/download, private/products altındaki Excel dosyalarını
+   * çalışma anında okur. Bu dosyalar hiçbir yerden import edilmediği için
+   * Next.js onları sunucu paketine dahil etmez ve canlıda dosya bulunamaz.
+   * Aşağıdaki ayar dosyaların dağıtıma kopyalanmasını sağlar.
+   */
+  outputFileTracingIncludes: {
+    "/api/premium/download": ["./private/products/**"],
+  },
+
   async headers() {
     return [
       {
