@@ -2,145 +2,160 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import Breadcrumb from "@/components/Breadcrumb";
-import { premiumProducts } from "@/data/premiumProducts";
+import { premiumProducts, KIND_LABELS } from "@/data/premiumProducts";
 
 export const metadata: Metadata = {
-  title: "Premium Excel Şablonları",
+  title: "Premium Hizmetler",
   description:
-    "Borç takip, ön muhasebe, kıdem-ihbar tazminat, kredi kapatma planlayıcı ve yıllık bütçe Excel şablonları. Hazır formüllerle indirin, kendi verinizi girin.",
+    "Windows programı, Access veritabanı paketi ve profesyonel Excel şablonları. Cari, stok, bordro, kira, e-ticaret ve şantiye takibi için hazır çözümler.",
   alternates: { canonical: "/premium" },
 };
 
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+
+const listSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "MiniHesap Premium Hizmetler",
+  itemListElement: premiumProducts.map((p, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    name: p.title,
+    url: `${baseUrl}/satin-al/${p.slug}`,
+  })),
+};
+
 export default function PremiumPage() {
+  /* Tür sayıları, üstteki özet rozetleri için */
+  const kinds = (["program", "veritabani", "excel"] as const).map((id) => ({
+    id,
+    count: premiumProducts.filter((p) => p.kind === id).length,
+  }));
+
   return (
     <main className="page">
       <div className="container">
         <Breadcrumb
-          items={[{ label: "Ana Sayfa", href: "/" }, { label: "Premium" }]}
+          items={[
+            { label: "Ana Sayfa", href: "/" },
+            { label: "Premium Hizmetler" },
+          ]}
         />
 
         <div className="section-head">
           <p className="eyebrow">💎 MİNİHESAP PREMIUM</p>
 
-          <h1 style={{ margin: "10px 0 14px" }}>Premium Excel Şablonları</h1>
+          <h1 style={{ margin: "10px 0 14px" }}>Premium Hizmetler</h1>
 
           <p className="page-lead" style={{ margin: "0 auto" }}>
             Sitedeki ücretsiz araçlar tek seferlik hesap içindir. Premium
-            şablonlar verilerinizi kalıcı olarak saklamanız, geçmişi takip
-            etmeniz ve rapor almanız için hazırlanmıştır.
+            çözümler verilerinizi kalıcı olarak saklamanız, geçmişi takip
+            etmeniz ve rapor almanız için hazırlandı.
           </p>
+
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              gap: 10,
+              justifyContent: "center",
+              marginTop: 20,
+            }}
+          >
+            {kinds
+              .filter((k) => k.count > 0)
+              .map((k) => (
+                <span
+                  key={k.id}
+                  className={`product-card__kind is-${k.id}`}
+                  style={{ padding: "7px 14px", fontSize: 12 }}
+                >
+                  {KIND_LABELS[k.id]} · {k.count}
+                </span>
+              ))}
+          </div>
         </div>
 
-        <div className="cards" style={{ marginTop: 40 }}>
+        <div className="product-grid">
           {premiumProducts.map((product) => (
-            <article key={product.slug} className="card" style={{ cursor: "default" }}>
-              <div className="card-icon" aria-hidden="true">
-                {product.icon}
+            <article key={product.slug} className="product-card">
+              <div className="product-card__top">
+                <div className="product-card__icon" aria-hidden="true">
+                  {product.icon}
+                </div>
+                <span className={`product-card__kind is-${product.kind}`}>
+                  {KIND_LABELS[product.kind]}
+                </span>
               </div>
 
-              <h2 style={{ margin: "18px 0 0", fontSize: 20 }}>
-                {product.title}
-              </h2>
+              <h2 className="product-card__title">{product.title}</h2>
 
-              <p
-                style={{
-                  margin: "6px 0 0",
-                  color: "var(--brand-dark)",
-                  fontWeight: 700,
-                  fontSize: 13,
-                }}
-              >
-                {product.tagline}
-              </p>
+              <p className="product-card__tagline">{product.tagline}</p>
 
-              <p style={{ color: "var(--muted)", lineHeight: 1.6 }}>
-                {product.description}
-              </p>
+              <p className="product-card__desc">{product.description}</p>
 
-              <ul
-                style={{
-                  margin: "4px 0 16px",
-                  paddingLeft: 18,
-                  color: "var(--ink-soft)",
-                  fontSize: 13,
-                  lineHeight: 1.8,
-                }}
-              >
+              <ul className="product-card__features">
                 {product.features.slice(0, 4).map((feature) => (
                   <li key={feature}>{feature}</li>
                 ))}
               </ul>
 
-              <p
-                style={{
-                  margin: "0 0 14px",
-                  fontSize: 12,
-                  color: "var(--muted)",
-                }}
-              >
-                <strong>Sayfalar:</strong> {product.sheets.join(" · ")}
+              <p className="product-card__sheets">
+                <strong>İçerik:</strong> {product.sheets.length} bölüm ·{" "}
+                {product.sheets.slice(0, 3).join(", ")}
+                {product.sheets.length > 3 && "…"}
               </p>
 
-              <div
-                style={{
-                  marginTop: "auto",
-                  display: "flex",
-                  flexWrap: "wrap",
-                  alignItems: "center",
-                  gap: 10,
-                }}
-              >
-                <span
-                  style={{
-                    fontSize: 22,
-                    fontWeight: 900,
-                    color: "var(--brand-deep)",
-                  }}
-                >
-                  {product.price} ₺
-                </span>
+              <div className="product-card__foot">
+                <div className="product-card__price">
+                  <b>{product.price.toLocaleString("tr-TR")} ₺</b>
+                  <span>tek seferlik · KDV dâhil</span>
+                </div>
 
-                <Link className="btn btn-green" href={`/satin-al/${product.slug}`}>
-                  Satın Al →
-                </Link>
-
-                {product.landingPage && (
-                  <Link className="btn btn-outline" href={product.landingPage}>
-                    İncele
+                <div className="product-card__actions">
+                  <Link
+                    className="btn btn-green"
+                    href={`/satin-al/${product.slug}`}
+                  >
+                    Satın Al →
                   </Link>
+
+                  {product.landingPage && (
+                    <Link className="btn btn-outline" href={product.landingPage}>
+                      Ayrıntılı İncele
+                    </Link>
+                  )}
+                </div>
+
+                {product.relatedTool && (
+                  <p className="product-card__try">
+                    Önce ücretsiz deneyin:{" "}
+                    <Link href={product.relatedTool.href}>
+                      {product.relatedTool.label}
+                    </Link>
+                  </p>
                 )}
               </div>
-
-              {product.relatedTool && (
-                <p style={{ margin: "14px 0 0", fontSize: 13 }}>
-                  Önce ücretsiz deneyin:{" "}
-                  <Link
-                    href={product.relatedTool.href}
-                    style={{
-                      color: "var(--brand-dark)",
-                      fontWeight: 700,
-                      textDecoration: "underline",
-                    }}
-                  >
-                    {product.relatedTool.label}
-                  </Link>
-                </p>
-              )}
             </article>
           ))}
         </div>
 
         <div className="notice" style={{ marginTop: 36 }}>
           <strong>Teslimat:</strong> Ödeme onaylandıktan hemen sonra indirme
-          bağlantınız ekranda görünür ve e-posta adresinize gönderilir.
-          Dijital ürün olduğu için indirme başladıktan sonra cayma hakkı sona
-          erer;{" "}
+          bağlantınız ekranda görünür. Siparişiniz 30 gün boyunca en fazla 10
+          kez indirilebilir. Dijital ürün olduğu için indirme başladıktan sonra
+          cayma hakkı sona erer;{" "}
           <Link href="/iade-kosullari" style={{ fontWeight: 700 }}>
             iptal ve iade koşullarına
           </Link>{" "}
           göz atın.
         </div>
       </div>
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(listSchema) }}
+      />
     </main>
   );
 }

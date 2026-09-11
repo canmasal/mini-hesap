@@ -12,6 +12,7 @@ import {
 import AdSlot from "@/components/AdSlot";
 import Breadcrumb from "@/components/Breadcrumb";
 import CalculatorCard from "@/components/CalculatorCard";
+import PremiumCta from "@/components/PremiumCta";
 import { guidesForTool } from "@/data/guides";
 
 import NetSalaryCalculator from "@/components/calculators/NetSalaryCalculator";
@@ -1279,6 +1280,8 @@ export default async function CalculatorPage({
           bordro, banka veya kurum hesaplaması yerine geçmez. Kesin tutarlar
           için işvereninize, bankanıza veya mali müşavirinize danışın.
         </p>
+
+        <PremiumCta toolHref={`/hesaplamalar/${slug}`} />
 
         <div style={{ marginTop: 24 }}>
           <AdSlot position="middle" />

@@ -7,8 +7,18 @@
  * API uç noktası, vitrin sayfası ve sitemap otomatik güncellenir.
  */
 
+export type ProductKind = "program" | "veritabani" | "excel";
+
+export const KIND_LABELS: Record<ProductKind, string> = {
+  program: "Windows Programı",
+  veritabani: "Access + Excel",
+  excel: "Excel Şablonu",
+};
+
 export type PremiumProduct = {
   slug: string;
+  /** Ürünün teknik türü; vitrinde rozet olarak gösterilir */
+  kind: ProductKind;
   /** private/products altındaki dosya adı */
   fileName: string;
   icon: string;
@@ -28,6 +38,7 @@ export type PremiumProduct = {
 export const premiumProducts: PremiumProduct[] = [
   {
     slug: "isletme-programi",
+    kind: "program",
     fileName: "MiniHesap_Isletme_Programi_Windows.zip",
     icon: "💻",
     title: "MiniHesap İşletme Programı (Windows)",
@@ -59,6 +70,7 @@ export const premiumProducts: PremiumProduct[] = [
 
   {
     slug: "access-excel-paketi",
+    kind: "veritabani",
     fileName: "MiniHesap_Isletme_Access_Excel_Paketi.zip",
     icon: "🗄️",
     title: "Access + Excel İşletme Paketi",
@@ -91,6 +103,7 @@ export const premiumProducts: PremiumProduct[] = [
 
   {
     slug: "isletme-yonetim-paneli",
+    kind: "excel",
     fileName: "MiniHesap_Isletme_Yonetim_Paneli.xlsx",
     icon: "🏢",
     title: "İşletme Yönetim Paneli",
@@ -123,6 +136,7 @@ export const premiumProducts: PremiumProduct[] = [
 
   {
     slug: "personel-bordro",
+    kind: "excel",
     fileName: "MiniHesap_Personel_Bordro_Ozluk_Takip.xlsx",
     icon: "👥",
     title: "Personel Bordro ve Özlük Takip",
@@ -155,6 +169,7 @@ export const premiumProducts: PremiumProduct[] = [
 
   {
     slug: "kira-portfoy",
+    kind: "excel",
     fileName: "MiniHesap_Kira_Gayrimenkul_Portfoy_Takibi.xlsx",
     icon: "🏠",
     title: "Kira ve Gayrimenkul Portföy Takibi",
@@ -187,6 +202,7 @@ export const premiumProducts: PremiumProduct[] = [
 
   {
     slug: "eticaret-satici",
+    kind: "excel",
     fileName: "MiniHesap_ETicaret_Satici_Paneli.xlsx",
     icon: "🛒",
     title: "e-Ticaret Satıcı Paneli",
@@ -214,6 +230,7 @@ export const premiumProducts: PremiumProduct[] = [
 
   {
     slug: "freelancer",
+    kind: "excel",
     fileName: "MiniHesap_Serbest_Meslek_Freelancer_Paketi.xlsx",
     icon: "🧑‍💻",
     title: "Serbest Meslek / Freelancer Paketi",
@@ -246,6 +263,7 @@ export const premiumProducts: PremiumProduct[] = [
 
   {
     slug: "santiye-proje",
+    kind: "excel",
     fileName: "MiniHesap_Santiye_Proje_Maliyet_Takibi.xlsx",
     icon: "🏗️",
     title: "Şantiye / Proje Maliyet Takibi",
@@ -275,6 +293,7 @@ export const premiumProducts: PremiumProduct[] = [
 
   {
     slug: "restoran-maliyet",
+    kind: "excel",
     fileName: "MiniHesap_Restoran_Kafe_Maliyet_Paneli.xlsx",
     icon: "🍔",
     title: "Restoran / Kafe Maliyet Paneli",
@@ -303,6 +322,7 @@ export const premiumProducts: PremiumProduct[] = [
 
   {
     slug: "borc-takip",
+    kind: "excel",
     fileName: "MiniHesap_Profesyonel_Borc_Takip.xlsx",
     icon: "🏦",
     title: "Profesyonel Borç Takip",
@@ -323,6 +343,7 @@ export const premiumProducts: PremiumProduct[] = [
 
   {
     slug: "on-muhasebe",
+    kind: "excel",
     fileName: "MiniHesap_On_Muhasebe_Takip.xlsx",
     icon: "📊",
     title: "Profesyonel Ön Muhasebe",
@@ -343,6 +364,7 @@ export const premiumProducts: PremiumProduct[] = [
 
   {
     slug: "kidem-ihbar",
+    kind: "excel",
     fileName: "MiniHesap_Kidem_Ihbar_Tazminat_Dosyasi.xlsx",
     icon: "💼",
     title: "Kıdem & İhbar Tazminat Dosyası",
@@ -367,6 +389,7 @@ export const premiumProducts: PremiumProduct[] = [
 
   {
     slug: "kredi-borc-kapatma",
+    kind: "excel",
     fileName: "MiniHesap_Kredi_Borc_Kapatma_Planlayici.xlsx",
     icon: "📉",
     title: "Kredi & Borç Kapatma Planlayıcı",
@@ -391,6 +414,7 @@ export const premiumProducts: PremiumProduct[] = [
 
   {
     slug: "yillik-butce",
+    kind: "excel",
     fileName: "MiniHesap_Yillik_Butce_Nakit_Akis.xlsx",
     icon: "🗓️",
     title: "Yıllık Bütçe ve Nakit Akış",
@@ -414,6 +438,11 @@ export const premiumProducts: PremiumProduct[] = [
     price: 179,
   },
 ];
+
+/** Bir ücretsiz araca bağlı premium ürünler (araç sayfasından yönlendirme için) */
+export function premiumForTool(toolHref: string) {
+  return premiumProducts.filter((p) => p.relatedTool?.href === toolHref);
+}
 
 export function findPremiumProduct(slug: string) {
   return premiumProducts.find((product) => product.slug === slug);
