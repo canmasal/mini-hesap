@@ -1,0 +1,207 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+
+import Breadcrumb from "@/components/Breadcrumb";
+import { findPremiumProduct } from "@/data/premiumProducts";
+import { getOrderStore } from "@/lib/orders/store";
+import { createDownloadToken } from "@/lib/orders/tokens";
+import { MAX_DOWNLOADS } from "@/lib/orders/types";
+
+export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  title: "Siparişiniz",
+  robots: { index: false, follow: false },
+};
+
+export default async function OrderPage({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ id: string }>;
+  searchParams: Promise<{ durum?: string }>;
+}) {
+  const { id } = await params;
+  const { durum } = await searchParams;
+
+  const order = await getOrderStore().get(id);
+
+  if (!order) {
+    return (
+      <main className="page">
+        <div className="container">
+          <h1>Sipariş bulunamadı</h1>
+          <p className="page-lead">
+            Bu bağlantı geçersiz olabilir. Sorun devam ederse{" "}
+            <Link href="/iletisim" style={{ fontWeight: 700 }}>
+              bize yazın
+            </Link>
+            .
+          </p>
+        </div>
+      </main>
+    );
+  }
+
+  const product = findPremiumProduct(order.productSlug);
+  const failed = durum === "basarisiz" || order.status === "basarisiz";
+  const paid = order.status === "odendi";
+
+  /* İndirme bağlantısı yalnızca ödenmiş siparişler için, kısa ömürlü üretilir */
+  let downloadUrl: string | null = null;
+
+  if (paid) {
+    const token = createDownloadToken({
+      orderId: order.id,
+      productSlug: order.productSlug,
+      /* Bağlantı 2 saat geçerli; sayfa yenilenince yenisi üretilir */
+      exp: Math.floor(Date.now() / 1000) + 2 * 60 * 60,
+    });
+
+    downloadUrl = `/api/premium/download?product=${encodeURIComponent(
+      order.productSlug
+    )}&token=${encodeURIComponent(token)}`;
+  }
+
+  return (
+    <main className="page">
+      <div className="container">
+        <Breadcrumb
+          items={[{ label: "Ana Sayfa", href: "/" }, { label: "Siparişiniz" }]}
+        />
+
+        <div style={{ maxWidth: 720 }}>
+          {paid && (
+            <>
+              <div style={{ fontSize: 52 }} aria-hidden="true">
+                ✅
+              </div>
+              <p className="eyebrow">ÖDEME ONAYLANDI</p>
+              <h1>Teşekkürler, {order.fullName.split(" ")[0]}!</h1>
+              <p className="page-lead">
+                <strong>{order.productTitle}</strong> için ödemeniz alındı.
+                Dosyanızı aşağıdan indirebilirsiniz.
+              </p>
+
+              <a
+                className="btn btn-green"
+                href={downloadUrl!}
+                style={{ marginTop: 22, padding: "15px 28px", fontSize: 16 }}
+              >
+                ⬇ Dosyayı İndir
+              </a>
+
+              <div className="notice notice-ok">
+                <strong>İndirme bilgileri.</strong> Bağlantı 2 saat geçerlidir;
+                süresi dolarsa bu sayfayı yenilemeniz yeterli. Siparişiniz{" "}
+                {order.downloadExpiresAt
+                  ? new Date(order.downloadExpiresAt).toLocaleDateString("tr-TR")
+                  : "—"}{" "}
+                tarihine kadar en fazla {MAX_DOWNLOADS} kez indirilebilir.
+                Şu ana kadar {order.downloadCount} kez indirdiniz.
+              </div>
+
+              <div className="notice">
+                <strong>Bu sayfayı kaydedin.</strong> Sipariş numaranız:{" "}
+                <code>{order.id}</code>
+                <br />
+                Bu adresi yer imlerinize ekleyin; dosyanıza tekrar buradan
+                ulaşabilirsiniz.
+              </div>
+            </>
+          )}
+
+          {failed && (
+            <>
+              <div style={{ fontSize: 52 }} aria-hidden="true">
+                ⚠️
+              </div>
+              <p className="eyebrow">ÖDEME TAMAMLANAMADI</p>
+              <h1>Ödeme alınamadı</h1>
+              <p className="page-lead">
+                Kartınızdan tahsilat yapılmadı. Tekrar deneyebilir veya farklı
+                bir kartla ödeme yapabilirsiniz.
+              </p>
+
+              {product && (
+                <Link
+                  className="btn btn-green"
+                  href={`/satin-al/${product.slug}`}
+                  style={{ marginTop: 20 }}
+                >
+                  Tekrar Dene
+                </Link>
+              )}
+            </>
+          )}
+
+          {!paid && !failed && (
+            <>
+              <div style={{ fontSize: 52 }} aria-hidden="true">
+                ⏳
+              </div>
+              <p className="eyebrow">ÖDEME BEKLENİYOR</p>
+              <h1>Siparişiniz alındı</h1>
+              <p className="page-lead">
+                Ödemeniz henüz onaylanmadı. Bankanızdan onay geldiğinde bu sayfa
+                indirme bağlantınızı gösterecek. Birkaç dakika sonra sayfayı
+                yenileyin.
+              </p>
+            </>
+          )}
+
+          <div
+            style={{
+              marginTop: 30,
+              padding: 20,
+              borderRadius: "var(--r-md)",
+              background: "var(--surface)",
+              border: "1px solid var(--line)",
+              fontSize: 14,
+            }}
+          >
+            <h2 style={{ marginTop: 0, fontSize: 16 }}>Sipariş özeti</h2>
+
+            <div className="panel-row">
+              <span>Ürün</span>
+              <span className="amount">{order.productTitle}</span>
+            </div>
+            <div className="panel-row">
+              <span>Tutar</span>
+              <span className="amount">
+                {(order.amountKurus / 100).toLocaleString("tr-TR", {
+                  minimumFractionDigits: 2,
+                })}{" "}
+                ₺
+              </span>
+            </div>
+            <div className="panel-row">
+              <span>E-posta</span>
+              <span className="amount">{order.email}</span>
+            </div>
+            <div className="panel-row">
+              <span>Tarih</span>
+              <span className="amount">
+                {new Date(order.createdAt).toLocaleString("tr-TR")}
+              </span>
+            </div>
+            <div className="panel-row">
+              <span>Durum</span>
+              <span className="amount">
+                {paid ? "Ödendi" : failed ? "Başarısız" : "Bekliyor"}
+              </span>
+            </div>
+          </div>
+
+          <p style={{ marginTop: 22, fontSize: 14 }}>
+            Sorun yaşarsanız sipariş numaranızla birlikte{" "}
+            <Link href="/iletisim" style={{ fontWeight: 700 }}>
+              iletişim sayfasından
+            </Link>{" "}
+            yazın.
+          </p>
+        </div>
+      </div>
+    </main>
+  );
+}

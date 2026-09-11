@@ -18,6 +18,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/hakkimizda`, changeFrequency: "monthly", priority: 0.5 },
     { url: `${baseUrl}/iletisim`, changeFrequency: "monthly", priority: 0.4 },
     { url: `${baseUrl}/gizlilik`, changeFrequency: "yearly", priority: 0.2 },
+    { url: `${baseUrl}/on-bilgilendirme`, changeFrequency: "yearly", priority: 0.2 },
+    { url: `${baseUrl}/mesafeli-satis-sozlesmesi`, changeFrequency: "yearly", priority: 0.2 },
+    { url: `${baseUrl}/iade-kosullari`, changeFrequency: "yearly", priority: 0.3 },
     {
       url: `${baseUrl}/kullanim-sartlari`,
       changeFrequency: "yearly",

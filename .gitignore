@@ -13,3 +13,4 @@ npm-debug.log*
 .vs/
 *.mp4
 .next-build
+private/orders.json

@@ -38,6 +38,8 @@ export default function Footer() {
           <Link href="/iletisim">İletişim</Link>
           <Link href="/gizlilik">Gizlilik Politikası</Link>
           <Link href="/kullanim-sartlari">Kullanım Şartları</Link>
+          <Link href="/mesafeli-satis-sozlesmesi">Mesafeli Satış Sözleşmesi</Link>
+          <Link href="/iade-kosullari">İptal ve İade</Link>
         </nav>
       </div>
 

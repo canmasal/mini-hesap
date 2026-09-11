@@ -100,13 +100,13 @@ export default function PremiumPage() {
                   {product.price} ₺
                 </span>
 
-                {product.landingPage ? (
-                  <Link className="btn btn-green" href={product.landingPage}>
-                    İncele →
-                  </Link>
-                ) : (
-                  <Link className="btn btn-outline" href="/iletisim">
-                    Satın almak için yazın
+                <Link className="btn btn-green" href={`/satin-al/${product.slug}`}>
+                  Satın Al →
+                </Link>
+
+                {product.landingPage && (
+                  <Link className="btn btn-outline" href={product.landingPage}>
+                    İncele
                   </Link>
                 )}
               </div>
@@ -131,13 +131,14 @@ export default function PremiumPage() {
         </div>
 
         <div className="notice" style={{ marginTop: 36 }}>
-          <strong>Satın alma akışı henüz aktif değil.</strong> Ödeme
-          altyapısı kurulana kadar satın almak için{" "}
-          <Link href="/iletisim" style={{ fontWeight: 700 }}>
-            iletişim sayfasından
+          <strong>Teslimat:</strong> Ödeme onaylandıktan hemen sonra indirme
+          bağlantınız ekranda görünür ve e-posta adresinize gönderilir.
+          Dijital ürün olduğu için indirme başladıktan sonra cayma hakkı sona
+          erer;{" "}
+          <Link href="/iade-kosullari" style={{ fontWeight: 700 }}>
+            iptal ve iade koşullarına
           </Link>{" "}
-          bize yazabilirsiniz. Dosyalar .xlsx biçimindedir; Excel, LibreOffice
-          Calc ve Google E-Tablolar ile açılır.
+          göz atın.
         </div>
       </div>
     </main>
