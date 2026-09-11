@@ -4,6 +4,22 @@ import path from "path";
 
 import { findPremiumProduct } from "@/data/premiumProducts";
 
+/** Dosya uzantısına göre içerik türü */
+function contentTypeOf(fileName: string) {
+  const ext = fileName.slice(fileName.lastIndexOf(".")).toLowerCase();
+
+  const types: Record<string, string> = {
+    ".xlsx":
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    ".xlsm": "application/vnd.ms-excel.sheet.macroEnabled.12",
+    ".accdb": "application/msaccess",
+    ".zip": "application/zip",
+    ".pdf": "application/pdf",
+  };
+
+  return types[ext] ?? "application/octet-stream";
+}
+
 /** Zamanlama saldırılarına karşı sabit süreli karşılaştırma */
 function safeEqual(a: string, b: string) {
   if (a.length !== b.length) return false;
@@ -58,8 +74,7 @@ export async function GET(request: Request) {
     return new NextResponse(new Uint8Array(file), {
       status: 200,
       headers: {
-        "Content-Type":
-          "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "Content-Type": contentTypeOf(selected.fileName),
 
         "Content-Disposition": `attachment; filename="${selected.fileName}"`,
 

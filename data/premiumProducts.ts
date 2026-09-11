@@ -27,6 +27,38 @@ export type PremiumProduct = {
 
 export const premiumProducts: PremiumProduct[] = [
   {
+    slug: "access-excel-paketi",
+    fileName: "MiniHesap_Isletme_Access_Excel_Paketi.zip",
+    icon: "🗄️",
+    title: "Access + Excel İşletme Paketi",
+    tagline: "Veriyi Access tutar, hesaplamayı Excel yapar",
+    description:
+      "Profesyonel iki dosyalı çözüm. Verileriniz gerçek bir Microsoft Access veritabanında ilişkisel olarak saklanır; Excel dosyası bu veriyi canlı okuyup kâr, KDV, stok, cari bakiye ve vade analizlerini hesaplar. Excel'in satır sınırı ve bozulma riski olmadan binlerce kayıt tutabilirsiniz.",
+    sheets: [
+      "Access: 8 tablo + 6 hesaplama sorgusu",
+      "Excel: Kurulum",
+      "Excel: Dashboard",
+      "Excel: Hareketler",
+      "Excel: Stok",
+      "Excel: Cari Ekstre",
+      "Excel: Ürün Kârlılık",
+      "Excel: Aylık Özet",
+      "Excel: Vadesi Geçen",
+    ],
+    features: [
+      "Gerçek ilişkisel veritabanı: birincil anahtar, yabancı anahtar ve indeksler",
+      "Access hatalı kayıt girmenizi engeller (referans bütünlüğü)",
+      "6 hazır hesaplama sorgusu: hareket detayı, stok, cari ekstre, aylık özet, ürün kârlılık, vadesi geçen",
+      "Excel dosyası Access'e canlı bağlıdır; açılışta otomatik yenilenir",
+      "Dashboard: satış, alış, brüt kâr, kâr marjı, ödenecek KDV, alacak/borç, vade riski",
+      "Binlerce kayıtta performans kaybı yok",
+      "Tek kullanıcı Access, çok kullanıcı için ağ paylaşımı desteği",
+    ],
+    relatedTool: { href: "/on-muhasebe", label: "Ön Muhasebe Takip aracı" },
+    price: 599,
+  },
+
+  {
     slug: "isletme-yonetim-paneli",
     fileName: "MiniHesap_Isletme_Yonetim_Paneli.xlsx",
     icon: "🏢",
