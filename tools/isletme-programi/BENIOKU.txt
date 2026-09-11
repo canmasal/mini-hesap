@@ -1,0 +1,70 @@
+MiniHesap İşletme Yönetim Programı
+===================================
+Sürüm 1.0  ·  minihesap.net
+
+
+KURULUM GEREKMEZ
+----------------
+MiniHesapIsletme.exe dosyasını istediğiniz klasöre kopyalayın ve çift tıklayın.
+Windows dışında bir kurulum, .NET veya Office gerekmez.
+
+
+VERİTABANI
+----------
+Program ilk çalıştığında yanında MiniHesapIsletme.db dosyasını oluşturur.
+Bütün verileriniz bu tek dosyada tutulur.
+
+  · YEDEK ALMAK : MiniHesapIsletme.db dosyasını kopyalamanız yeterlidir.
+  · TAŞIMAK     : exe ve db dosyasını birlikte taşıyın.
+  · SIFIRLAMAK  : db dosyasını silin; program örnek verilerle yeniden oluşturur.
+
+Veriler yalnızca kendi bilgisayarınızda durur, hiçbir yere gönderilmez.
+
+
+PROGRAMIN BÖLÜMLERİ
+-------------------
+Panel          Satış, alış, brüt kâr, kâr marjı, ödenecek KDV, alacak,
+               borç, kritik stok ve kayıt sayısı özetleri.
+Cariler        Müşteri ve tedarikçi kartları. Cari kodu benzersizdir.
+Ürünler        Ürün ve hizmet kartları; alış/satış fiyatı, KDV, kritik stok.
+Hareketler     Her alış ve satış için bir kayıt. Cari ve ürün listeden seçilir.
+Stok Durumu    Açılış + giren − çıkan = kalan stok. Kritik seviye uyarısı.
+Cari Ekstre    Cari bazlı satış, alış, bakiye ve açık alacak.
+
+
+İLK ADIMLAR
+-----------
+1. Cariler sekmesinden müşteri ve tedarikçilerinizi ekleyin.
+2. Ürünler sekmesinden sattığınız ürünleri tanımlayın.
+3. Hareketler sekmesinden alış ve satışlarınızı girin.
+4. Panel sekmesi özetleri otomatik hesaplar.
+
+Örnek kayıtları silmek için ilgili sekmede satırı seçip Sil deyin.
+
+
+DIŞA AKTARIM
+------------
+Panel sekmesindeki "Excel'e Aktar (CSV)" düğmesi hareketlerinizi CSV olarak
+kaydeder. Dosya Excel'de doğrudan açılır, Türkçe karakterler bozulmaz.
+
+
+SIK KARŞILAŞILAN DURUMLAR
+-------------------------
+"Bu cariye bağlı hareketler var" uyarısı
+    Cariyi silmek yerine Durum alanını Pasif yapın; geçmiş kayıtlar bozulmaz.
+
+Windows SmartScreen uyarısı
+    Program kod imzası taşımadığı için ilk çalıştırmada
+    "Daha fazla bilgi" > "Yine de çalıştır" demeniz gerekebilir.
+
+Antivirüs uyarısı
+    Tek dosya haline getirilmiş programlarda nadiren oluşur.
+    Dosyayı güvenilir listeye ekleyebilirsiniz.
+
+
+SORUMLULUK
+----------
+Bu programdaki hesaplamalar bilgilendirme amaçlıdır; resmî defter, beyanname
+veya mali müşavir hizmeti yerine geçmez.
+
+© MiniHesap · minihesap.net

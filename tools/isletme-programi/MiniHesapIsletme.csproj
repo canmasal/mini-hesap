@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net9.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>MiniHesap</RootNamespace>
+    <AssemblyName>MiniHesapIsletme</AssemblyName>
+    <Version>1.0.0</Version>
+    <Company>MiniHesap</Company>
+    <Product>MiniHesap İşletme</Product>
+    <AssemblyTitle>MiniHesap İşletme Yönetim Programı</AssemblyTitle>
+    <Copyright>© MiniHesap - minihesap.net</Copyright>
+    <ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
+    <SatelliteResourceLanguages>tr;en</SatelliteResourceLanguages>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="9.0.0" />
+  </ItemGroup>
+
+</Project>

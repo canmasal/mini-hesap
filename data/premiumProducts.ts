@@ -27,6 +27,37 @@ export type PremiumProduct = {
 
 export const premiumProducts: PremiumProduct[] = [
   {
+    slug: "isletme-programi",
+    fileName: "MiniHesap_Isletme_Programi_Windows.zip",
+    icon: "💻",
+    title: "MiniHesap İşletme Programı (Windows)",
+    tagline: "Kurulum gerektirmeyen masaüstü program",
+    description:
+      "Excel veya Access gerektirmeyen, çift tıklayınca açılan gerçek bir Windows programı. Cari, ürün, stok ve fatura hareketlerinizi kendi veritabanında tutar; kâr, KDV, stok ve cari bakiyelerinizi anlık hesaplar. Tüm veriler kendi bilgisayarınızda kalır.",
+    sheets: [
+      "Panel (Dashboard)",
+      "Cariler",
+      "Ürünler",
+      "Hareketler",
+      "Stok Durumu",
+      "Cari Ekstre",
+    ],
+    features: [
+      "Kurulum yok: tek dosya, çift tıkla çalışır",
+      "Office veya .NET kurulumu gerekmez",
+      "Kendi veritabanı (SQLite) — binlerce kayıtta hızlı",
+      "Veri bütünlüğü korumalı: hatalı kayıt girilemez",
+      "Cari, ürün ve hareket için ekle / düzenle / sil",
+      "Anlık panel: kâr, marj, ödenecek KDV, alacak, borç, kritik stok",
+      "Stok otomatik hesaplanır, kritik seviyede uyarır",
+      "Tek tuşla CSV dışa aktarım (Excel'de açılır)",
+      "Yedekleme tek dosya kopyalamak kadar kolay",
+    ],
+    relatedTool: { href: "/on-muhasebe", label: "Ön Muhasebe Takip aracı" },
+    price: 899,
+  },
+
+  {
     slug: "access-excel-paketi",
     fileName: "MiniHesap_Isletme_Access_Excel_Paketi.zip",
     icon: "🗄️",
