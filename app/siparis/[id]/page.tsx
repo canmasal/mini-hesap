@@ -6,6 +6,7 @@ import { findPremiumProduct } from "@/data/premiumProducts";
 import { getOrderStore } from "@/lib/orders/store";
 import { createDownloadToken } from "@/lib/orders/tokens";
 import { MAX_DOWNLOADS } from "@/lib/orders/types";
+import { havaleInfo } from "@/lib/payments/havale";
 
 export const dynamic = "force-dynamic";
 
@@ -46,6 +47,7 @@ export default async function OrderPage({
   const product = findPremiumProduct(order.productSlug);
   const failed = durum === "basarisiz" || order.status === "basarisiz";
   const paid = order.status === "odendi";
+  const havale = havaleInfo();
 
   /* İndirme bağlantısı yalnızca ödenmiş siparişler için, kısa ömürlü üretilir */
   let downloadUrl: string | null = null;
@@ -135,7 +137,98 @@ export default async function OrderPage({
             </>
           )}
 
-          {!paid && !failed && (
+          {!paid && !failed && order.provider === "havale" && (
+            <>
+              <div style={{ fontSize: 52 }} aria-hidden="true">
+                🏦
+              </div>
+              <p className="eyebrow">ÖDEME BEKLENİYOR</p>
+              <h1>Siparişiniz alındı</h1>
+              <p className="page-lead">
+                Son adım: aşağıdaki hesaba havale/EFT yapın. Ödemeniz
+                görüldüğünde indirme bağlantınız bu sayfada açılır ve size
+                e-posta gönderilir.
+              </p>
+
+              <div
+                style={{
+                  marginTop: 22,
+                  padding: 22,
+                  borderRadius: "var(--r-lg)",
+                  background: "var(--surface)",
+                  border: "2px solid var(--brand)",
+                }}
+              >
+                <h2 style={{ marginTop: 0, fontSize: 17 }}>Havale bilgileri</h2>
+
+                <div className="panel-row">
+                  <span>Alıcı</span>
+                  <span className="amount">{havale.alici}</span>
+                </div>
+
+                {havale.banka && (
+                  <div className="panel-row">
+                    <span>Banka</span>
+                    <span className="amount">{havale.banka}</span>
+                  </div>
+                )}
+
+                <div className="panel-row">
+                  <span>IBAN</span>
+                  <span
+                    className="amount"
+                    style={{ fontFamily: "monospace", fontSize: 15 }}
+                  >
+                    {havale.iban}
+                  </span>
+                </div>
+
+                <div className="panel-row">
+                  <span>Tutar</span>
+                  <span
+                    className="amount"
+                    style={{ fontSize: 19, color: "var(--brand-deep)" }}
+                  >
+                    {(order.amountKurus / 100).toLocaleString("tr-TR", {
+                      minimumFractionDigits: 2,
+                    })}{" "}
+                    ₺
+                  </span>
+                </div>
+
+                <div className="notice notice-warn" style={{ marginTop: 16 }}>
+                  <strong>Açıklama kısmına mutlaka yazın:</strong>
+                  <div
+                    style={{
+                      marginTop: 8,
+                      padding: "10px 14px",
+                      borderRadius: 10,
+                      background: "#fff",
+                      border: "1px solid var(--line)",
+                      fontFamily: "monospace",
+                      fontSize: 16,
+                      fontWeight: 700,
+                      letterSpacing: 1,
+                    }}
+                  >
+                    {order.id}
+                  </div>
+                  <p style={{ margin: "10px 0 0", fontSize: 13 }}>
+                    Bu numara olmadan ödemenizi siparişinizle
+                    eşleştiremeyiz ve teslimat gecikir.
+                  </p>
+                </div>
+              </div>
+
+              <div className="notice">
+                Havaleler genelde aynı gün, hafta sonu ve tatillerde ilk iş
+                günü onaylanır. Onaylandığında bu sayfayı yenilemeniz
+                yeterlidir.
+              </div>
+            </>
+          )}
+
+          {!paid && !failed && order.provider !== "havale" && (
             <>
               <div style={{ fontSize: 52 }} aria-hidden="true">
                 ⏳
