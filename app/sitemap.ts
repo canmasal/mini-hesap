@@ -3,6 +3,7 @@ import type { MetadataRoute } from "next";
 import { calculators } from "@/data/calculators";
 import { premiumProducts } from "@/data/premiumProducts";
 import { guides } from "@/data/guides";
+import { longtailPages } from "@/data/longtail";
 
 const baseUrl =
   process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
@@ -59,5 +60,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  return [...staticPages, ...calculatorPages, ...premiumPages, ...guidePages];
+  /* Uzun kuyruk sayfalari: tek bir soruya cevap veren hazir hesaplar */
+  const longtail: MetadataRoute.Sitemap = longtailPages.map((p) => ({
+    url: `${baseUrl}/hesapla/${p.slug}`,
+    lastModified: now,
+    changeFrequency: "monthly",
+    priority: 0.6,
+  }));
+
+  return [
+    ...staticPages,
+    ...calculatorPages,
+    ...premiumPages,
+    ...guidePages,
+    ...longtail,
+  ];
 }
