@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 
 import { calculators } from "@/data/calculators";
 import { premiumProducts } from "@/data/premiumProducts";
+import { guides } from "@/data/guides";
 
 const baseUrl =
   process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
@@ -15,6 +16,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/borc-takip`, changeFrequency: "weekly", priority: 0.8 },
     { url: `${baseUrl}/on-muhasebe`, changeFrequency: "weekly", priority: 0.8 },
     { url: `${baseUrl}/premium`, changeFrequency: "weekly", priority: 0.8 },
+    { url: `${baseUrl}/rehber`, changeFrequency: "weekly", priority: 0.9 },
     { url: `${baseUrl}/hakkimizda`, changeFrequency: "monthly", priority: 0.5 },
     { url: `${baseUrl}/iletisim`, changeFrequency: "monthly", priority: 0.4 },
     { url: `${baseUrl}/gizlilik`, changeFrequency: "yearly", priority: 0.2 },
@@ -50,5 +52,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     }));
 
-  return [...staticPages, ...calculatorPages, ...premiumPages];
+  const guidePages: MetadataRoute.Sitemap = guides.map((g) => ({
+    url: `${baseUrl}/rehber/${g.slug}`,
+    lastModified: new Date(g.updated),
+    changeFrequency: "monthly",
+    priority: 0.8,
+  }));
+
+  return [...staticPages, ...calculatorPages, ...premiumPages, ...guidePages];
 }

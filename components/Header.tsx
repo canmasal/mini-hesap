@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 const navItems = [
   { href: "/", label: "Ana Sayfa" },
   { href: "/hesaplamalar", label: "Hesaplamalar" },
+  { href: "/rehber", label: "Rehberler" },
   { href: "/borc-takip", label: "Borç Takip" },
   { href: "/on-muhasebe", label: "Ön Muhasebe" },
   { href: "/hakkimizda", label: "Hakkımızda" },

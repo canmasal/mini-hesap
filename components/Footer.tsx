@@ -29,6 +29,7 @@ export default function Footer() {
           <Link href="/borc-takip">Banka Borç Takip</Link>
           <Link href="/on-muhasebe">Ön Muhasebe Takip</Link>
           <Link href="/premium">Premium Şablonlar</Link>
+          <Link href="/rehber">Rehberler</Link>
           
         </nav>
 

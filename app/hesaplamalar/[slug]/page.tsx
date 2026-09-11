@@ -12,6 +12,7 @@ import {
 import AdSlot from "@/components/AdSlot";
 import Breadcrumb from "@/components/Breadcrumb";
 import CalculatorCard from "@/components/CalculatorCard";
+import { guidesForTool } from "@/data/guides";
 
 import NetSalaryCalculator from "@/components/calculators/NetSalaryCalculator";
 import PercentCalculator from "@/components/calculators/PercentCalculator";
@@ -1208,6 +1209,9 @@ export default async function CalculatorPage({
   const related =
     getRelatedCalculators(slug);
 
+  /* Bu araca ait rehber yazilari */
+  const toolGuides = guidesForTool(slug);
+
   return (
     <main className="page">
 
@@ -1251,6 +1255,23 @@ export default async function CalculatorPage({
         </p>
 
         <Calculator />
+
+        {toolGuides.length > 0 && (
+          <div className="notice notice-ok">
+            <strong>Konuyu daha iyi anlamak ister misiniz?</strong>{" "}
+            {toolGuides.map((g, i) => (
+              <span key={g.slug}>
+                {i > 0 && " · "}
+                <Link
+                  href={`/rehber/${g.slug}`}
+                  style={{ fontWeight: 700, textDecoration: "underline" }}
+                >
+                  {g.title}
+                </Link>
+              </span>
+            ))}
+          </div>
+        )}
 
         <p className="notice notice-warn">
           <strong>Bilgilendirme:</strong> Buradaki sonuçlar girdiğiniz
