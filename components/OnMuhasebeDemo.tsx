@@ -885,30 +885,51 @@ export default function OnMuhasebeDemo() {
 
           {/* ===== TABLO ===== */}
 
-          <div className="ledger-scroll" style={{ marginTop: 18 }}>
+          {/* Kullanıcı tabloyu ilk gördüğünde ne yapacağını bilsin */}
+          <ol className="ledger-guide">
+            <li>
+              <span>1</span> Tarihi, türü (gelir/gider) ve kategoriyi seçin
+            </li>
+            <li>
+              <span>2</span> Tutarı yazıp <b>KDV dahil mi hariç mi</b>
+              olduğunu seçin
+            </li>
+            <li>
+              <span>3</span> Gri sütunlar otomatik dolar:{" "}
+              <b>matrah, KDV ve genel toplam</b>
+            </li>
+            <li>
+              <span>4</span> Tahsil/ödeme bekliyorsa <b>vade</b> girip durumu
+              “Bekliyor” yapın
+            </li>
+          </ol>
+
+          <div className="ledger-scroll" style={{ marginTop: 12 }}>
             <table className="ledger-table">
               <caption className="visually-hidden">
                 Gelir ve gider kayıtları tablosu
               </caption>
 
+              {/* Genişlikler en uzun içeriğe göre belirlendi.
+                  table-layout: fixed olduğu için bu değerler birebir uygulanır. */}
               <colgroup>
-                <col style={{ width: 140 }} />
-                <col style={{ width: 96 }} />
-                <col style={{ width: 180 }} />
-                <col style={{ width: 150 }} />
-                <col style={{ width: 170 }} />
-                <col style={{ width: 120 }} />
-                <col style={{ width: 108 }} />
-                <col style={{ width: 84 }} />
-                <col style={{ width: 118 }} />
-                <col style={{ width: 112 }} />
-                <col style={{ width: 126 }} />
-                <col style={{ width: 112 }} />
-                <col style={{ width: 132 }} />
-                <col style={{ width: 126 }} />
-                <col style={{ width: 140 }} />
-                <col style={{ width: 130 }} />
-                <col style={{ width: 54 }} />
+                <col style={{ width: 138 }} /> {/* Tarih */}
+                <col style={{ width: 92 }} /> {/* Tür */}
+                <col style={{ width: 192 }} /> {/* Kategori */}
+                <col style={{ width: 132 }} /> {/* Cari */}
+                <col style={{ width: 150 }} /> {/* Açıklama */}
+                <col style={{ width: 106 }} /> {/* Tutar */}
+                <col style={{ width: 116 }} /> {/* Tutar Tipi */}
+                <col style={{ width: 78 }} /> {/* KDV */}
+                <col style={{ width: 106 }} /> {/* Matrah */}
+                <col style={{ width: 106 }} /> {/* KDV Tutarı */}
+                <col style={{ width: 118 }} /> {/* Genel Toplam */}
+                <col style={{ width: 116 }} /> {/* Ödeme */}
+                <col style={{ width: 182 }} /> {/* Belge */}
+                <col style={{ width: 120 }} /> {/* Belge No */}
+                <col style={{ width: 138 }} /> {/* Vade */}
+                <col style={{ width: 130 }} /> {/* Durum */}
+                <col style={{ width: 49 }} /> {/* Sil */}
               </colgroup>
 
               <thead>

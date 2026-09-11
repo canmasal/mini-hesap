@@ -83,6 +83,44 @@
 .kpi-neg .kpi-value { color: var(--danger); }
 
 /* ---------------------------------------------------------
+   TABLO KULLANIM REHBERİ
+--------------------------------------------------------- */
+
+.ledger-guide {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 10px;
+  margin: 18px 0 0;
+  padding: 0;
+}
+.ledger-guide li {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 10px 12px;
+  border-radius: var(--r-sm);
+  background: var(--surface-soft);
+  border: 1px solid var(--line-soft);
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: var(--ink-soft);
+}
+.ledger-guide li > span {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--brand-tint);
+  color: var(--brand-deep);
+  font-size: 11px;
+  font-weight: 900;
+}
+.ledger-guide b { color: var(--ink); }
+
+/* ---------------------------------------------------------
    TABLO
 --------------------------------------------------------- */
 
@@ -95,10 +133,14 @@
 
 .ledger-table {
   width: 100%;
-  min-width: 1500px;
+  min-width: 2069px;
+  /* Kolon genişliklerinin colgroup ile birebir uygulanması için şart.
+     "auto" yerleşimde tarayıcı kolonları kendi dağıtır ve
+     Tür / KDV / Ödeme / Durum sütunlarının yazıları kırpılır. */
+  table-layout: fixed;
   border-collapse: separate;
   border-spacing: 0;
-  font-size: 13px;
+  font-size: 12.5px;
   background: #fff;
 }
 
@@ -106,7 +148,9 @@
   position: sticky;
   top: 0;
   z-index: 3;
-  padding: 11px 9px;
+  padding: 10px 7px;
+  overflow: hidden;
+  text-overflow: ellipsis;
   background: var(--surface-soft);
   border-bottom: 1px solid var(--line);
   text-align: left;
@@ -118,10 +162,11 @@
 .ledger-table th.num-col { text-align: right; }
 
 .ledger-table td {
-  padding: 8px 9px;
+  padding: 7px;
   border-bottom: 1px solid var(--line-soft);
   vertical-align: middle;
   background: #fff;
+  overflow: hidden;
 }
 .ledger-table tbody tr:hover td { background: #fbfdfc; }
 
@@ -145,13 +190,17 @@
 .ledger-table input,
 .ledger-table select {
   width: 100%;
-  padding: 9px 10px;
+  min-width: 0;
+  padding: 8px 7px;
   border: 1px solid var(--line);
-  border-radius: 10px;
+  border-radius: 9px;
   background: #fff;
-  font-size: 13px;
+  font-size: 12.5px;
   outline: none;
+  text-overflow: ellipsis;
 }
+/* Yerleşik ok ile yazının üst üste binmemesi için sağda pay bırak */
+.ledger-table select { padding-right: 20px; }
 .ledger-table input:focus,
 .ledger-table select:focus {
   border-color: var(--brand);
