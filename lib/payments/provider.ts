@@ -1,4 +1,5 @@
 import type { Order } from "@/lib/orders/types";
+import { shopierProvider } from "./shopier";
 
 /**
  * Ödeme sağlayıcısı arayüzü.
@@ -87,7 +88,7 @@ export const testProvider: PaymentProvider = {
    KAYIT
 ========================================================= */
 
-const providers: PaymentProvider[] = [testProvider];
+const providers: PaymentProvider[] = [testProvider, shopierProvider];
 
 export function activeProvider(): PaymentProvider | null {
   const wanted = process.env.PAYMENT_PROVIDER;

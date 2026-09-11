@@ -31,6 +31,16 @@ export default function PreInfoPage() {
         </p>
 
         <div className="prose">
+          <div className="notice notice-warn">
+            <strong>Bu sayfa henüz tamamlanmamıştır.</strong> Firma bilgileri
+            girilmeden ve ticari kayıt tamamlanmadan bu site üzerinden satış
+            yapılmamaktadır. Ürünlerle ilgilenmek için{" "}
+            <Link href="/iletisim" style={{ fontWeight: 700 }}>
+              iletişim sayfasından
+            </Link>{" "}
+            bize yazabilirsiniz.
+          </div>
+
           <h2>1. Satıcı bilgileri</h2>
           <ul>
             <li>
