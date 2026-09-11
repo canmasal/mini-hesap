@@ -25,6 +25,10 @@ import KidemIhbarCalculator from "@/components/calculators/KidemIhbarCalculator"
 import AgeCalculator from "@/components/calculators/AgeCalculator";
 import AnnualLeaveCalculator from "@/components/calculators/AnnualLeaveCalculator";
 import BankLoanCalculator from "@/components/calculators/BankLoanCalculator";
+import RetirementCalculator from "@/components/calculators/RetirementCalculator";
+import DepositCalculator from "@/components/calculators/DepositCalculator";
+import InstallmentCostCalculator from "@/components/calculators/InstallmentCostCalculator";
+import InflationCalculator from "@/components/calculators/InflationCalculator";
 
 /* =========================================================
    HESAPLAMA BİLEŞENLERİ
@@ -43,6 +47,10 @@ const componentMap: Record<string, ComponentType> = {
   yas: AgeCalculator,
   "yillik-izin": AnnualLeaveCalculator,
   "kredi-borc": BankLoanCalculator,
+  emeklilik: RetirementCalculator,
+  mevduat: DepositCalculator,
+  "taksit-maliyeti": InstallmentCostCalculator,
+  enflasyon: InflationCalculator,
 };
 
 /* =========================================================
@@ -552,6 +560,171 @@ const seoContents: Record<string, SeoContent> = {
       },
     ],
   },
+};
+
+/* =======================================================
+   EMEKLİLİK / EYT
+======================================================= */
+
+seoContents.emeklilik = {
+  title: "Emeklilik Hesaplama 2026 | EYT ve Emeklilik Yaşı",
+  description:
+    "Sigorta başlangıç tarihi, prim gün sayısı ve yaşınıza göre emeklilik tarihinizi hesaplayın. EYT kapsamında mısınız, kaç gün priminiz eksik öğrenin.",
+  intro:
+    "Emeklilik hesaplama aracımız, sigorta başlangıç tarihinize göre hangi emeklilik grubuna girdiğinizi belirler; gereken prim günü, sigortalılık süresi ve yaş şartlarını karşılaştırarak tahmini emeklilik tarihinizi gösterir.",
+  howItWorks: [
+    "Cinsiyetinizi ve doğum tarihinizi girin.",
+    "SGK ilk işe giriş (sigorta başlangıç) tarihinizi yazın.",
+    "e-Devlet'teki toplam prim gün sayınızı girin.",
+    "Çalışmaya devam ediyorsanız aylık eklenecek prim gününü 30 bırakın.",
+  ],
+  faqs: [
+    {
+      question: "EYT kapsamında mıyım?",
+      answer:
+        "Sigorta başlangıç tarihiniz 08.09.1999 ve öncesi ise EYT kapsamındasınız; bu grupta yaş şartı aranmaz, yalnızca sigortalılık süresi (kadınlarda 20, erkeklerde 25 yıl) ve prim gün şartı aranır.",
+    },
+    {
+      question: "Kaç prim günü ile emekli olunur?",
+      answer:
+        "08.09.1999 öncesi girişlilerde giriş tarihine göre kademeli olarak 5.000 ile 5.975 gün arasında değişir. 09.09.1999 – 30.04.2008 arası girişlilerde 7.000 gün, 01.05.2008 sonrası girişlilerde 7.200 gün gerekir.",
+    },
+    {
+      question: "2008 sonrası sigortalıların emeklilik yaşı kaç?",
+      answer:
+        "Temel şart kadınlarda 58, erkeklerde 60 yaştır. Ancak 2036 yılından itibaren bu yaş kademeli olarak artar ve 2048'den sonra her iki cinsiyet için 65'e çıkar. Prim gününüzü hangi yılda tamamladığınız hangi yaş şartına tabi olacağınızı belirler.",
+    },
+    {
+      question: "Askerlik borçlanması emeklilik tarihini değiştirir mi?",
+      answer:
+        "Evet. Askerlik borçlanması prim gün sayınızı artırır ve bazı durumlarda sigorta başlangıç tarihinizi öne çekerek daha avantajlı bir gruba girmenizi sağlayabilir. Bu araç borçlanmaları hesaba katmaz.",
+    },
+    {
+      question: "Bu hesaplama SGK için bağlayıcı mıdır?",
+      answer:
+        "Hayır. Sonuç 4a (SSK) genel kurallarına göre üretilen bir tahmindir. Kesin emeklilik tarihiniz için e-Devlet üzerinden SGK Emeklilik Tahsis Talebi ekranını kullanın veya SGK'ya başvurun.",
+    },
+  ],
+};
+
+/* =======================================================
+   VADELİ MEVDUAT
+======================================================= */
+
+seoContents.mevduat = {
+  title: "Vadeli Mevduat Hesaplama 2026 | Net Faiz Getirisi",
+  description:
+    "Anapara, yıllık faiz oranı ve vadeye göre stopaj düşülmüş net mevduat getirinizi ve vade sonu toplam tutarınızı hesaplayın.",
+  intro:
+    "Vadeli mevduat hesaplama aracıyla bankanın ilan ettiği brüt faiz oranının stopaj kesintisinden sonra elinize ne kadar geçeceğini görebilir, farklı vadeleri karşılaştırabilirsiniz.",
+  howItWorks: [
+    "Yatıracağınız anapara tutarını girin.",
+    "Bankanın verdiği yıllık brüt faiz oranını yazın.",
+    "Vade süresini gün olarak girin (32, 92, 180 gibi).",
+    "Stopaj oranını girin ve net getirinizi görüntüleyin.",
+  ],
+  faqs: [
+    {
+      question: "Mevduat faizi nasıl hesaplanır?",
+      answer:
+        "Brüt faiz, anaparanın yıllık faiz oranıyla çarpılıp vade gününün 365'e bölünmesiyle bulunur. Örneğin 100.000 TL, yıllık %45 faiz ve 32 gün vade için brüt faiz yaklaşık 3.945 TL olur.",
+    },
+    {
+      question: "Mevduat stopajı ne kadar?",
+      answer:
+        "Stopaj yalnızca faiz getirisi üzerinden kesilir, anaparadan kesinti yapılmaz. Oran vade süresine ve mevduat türüne göre değişebildiği için güncel oranı bankanızdan teyit etmeniz gerekir.",
+    },
+    {
+      question: "Vade sonunda elime ne kadar geçer?",
+      answer:
+        "Anaparanız ile stopaj düşüldükten sonraki net faiz getirinizin toplamı elinize geçer. Araç bu tutarı 'Vade Sonu Toplam' satırında gösterir.",
+    },
+    {
+      question: "Kısa vade mi uzun vade mi daha avantajlı?",
+      answer:
+        "Faiz oranı aynıysa vadeyi yenileyerek bileşik getiri elde etmek toplam kazancı artırır. Araçtaki 'Yıllık Net Bileşik Getiri' satırı, aynı oranla yenilendiği varsayımıyla yıllık karşılığı gösterir.",
+    },
+  ],
+};
+
+/* =======================================================
+   TAKSİTLİ ALIŞVERİŞ MALİYETİ
+======================================================= */
+
+seoContents["taksit-maliyeti"] = {
+  title: "Taksitli Alışveriş Maliyeti | Taksit Farkı Hesaplama",
+  description:
+    "Taksitli fiyat ile peşin fiyat arasındaki farkı ve bu farkın gizli aylık ve yıllık faiz karşılığını hesaplayın. Taksit gerçekten farksız mı öğrenin.",
+  intro:
+    "“Taksit farkı yok” denilen kampanyalarda bile peşin fiyatla taksitli toplam arasında fark olabilir. Bu araç aradaki farkı lira olarak gösterir ve bu farkın hangi faiz oranına denk geldiğini hesaplar.",
+  howItWorks: [
+    "Ürünün peşin (tek çekim) fiyatını girin.",
+    "Taksit sayısını yazın.",
+    "Aylık taksit tutarını veya taksitli toplam fiyatı girin.",
+    "Fark tutarını ve gizli faiz oranını görüntüleyin.",
+  ],
+  faqs: [
+    {
+      question: "Taksit farkı nasıl hesaplanır?",
+      answer:
+        "Aylık taksit tutarı taksit sayısıyla çarpılarak toplam ödeme bulunur; bu tutardan peşin fiyat çıkarıldığında taksit farkı ortaya çıkar.",
+    },
+    {
+      question: "Gizli faiz ne demek?",
+      answer:
+        "Taksitli ödeme planının, aynı parayı borç almışsınız gibi düşünüldüğünde karşılık geldiği faiz oranıdır. İç verim oranı (IRR) yöntemiyle hesaplanır ve ödemelerin zamana yayılmasını da dikkate alır.",
+    },
+    {
+      question: "Taksit farkı yoksa peşin mi almalıyım?",
+      answer:
+        "Gerçekten fark yoksa taksitle almak genelde avantajlıdır; paranız elinizde kalır ve enflasyon karşısında taksitlerin reel değeri düşer. Fark varsa, bu farkın yıllık maliyetini mevduat getirinizle karşılaştırın.",
+    },
+    {
+      question: "Kredi kartı taksiti kredi sayılır mı?",
+      answer:
+        "Taksitli alışveriş bir tüketici finansmanıdır ve kart limitinizi kullanır. Taksit farkı içeriyorsa ekonomik olarak kredi kullanmaktan farksızdır.",
+    },
+  ],
+};
+
+/* =======================================================
+   ENFLASYON / ZAM FARKI
+======================================================= */
+
+seoContents.enflasyon = {
+  title: "Enflasyon ve Zam Farkı Hesaplama | Reel Artış",
+  description:
+    "Aldığınız zammın enflasyon karşısındaki gerçek değerini hesaplayın. Alım gücü kaybınızı, reel artış oranını ve olması gereken tutarı görün.",
+  intro:
+    "Nominal zam oranı tek başına alım gücünüzün arttığını göstermez. Bu araç, zammınızı aynı dönemin enflasyonuyla karşılaştırarak reel (gerçek) değişimi ve alım gücü farkınızı hesaplar.",
+  howItWorks: [
+    "Zam öncesi tutarı girin (maaş, kira veya fiyat).",
+    "Yeni tutarı veya zam oranını yazın.",
+    "Aynı dönemin TÜFE enflasyon oranını girin.",
+    "Reel artışınızı ve alım gücü farkınızı görüntüleyin.",
+  ],
+  faqs: [
+    {
+      question: "Reel artış nasıl hesaplanır?",
+      answer:
+        "Reel artış, (1 + zam oranı) bölü (1 + enflasyon oranı) işleminin sonucundan 1 çıkarılarak bulunur. Zammı enflasyondan düz çıkarmak matematiksel olarak yanlış sonuç verir.",
+    },
+    {
+      question: "Enflasyonun altında zam ne anlama gelir?",
+      answer:
+        "Nominal olarak daha çok para alsanız da aynı parayla eskisi kadar mal ve hizmet alamazsınız; alım gücünüz azalmış demektir.",
+    },
+    {
+      question: "Kira artışında hangi oran kullanılır?",
+      answer:
+        "Konut kiralarında yasal üst sınır, bir önceki kira yılına ait tüketici fiyat endeksinin on iki aylık ortalamalara göre değişim oranıdır. Güncel oranı TÜİK verilerinden kontrol edin.",
+    },
+    {
+      question: "Maaşımın enflasyona yetişmesi için ne kadar zam almalıyım?",
+      answer:
+        "Alım gücünüzün aynı kalması için en az enflasyon oranı kadar zam almanız gerekir. Araç bu tutarı 'Enflasyona Yetişmesi İçin Gereken' satırında gösterir.",
+    },
+  ],
 };
 
 /* =========================================================

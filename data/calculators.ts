@@ -119,6 +119,73 @@ export const calculators = [
   },
 
   {
+    slug: "emeklilik",
+    icon: "👴",
+    title: "Emeklilik / EYT Hesaplama",
+    category: "calisan",
+    keywords: [
+      "emeklilik",
+      "eyt",
+      "sgk",
+      "prim günü",
+      "sigorta başlangıcı",
+      "emeklilik yaşı",
+    ],
+    description:
+      "Sigorta başlangıcı, prim gün sayısı ve yaşınıza göre hangi emeklilik grubuna girdiğinizi ve tahmini emeklilik tarihinizi hesaplayın.",
+  },
+
+  {
+    slug: "mevduat",
+    icon: "🏧",
+    title: "Vadeli Mevduat Getirisi",
+    category: "finans",
+    keywords: [
+      "mevduat",
+      "faiz",
+      "vade",
+      "stopaj",
+      "birikim",
+      "net getiri",
+    ],
+    description:
+      "Anapara, yıllık faiz oranı ve vadeye göre stopaj düşülmüş net getirinizi ve vade sonu toplamınızı hesaplayın.",
+  },
+
+  {
+    slug: "taksit-maliyeti",
+    icon: "🧾",
+    title: "Taksitli Alışveriş Maliyeti",
+    category: "finans",
+    keywords: [
+      "taksit",
+      "taksit farkı",
+      "peşin fiyat",
+      "kredi kartı",
+      "vade farkı",
+    ],
+    description:
+      "Taksitli fiyat ile peşin fiyat arasındaki farkı ve bu farkın gizli aylık / yıllık faiz karşılığını hesaplayın.",
+  },
+
+  {
+    slug: "enflasyon",
+    icon: "📉",
+    title: "Enflasyon / Zam Farkı",
+    category: "gunluk",
+    keywords: [
+      "enflasyon",
+      "zam",
+      "tüfe",
+      "alım gücü",
+      "reel artış",
+      "maaş zammı",
+    ],
+    description:
+      "Aldığınız zammın enflasyon karşısındaki gerçek değerini, alım gücü kaybınızı ve reel artış oranını hesaplayın.",
+  },
+
+  {
     slug: "kredi-borc",
     icon: "🏦",
     title: "Kredi / Banka Borç Hesaplama",

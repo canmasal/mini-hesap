@@ -35,6 +35,18 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   reactStrictMode: true,
 
+  /*
+   * Derleme çıktısının klasörü.
+   *
+   * "npm run dev" çalışırken "npm run build" çalıştırılırsa ikisi aynı
+   * .next klasörünü paylaşır; build, dev sunucusunun kullandığı JS ve CSS
+   * parçalarını siler ve site stilsiz kalır / 500 verir.
+   *
+   * Bunu önlemek için derlemeyi ayrı klasöre almak üzere:
+   *   BUILD_DIR=.next-build npm run build
+   */
+  distDir: process.env.BUILD_DIR || ".next",
+
   /* Sunucu sürüm bilgisini yanıt başlığında açık etmeyelim */
   poweredByHeader: false,
 

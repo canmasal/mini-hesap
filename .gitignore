@@ -12,3 +12,4 @@ npm-debug.log*
 .backup-*/
 .vs/
 *.mp4
+.next-build
