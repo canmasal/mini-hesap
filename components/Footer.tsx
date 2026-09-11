@@ -28,8 +28,8 @@ export default function Footer() {
           <strong>Finans Araçları</strong>
           <Link href="/borc-takip">Banka Borç Takip</Link>
           <Link href="/on-muhasebe">Ön Muhasebe Takip</Link>
-          <Link href="/premium/borc-takip">Premium Borç Takip</Link>
-          <Link href="/premium/on-muhasebe">Premium Ön Muhasebe</Link>
+          <Link href="/premium">Premium Şablonlar</Link>
+          
         </nav>
 
         <nav aria-label="Kurumsal ve yasal">

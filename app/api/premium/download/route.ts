@@ -2,63 +2,46 @@ import { NextResponse } from "next/server";
 import { readFile } from "fs/promises";
 import path from "path";
 
+import { findPremiumProduct } from "@/data/premiumProducts";
+
+/** Zamanlama saldırılarına karşı sabit süreli karşılaştırma */
+function safeEqual(a: string, b: string) {
+  if (a.length !== b.length) return false;
+
+  let diff = 0;
+  for (let i = 0; i < a.length; i += 1) {
+    diff |= a.charCodeAt(i) ^ b.charCodeAt(i);
+  }
+  return diff === 0;
+}
+
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
 
-  const token = searchParams.get("token");
-  const product = searchParams.get("product");
+  const token = searchParams.get("token") ?? "";
+  const product = searchParams.get("product") ?? "";
 
-  // Premium indirme gizli anahtarı
   const secret = process.env.PREMIUM_DOWNLOAD_SECRET;
 
-  if (!secret || token !== secret) {
+  if (!secret || !safeEqual(token, secret)) {
     return NextResponse.json(
       {
         success: false,
         message: "Premium Excel indirme yetkiniz bulunmuyor.",
       },
-      {
-        status: 403,
-      }
+      { status: 403 }
     );
   }
 
-  /*
-   * Ürün seçimi
-   *
-   * borc-takip
-   * on-muhasebe
-   */
+  const selected = findPremiumProduct(product);
 
-  const products: Record<
-    string,
-    {
-      fileName: string;
-      downloadName: string;
-    }
-  > = {
-    "borc-takip": {
-      fileName: "MiniHesap_Profesyonel_Borc_Takip.xlsx",
-      downloadName: "MiniHesap_Profesyonel_Borc_Takip.xlsx",
-    },
-
-    "on-muhasebe": {
-      fileName: "MiniHesap_On_Muhasebe_Takip.xlsx",
-      downloadName: "MiniHesap_On_Muhasebe_Takip.xlsx",
-    },
-  };
-
-  const selectedProduct = products[product || ""];
-
-  if (!selectedProduct) {
+  if (!selected) {
     return NextResponse.json(
       {
         success: false,
         message: "Geçersiz Premium ürün.",
       },
-      {
-        status: 400,
-      }
+      { status: 400 }
     );
   }
 
@@ -67,7 +50,7 @@ export async function GET(request: Request) {
       process.cwd(),
       "private",
       "products",
-      selectedProduct.fileName
+      selected.fileName
     );
 
     const file = await readFile(filePath);
@@ -78,7 +61,7 @@ export async function GET(request: Request) {
         "Content-Type":
           "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
 
-        "Content-Disposition": `attachment; filename="${selectedProduct.downloadName}"`,
+        "Content-Disposition": `attachment; filename="${selected.fileName}"`,
 
         "Cache-Control": "private, no-store",
       },
@@ -91,9 +74,7 @@ export async function GET(request: Request) {
         success: false,
         message: "Excel dosyası hazırlanırken bir hata oluştu.",
       },
-      {
-        status: 500,
-      }
+      { status: 500 }
     );
   }
 }
