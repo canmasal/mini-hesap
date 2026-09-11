@@ -8,6 +8,7 @@ type Props = {
   productTitle: string;
   price: number;
   paymentsEnabled: boolean;
+  emailEnabled?: boolean;
 };
 
 export default function CheckoutForm({
@@ -15,6 +16,7 @@ export default function CheckoutForm({
   productTitle,
   price,
   paymentsEnabled,
+  emailEnabled = false,
 }: Props) {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -116,7 +118,9 @@ export default function CheckoutForm({
             required
           />
           <span className="field-hint">
-            İndirme bağlantısı bu adrese gönderilir.
+            {emailEnabled
+              ? "İndirme bağlantısı bu adrese gönderilir."
+              : "Sipariş kaydınız ve destek için kullanılır."}
           </span>
         </label>
       </div>

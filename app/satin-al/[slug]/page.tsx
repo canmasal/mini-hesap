@@ -6,6 +6,7 @@ import Breadcrumb from "@/components/Breadcrumb";
 import CheckoutForm from "@/components/CheckoutForm";
 import { premiumProducts, findPremiumProduct } from "@/data/premiumProducts";
 import { paymentsEnabled } from "@/lib/payments/provider";
+import { emailEnabled } from "@/lib/mail/send";
 
 export function generateStaticParams() {
   return premiumProducts.map((p) => ({ slug: p.slug }));
@@ -40,6 +41,7 @@ export default async function CheckoutPage({
   if (!product) notFound();
 
   const enabled = paymentsEnabled();
+  const mail = emailEnabled();
 
   return (
     <main className="page">
@@ -74,6 +76,7 @@ export default async function CheckoutPage({
               productTitle={product.title}
               price={product.price}
               paymentsEnabled={enabled}
+              emailEnabled={mail}
             />
           </div>
 
@@ -107,8 +110,8 @@ export default async function CheckoutPage({
 
             <div className="notice" style={{ marginTop: 18 }}>
               <strong>Teslimat:</strong> Ödeme onaylandıktan hemen sonra
-              indirme bağlantınız ekranda görünür ve e-posta adresinize
-              gönderilir. Bağlantı 30 gün geçerlidir.
+              indirme bağlantınız ekranda görünür{mail ? " ve e-posta adresinize gönderilir" : ""}.
+              Siparişiniz 30 gün boyunca en fazla 10 kez indirilebilir.
             </div>
 
             <p style={{ fontSize: 13, marginTop: 14 }}>

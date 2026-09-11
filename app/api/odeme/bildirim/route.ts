@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import { getOrderStore } from "@/lib/orders/store";
 import { DOWNLOAD_WINDOW_DAYS } from "@/lib/orders/types";
 import { activeProvider } from "@/lib/payments/provider";
+import { sendOrderEmail } from "@/lib/mail/send";
 
 /**
  * Ödeme sağlayıcısının bildirim (callback / webhook) uç noktası.
@@ -85,12 +86,19 @@ async function handle(request: Request) {
   const expires = new Date();
   expires.setDate(expires.getDate() + DOWNLOAD_WINDOW_DAYS);
 
-  await store.update(order.id, {
+  const updated = await store.update(order.id, {
     status: "odendi",
     providerRef: result.providerRef,
     paidAt: new Date().toISOString(),
     downloadExpiresAt: expires.toISOString(),
   });
+
+  /* Onay e-postası. Gönderilemezse sipariş yine de geçerlidir;
+     müşteri sipariş sayfasından dosyasına ulaşabilir. */
+  const baseUrl =
+    process.env.NEXT_PUBLIC_SITE_URL ?? new URL(request.url).origin;
+
+  await sendOrderEmail(updated ?? order, `${baseUrl}/siparis/${order.id}`);
 
   return redirectOrJson(request, order.id, true);
 }
