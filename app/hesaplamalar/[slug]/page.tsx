@@ -29,6 +29,11 @@ import RetirementCalculator from "@/components/calculators/RetirementCalculator"
 import DepositCalculator from "@/components/calculators/DepositCalculator";
 import InstallmentCostCalculator from "@/components/calculators/InstallmentCostCalculator";
 import InflationCalculator from "@/components/calculators/InflationCalculator";
+import MaternityLeaveCalculator from "@/components/calculators/MaternityLeaveCalculator";
+import UnemploymentCalculator from "@/components/calculators/UnemploymentCalculator";
+import HomeLoanCostCalculator from "@/components/calculators/HomeLoanCostCalculator";
+import FuelCostCalculator from "@/components/calculators/FuelCostCalculator";
+import PensionFundCalculator from "@/components/calculators/PensionFundCalculator";
 
 /* =========================================================
    HESAPLAMA BİLEŞENLERİ
@@ -51,6 +56,11 @@ const componentMap: Record<string, ComponentType> = {
   mevduat: DepositCalculator,
   "taksit-maliyeti": InstallmentCostCalculator,
   enflasyon: InflationCalculator,
+  "dogum-izni": MaternityLeaveCalculator,
+  "issizlik-maasi": UnemploymentCalculator,
+  "konut-kredisi": HomeLoanCostCalculator,
+  "yakit-maliyeti": FuelCostCalculator,
+  bes: PensionFundCalculator,
 };
 
 /* =========================================================
@@ -723,6 +733,236 @@ seoContents.enflasyon = {
       question: "Maaşımın enflasyona yetişmesi için ne kadar zam almalıyım?",
       answer:
         "Alım gücünüzün aynı kalması için en az enflasyon oranı kadar zam almanız gerekir. Araç bu tutarı 'Enflasyona Yetişmesi İçin Gereken' satırında gösterir.",
+    },
+  ],
+};
+
+/* =======================================================
+   DOĞUM VE SÜT İZNİ
+======================================================= */
+
+seoContents["dogum-izni"] = {
+  title: "Doğum İzni Hesaplama 2026 | Süt İzni ve Analık İzni",
+  description:
+    "Doğum izni başlangıç ve bitiş tarihlerinizi, süt izni sürenizi, yarım çalışma ödeneği ve ücretsiz izin hakkınızı hesaplayın.",
+  intro:
+    "Doğum izni hesaplama aracı, 4857 sayılı İş Kanunu'nun 74. maddesine göre doğum öncesi ve sonrası izin sürelerinizi tarih tarih gösterir; süt izni ve yarım çalışma ödeneği haklarınızı da hatırlatır.",
+  howItWorks: [
+    "Tahmini doğum tarihinizi girin.",
+    "Tekil mi çoğul mu gebelik olduğunu seçin.",
+    "Doğum öncesi çalışmayı düşündüğünüz hafta sayısını belirtin.",
+    "Kaçıncı çocuğunuz olduğunu seçip sonuçları görüntüleyin.",
+  ],
+  faqs: [
+    {
+      question: "Doğum izni kaç hafta?",
+      answer:
+        "Kadın işçiye doğumdan önce 8, doğumdan sonra 8 hafta olmak üzere toplam 16 hafta ücretli izin verilir. Çoğul gebelikte doğum öncesi süreye 2 hafta eklenir ve toplam 18 haftaya çıkar.",
+    },
+    {
+      question: "Doğumdan önce çalışırsam iznim uzar mı?",
+      answer:
+        "Evet. Sağlık durumunuz uygunsa ve hekim onay verirse doğumdan önceki 3 haftaya kadar çalışabilirsiniz. Çalıştığınız süre doğum sonrası izninize eklenir.",
+    },
+    {
+      question: "Süt izni ne kadar ve nasıl kullanılır?",
+      answer:
+        "Çocuk bir yaşını doldurana kadar günde toplam 1,5 saat süt izni hakkınız vardır. Bu sürenin hangi saatlerde ve kaça bölünerek kullanılacağını işçi kendisi belirler; izin süresi günlük çalışma süresinden sayılır.",
+    },
+    {
+      question: "Yarım çalışma ödeneği nedir?",
+      answer:
+        "Doğum izni bittikten sonra haftalık çalışma süresinin yarısı kadar ücretsiz izin kullanabilirsiniz; bu dönemde İŞKUR yarım çalışma ödeneği öder. Süre birinci çocukta 60, ikincide 120, üçüncü ve sonrasında 180 gündür.",
+    },
+    {
+      question: "Babalık izni kaç gün?",
+      answer:
+        "Eşi doğum yapan işçiye 5 gün ücretli izin verilir. Bu hak İş Kanunu Ek Madde 2 ile düzenlenmiştir.",
+    },
+    {
+      question: "Doğum izninde maaşımı kim öder?",
+      answer:
+        "Doğum izni süresince SGK tarafından geçici iş göremezlik ödeneği (analık ödeneği) ödenir. Ödenek, son bir yıldaki prime esas kazancınızın günlük ortalamasının üçte ikisi oranındadır.",
+    },
+  ],
+};
+
+/* =======================================================
+   İŞSİZLİK MAAŞI
+======================================================= */
+
+seoContents["issizlik-maasi"] = {
+  title: "İşsizlik Maaşı Hesaplama 2026 | İşsizlik Ödeneği",
+  description:
+    "Son 4 ayın ortalama brüt ücreti ve prim gün sayınıza göre aylık net işsizlik maaşınızı ve kaç ay boyunca alacağınızı hesaplayın.",
+  intro:
+    "İşsizlik maaşı hesaplama aracı, İŞKUR tarafından ödenen işsizlik ödeneğinin aylık net tutarını ve ödeme süresini prim gün sayınıza göre hesaplar.",
+  howItWorks: [
+    "Son 4 ayın ortalama brüt ücretini girin.",
+    "Son 3 yıldaki prim gün sayınızı yazın.",
+    "Son 120 gün kesintisiz çalışıp çalışmadığınızı seçin.",
+    "Net ödenek tutarınızı ve süresini görüntüleyin.",
+  ],
+  faqs: [
+    {
+      question: "İşsizlik maaşı almanın şartları neler?",
+      answer:
+        "İş sözleşmesinin kendi isteğiniz dışında sona ermesi, son 120 gün hizmet akdine tabi kesintisiz çalışmış olmak ve son 3 yılda en az 600 gün işsizlik sigortası primi ödemiş olmak gerekir.",
+    },
+    {
+      question: "İşsizlik maaşı ne kadar?",
+      answer:
+        "Son 4 aylık prime esas kazancınızın günlük ortalamasının %40'ıdır. Ancak hesaplanan tutar, brüt asgari ücretin %80'ini geçemez.",
+    },
+    {
+      question: "Kaç ay işsizlik maaşı alınır?",
+      answer:
+        "600 gün primi olan 180 gün, 900 gün primi olan 240 gün, 1080 gün ve üzeri primi olan 300 gün ödenek alır.",
+    },
+    {
+      question: "İstifa edersem işsizlik maaşı alabilir miyim?",
+      answer:
+        "Kural olarak hayır. İşsizlik ödeneği, iş sözleşmesinin işçinin kendi isteği dışında sona ermesi hâlinde bağlanır. Haklı nedenle fesih gibi istisnai durumlarda hak doğabilir.",
+    },
+    {
+      question: "Başvuru süresi ne kadar?",
+      answer:
+        "İş sözleşmesinin sona erdiği tarihten itibaren 30 gün içinde İŞKUR'a başvurmanız gerekir. e-Devlet üzerinden de başvuru yapılabilir.",
+    },
+    {
+      question: "İşsizlik maaşından kesinti yapılır mı?",
+      answer:
+        "Ödenekten yalnızca damga vergisi kesilir. Gelir vergisi ve SGK primi kesintisi yapılmaz. Ayrıca ödenek aldığınız sürece genel sağlık sigortanız İŞKUR tarafından karşılanır.",
+    },
+  ],
+};
+
+/* =======================================================
+   KONUT KREDİSİ VE MASRAFLAR
+======================================================= */
+
+seoContents["konut-kredisi"] = {
+  title: "Konut Kredisi Hesaplama 2026 | Tapu Harcı ve Masraflar",
+  description:
+    "Konut kredisi taksitinizi ve tapu harcı, ekspertiz, DASK, sigorta gibi tüm alım masraflarını hesaplayarak evin size gerçek maliyetini görün.",
+  intro:
+    "Ev alırken sadece taksit değil, tapu harcından sigortaya kadar birçok masraf ortaya çıkar. Bu araç bunların tamamını hesaba katarak tapuda hazır bulundurmanız gereken nakdi ve evin toplam maliyetini gösterir.",
+  howItWorks: [
+    "Konut fiyatını ve peşinatınızı girin.",
+    "Bankanızın aylık faiz oranını ve vadeyi yazın.",
+    "Masraf kalemlerini kendi durumunuza göre düzenleyin.",
+    "Toplam nakit ihtiyacınızı ve gerçek maliyeti görüntüleyin.",
+  ],
+  faqs: [
+    {
+      question: "Ev alırken tapu harcı ne kadar?",
+      answer:
+        "Tapu harcı, satış bedeli üzerinden toplam %4'tür. Kanunen alıcı ve satıcı %2'şer öder, ancak uygulamada çoğu zaman tamamı alıcıya bırakılır. Hesaplamada bu oranı kendi anlaşmanıza göre değiştirebilirsiniz.",
+    },
+    {
+      question: "Kredi tahsis ücreti ne kadar olabilir?",
+      answer:
+        "Bankalar konut kredilerinde kredi tutarının binde 5'ini aşmayacak şekilde tahsis ücreti alabilir. Bu üst sınır mevzuatla belirlenmiştir.",
+    },
+    {
+      question: "DASK zorunlu mu?",
+      answer:
+        "Evet. Zorunlu Deprem Sigortası, tapu işlemleri ve konut kredisi kullanımı için zorunludur. Konut sigortası ise zorunlu değildir ancak bankalar genelde kredi şartı olarak talep eder.",
+    },
+    {
+      question: "Ekspertiz ücreti neden alınır?",
+      answer:
+        "Banka, kredi verdiği konutun gerçek piyasa değerini bağımsız bir değerleme şirketine tespit ettirir. Ekspertiz raporu kredi tutarının üst sınırını belirler ve ücreti genelde alıcıdan tahsil edilir.",
+    },
+    {
+      question: "Konut kredisinde en fazla ne kadar kredi çekilebilir?",
+      answer:
+        "Konutun ekspertiz değerine göre belirlenen kredi/değer oranı sınırlar. Oran konutun değerine ve mevzuata göre değişir; bu nedenle peşinat oranınızı ekspertiz sonrasına göre planlamak gerekir.",
+    },
+  ],
+};
+
+/* =======================================================
+   YAKIT VE YOL MALİYETİ
+======================================================= */
+
+seoContents["yakit-maliyeti"] = {
+  title: "Yakıt Hesaplama | Yol ve Km Maliyeti Hesaplama",
+  description:
+    "Mesafe, ortalama tüketim ve yakıt fiyatına göre yolculuk maliyetinizi, kişi başı tutarı ve aylık yol giderinizi hesaplayın.",
+  intro:
+    "Yakıt maliyeti hesaplama aracı, gideceğiniz mesafe ve aracınızın ortalama tüketimi üzerinden yolculuğun size kaça mal olacağını gösterir; maliyeti yol arkadaşlarınızla bölüşmenizi kolaylaştırır.",
+  howItWorks: [
+    "Tek yön mesafeyi kilometre olarak girin.",
+    "Aracınızın 100 kilometrede kaç litre yaktığını yazın.",
+    "Güncel yakıt litre fiyatını girin.",
+    "Gidiş-dönüş, kişi sayısı ve geçiş ücretlerini belirtin.",
+  ],
+  faqs: [
+    {
+      question: "Yakıt tüketimi nasıl hesaplanır?",
+      answer:
+        "Gidilen mesafe, aracın 100 kilometredeki ortalama tüketimiyle çarpılır ve 100'e bölünür. Çıkan litre miktarı güncel yakıt fiyatıyla çarpılarak maliyet bulunur.",
+    },
+    {
+      question: "Aracımın ortalama tüketimini nereden öğrenirim?",
+      answer:
+        "Çoğu aracın gösterge panelinde ortalama tüketim bilgisi bulunur. Alternatif olarak, depoyu tam doldurup belirli bir mesafe sonrasında tekrar doldurarak harcanan litreyi kilometreye bölebilirsiniz.",
+    },
+    {
+      question: "Şehir içi ve şehir dışı tüketim neden farklı?",
+      answer:
+        "Şehir içinde sık dur-kalk, rölanti ve düşük vites kullanımı tüketimi artırır. Şehir dışında sabit hızda seyir tüketimi düşürür. Uzun yol hesabı yaparken şehir dışı ortalamayı kullanmak daha doğru sonuç verir.",
+    },
+    {
+      question: "Aracın gerçek kilometre maliyeti sadece yakıt mı?",
+      answer:
+        "Hayır. Lastik, periyodik bakım, sigorta, MTV, muayene ve değer kaybı da kilometre başına maliyete eklenir. Bu kalemler toplamda genellikle yakıt gideri kadar tutar.",
+    },
+  ],
+};
+
+/* =======================================================
+   BES
+======================================================= */
+
+seoContents.bes = {
+  title: "BES Hesaplama 2026 | Devlet Katkılı Birikim Hesaplama",
+  description:
+    "Aylık katkı payı, süre ve getiri beklentinize göre devlet katkısı dâhil toplam BES birikiminizi ve hak ediş oranınızı hesaplayın.",
+  intro:
+    "BES hesaplama aracı, bireysel emeklilik sisteminde biriktireceğiniz tutarı devlet katkısıyla birlikte gösterir ve kaç yıl kalırsanız devlet katkısının ne kadarına hak kazanacağınızı hesaplar.",
+  howItWorks: [
+    "Aylık ödeyeceğiniz katkı payını girin.",
+    "Sistemde kalmayı planladığınız süreyi yazın.",
+    "Yıllık getiri beklentinizi belirtin.",
+    "Emeklilik hakkı kazanıp kazanmayacağınızı seçin.",
+  ],
+  faqs: [
+    {
+      question: "BES devlet katkısı ne kadar?",
+      answer:
+        "Ödediğiniz katkı payının %30'u kadar devlet katkısı hesabınıza eklenir. Bir takvim yılında alınabilecek toplam devlet katkısı, o yılın brüt asgari ücretinin yıllık toplamını aşamaz.",
+    },
+    {
+      question: "Devlet katkısının tamamını ne zaman alırım?",
+      answer:
+        "Hak ediş kademelidir: 3 yıl sonunda %15'i, 6 yıl sonunda %35'i, 10 yıl sonunda %60'ı hak edilir. 56 yaşını doldurup en az 10 yıl sistemde kalarak emekli olduğunuzda devlet katkısının tamamını alırsınız.",
+    },
+    {
+      question: "BES'ten erken çıkarsam ne olur?",
+      answer:
+        "Kendi katkı paylarınızı ve getirilerini alırsınız, ancak hak etmediğiniz devlet katkısı kısmı devlete geri döner. Ayrıca sistemde kalış sürenize göre stopaj kesintisi uygulanır.",
+    },
+    {
+      question: "BES ile mevduat arasındaki fark nedir?",
+      answer:
+        "Mevduatta faiz oranı baştan bellidir ve getiriniz garantilidir. BES'te getiri seçtiğiniz fonun performansına bağlıdır, garanti yoktur; buna karşılık %30 devlet katkısı ve uzun vadeli birikim disiplini avantajı sağlar.",
+    },
+    {
+      question: "BES kesintileri nelerdir?",
+      answer:
+        "Fon toplam gider kesintisi ve bazı sözleşmelerde giriş aidatı uygulanır. Bu araç kesintileri hesaba katmaz; net getirinizi görmek için sözleşmenizdeki oranları emeklilik şirketinizden teyit edin.",
     },
   ],
 };

@@ -186,6 +186,88 @@ export const calculators = [
   },
 
   {
+    slug: "dogum-izni",
+    icon: "👶",
+    title: "Doğum ve Süt İzni Hesaplama",
+    category: "calisan",
+    keywords: [
+      "doğum izni",
+      "süt izni",
+      "analık izni",
+      "babalık izni",
+      "yarım çalışma ödeneği",
+    ],
+    description:
+      "Doğum izninizin başlangıç ve bitiş tarihlerini, süt izni sürenizi, yarım çalışma ödeneği ve ücretsiz izin hakkınızı hesaplayın.",
+  },
+
+  {
+    slug: "issizlik-maasi",
+    icon: "🧾",
+    title: "İşsizlik Maaşı Hesaplama",
+    category: "calisan",
+    keywords: [
+      "işsizlik maaşı",
+      "işsizlik ödeneği",
+      "işkur",
+      "prim gün",
+      "işten çıkarılma",
+    ],
+    description:
+      "Son 4 ayın ortalama brüt ücreti ve prim gün sayınıza göre aylık net işsizlik maaşınızı ve kaç ay alacağınızı hesaplayın.",
+  },
+
+  {
+    slug: "konut-kredisi",
+    icon: "🏡",
+    title: "Konut Kredisi ve Alım Masrafları",
+    category: "finans",
+    keywords: [
+      "konut kredisi",
+      "tapu harcı",
+      "ekspertiz",
+      "dask",
+      "ev alma masrafları",
+      "mortgage",
+    ],
+    description:
+      "Konut kredisi taksitinizi ve tapu harcından sigortaya kadar tüm alım masraflarını hesaplayarak evin size gerçek maliyetini görün.",
+  },
+
+  {
+    slug: "yakit-maliyeti",
+    icon: "⛽",
+    title: "Yakıt ve Yol Maliyeti",
+    category: "gunluk",
+    keywords: [
+      "yakıt",
+      "benzin",
+      "motorin",
+      "yol masrafı",
+      "km maliyeti",
+      "seyahat",
+    ],
+    description:
+      "Mesafe, ortalama tüketim ve yakıt fiyatına göre yolculuk maliyetinizi, kişi başı tutarı ve aylık yol giderinizi hesaplayın.",
+  },
+
+  {
+    slug: "bes",
+    icon: "🐖",
+    title: "BES Birikim Hesaplama",
+    category: "finans",
+    keywords: [
+      "bes",
+      "bireysel emeklilik",
+      "devlet katkısı",
+      "birikim",
+      "emeklilik fonu",
+    ],
+    description:
+      "Aylık katkı payı, süre ve getiri beklentinize göre devlet katkısı dâhil toplam BES birikiminizi ve hak ediş oranınızı hesaplayın.",
+  },
+
+  {
     slug: "kredi-borc",
     icon: "🏦",
     title: "Kredi / Banka Borç Hesaplama",
