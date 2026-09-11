@@ -4,6 +4,7 @@ import "./ledger.css";
 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import CookieConsent from "@/components/CookieConsent";
 
 export const metadata: Metadata = {
   metadataBase: new URL(
@@ -145,6 +146,8 @@ export default function RootLayout({
         <div id="icerik">{children}</div>
 
         <Footer />
+
+        <CookieConsent />
 
         <script
           type="application/ld+json"

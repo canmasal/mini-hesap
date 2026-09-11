@@ -116,17 +116,64 @@ export default function BorcTakipDemo() {
    * =====================================================
    */
 
-  useEffect(() => {
-    const saved = Number(
-      window.localStorage.getItem(
-        "miniHesapBorcTakipUsage"
-      ) || "0"
-    );
+  /* Kayıtlı satırlar yüklenene kadar depoya yazmayı beklet */
+  const [loaded, setLoaded] = useState(false);
 
-    setUsage(
-      Math.min(saved, FREE_LIMIT)
-    );
+  useEffect(() => {
+    try {
+      const saved = Number(
+        window.localStorage.getItem(
+          "miniHesapBorcTakipUsage"
+        ) || "0"
+      );
+
+      setUsage(
+        Math.min(saved, FREE_LIMIT)
+      );
+
+      /* Girilen banka satırlarını geri yükle */
+      const savedRows =
+        window.localStorage.getItem(
+          "miniHesapBorcTakipSatirlar"
+        );
+
+      if (savedRows) {
+        const parsed = JSON.parse(
+          savedRows
+        ) as BankRow[];
+
+        if (
+          Array.isArray(parsed) &&
+          parsed.length > 0
+        ) {
+          setRows(parsed);
+          setCalculated(true);
+        }
+      }
+    } catch {
+      /* Depolama kullanılamıyorsa araç boş tabloyla çalışır. */
+    }
+
+    setLoaded(true);
   }, []);
+
+  /*
+   * Satırlar her değiştiğinde kaydet.
+   * Önceden yalnızca kullanım sayacı saklanıyordu ve
+   * sayfa yenilendiğinde girilen tüm veriler siliniyordu.
+   */
+  useEffect(() => {
+    if (!loaded) return;
+
+    try {
+      window.localStorage.setItem(
+        "miniHesapBorcTakipSatirlar",
+        JSON.stringify(rows)
+      );
+    } catch {
+      /* Kota dolduysa sessizce devam et. */
+    }
+  }, [rows, loaded]);
 
   /*
    * =====================================================
