@@ -506,14 +506,20 @@
 }
 
 /* Alt blok her kartta aynı hizada başlar */
+/* Alt blok: her kartta AYNI yukseklikte olmali ki satirdaki
+   fiyat ve butonlar birebir hizalansin. Bu yuzden her parcaya
+   sabit yukseklik verilir ve butun kartlarda ayni ogeler render edilir. */
 .product-card__foot {
   margin-top: auto;
   padding-top: 18px;
+  border-top: 1px solid var(--line-soft);
 }
 .product-card__price {
   display: flex;
   align-items: baseline;
-  gap: 8px;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+  min-height: 42px;
   margin-bottom: 12px;
 }
 .product-card__price b {
@@ -526,15 +532,19 @@
   font-size: 12px;
   color: var(--muted);
 }
-.product-card__actions { display: grid; gap: 8px; }
 .product-card__actions .btn { width: 100%; }
-.product-card__try {
-  margin: 12px 0 0;
+/* Ikincil baglantilar buton degil, metin olarak duruyor; boylece
+   her kartta buton sayisi ayni kaliyor. */
+.product-card__links {
+  margin: 14px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
   font-size: 13px;
+  line-height: 1.55;
   color: var(--muted);
-  line-height: 1.6;
 }
-.product-card__try a {
+.product-card__links a {
   color: var(--brand-dark);
   font-weight: 700;
   text-decoration: underline;
@@ -586,7 +596,8 @@
 @media (max-width: 560px) {
   .product-card { padding: 20px; border-radius: var(--r-lg); }
   .product-card__title,
-  .product-card__tagline { min-height: 0; }
+  .product-card__tagline,
+  .product-card__price { min-height: 0; }
   .premium-cta { padding: 18px; }
   .premium-cta__row .btn { width: 100%; }
 }

@@ -106,6 +106,23 @@ export default function PremiumPage() {
                 {product.sheets.length > 3 && "…"}
               </p>
 
+              {/* Ikincil baglantilar esnek alanda durur; boylece alttaki
+                  fiyat + buton blogu her kartta ayni yukseklikte kalir. */}
+              <div className="product-card__links">
+                {product.relatedTool && (
+                  <span>
+                    Ücretsiz dene:{" "}
+                    <Link href={product.relatedTool.href}>
+                      {product.relatedTool.label}
+                    </Link>
+                  </span>
+                )}
+
+                {product.landingPage && (
+                  <Link href={product.landingPage}>Ayrıntılı incele</Link>
+                )}
+              </div>
+
               <div className="product-card__foot">
                 <div className="product-card__price">
                   <b>{product.price.toLocaleString("tr-TR")} ₺</b>
@@ -119,22 +136,8 @@ export default function PremiumPage() {
                   >
                     Satın Al →
                   </Link>
-
-                  {product.landingPage && (
-                    <Link className="btn btn-outline" href={product.landingPage}>
-                      Ayrıntılı İncele
-                    </Link>
-                  )}
                 </div>
 
-                {product.relatedTool && (
-                  <p className="product-card__try">
-                    Önce ücretsiz deneyin:{" "}
-                    <Link href={product.relatedTool.href}>
-                      {product.relatedTool.label}
-                    </Link>
-                  </p>
-                )}
               </div>
             </article>
           ))}
