@@ -27,6 +27,70 @@ export type PremiumProduct = {
 
 export const premiumProducts: PremiumProduct[] = [
   {
+    slug: "isletme-yonetim-paneli",
+    fileName: "MiniHesap_Isletme_Yonetim_Paneli.xlsx",
+    icon: "🏢",
+    title: "İşletme Yönetim Paneli",
+    tagline: "Veritabanı mantığında çalışan tam işletme dosyası",
+    description:
+      "Cari, ürün, stok ve fatura hareketlerini tek dosyada veritabanı mantığıyla yönetir. Bilgiyi bir kez kart olarak tanımlarsınız; hareket girerken listeden seçersiniz, fiyat ve KDV otomatik gelir, stok ve cari bakiye kendiliğinden güncellenir.",
+    sheets: [
+      "Nasıl Kullanılır",
+      "Ayarlar",
+      "Cari Kartlar",
+      "Ürün Kartlar",
+      "Hareketler",
+      "Stok Durumu",
+      "Cari Ekstre",
+      "Dashboard",
+    ],
+    features: [
+      "200 cari + 200 ürün kartı, 1.000 hareket satırı",
+      "Açılır listeden cari ve ürün seçimi (yazım hatası olmaz)",
+      "Fiyat ve KDV ürün kartından otomatik gelir",
+      "Alış/satışa göre otomatik stok giriş-çıkışı",
+      "Kritik stok ve stok tükendi uyarıları",
+      "Cari bazlı borç / alacak / bakiye ekstresi",
+      "Satış, alış, brüt kâr, KDV ve alacak özeti içeren dashboard",
+      "En çok satış yapılan cariler sıralaması",
+    ],
+    relatedTool: { href: "/on-muhasebe", label: "Ön Muhasebe Takip aracı" },
+    price: 399,
+  },
+
+  {
+    slug: "personel-bordro",
+    fileName: "MiniHesap_Personel_Bordro_Ozluk_Takip.xlsx",
+    icon: "👥",
+    title: "Personel Bordro ve Özlük Takip",
+    tagline: "Bordro, izin ve kıdem yükü tek dosyada",
+    description:
+      "Çalışanlarınızın özlük bilgilerini, aylık bordrolarını, yıllık izin haklarını ve biriken kıdem tazminatı yükünüzü takip eder. Oranlar tek sayfadan yönetilir; her yıl değiştiğinde sadece orada güncellersiniz.",
+    sheets: [
+      "Nasıl Kullanılır",
+      "Parametreler",
+      "Personel Kartları",
+      "Aylık Bordro",
+      "İzin Takibi",
+      "Kıdem Yükü",
+    ],
+    features: [
+      "100 personel kapasitesi",
+      "Brütten nete kesinti dökümü (SGK, işsizlik, gelir ve damga vergisi)",
+      "İstisna tutarları ve SGK tavanı desteği",
+      "İşverene toplam maliyet hesabı",
+      "Hizmet yılına göre otomatik yıllık izin hakkı",
+      "Bugün itibarıyla toplam kıdem tazminatı yükü",
+      "Tüm oranlar tek parametre sayfasından yönetilir",
+    ],
+    relatedTool: {
+      href: "/hesaplamalar/net-maas",
+      label: "Net Maaş hesaplama aracı",
+    },
+    price: 299,
+  },
+
+  {
     slug: "borc-takip",
     fileName: "MiniHesap_Profesyonel_Borc_Takip.xlsx",
     icon: "🏦",
