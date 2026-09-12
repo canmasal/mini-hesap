@@ -3,7 +3,6 @@ import Link from "next/link";
 import CalculatorCard from "@/components/CalculatorCard";
 import { calculators } from "@/data/calculators";
 import AdSlot from "@/components/AdSlot";
-import SponsorBanner from "@/components/SponsorBanner";
 
 export const metadata = {
   title: "Ücretsiz Online Hesaplama Araçları",
@@ -108,8 +107,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      <SponsorBanner />
 
       <div className="container ad-slot">
         <AdSlot position="top" />
