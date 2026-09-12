@@ -41,8 +41,9 @@ export default function RefundPage() {
               sona erer, iade yapılamaz.
             </li>
             <li>
-              <strong>Ürün hatalıysa:</strong> İndirmiş olsanız bile onarım
-              veya tam iade hakkınız vardır.
+              <strong>Ürün hatalıysa:</strong> Ürünün geliştirilmesini ya da
+              ihtiyacınıza göre yeni bir özellik eklenmesini istiyorsanız{" "}
+              <Link href="/program-talebi">geliştirme talebi oluşturabilirsiniz</Link>.
             </li>
           </ul>
 

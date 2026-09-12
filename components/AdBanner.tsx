@@ -1,12 +1,19 @@
 type AdBannerProps = {
   label?: string;
   minHeight?: number;
+  slot?: string;
 };
+
+import AdSenseUnit from "@/components/AdSenseUnit";
+import Link from "next/link";
 
 export default function AdBanner({
   label = "REKLAM",
   minHeight = 90,
+  slot,
 }: AdBannerProps) {
+  const clientId = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID;
+
   return (
     <div
       aria-label="Reklam alanı"
@@ -25,16 +32,27 @@ export default function AdBanner({
         overflow: "hidden",
       }}
     >
-      <span
-        style={{
-          fontSize: "11px",
-          color: "#94a39a",
-          letterSpacing: "1px",
-          fontWeight: 700,
-        }}
-      >
-        {label}
-      </span>
+      {clientId && slot ? (
+        <AdSenseUnit slot={slot} />
+      ) : (
+        <Link
+          href="/iletisim?konu=reklam"
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            justifyContent: "center",
+            minHeight: `${Math.max(minHeight - 16, 44)}px`,
+            padding: "10px 18px",
+            color: "var(--brand-dark)",
+            fontSize: "13px",
+            fontWeight: 700,
+            textAlign: "center",
+            textDecoration: "none",
+          }}
+        >
+          Reklam vermek için iletişime geçiniz
+        </Link>
+      )}
     </div>
   );
 }

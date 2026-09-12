@@ -26,9 +26,14 @@ create table if not exists public.orders (
     "createdAt"         timestamptz not null default now(),
     "paidAt"            timestamptz,
     "downloadCount"     integer     not null default 0,
+    "firstDownloadedAt" timestamptz,
+    "lastDownloadedAt"  timestamptz,
     "downloadExpiresAt" timestamptz,
     "ip"                text
 );
+
+alter table public.orders add column if not exists "firstDownloadedAt" timestamptz;
+alter table public.orders add column if not exists "lastDownloadedAt" timestamptz;
 
 -- Sipariş listeleme ve arama için indeksler
 create index if not exists orders_created_idx
@@ -60,6 +65,34 @@ alter table public.orders enable row level security;
 -- Anon rolünün yanlışlıkla erişmesini ayrıca engelle
 revoke all on public.orders from anon;
 revoke all on public.orders from authenticated;
+
+-- =========================================================
+--  PROGRAM TALEPLERİ
+-- =========================================================
+
+create table if not exists public.program_requests (
+    "id"            text primary key,
+    "name"          text not null,
+    "email"         text not null,
+    "description"   text not null,
+    "category"      text not null,
+    "aiSummary"     text not null,
+    "aiQuestions"   jsonb not null default '[]'::jsonb,
+    "status"        text not null default 'yeni'
+                    check ("status" in ('yeni','inceleniyor','tamamlandi')),
+    "createdAt"     timestamptz not null default now(),
+    "ip"            text
+);
+
+create index if not exists program_requests_created_idx
+    on public.program_requests ("createdAt" desc);
+
+create index if not exists program_requests_status_idx
+    on public.program_requests ("status");
+
+alter table public.program_requests enable row level security;
+revoke all on public.program_requests from anon;
+revoke all on public.program_requests from authenticated;
 
 -- =========================================================
 --  DOĞRULAMA

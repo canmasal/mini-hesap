@@ -5,11 +5,17 @@ import "./ledger.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import CookieConsent from "@/components/CookieConsent";
+import AdSenseScript from "@/components/AdSenseScript";
+import ChatWidget from "@/components/ChatWidget";
+
+const adsenseClientId =
+  process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID ||
+  "ca-pub-5744638110984506";
 
 export const metadata: Metadata = {
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL ||
-      "http://localhost:3000"
+      "https://minihesap.net"
   ),
 
   title: {
@@ -75,7 +81,7 @@ export const metadata: Metadata = {
 
     url:
       process.env.NEXT_PUBLIC_SITE_URL ||
-      "http://localhost:3000",
+      "https://minihesap.net",
   },
 
   twitter: {
@@ -101,6 +107,10 @@ export const metadata: Metadata = {
     email: false,
     address: false,
   },
+
+  other: {
+    "google-adsense-account": adsenseClientId,
+  },
 };
 
 export const viewport: Viewport = {
@@ -112,7 +122,7 @@ export const viewport: Viewport = {
 
 /* Site geneli arama kutusu + kuruluş şeması */
 const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+  process.env.NEXT_PUBLIC_SITE_URL || "https://minihesap.net";
 
 const websiteSchema = {
   "@context": "https://schema.org",
@@ -126,6 +136,7 @@ const websiteSchema = {
     "@type": "Organization",
     name: "MiniHesap",
     url: siteUrl,
+    logo: `${siteUrl}/icon.svg`,
   },
 };
 
@@ -148,6 +159,8 @@ export default function RootLayout({
         <Footer />
 
         <CookieConsent />
+        <AdSenseScript />
+        <ChatWidget />
 
         <script
           type="application/ld+json"

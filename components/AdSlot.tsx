@@ -11,9 +11,15 @@ export default function AdSlot({ position = "middle" }: AdSlotProps) {
     bottom: 90,
   };
 
+  const slots = {
+    top: process.env.NEXT_PUBLIC_ADSENSE_SLOT_TOP,
+    middle: process.env.NEXT_PUBLIC_ADSENSE_SLOT_MIDDLE,
+    bottom: process.env.NEXT_PUBLIC_ADSENSE_SLOT_BOTTOM,
+  };
+
   return (
     <div className="ad-slot" style={{ width: "100%" }}>
-      <AdBanner label="REKLAM" minHeight={heights[position]} />
+      <AdBanner label="REKLAM" minHeight={heights[position]} slot={slots[position]} />
     </div>
   );
 }

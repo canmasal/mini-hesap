@@ -96,7 +96,7 @@ export default function AboutPage() {
           </p>
 
           <p style={{ marginTop: 28 }}>
-            <Link className="btn btn-green" href="/hesaplamalar">
+            <Link className="btn btn-green btn-discover" href="/hesaplamalar">
               Araçları keşfet →
             </Link>
           </p>

@@ -69,6 +69,27 @@ export default function PrivacyPage() {
             amacıyla kullanılmaz ve üçüncü taraflarla paylaşılmaz.
           </p>
 
+          <h3>2.4 Program talebi ve AI ürün danışmanı</h3>
+          <p>
+            <Link href="/program-talebi">Program Talebi</Link> formunu
+            kullandığınızda adınız, e-posta adresiniz ve program fikriniz talebi
+            değerlendirmek ve size dönüş yapmak için kaydedilir. AI ürün
+            danışmanı, yazdığınız açıklamayı özetlemek ve netleştirici sorular
+            önermek için kullanılabilir. AI çıktısı karar veya taahhüt değildir.
+            Özel nitelikli kişisel veri, şifre, kart bilgisi ve finansal sır
+            paylaşmayın. Yapılandırıldığında açıklama, AI hizmeti sağlayıcısına
+            işlenmek üzere aktarılabilir.
+          </p>
+
+          <h3>2.5 Müşteri temsilcisi iletişim formu</h3>
+          <p>
+            Sohbet asistanındaki iletişim formunda ad soyad, telefon ve e-posta
+            bilgilerinizi yalnızca size dönüş yapmak amacıyla iletebilirsiniz.
+            KVKK aydınlatma metni onayı zorunludur; pazarlama iletişimi izni
+            ayrıca ve isteğe bağlıdır. Pazarlama izninin kapsamı ve geri alma
+            yöntemi için <Link href="/pazarlama-iletisimi">Pazarlama İletişimi İzni</Link> sayfasını inceleyin.
+          </p>
+
           <h2>3. Çerezler</h2>
           <p>
             Sitede iki tür çerez kullanılabilir:

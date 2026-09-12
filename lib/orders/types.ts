@@ -29,6 +29,10 @@ export type Order = {
   paidAt?: string;
   /** Kaç kez indirildi (kötüye kullanım takibi) */
   downloadCount: number;
+  /** İlk başarılı dosya indirme zamanı */
+  firstDownloadedAt?: string;
+  /** Son başarılı dosya indirme zamanı */
+  lastDownloadedAt?: string;
   /** İndirme hakkının bittiği an */
   downloadExpiresAt?: string;
   /** Log ve iade incelemesi için */

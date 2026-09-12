@@ -99,8 +99,19 @@ export default async function OrderPage({
                 {order.downloadExpiresAt
                   ? new Date(order.downloadExpiresAt).toLocaleDateString("tr-TR")
                   : "—"}{" "}
-                tarihine kadar en fazla {MAX_DOWNLOADS} kez indirilebilir.
-                Şu ana kadar {order.downloadCount} kez indirdiniz.
+                tarihine kadar en fazla {MAX_DOWNLOADS} kez indirilebilir.{" "}
+                {order.downloadCount > 0 ? (
+                  <>
+                    Şu ana kadar {order.downloadCount} kez indirdiniz.
+                    {order.firstDownloadedAt && (
+                      <>
+                        <br />İlk başarılı indirme: {new Date(order.firstDownloadedAt).toLocaleString("tr-TR")}
+                      </>
+                    )}
+                  </>
+                ) : (
+                  <>Dosya henüz indirilmedi.</>
+                )}
               </div>
 
               <div className="notice">

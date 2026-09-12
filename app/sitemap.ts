@@ -6,7 +6,7 @@ import { guides } from "@/data/guides";
 import { longtailPages } from "@/data/longtail";
 
 const baseUrl =
-  process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+  process.env.NEXT_PUBLIC_SITE_URL || "https://minihesap.net";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
@@ -18,6 +18,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/on-muhasebe`, changeFrequency: "weekly", priority: 0.8 },
     { url: `${baseUrl}/premium`, changeFrequency: "weekly", priority: 0.8 },
     { url: `${baseUrl}/rehber`, changeFrequency: "weekly", priority: 0.9 },
+    { url: `${baseUrl}/program-talebi`, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${baseUrl}/pazarlama-iletisimi`, changeFrequency: "yearly", priority: 0.2 },
     { url: `${baseUrl}/hakkimizda`, changeFrequency: "monthly", priority: 0.5 },
     { url: `${baseUrl}/iletisim`, changeFrequency: "monthly", priority: 0.4 },
     { url: `${baseUrl}/gizlilik`, changeFrequency: "yearly", priority: 0.2 },

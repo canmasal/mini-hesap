@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "check:calculators": "node tools/check-calculators.mjs",
     "build:check": "BUILD_DIR=.next-build next build"
   },
   "dependencies": {

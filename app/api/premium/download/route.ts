@@ -98,7 +98,6 @@ export async function GET(request: Request) {
       );
     }
 
-    await store.update(orderId, { downloadCount: order.downloadCount + 1 });
   }
 
   const selected = findPremiumProduct(productSlug);
@@ -119,6 +118,20 @@ export async function GET(request: Request) {
     );
 
     const file = await readFile(filePath);
+
+    if (!isAdmin && orderId) {
+      const downloadedAt = new Date().toISOString();
+      const store = getOrderStore();
+      const order = await store.get(orderId);
+
+      if (order) {
+        await store.update(orderId, {
+          downloadCount: order.downloadCount + 1,
+          firstDownloadedAt: order.firstDownloadedAt || downloadedAt,
+          lastDownloadedAt: downloadedAt,
+        });
+      }
+    }
 
     return new NextResponse(new Uint8Array(file), {
       status: 200,

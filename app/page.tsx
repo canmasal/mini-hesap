@@ -3,6 +3,20 @@ import Link from "next/link";
 import CalculatorCard from "@/components/CalculatorCard";
 import { calculators } from "@/data/calculators";
 import AdSlot from "@/components/AdSlot";
+import SponsorBanner from "@/components/SponsorBanner";
+
+export const metadata = {
+  title: "Ücretsiz Online Hesaplama Araçları",
+  description:
+    "Net maaş, kıdem ve ihbar tazminatı, KDV, yüzde, kira artışı, kredi ve daha fazlasını ücretsiz hesaplayın.",
+  alternates: { canonical: "/" },
+  openGraph: {
+    title: "Ücretsiz Online Hesaplama Araçları | MiniHesap",
+    description:
+      "Günlük hayat ve finans için hızlı, anlaşılır ve mobil uyumlu hesaplama araçları.",
+    type: "website" as const,
+  },
+};
 
 const financeTools = [
   {
@@ -95,6 +109,8 @@ export default function HomePage() {
         </div>
       </section>
 
+      <SponsorBanner />
+
       <div className="container ad-slot">
         <AdSlot position="top" />
       </div>
@@ -184,6 +200,21 @@ export default function HomePage() {
                 hesaplanır.
               </p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container">
+          <div className="section-head">
+            <p className="eyebrow">İHTİYACINIZA GÖRE</p>
+            <h2>Aradığınız program burada yok mu?</h2>
+            <p>
+              İstediğiniz programı doğal dille anlatın. AI ürün danışmanımız talebinizi özetlesin ve ekibimize bildirsin.
+            </p>
+            <Link className="btn btn-green" href="/program-talebi" style={{ marginTop: 20 }}>
+              Program talebi oluştur
+            </Link>
           </div>
         </div>
       </section>
