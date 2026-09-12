@@ -536,10 +536,16 @@ a.eyebrow:hover { color: var(--brand-dark); text-decoration: underline; }
 ========================================================= */
 
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
-.btn-ghost { border: 1.5px solid var(--line); background: #fff; color: var(--ink); }
-.btn-ghost:hover:not(:disabled) { border-color: var(--brand); color: var(--brand-dark); background: var(--surface-mint); }
-.btn-on-dark { border: 1.5px solid rgba(255, 255, 255, .28); background: transparent; color: #fff; }
+.btn-ghost { border: 2px solid var(--brand-line); background: #fff; color: var(--brand-deep); }
+.btn-ghost:hover:not(:disabled) { border-color: var(--brand); background: var(--surface-mint); }
+.btn-on-dark { border: 2px solid rgba(255, 255, 255, .28); background: transparent; color: #fff; }
 .btn-on-dark:hover:not(:disabled) { border-color: rgba(255, 255, 255, .6); background: rgba(255, 255, 255, .08); }
+
+/* Dolu ve cerceveli butonlar yan yana durdugunda ayni yuksekligi
+   tutsun diye dolu butona da ayni kalinlikta gorunmez kenarlik verilir. */
+.plan-card__cta.btn-green,
+.premium-hero__actions .btn-green,
+.premium-cta__actions .btn-green { border: 2px solid var(--brand); }
 
 .premium-section { margin-top: 76px; }
 .premium-section .section-head { margin-bottom: 30px; }
@@ -572,7 +578,9 @@ a.eyebrow:hover { color: var(--brand-dark); text-decoration: underline; }
 .premium-hero__stats dd { margin: 4px 0 0; font-size: 30px; font-weight: 900; letter-spacing: -1px; }
 
 /* ---------- Paket kartlari ---------- */
-.plan-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; align-items: start; }
+/* Kartlar esit yukseklikte olur; boylece fiyat, buton ve alttaki icerik
+   satiri her sutunda ayni hizaya oturur. */
+.plan-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; align-items: stretch; }
 .plan-card {
   position: relative; display: flex; flex-direction: column;
   padding: 30px 26px;
@@ -599,7 +607,7 @@ a.eyebrow:hover { color: var(--brand-dark); text-decoration: underline; }
 .plan-card__saving s { opacity: .8; }
 .plan-card__saving-pill { padding: 4px 10px; border-radius: var(--r-pill); background: var(--brand-tint); color: var(--brand-deep); font-size: 11.5px; font-weight: 900; }
 .plan-card__cta { width: 100%; margin: 20px 0 22px; padding: 14px 18px; text-decoration: none; }
-.plan-card__perks { flex: 1; display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.plan-card__perks { display: grid; align-content: start; gap: 10px; margin: 0 0 20px; padding: 0; list-style: none; }
 .plan-card__perks li { position: relative; padding-left: 26px; font-size: 13.5px; line-height: 1.5; }
 .plan-card__perks li::before {
   content: "✓"; position: absolute; left: 0; top: 0;
@@ -607,7 +615,7 @@ a.eyebrow:hover { color: var(--brand-dark); text-decoration: underline; }
   border-radius: 50%; background: var(--brand-tint); color: var(--brand-deep);
   font-size: 10px; font-weight: 900;
 }
-.plan-card__contents { margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--line-soft); }
+.plan-card__contents { margin-top: auto; padding-top: 18px; border-top: 1px solid var(--line-soft); }
 .plan-card__contents summary { color: var(--brand-dark); font-size: 13px; font-weight: 800; cursor: pointer; }
 .plan-card__contents summary:hover { color: var(--brand-deep); }
 .plan-card__contents ul { display: grid; gap: 8px; margin: 14px 0 0; padding: 0; list-style: none; color: var(--muted); font-size: 12.5px; line-height: 1.45; }

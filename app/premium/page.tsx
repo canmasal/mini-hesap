@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
 
 import Breadcrumb from "@/components/Breadcrumb";
@@ -177,6 +177,90 @@ export default function PremiumPage() {
           </dl>
         </section>
 
+        {/* ================= KARSILASTIRMA ================= */}
+        <section className="premium-section">
+          <div className="section-head">
+            <p className="eyebrow">KARŞILAŞTIRMA</p>
+            <h2>Paketler neleri kapsıyor?</h2>
+            <p>Tabloyu yana kaydırarak tüm paketleri görebilirsiniz.</p>
+          </div>
+
+          <div className="plan-compare-wrap">
+            <table className="plan-compare">
+              <caption className="sr-only">
+                Standart, Plus ve Pro paketlerinin içerdiği ürünler
+              </caption>
+
+              <thead>
+                <tr>
+                  <th scope="col">Ürün</th>
+                  {plans.map((plan) => (
+                    <th
+                      key={plan.id}
+                      scope="col"
+                      className={plan.featured ? "is-featured" : undefined}
+                    >
+                      {plan.name}
+                      <span>{plan.price.toLocaleString("tr-TR")} ₺</span>
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+
+              {comparisonGroups.map((group) => (
+                <tbody key={group.kind}>
+                  <tr className="plan-compare__group">
+                    <th scope="colgroup" colSpan={plans.length + 1}>
+                      {KIND_LABELS[group.kind]}
+                    </th>
+                  </tr>
+
+                  {group.rows.map((row) => (
+                    <tr key={row.slug}>
+                      <th scope="row">
+                        {row.title}
+                        <span>{row.tagline}</span>
+                      </th>
+                      {row.inPlan.map((included, index) => (
+                        <td
+                          key={plans[index].id}
+                          className={`${included ? "is-yes" : "is-no"}${
+                            plans[index].featured ? " is-featured" : ""
+                          }`}
+                        >
+                          <span className="sr-only">
+                            {included ? "Dahil" : "Dahil değil"}
+                          </span>
+                          <span aria-hidden="true">{included ? "✓" : "–"}</span>
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              ))}
+
+              <tfoot>
+                <tr>
+                  <th scope="row">Paketi al</th>
+                  {plans.map((plan) => (
+                    <td
+                      key={plan.id}
+                      className={plan.featured ? "is-featured" : undefined}
+                    >
+                      <Link
+                        className="plan-compare__cta"
+                        href={`/satin-al/${plan.slug}`}
+                      >
+                        Seç
+                      </Link>
+                    </td>
+                  ))}
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </section>
+
         {/* ================= PAKETLER ================= */}
         <section id="paketler" className="premium-section">
           <div className="section-head">
@@ -280,90 +364,6 @@ export default function PremiumPage() {
                 <p>{item.text}</p>
               </article>
             ))}
-          </div>
-        </section>
-
-        {/* ================= KARSILASTIRMA ================= */}
-        <section className="premium-section">
-          <div className="section-head">
-            <p className="eyebrow">KARŞILAŞTIRMA</p>
-            <h2>Paketler neleri kapsıyor?</h2>
-            <p>Tabloyu yana kaydırarak tüm paketleri görebilirsiniz.</p>
-          </div>
-
-          <div className="plan-compare-wrap">
-            <table className="plan-compare">
-              <caption className="sr-only">
-                Standart, Plus ve Pro paketlerinin içerdiği ürünler
-              </caption>
-
-              <thead>
-                <tr>
-                  <th scope="col">Ürün</th>
-                  {plans.map((plan) => (
-                    <th
-                      key={plan.id}
-                      scope="col"
-                      className={plan.featured ? "is-featured" : undefined}
-                    >
-                      {plan.name}
-                      <span>{plan.price.toLocaleString("tr-TR")} ₺</span>
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-
-              {comparisonGroups.map((group) => (
-                <tbody key={group.kind}>
-                  <tr className="plan-compare__group">
-                    <th scope="colgroup" colSpan={plans.length + 1}>
-                      {KIND_LABELS[group.kind]}
-                    </th>
-                  </tr>
-
-                  {group.rows.map((row) => (
-                    <tr key={row.slug}>
-                      <th scope="row">
-                        {row.title}
-                        <span>{row.tagline}</span>
-                      </th>
-                      {row.inPlan.map((included, index) => (
-                        <td
-                          key={plans[index].id}
-                          className={`${included ? "is-yes" : "is-no"}${
-                            plans[index].featured ? " is-featured" : ""
-                          }`}
-                        >
-                          <span className="sr-only">
-                            {included ? "Dahil" : "Dahil değil"}
-                          </span>
-                          <span aria-hidden="true">{included ? "✓" : "–"}</span>
-                        </td>
-                      ))}
-                    </tr>
-                  ))}
-                </tbody>
-              ))}
-
-              <tfoot>
-                <tr>
-                  <th scope="row">Paketi al</th>
-                  {plans.map((plan) => (
-                    <td
-                      key={plan.id}
-                      className={plan.featured ? "is-featured" : undefined}
-                    >
-                      <Link
-                        className="plan-compare__cta"
-                        href={`/satin-al/${plan.slug}`}
-                      >
-                        Seç
-                      </Link>
-                    </td>
-                  ))}
-                </tr>
-              </tfoot>
-            </table>
           </div>
         </section>
 
