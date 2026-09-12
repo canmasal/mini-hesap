@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import Breadcrumb from "@/components/Breadcrumb";
-import { findPremiumProduct } from "@/data/premiumProducts";
+import { findPurchasable } from "@/data/plans";
 import { getOrderStore } from "@/lib/orders/store";
 import { createDownloadToken } from "@/lib/orders/tokens";
 import { MAX_DOWNLOADS } from "@/lib/orders/types";
@@ -44,15 +44,17 @@ export default async function OrderPage({
     );
   }
 
-  const product = findPremiumProduct(order.productSlug);
+  const product = findPurchasable(order.productSlug);
   const failed = durum === "basarisiz" || order.status === "basarisiz";
   const paid = order.status === "odendi";
   const havale = havaleInfo();
 
-  /* İndirme bağlantısı yalnızca ödenmiş siparişler için, kısa ömürlü üretilir */
-  let downloadUrl: string | null = null;
+  /* İndirme bağlantıları yalnızca ödenmiş siparişler için, kısa ömürlü
+     üretilir. Pakette birden çok dosya olduğundan her dosya için ayrı
+     bağlantı çıkarılır; jeton hepsinde ortaktır. */
+  let downloads: { label: string; url: string }[] = [];
 
-  if (paid) {
+  if (paid && product) {
     const token = createDownloadToken({
       orderId: order.id,
       productSlug: order.productSlug,
@@ -60,10 +62,17 @@ export default async function OrderPage({
       exp: Math.floor(Date.now() / 1000) + 2 * 60 * 60,
     });
 
-    downloadUrl = `/api/premium/download?product=${encodeURIComponent(
+    const base = `/api/premium/download?product=${encodeURIComponent(
       order.productSlug
     )}&token=${encodeURIComponent(token)}`;
+
+    downloads = product.files.map((file) => ({
+      label: file.label,
+      url: `${base}&file=${encodeURIComponent(file.fileName)}`,
+    }));
   }
+
+  const isBundle = downloads.length > 1;
 
   return (
     <main className="page">
@@ -82,16 +91,22 @@ export default async function OrderPage({
               <h1>Teşekkürler, {order.fullName.split(" ")[0]}!</h1>
               <p className="page-lead">
                 <strong>{order.productTitle}</strong> için ödemeniz alındı.
-                Dosyanızı aşağıdan indirebilirsiniz.
+                {isBundle
+                  ? ` Paketinizdeki ${downloads.length} dosyayı aşağıdan tek tek indirebilirsiniz.`
+                  : " Dosyanızı aşağıdan indirebilirsiniz."}
               </p>
 
-              <a
-                className="btn btn-green"
-                href={downloadUrl!}
-                style={{ marginTop: 22, padding: "15px 28px", fontSize: 16 }}
-              >
-                ⬇ Dosyayı İndir
-              </a>
+              <div className="order-downloads">
+                {downloads.map((item, index) => (
+                  <a
+                    key={item.url}
+                    className={`btn ${index === 0 && !isBundle ? "btn-green" : "btn-ghost"}`}
+                    href={item.url}
+                  >
+                    ⬇ {isBundle ? item.label : "Dosyayı İndir"}
+                  </a>
+                ))}
+              </div>
 
               <div className="notice notice-ok">
                 <strong>İndirme bilgileri.</strong> Bağlantı 2 saat geçerlidir;

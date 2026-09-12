@@ -4,12 +4,16 @@ import Link from "next/link";
 
 import Breadcrumb from "@/components/Breadcrumb";
 import CheckoutForm from "@/components/CheckoutForm";
-import { premiumProducts, findPremiumProduct } from "@/data/premiumProducts";
+import { premiumProducts } from "@/data/premiumProducts";
+import { plans, findPurchasable } from "@/data/plans";
 import { paymentsEnabled } from "@/lib/payments/provider";
 import { emailEnabled } from "@/lib/mail/send";
 
 export function generateStaticParams() {
-  return premiumProducts.map((p) => ({ slug: p.slug }));
+  return [
+    ...plans.map((p) => ({ slug: p.slug })),
+    ...premiumProducts.map((p) => ({ slug: p.slug })),
+  ];
 }
 
 export async function generateMetadata({
@@ -18,13 +22,13 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const product = findPremiumProduct(slug);
+  const product = findPurchasable(slug);
 
   if (!product) return { title: "Ürün bulunamadı" };
 
   return {
     title: `${product.title} — Satın Al`,
-    description: product.description,
+    description: product.tagline,
     alternates: { canonical: `/satin-al/${slug}` },
     robots: { index: false, follow: true },
   };
@@ -36,7 +40,7 @@ export default async function CheckoutPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const product = findPremiumProduct(slug);
+  const product = findPurchasable(slug);
 
   if (!product) notFound();
 

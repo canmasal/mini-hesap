@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { readFile } from "fs/promises";
 import path from "path";
 
-import { findPremiumProduct } from "@/data/premiumProducts";
+import { findPurchasable } from "@/data/plans";
 import { getOrderStore } from "@/lib/orders/store";
 import { verifyDownloadToken } from "@/lib/orders/tokens";
 import { MAX_DOWNLOADS } from "@/lib/orders/types";
@@ -100,7 +100,7 @@ export async function GET(request: Request) {
 
   }
 
-  const selected = findPremiumProduct(productSlug);
+  const selected = findPurchasable(productSlug);
 
   if (!selected) {
     return NextResponse.json(
@@ -109,12 +109,24 @@ export async function GET(request: Request) {
     );
   }
 
+  /* Pakette birden çok dosya vardır; hangisinin istendiği "file" ile
+     belirtilir. İstenen ad yalnızca bu ürünün dosya listesiyle eşleşirse
+     kabul edilir, böylece dizin dışına çıkılamaz. */
+  const requestedFile = searchParams.get("file");
+  const target = requestedFile
+    ? selected.files.find((item) => item.fileName === requestedFile)
+    : selected.files[0];
+
+  if (!target) {
+    return deny("İstenen dosya bu siparişe ait değil.", 400);
+  }
+
   try {
     const filePath = path.join(
       process.cwd(),
       "private",
       "products",
-      selected.fileName
+      target.fileName
     );
 
     const file = await readFile(filePath);
@@ -136,8 +148,8 @@ export async function GET(request: Request) {
     return new NextResponse(new Uint8Array(file), {
       status: 200,
       headers: {
-        "Content-Type": contentTypeOf(selected.fileName),
-        "Content-Disposition": `attachment; filename="${selected.fileName}"`,
+        "Content-Type": contentTypeOf(target.fileName),
+        "Content-Disposition": `attachment; filename="${target.fileName}"`,
         "Cache-Control": "private, no-store",
       },
     });

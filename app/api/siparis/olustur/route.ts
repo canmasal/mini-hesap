@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-import { findPremiumProduct } from "@/data/premiumProducts";
+import { findPurchasable } from "@/data/plans";
 import { getOrderStore } from "@/lib/orders/store";
 import { newOrderId } from "@/lib/orders/tokens";
 import type { Order } from "@/lib/orders/types";
@@ -37,7 +37,7 @@ export async function POST(request: Request) {
   const phone = String(body.phone ?? "").trim();
   const terms = body.terms === true;
 
-  const product = findPremiumProduct(productSlug);
+  const product = findPurchasable(productSlug);
   if (!product) {
     return NextResponse.json(
       { success: false, message: "Ürün bulunamadı." },
