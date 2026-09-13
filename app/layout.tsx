@@ -6,7 +6,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import CookieConsent from "@/components/CookieConsent";
 import AdSenseScript from "@/components/AdSenseScript";
-import GoogleAnalytics from "@/components/GoogleAnalytics";
+import GoogleAnalytics, { GoogleTagHead } from "@/components/GoogleAnalytics";
 import ChatWidget from "@/components/ChatWidget";
 import { ADSENSE_CLIENT_ID as adsenseClientId } from "@/lib/adsense";
 
@@ -145,6 +145,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="tr">
+      <head>
+        <GoogleTagHead />
+      </head>
       <body>
         <a className="skip-link" href="#icerik">
           İçeriğe atla

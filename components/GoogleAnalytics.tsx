@@ -8,48 +8,68 @@ const CONSENT_KEY = "miniHesapCerezTercihi";
 export const GA_MEASUREMENT_ID =
   process.env.NEXT_PUBLIC_GA_ID || "G-CLPRJW4PT";
 
-type GtagWindow = typeof window & {
-  dataLayer?: unknown[];
-  gtag?: (...args: unknown[]) => void;
-};
-
 /**
- * Google Analytics yalnızca ziyaretçi çerezleri kabul ettiğinde yüklenir.
- * Sayfa geçişleri GA4'ün "geliştirilmiş ölçüm" ayarındaki tarayıcı geçmişi
- * olaylarıyla otomatik izlenir.
+ * <head> içine konan Google etiketi (Consent Mode v2).
+ *
+ * Etiket her sayfada HTML'de bulunur; böylece Google'ın kurulum kontrolü
+ * etiketi algılar. Onay varsayılan olarak "reddedildi" başlar: ziyaretçi
+ * çerezleri kabul edene kadar analitik ve reklam çerezi yazılmaz. Daha önce
+ * kabul etmiş ziyaretçide onay, etiket yüklenmeden hemen önce açılır.
  */
+export function GoogleTagHead() {
+  if (!GA_MEASUREMENT_ID) return null;
+
+  const init = `
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('consent', 'default', {
+  ad_storage: 'denied',
+  ad_user_data: 'denied',
+  ad_personalization: 'denied',
+  analytics_storage: 'denied',
+  wait_for_update: 500
+});
+try {
+  if (localStorage.getItem('${CONSENT_KEY}') === 'kabul') {
+    gtag('consent', 'update', {
+      ad_storage: 'granted',
+      ad_user_data: 'granted',
+      ad_personalization: 'granted',
+      analytics_storage: 'granted'
+    });
+  }
+} catch (e) {}
+gtag('js', new Date());
+gtag('config', '${GA_MEASUREMENT_ID}');
+`;
+
+  return (
+    <>
+      {/* Google tag (gtag.js) */}
+      <script dangerouslySetInnerHTML={{ __html: init }} />
+      <script
+        async
+        src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+      />
+    </>
+  );
+}
+
+type GtagWindow = typeof window & { gtag?: (...args: unknown[]) => void };
+
+/** Çerez bandındaki seçimi Google etiketine onay güncellemesi olarak iletir. */
 export default function GoogleAnalytics() {
   useEffect(() => {
-    if (!GA_MEASUREMENT_ID) return;
-
-    function load() {
-      if (document.querySelector('script[data-minihesap-ga="true"]')) return;
-
-      const w = window as GtagWindow;
-      w.dataLayer = w.dataLayer || [];
-      w.gtag = function gtag() {
-        // gtag, arguments nesnesinin kendisini bekler
-        // eslint-disable-next-line prefer-rest-params
-        w.dataLayer!.push(arguments);
-      };
-      w.gtag("js", new Date());
-      w.gtag("config", GA_MEASUREMENT_ID, { anonymize_ip: true });
-
-      const script = document.createElement("script");
-      script.async = true;
-      script.dataset.minihesapGa = "true";
-      script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
-      document.head.appendChild(script);
-    }
-
-    try {
-      if (localStorage.getItem(CONSENT_KEY) === "kabul") load();
-    } catch {
-      /* Site verisi engelliyse onay olayı beklenir */
-    }
-
     function onConsent(event: Event) {
-      if ((event as CustomEvent<string>).detail === "kabul") load();
+      const granted = (event as CustomEvent<string>).detail === "kabul";
+      const value = granted ? "granted" : "denied";
+
+      (window as GtagWindow).gtag?.("consent", "update", {
+        ad_storage: value,
+        ad_user_data: value,
+        ad_personalization: value,
+        analytics_storage: value,
+      });
     }
 
     window.addEventListener("minihesap-cerez", onConsent);
