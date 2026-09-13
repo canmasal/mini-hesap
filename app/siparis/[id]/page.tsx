@@ -100,7 +100,7 @@ export default async function OrderPage({
                 {downloads.map((item, index) => (
                   <a
                     key={item.url}
-                    className={`btn ${index === 0 && !isBundle ? "btn-green" : "btn-ghost"}`}
+                    className={`btn ${index === 0 && !isBundle ? "btn-green" : "btn-dark"}`}
                     href={item.url}
                   >
                     ⬇ {isBundle ? item.label : "Dosyayı İndir"}

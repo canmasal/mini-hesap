@@ -248,7 +248,9 @@ export default function PremiumPage() {
                       className={plan.featured ? "is-featured" : undefined}
                     >
                       <Link
-                        className="plan-compare__cta"
+                        className={`btn plan-compare__cta ${
+                          plan.featured ? "btn-green" : "btn-dark"
+                        }`}
                         href={`/satin-al/${plan.slug}`}
                       >
                         Seç
@@ -311,7 +313,7 @@ export default function PremiumPage() {
 
                   <Link
                     className={`btn plan-card__cta${
-                      plan.featured ? " btn-green" : " btn-ghost"
+                      plan.featured ? " btn-green" : " btn-dark"
                     }`}
                     href={`/satin-al/${plan.slug}`}
                   >
