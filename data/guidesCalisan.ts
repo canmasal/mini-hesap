@@ -437,7 +437,7 @@ export const calisanGuides: Guide[] = [
      İŞSİZLİK MAAŞI
   ======================================================= */
   {
-    slug: "isizlik-maasi-sartlari-ve-hesaplama",
+    slug: "issizlik-maasi-sartlari-ve-hesaplama",
     title: "İşsizlik Maaşı Şartları ve Hesaplama",
     metaTitle: "İşsizlik Maaşı Nasıl Hesaplanır? Şartlar, Süre ve Tutar Rehberi",
     description:
