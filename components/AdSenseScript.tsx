@@ -2,12 +2,12 @@
 
 import { useEffect } from "react";
 
+import { ADSENSE_CLIENT_ID as clientId } from "@/lib/adsense";
+
 const CONSENT_KEY = "miniHesapCerezTercihi";
 
 export default function AdSenseScript() {
   useEffect(() => {
-    const clientId = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID;
-    if (!clientId) return;
 
     function load() {
       if (document.querySelector('script[data-minihesap-adsense="true"]')) return;

@@ -7,10 +7,7 @@ import Footer from "@/components/Footer";
 import CookieConsent from "@/components/CookieConsent";
 import AdSenseScript from "@/components/AdSenseScript";
 import ChatWidget from "@/components/ChatWidget";
-
-const adsenseClientId =
-  process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID ||
-  "ca-pub-5744638110984506";
+import { ADSENSE_CLIENT_ID as adsenseClientId } from "@/lib/adsense";
 
 export const metadata: Metadata = {
   metadataBase: new URL(

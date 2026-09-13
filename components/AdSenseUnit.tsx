@@ -2,6 +2,8 @@
 
 import { useEffect, useRef } from "react";
 
+import { ADSENSE_CLIENT_ID } from "@/lib/adsense";
+
 export default function AdSenseUnit({ slot }: { slot: string }) {
   const ref = useRef<HTMLElement>(null);
 
@@ -17,8 +19,14 @@ export default function AdSenseUnit({ slot }: { slot: string }) {
       }
     }
 
-    if (localStorage.getItem("miniHesapCerezTercihi") === "kabul") {
-      window.setTimeout(pushAd, 250);
+    /* Tarayıcı site verisini engellediğinde localStorage erişimi hata
+       fırlatır; bu durumda onay beklenir, bileşen çökmez. */
+    try {
+      if (localStorage.getItem("miniHesapCerezTercihi") === "kabul") {
+        window.setTimeout(pushAd, 250);
+      }
+    } catch {
+      /* onay olayı beklenir */
     }
 
     function onConsent(event: Event) {
@@ -36,7 +44,7 @@ export default function AdSenseUnit({ slot }: { slot: string }) {
       ref={ref as React.RefObject<HTMLModElement>}
       className="adsbygoogle"
       style={{ display: "block", minHeight: 90, width: "100%" }}
-      data-ad-client={process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID}
+      data-ad-client={ADSENSE_CLIENT_ID}
       data-ad-slot={slot}
       data-ad-format="auto"
       data-full-width-responsive="true"

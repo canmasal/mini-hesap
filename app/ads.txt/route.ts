@@ -1,11 +1,12 @@
-export function GET() {
-  const clientId = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || "";
-  const publisherId = clientId.replace(/^ca-/, "");
-  const body = publisherId
-    ? `google.com, ${publisherId}, f08c47fec0942fa0, DIRECT\n`
-    : "# AdSense publisher ID is not configured yet.\n";
+import { ADSENSE_PUBLISHER_ID } from "@/lib/adsense";
 
-  return new Response(body, {
-    headers: { "Content-Type": "text/plain; charset=utf-8" },
-  });
+/* İçerik yalnızca derleme anındaki kimliğe bağlı; her istekte yeniden
+   üretilmesine gerek yok. */
+export const dynamic = "force-static";
+
+export function GET() {
+  return new Response(
+    `google.com, ${ADSENSE_PUBLISHER_ID}, f08c47fec0942fa0, DIRECT\n`,
+    { headers: { "Content-Type": "text/plain; charset=utf-8" } }
+  );
 }
