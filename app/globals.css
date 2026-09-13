@@ -421,6 +421,43 @@ a.eyebrow:hover { color: var(--brand-dark); text-decoration: underline; }
   border-color: var(--danger-line); background: var(--danger-bg);
 }
 .field-hint { display: block; margin-top: 6px; font-weight: 500; font-size: 13px; color: var(--muted); }
+
+/* ---------- Sınav net tablosu ---------- */
+.exam-table { display: grid; gap: 8px; }
+.exam-row { display: grid; grid-template-columns: minmax(0, 1fr) 76px 76px 64px; gap: 10px; align-items: center; padding: 8px 12px; border: 1px solid var(--line-soft); border-radius: var(--r-sm); background: var(--surface-soft); }
+.exam-row--head { padding-top: 0; padding-bottom: 0; border: 0; background: transparent; color: var(--muted); font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .04em; }
+.exam-row--head span:not(:first-child) { text-align: center; }
+.exam-row__subject { font-weight: 800; line-height: 1.25; }
+.exam-row__subject small { display: block; margin-top: 2px; color: var(--muted); font-size: 12px; font-weight: 600; }
+.exam-row input { width: 100%; min-height: 44px; padding: 8px; border: 1px solid var(--line); border-radius: 10px; background: #fff; font-size: 16px; font-weight: 700; text-align: center; }
+.exam-row input:focus { outline: 0; border-color: var(--brand); box-shadow: 0 0 0 3px rgba(22, 163, 74, .15); }
+.exam-row__net { color: var(--brand-deep); font-size: 17px; text-align: center; font-variant-numeric: tabular-nums; }
+.exam-row.is-error { border-color: var(--danger-line); background: var(--danger-bg); }
+.exam-error { margin: 12px 0 0; color: var(--danger); font-size: 14px; font-weight: 700; }
+.calc-hint { margin-top: 22px; padding: 18px; border: 1px solid var(--line-soft); border-radius: 18px; background: var(--surface-soft); color: var(--muted); font-size: 14px; line-height: 1.7; }
+@media (max-width: 520px) {
+  .exam-row { grid-template-columns: minmax(0, 1fr) 58px 58px 48px; gap: 6px; padding: 8px; }
+  .exam-row__subject { font-size: 14px; }
+  .exam-row__net { font-size: 15px; }
+}
+
+/* ---------- Sonucu paylaş ---------- */
+.share-result { margin-top: 16px; padding: 16px 18px; border: 1px solid var(--brand-line); border-radius: 18px; background: var(--surface-mint); }
+.share-result__title { margin: 0 0 10px; color: var(--brand-deep); font-size: 14px; font-weight: 900; }
+.share-result__actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.share-result__actions .btn { padding: 10px 16px; font-size: 14px; }
+.share-result__status { min-height: 1.2em; margin: 8px 0 0; color: var(--brand-deep); font-size: 13px; font-weight: 700; }
+@media (max-width: 520px) {
+  .share-result__actions { display: grid; grid-template-columns: 1fr 1fr; }
+  .share-result__actions .btn { width: 100%; }
+}
+
+/* ---------- Araç sayfası açıklama bölümleri ---------- */
+.tool-section { margin-top: 20px; padding: 25px; border: 1px solid var(--line); border-radius: 22px; background: #fff; }
+.tool-section h2 { margin: 0 0 12px; font-size: clamp(21px, 2.6vw, 25px); }
+.tool-section p { margin: 0 0 12px; color: var(--ink-soft); line-height: 1.8; }
+.tool-section p:last-child { margin-bottom: 0; }
+.tool-section__list { display: grid; gap: 6px; margin: 0 0 12px; padding-left: 20px; color: var(--ink-soft); line-height: 1.7; }
 .field-error { display: block; margin-top: 6px; font-weight: 700; font-size: 13px; color: var(--danger); }
 
 .result { margin-top: 25px; padding: 24px; border-radius: var(--r-lg); background: var(--surface-mint); }

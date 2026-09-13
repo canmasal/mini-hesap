@@ -26,6 +26,7 @@ export default function ResultRow({
 
   return (
     <div
+      data-share-row=""
       style={{
         display: "flex",
         justifyContent: "space-between",
@@ -40,7 +41,9 @@ export default function ResultRow({
       }}
     >
       <span>
-        <span style={{ color: "var(--muted)", fontSize: 14 }}>{label}</span>
+        <span data-share-label="" style={{ color: "var(--muted)", fontSize: 14 }}>
+          {label}
+        </span>
         {hint && (
           <span
             style={{
@@ -57,6 +60,7 @@ export default function ResultRow({
       </span>
 
       <strong
+        data-share-value=""
         style={{
           color: valueColor,
           fontSize: 18,

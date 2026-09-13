@@ -13,7 +13,16 @@ import AdSlot from "@/components/AdSlot";
 import Breadcrumb from "@/components/Breadcrumb";
 import CalculatorCard from "@/components/CalculatorCard";
 import PremiumCta from "@/components/PremiumCta";
+import ShareResult from "@/components/ShareResult";
 import { guidesForTool } from "@/data/guides";
+import { exams } from "@/data/exams";
+import {
+  newToolSeo,
+  toolSections,
+  type SeoSection,
+  type ToolSeo,
+} from "@/data/calculatorSeo";
+import ExamNetCalculator from "@/components/calculators/ExamNetCalculator";
 
 import NetSalaryCalculator from "@/components/calculators/NetSalaryCalculator";
 import PercentCalculator from "@/components/calculators/PercentCalculator";
@@ -63,7 +72,66 @@ const componentMap: Record<string, ComponentType> = {
   "konut-kredisi": HomeLoanCostCalculator,
   "yakit-maliyeti": FuelCostCalculator,
   bes: PensionFundCalculator,
+
+  /* Sınav araçları tek bileşenden, sınav yapılandırmasıyla üretilir */
+  ...Object.fromEntries(
+    Object.entries(exams).map(([examSlug, exam]) => {
+      const ExamTool = () => <ExamNetCalculator exam={exam} />;
+      ExamTool.displayName = `ExamTool(${examSlug})`;
+      return [examSlug, ExamTool];
+    })
+  ),
 };
+
+/** Aracın SEO içeriği: eski araçlarda sayfa içi kayıt, yenilerde ayrı dosya.
+    Uzun açıklama bölümleri her iki durumda da eklenir. */
+function seoFor(slug: string): ToolSeo | undefined {
+  const base: ToolSeo | undefined = seoContents[slug] ?? newToolSeo[slug];
+  if (!base) return undefined;
+  return { ...base, sections: base.sections ?? toolSections[slug] };
+}
+
+/** Açıklama gövdesi: "- " ile başlayan ardışık satırlar liste olur. */
+function SectionBody({ lines }: { lines: string[] }) {
+  const blocks: { list: boolean; items: string[] }[] = [];
+
+  for (const line of lines) {
+    const isItem = line.startsWith("- ");
+    const text = isItem ? line.slice(2) : line;
+    const last = blocks[blocks.length - 1];
+    if (isItem && last?.list) last.items.push(text);
+    else blocks.push({ list: isItem, items: [text] });
+  }
+
+  return (
+    <>
+      {blocks.map((block, index) =>
+        block.list ? (
+          <ul key={index} className="tool-section__list">
+            {block.items.map((item, i) => (
+              <li key={i} dangerouslySetInnerHTML={{ __html: item }} />
+            ))}
+          </ul>
+        ) : (
+          <p key={index} dangerouslySetInnerHTML={{ __html: block.items[0] }} />
+        )
+      )}
+    </>
+  );
+}
+
+function ToolSections({ sections }: { sections: SeoSection[] }) {
+  return (
+    <>
+      {sections.map((section) => (
+        <article key={section.heading} className="tool-section">
+          <h2>{section.heading}</h2>
+          <SectionBody lines={section.body} />
+        </article>
+      ))}
+    </>
+  );
+}
 
 /* =========================================================
    SEO TİPLERİ
@@ -979,7 +1047,7 @@ function JsonLd({
   slug,
 }: {
   calculator: (typeof calculators)[number];
-  seo: SeoContent;
+  seo: ToolSeo;
   slug: string;
 }) {
   const baseUrl =
@@ -1113,8 +1181,7 @@ export async function generateMetadata({
         item.slug === slug
     );
 
-  const seo =
-    seoContents[slug];
+  const seo = seoFor(slug);
 
   if (
     !calculator ||
@@ -1199,8 +1266,7 @@ export default async function CalculatorPage({
   const Calculator =
     componentMap[slug];
 
-  const seo =
-    seoContents[slug];
+  const seo = seoFor(slug);
 
   if (
     !calculator ||
@@ -1258,7 +1324,15 @@ export default async function CalculatorPage({
           }
         </p>
 
-        <Calculator />
+        <div id="hesaplama">
+          <Calculator />
+        </div>
+
+        <ShareResult
+          toolTitle={calculator.title}
+          path={`/hesaplamalar/${slug}`}
+          targetId="hesaplama"
+        />
 
         {toolGuides.length > 0 && (
           <div className="notice notice-ok">
@@ -1354,6 +1428,10 @@ export default async function CalculatorPage({
               </p>
 
             </article>
+
+            {seo.sections && seo.sections.length > 0 && (
+              <ToolSections sections={seo.sections} />
+            )}
 
             {/* =================================================
                 NASIL HESAPLANIR

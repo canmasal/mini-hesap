@@ -3,6 +3,7 @@ export const categories = [
   { id: "calisan", label: "Çalışan Hakları" },
   { id: "finans", label: "Finans & Kredi" },
   { id: "gunluk", label: "Günlük Hesaplar" },
+  { id: "egitim", label: "Eğitim & Sınav" },
 ] as const;
 
 export type CategoryId = (typeof categories)[number]["id"];
@@ -46,6 +47,78 @@ export const calculators = [
     keywords: ["indirim", "kampanya", "fiyat", "iskonto"],
     description:
       "İndirim oranına göre indirim tutarını ve indirim sonrası ödenecek fiyatı bulun.",
+  },
+
+  /* ---------------- Eğitim & Sınav ---------------- */
+
+  {
+    slug: "tyt-net",
+    icon: "📝",
+    title: "TYT Net Hesaplama",
+    category: "egitim",
+    keywords: ["tyt", "yks", "net", "üniversite sınavı", "obp", "diploma notu"],
+    description:
+      "Türkçe, sosyal, matematik ve fen doğru-yanlış sayılarınızı girin; TYT netinizi ve OBP katkınızı anında hesaplayın.",
+  },
+
+  {
+    slug: "ayt-net",
+    icon: "🎓",
+    title: "AYT Net Hesaplama",
+    category: "egitim",
+    keywords: ["ayt", "yks", "net", "sayısal", "eşit ağırlık", "sözel"],
+    description:
+      "AYT ders bazında doğru-yanlış girin; sayısal, eşit ağırlık ve sözel puan türlerine göre netlerinizi görün.",
+  },
+
+  {
+    slug: "lgs-puan",
+    icon: "🏫",
+    title: "LGS Net ve Puan Hesaplama",
+    category: "egitim",
+    keywords: ["lgs", "liseye geçiş", "net", "puan", "ağırlıklı net", "8. sınıf"],
+    description:
+      "LGS doğru-yanlış sayılarınızla netinizi, katsayılı ağırlıklı netinizi ve tahmini puanınızı hesaplayın.",
+  },
+
+  {
+    slug: "kpss-net",
+    icon: "🏛️",
+    title: "KPSS Net Hesaplama",
+    category: "egitim",
+    keywords: ["kpss", "genel yetenek", "genel kültür", "net", "memurluk"],
+    description:
+      "KPSS Genel Yetenek ve Genel Kültür doğru-yanlış sayılarınızla ders ve oturum bazında netinizi hesaplayın.",
+  },
+
+  {
+    slug: "ales-net",
+    icon: "📚",
+    title: "ALES Net Hesaplama",
+    category: "egitim",
+    keywords: ["ales", "yüksek lisans", "sayısal", "sözel", "net"],
+    description:
+      "ALES sayısal ve sözel doğru-yanlış sayılarınızı girerek netlerinizi hesaplayın.",
+  },
+
+  {
+    slug: "dgs-net",
+    icon: "🎒",
+    title: "DGS Net Hesaplama",
+    category: "egitim",
+    keywords: ["dgs", "dikey geçiş", "önlisans", "sayısal", "sözel", "net"],
+    description:
+      "DGS sayısal ve sözel doğru-yanlış sayılarınızı girerek netlerinizi hesaplayın.",
+  },
+
+  {
+    slug: "yds-puan",
+    icon: "🌍",
+    title: "YDS Puan Hesaplama",
+    category: "egitim",
+    keywords: ["yds", "yökdil", "yabancı dil", "puan", "ingilizce"],
+    description:
+      "YDS doğru sayınızı girin; yanlışların götürmediği sistemde puanınızı anında hesaplayın.",
   },
 
   {
