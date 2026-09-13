@@ -9,6 +9,9 @@ import { plans, findPurchasable } from "@/data/plans";
 import { paymentsEnabled } from "@/lib/payments/provider";
 import { emailEnabled } from "@/lib/mail/send";
 
+/* Listede olmayan adresler gerçek 404 döner (soft 404 önlenir). */
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return [
     ...plans.map((p) => ({ slug: p.slug })),

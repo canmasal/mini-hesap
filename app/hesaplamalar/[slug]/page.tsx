@@ -1082,6 +1082,9 @@ function JsonLd({
    STATIC PARAMS
 ========================================================= */
 
+/* Listede olmayan adresler gerçek 404 döner (soft 404 önlenir). */
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return calculators.map(
     (calculator) => ({

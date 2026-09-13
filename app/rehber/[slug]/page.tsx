@@ -6,6 +6,11 @@ import AdSlot from "@/components/AdSlot";
 import Breadcrumb from "@/components/Breadcrumb";
 import { guides, findGuide } from "@/data/guides";
 
+/* Listede olmayan adresler render edilmeden gerçek 404 döner. Aksi hâlde
+   kök loading.tsx akışı başlattığı için "bulunamadı" sayfası 200 koduyla
+   ve indekslenebilir olarak sunuluyordu (soft 404). */
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return guides.map((g) => ({ slug: g.slug }));
 }

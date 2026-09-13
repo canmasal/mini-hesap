@@ -12,6 +12,9 @@ import {
   money,
 } from "@/lib/calculations/longtail";
 
+/* Listede olmayan adresler gerçek 404 döner (soft 404 önlenir). */
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return longtailPages.map((p) => ({ slug: p.slug }));
 }
