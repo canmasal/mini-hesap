@@ -6,7 +6,7 @@ const CONSENT_KEY = "miniHesapCerezTercihi";
 
 /** Google Analytics 4 ölçüm kimliği; ortam değişkeniyle değiştirilebilir. */
 export const GA_MEASUREMENT_ID =
-  process.env.NEXT_PUBLIC_GA_ID || "G-CLPRJW4PT";
+  process.env.NEXT_PUBLIC_GA_ID || "G-CLPRJW64PT";
 
 /**
  * <head> içine konan Google etiketi (Consent Mode v2).
