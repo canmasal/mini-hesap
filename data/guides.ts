@@ -6,6 +6,9 @@
  * bu sayfalardır.
  */
 
+import { calisanGuides } from "@/data/guidesCalisan";
+import { finansGuides } from "@/data/guidesFinans";
+
 export type GuideSection = {
   heading: string;
   /** Paragraflar; "- " ile başlayan satırlar madde listesi olur */
@@ -35,7 +38,7 @@ export type Guide = {
   related: string[];
 };
 
-export const guides: Guide[] = [
+const coreGuides: Guide[] = [
   /* =======================================================
      KIDEM TAZMİNATI
   ======================================================= */
@@ -559,6 +562,10 @@ export const guides: Guide[] = [
     related: ["kdv-nedir-nasil-hesaplanir", "brutten-nete-maas-hesaplama"],
   },
 ];
+
+/* Diğer hesaplama araçlarının rehberleri ayrı dosyalarda tutulur;
+   dışarıya tek liste olarak sunulur. */
+export const guides: Guide[] = [...coreGuides, ...calisanGuides, ...finansGuides];
 
 export function findGuide(slug: string) {
   return guides.find((g) => g.slug === slug);
