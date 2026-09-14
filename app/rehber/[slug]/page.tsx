@@ -5,6 +5,7 @@ import Link from "next/link";
 import AdSlot from "@/components/AdSlot";
 import Breadcrumb from "@/components/Breadcrumb";
 import { guides, findGuide } from "@/data/guides";
+import { SITE_URL } from "@/lib/site";
 
 /* Listede olmayan adresler render edilmeden gerçek 404 döner. Aksi hâlde
    kök loading.tsx akışı başlattığı için "bulunamadı" sayfası 200 koduyla
@@ -79,7 +80,7 @@ export default async function GuidePage({
 
   if (!guide) notFound();
 
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://minihesap.net";
+  const baseUrl = SITE_URL;
 
   const articleSchema = {
     "@context": "https://schema.org",

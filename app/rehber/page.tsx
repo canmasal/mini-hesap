@@ -5,6 +5,7 @@ import AdSlot from "@/components/AdSlot";
 import Breadcrumb from "@/components/Breadcrumb";
 import { guides } from "@/data/guides";
 import { calculators, categories } from "@/data/calculators";
+import { SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Rehberler",
@@ -13,7 +14,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/rehber" },
 };
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://minihesap.net";
+const baseUrl = SITE_URL;
 
 const listSchema = {
   "@context": "https://schema.org",

@@ -14,6 +14,7 @@ import Breadcrumb from "@/components/Breadcrumb";
 import CalculatorCard from "@/components/CalculatorCard";
 import PremiumCta from "@/components/PremiumCta";
 import ShareResult from "@/components/ShareResult";
+import { SITE_URL } from "@/lib/site";
 import { guidesForTool } from "@/data/guides";
 import { exams } from "@/data/exams";
 import {
@@ -1050,9 +1051,7 @@ function JsonLd({
   seo: ToolSeo;
   slug: string;
 }) {
-  const baseUrl =
-    process.env.NEXT_PUBLIC_SITE_URL ||
-    "https://minihesap.net";
+  const baseUrl = SITE_URL;
 
   const pageUrl =
     `${baseUrl}/hesaplamalar/${slug}`;

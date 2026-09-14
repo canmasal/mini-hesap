@@ -4,6 +4,7 @@ import AdSlot from "@/components/AdSlot";
 import Breadcrumb from "@/components/Breadcrumb";
 import CalculatorExplorer from "@/components/CalculatorExplorer";
 import { calculators } from "@/data/calculators";
+import { SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Hesaplama Araçları",
@@ -18,7 +19,7 @@ export const metadata: Metadata = {
   },
 };
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+const baseUrl = SITE_URL;
 
 const itemListSchema = {
   "@context": "https://schema.org",

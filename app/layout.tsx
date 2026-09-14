@@ -9,12 +9,10 @@ import AdSenseScript from "@/components/AdSenseScript";
 import GoogleAnalytics, { GoogleTagHead } from "@/components/GoogleAnalytics";
 import ChatWidget from "@/components/ChatWidget";
 import { ADSENSE_CLIENT_ID as adsenseClientId } from "@/lib/adsense";
+import { SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ||
-      "https://minihesap.net"
-  ),
+  metadataBase: new URL(SITE_URL),
 
   title: {
     default:
@@ -77,9 +75,7 @@ export const metadata: Metadata = {
     description:
       "Günlük hayattaki hesaplamalarınızı hızlı ve kolay şekilde yapın.",
 
-    url:
-      process.env.NEXT_PUBLIC_SITE_URL ||
-      "https://minihesap.net",
+    url: SITE_URL,
   },
 
   twitter: {
@@ -119,8 +115,7 @@ export const viewport: Viewport = {
 };
 
 /* Site geneli arama kutusu + kuruluş şeması */
-const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://minihesap.net";
+const siteUrl = SITE_URL;
 
 const websiteSchema = {
   "@context": "https://schema.org",

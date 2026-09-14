@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 
+import { ENV_SITE_URL } from "@/lib/site";
 import { getOrderStore } from "@/lib/orders/store";
 import { safeEqual } from "@/lib/orders/tokens";
 import { DOWNLOAD_WINDOW_DAYS } from "@/lib/orders/types";
@@ -89,7 +90,7 @@ async function handle(request: Request) {
   });
 
   const baseUrl =
-    process.env.NEXT_PUBLIC_SITE_URL ?? new URL(request.url).origin;
+    ENV_SITE_URL ?? new URL(request.url).origin;
 
   const mail = await sendOrderEmail(
     updated ?? order,

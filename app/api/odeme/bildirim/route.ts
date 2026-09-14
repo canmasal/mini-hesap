@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 
+import { ENV_SITE_URL } from "@/lib/site";
 import { getOrderStore } from "@/lib/orders/store";
 import { DOWNLOAD_WINDOW_DAYS } from "@/lib/orders/types";
 import { activeProvider } from "@/lib/payments/provider";
@@ -96,7 +97,7 @@ async function handle(request: Request) {
   /* Onay e-postası. Gönderilemezse sipariş yine de geçerlidir;
      müşteri sipariş sayfasından dosyasına ulaşabilir. */
   const baseUrl =
-    process.env.NEXT_PUBLIC_SITE_URL ?? new URL(request.url).origin;
+    ENV_SITE_URL ?? new URL(request.url).origin;
 
   await sendOrderEmail(updated ?? order, `${baseUrl}/siparis/${order.id}`);
 
@@ -116,7 +117,7 @@ function redirectOrJson(request: Request, orderId: string, ok: boolean) {
   }
 
   const baseUrl =
-    process.env.NEXT_PUBLIC_SITE_URL ?? new URL(request.url).origin;
+    ENV_SITE_URL ?? new URL(request.url).origin;
 
   const target = ok
     ? `${baseUrl}/siparis/${orderId}`

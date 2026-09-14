@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 
+import { ENV_SITE_URL } from "@/lib/site";
 import { findPurchasable } from "@/data/plans";
 import { getOrderStore } from "@/lib/orders/store";
 import { newOrderId } from "@/lib/orders/tokens";
@@ -72,7 +73,7 @@ export async function POST(request: Request) {
   }
 
   const baseUrl =
-    process.env.NEXT_PUBLIC_SITE_URL ?? new URL(request.url).origin;
+    ENV_SITE_URL ?? new URL(request.url).origin;
 
   const order: Order = {
     id: newOrderId(),

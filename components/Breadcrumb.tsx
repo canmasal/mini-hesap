@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+import { SITE_URL } from "@/lib/site";
+
 export type Crumb = {
   label: string;
   href?: string;
@@ -10,8 +12,7 @@ export type Crumb = {
  * Son öğe her zaman geçerli sayfadır ve link içermez.
  */
 export default function Breadcrumb({ items }: { items: Crumb[] }) {
-  const baseUrl =
-    process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+  const baseUrl = SITE_URL;
 
   const schema = {
     "@context": "https://schema.org",

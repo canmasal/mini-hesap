@@ -10,6 +10,7 @@ import {
   planListValue,
   planSavingPercent,
 } from "@/data/plans";
+import { SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Premium Paketler — Standart, Plus ve Pro",
@@ -18,7 +19,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/premium" },
 };
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+const baseUrl = SITE_URL;
 
 /* ---------------------------------------------------------------
    Sayfa iceriginin veriden turetilen parcalari
