@@ -1,80 +1,100 @@
 import type { MetadataRoute } from "next";
 
-import { calculators } from "@/data/calculators";
-import { premiumProducts } from "@/data/premiumProducts";
-import { guides } from "@/data/guides";
-import { longtailPages } from "@/data/longtail";
-
-const baseUrl =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://minihesap.net";
+const baseUrl = "https://minihesap.net";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
 
-  const staticPages: MetadataRoute.Sitemap = ([
-    { url: baseUrl, changeFrequency: "weekly", priority: 1 },
-    { url: `${baseUrl}/hesaplamalar`, changeFrequency: "weekly", priority: 0.9 },
-    { url: `${baseUrl}/borc-takip`, changeFrequency: "weekly", priority: 0.8 },
-    { url: `${baseUrl}/on-muhasebe`, changeFrequency: "weekly", priority: 0.8 },
-    { url: `${baseUrl}/premium`, changeFrequency: "weekly", priority: 0.8 },
-    { url: `${baseUrl}/rehber`, changeFrequency: "weekly", priority: 0.9 },
-    { url: `${baseUrl}/program-talebi`, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${baseUrl}/pazarlama-iletisimi`, changeFrequency: "yearly", priority: 0.2 },
-    { url: `${baseUrl}/hakkimizda`, changeFrequency: "monthly", priority: 0.5 },
-    { url: `${baseUrl}/iletisim`, changeFrequency: "monthly", priority: 0.4 },
-    { url: `${baseUrl}/gizlilik`, changeFrequency: "yearly", priority: 0.2 },
-    { url: `${baseUrl}/on-bilgilendirme`, changeFrequency: "yearly", priority: 0.2 },
-    { url: `${baseUrl}/mesafeli-satis-sozlesmesi`, changeFrequency: "yearly", priority: 0.2 },
-    { url: `${baseUrl}/iade-kosullari`, changeFrequency: "yearly", priority: 0.3 },
+  return [
     {
-      url: `${baseUrl}/kullanim-sartlari`,
-      changeFrequency: "yearly",
-      priority: 0.2,
+      url: baseUrl,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 1,
     },
-  ] satisfies Omit<MetadataRoute.Sitemap[number], "lastModified">[]).map(
-    (page) => ({ ...page, lastModified: now })
-  );
-
-  /* Hesaplama sayfaları tek kaynaktan (data/calculators) türetilir */
-  const calculatorPages: MetadataRoute.Sitemap = calculators.map(
-    (calculator) => ({
-      url: `${baseUrl}/hesaplamalar/${calculator.slug}`,
+    {
+      url: `${baseUrl}/hesaplamalar`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/borc-takip`,
       lastModified: now,
       changeFrequency: "weekly",
       priority: 0.8,
-    })
-  );
-
-  /* Kendi tanıtım sayfası olan premium ürünler */
-  const premiumPages: MetadataRoute.Sitemap = premiumProducts
-    .filter((product) => product.landingPage)
-    .map((product) => ({
-      url: `${baseUrl}${product.landingPage}`,
+    },
+    {
+      url: `${baseUrl}/on-muhasebe`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/premium`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/rehber`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/program-talebi`,
       lastModified: now,
       changeFrequency: "monthly",
       priority: 0.7,
-    }));
-
-  const guidePages: MetadataRoute.Sitemap = guides.map((g) => ({
-    url: `${baseUrl}/rehber/${g.slug}`,
-    lastModified: new Date(g.updated),
-    changeFrequency: "monthly",
-    priority: 0.8,
-  }));
-
-  /* Uzun kuyruk sayfalari: tek bir soruya cevap veren hazir hesaplar */
-  const longtail: MetadataRoute.Sitemap = longtailPages.map((p) => ({
-    url: `${baseUrl}/hesapla/${p.slug}`,
-    lastModified: now,
-    changeFrequency: "monthly",
-    priority: 0.6,
-  }));
-
-  return [
-    ...staticPages,
-    ...calculatorPages,
-    ...premiumPages,
-    ...guidePages,
-    ...longtail,
+    },
+    {
+      url: `${baseUrl}/pazarlama-iletisimi`,
+      lastModified: now,
+      changeFrequency: "yearly",
+      priority: 0.2,
+    },
+    {
+      url: `${baseUrl}/hakkimizda`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.5,
+    },
+    {
+      url: `${baseUrl}/iletisim`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.4,
+    },
+    {
+      url: `${baseUrl}/gizlilik`,
+      lastModified: now,
+      changeFrequency: "yearly",
+      priority: 0.2,
+    },
+    {
+      url: `${baseUrl}/on-bilgilendirme`,
+      lastModified: now,
+      changeFrequency: "yearly",
+      priority: 0.2,
+    },
+    {
+      url: `${baseUrl}/mesafeli-satis-sozlesmesi`,
+      lastModified: now,
+      changeFrequency: "yearly",
+      priority: 0.2,
+    },
+    {
+      url: `${baseUrl}/iade-kosullari`,
+      lastModified: now,
+      changeFrequency: "yearly",
+      priority: 0.3,
+    },
+    {
+      url: `${baseUrl}/kullanim-sartlari`,
+      lastModified: now,
+      changeFrequency: "yearly",
+      priority: 0.2,
+    },
   ];
 }
