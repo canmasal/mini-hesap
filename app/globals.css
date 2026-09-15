@@ -452,6 +452,24 @@ a.eyebrow:hover { color: var(--brand-dark); text-decoration: underline; }
   .share-result__actions .btn { width: 100%; }
 }
 
+/* ---------- Long-tail hesap sayfaları ---------- */
+.lt-page { max-width: 820px; }
+.lt-answer { margin: 12px 0 0; padding: 14px 16px; border-left: 4px solid var(--brand); border-radius: 0 var(--r-sm) var(--r-sm) 0; background: var(--surface-mint); color: var(--ink); font-size: 17px; line-height: 1.6; }
+.lt-hero { margin-top: 18px; padding: 22px 24px; border: 1px solid var(--brand-line); border-radius: var(--r-lg); background: #fff; }
+.lt-hero span { display: block; color: var(--muted); font-size: 14px; font-weight: 700; }
+.lt-hero b { display: block; margin-top: 6px; color: var(--brand-deep); font-size: clamp(28px, 6vw, 42px); font-weight: 900; font-variant-numeric: tabular-nums; }
+.lt-section { margin-top: 30px; }
+.lt-section h2 { margin: 0 0 10px; font-size: clamp(20px, 2.6vw, 24px); }
+.lt-section p { color: var(--ink-soft); line-height: 1.8; }
+.lt-section p a { color: var(--brand-dark); font-weight: 700; text-decoration: underline; }
+.lt-section .rates-table td { text-align: right; }
+.lt-cta { margin-top: 28px; padding: 22px; border: 1px solid var(--brand-line); border-radius: var(--r-lg); background: var(--surface-mint); text-align: center; }
+.lt-cta h2 { margin: 0 0 6px; font-size: 19px; }
+.lt-cta p { margin: 0 0 14px; color: var(--muted); line-height: 1.7; }
+.lt-links { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px; margin: 12px 0 0; padding: 0; list-style: none; }
+.lt-links a { display: block; padding: 12px 14px; border: 1px solid var(--line); border-radius: var(--r-sm); background: #fff; color: var(--ink-soft); font-size: 14px; font-weight: 600; }
+.lt-links a:hover { border-color: var(--brand); color: var(--brand-dark); }
+
 /* ---------- Güncel rakamlar sayfası ---------- */
 .rates-page { max-width: 900px; }
 .rates-verified { display: inline-block; margin: 6px 0 0; padding: 8px 14px; border: 1px solid var(--brand-line); border-radius: var(--r-pill); background: var(--surface-mint); color: var(--brand-deep); font-size: 14px; }

@@ -20,9 +20,6 @@ import {
   PENSION_STATE_CONTRIBUTION,
   tl,
 } from "@/data/parameters";
-
-/** 0.175 → "%17,5" */
-const pctTr = (rate: number) => `%${(rate * 100).toLocaleString("tr-TR")}`;
 import { guidesForTool } from "@/data/guides";
 import { exams } from "@/data/exams";
 import {
@@ -56,6 +53,9 @@ import FuelCostCalculator from "@/components/calculators/FuelCostCalculator";
 import PensionFundCalculator from "@/components/calculators/PensionFundCalculator";
 import DayCountCalculator from "@/components/calculators/DayCountCalculator";
 import GpaCalculator from "@/components/calculators/GpaCalculator";
+
+/** 0.175 → "%17,5" */
+const pctTr = (rate: number) => `%${(rate * 100).toLocaleString("tr-TR")}`;
 
 /* =========================================================
    HESAPLAMA BİLEŞENLERİ
@@ -213,9 +213,9 @@ const seoContents: Record<string, SeoContent> = {
 
   yuzde: {
     title:
-      "Yüzde Hesaplama | Yüzde Artış ve Azalış Hesapla",
+      "Yüzde Hesaplama | Yüzde Kaç, Artış, Azalış",
     description:
-      "Yüzde hesaplama aracı ile bir sayının yüzdesini, yüzde artışını ve yüzde azalışını hızlıca hesaplayın.",
+      "Yüzde hesaplama: bir sayının yüzdesi kaç, A sayısı B'nin yüzde kaçı, yüzde artış ve azalış. Formüller ve örneklerle anında, ücretsiz hesaplayın.",
     intro:
       "Yüzde hesaplama aracıyla günlük hayatta sık kullanılan yüzde işlemlerini hızlı ve anlaşılır şekilde yapabilirsiniz.",
     howItWorks: [
@@ -254,7 +254,7 @@ const seoContents: Record<string, SeoContent> = {
     title:
       "KDV Hesaplama 2026 | KDV Dahil ve Hariç Hesapla",
     description:
-      "KDV hesaplama aracı ile KDV dahil ve KDV hariç tutarı, KDV miktarını ve genel toplamı hesaplayın.",
+      "KDV hesaplama 2026: %1, %10 ve %20 oranlarıyla KDV dahil ve hariç tutarı, KDV miktarını anında bulun. KDV ayırma formülü, örnekler ve sık yapılan hatalar.",
     intro:
       "KDV hesaplama aracımız ile bir tutarın KDV dahil veya KDV hariç karşılığını kolayca hesaplayabilirsiniz.",
     howItWorks: [
@@ -291,9 +291,9 @@ const seoContents: Record<string, SeoContent> = {
 
   indirim: {
     title:
-      "İndirim Hesaplama | İndirimli Fiyat Hesapla",
+      "İndirim Hesaplama | Yüzde İndirimli Fiyat",
     description:
-      "İndirim hesaplama aracı ile indirim oranını, indirim tutarını ve indirim sonrası fiyatı hesaplayın.",
+      "İndirim hesaplama: yüzde indirimli fiyatı, indirim tutarını ve indirim oranını hesaplayın. Ardışık indirimlerin ve “3 al 2 öde” kampanyalarının gerçek oranı.",
     intro:
       "Normal fiyatı ve indirim oranını girerek indirim miktarını ve ödenecek son fiyatı kolayca bulabilirsiniz.",
     howItWorks: [
@@ -330,9 +330,9 @@ const seoContents: Record<string, SeoContent> = {
 
   "kira-artisi": {
     title:
-      "Kira Artış Hesaplama 2026 | Yeni Kira Hesapla",
+      "Kira Artışı Hesaplama 2026 | Yasal Zam Sınırı",
     description:
-      "Kira artış hesaplama aracı ile mevcut kira ve girdiğiniz artış oranına göre yeni kira tutarını hesaplayın.",
+      "Kira artışı hesaplama 2026: mevcut kira ve 12 aylık TÜFE ortalamasıyla yasal üst sınıra göre yeni kiranızı hesaplayın. 5 yıl kuralı ve örnekler.",
     intro:
       "Mevcut kira tutarı ve artış oranını girerek yeni aylık kira tutarını ve yıllık farkı hesaplayabilirsiniz.",
     howItWorks: [
@@ -613,7 +613,7 @@ const seoContents: Record<string, SeoContent> = {
 
   "kredi-borc": {
     title:
-      "Kredi Borç Hesaplama 2026 | Aylık Taksit",
+      "Kredi Hesaplama 2026 | Taksit ve Ödeme Planı",
     description:
       "Kredi borç hesaplama aracı ile kredi tutarı, aylık faiz ve vade bilgilerine göre aylık taksit, toplam faiz, toplam geri ödeme ve ödeme planını hesaplayın.",
     intro:
@@ -705,7 +705,7 @@ seoContents.emeklilik = {
 ======================================================= */
 
 seoContents.mevduat = {
-  title: "Vadeli Mevduat Hesaplama 2026 | Net Getiri",
+  title: "Mevduat Faizi Hesaplama 2026 | Net Getiri",
   description:
     "Anapara, yıllık faiz oranı ve vadeye göre stopaj düşülmüş net mevduat getirinizi ve vade sonu toplam tutarınızı hesaplayın.",
   intro:
@@ -1040,7 +1040,7 @@ seoContents.bes = {
     {
       question: "BES ile mevduat arasındaki fark nedir?",
       answer:
-        "Mevduatta faiz oranı baştan bellidir ve getiriniz garantilidir. BES'te getiri seçtiğiniz fonun performansına bağlıdır, garanti yoktur; buna karşılık %30 devlet katkısı ve uzun vadeli birikim disiplini avantajı sağlar.",
+        "Mevduatta faiz oranı baştan bellidir ve getiriniz garantilidir. BES'te getiri seçtiğiniz fonun performansına bağlıdır, garanti yoktur; buna karşılık %20 devlet katkısı (2026) ve uzun vadeli birikim disiplini avantajı sağlar.",
     },
     {
       question: "BES kesintileri nelerdir?",

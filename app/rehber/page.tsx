@@ -8,9 +8,9 @@ import { calculators, categories } from "@/data/calculators";
 import { SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Rehberler",
+  title: "Hesaplama Rehberleri 2026: Maaş, Vergi",
   description:
-    "Net maaş, kıdem tazminatı, KDV, kredi, emeklilik, kira artışı ve diğer hesaplama araçlarını açıklayan örnekli rehberler.",
+    "Asgari ücret, kıdem tazminatı, gelir vergisi dilimleri, KDV, kredi, BES ve emeklilik hesapları. 2026 resmî rakamlarıyla örnekli, soru-cevap rehberler.",
   alternates: { canonical: "/rehber" },
 };
 

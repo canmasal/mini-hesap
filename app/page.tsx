@@ -5,14 +5,14 @@ import { calculators } from "@/data/calculators";
 import AdSlot from "@/components/AdSlot";
 
 export const metadata = {
-  title: "Ücretsiz Online Hesaplama Araçları",
+  title: { absolute: "Hesaplama Araçları 2026: Maaş, Tazminat, KDV | MiniHesap" },
   description:
-    "Net maaş, kıdem ve ihbar tazminatı, KDV, yüzde, kira artışı, kredi ve daha fazlasını ücretsiz hesaplayın.",
+    "Ücretsiz online hesaplama araçları: net maaş, kıdem tazminatı, KDV, yüzde, kredi, TYT ve LGS net hesaplama. 2026 resmî rakamlarıyla, üyeliksiz ve anında.",
   alternates: { canonical: "/" },
   openGraph: {
-    title: "Ücretsiz Online Hesaplama Araçları | MiniHesap",
+    title: "Hesaplama Araçları 2026: Maaş, Tazminat, KDV | MiniHesap",
     description:
-      "Günlük hayat ve finans için hızlı, anlaşılır ve mobil uyumlu hesaplama araçları.",
+      "Net maaş, kıdem tazminatı, KDV, kredi, TYT ve LGS net hesaplama. 2026 resmî rakamlarıyla ücretsiz araçlar.",
     type: "website" as const,
   },
 };

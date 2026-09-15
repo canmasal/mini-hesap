@@ -91,9 +91,25 @@ export function findLongtail(slug: string) {
   return longtailPages.find((p) => p.slug === slug);
 }
 
-/** Aynı türden komşu sayfalar (iç linkleme için) */
+/** Sayfanın ana tutarı (kredide tutar, diğerlerinde tek değer) */
+const magnitude = (p: LongtailPage) => p.input.gross ?? p.input.amount ?? 0;
+
+/**
+ * Aynı türden en yakın tutarlı sayfalar (iç linkleme için).
+ * Her sayfa kendi çevresindeki tutarlara bağlanır; böylece tüm sayfalarda
+ * aynı bağlantı listesi tekrar etmez.
+ */
 export function neighbours(page: LongtailPage, limit = 6) {
+  const base = magnitude(page);
   return longtailPages
     .filter((p) => p.kind === page.kind && p.slug !== page.slug)
-    .slice(0, limit);
+    .map((p) => ({
+      p,
+      distance:
+        Math.abs(Math.log(magnitude(p) / base)) +
+        (p.kind === "kredi" ? Math.abs((p.input.months - page.input.months) / 48) : 0),
+    }))
+    .sort((a, b) => a.distance - b.distance)
+    .slice(0, limit)
+    .map(({ p }) => p);
 }

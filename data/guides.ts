@@ -269,7 +269,7 @@ const coreGuides: Guide[] = [
     title: "İhbar Tazminatı ve İhbar Süresi",
     metaTitle: "İhbar Tazminatı Hesaplama 2026 Rehberi",
     description:
-      "İhbar süreleri, ihbar tazminatı hesaplama, kimin kime ödeyeceği ve kıdem tazminatından farkları.",
+      "İhbar süreleri (2, 4, 6, 8 hafta), ihbar tazminatı nasıl hesaplanır, vergisi ne kadar, kimin kime ödeyeceği ve kıdem tazminatından farkları örnekle.",
     category: "Çalışan Hakları",
     icon: "📋",
     published: "2026-09-11",
@@ -367,7 +367,7 @@ const coreGuides: Guide[] = [
     title: "KDV Nedir, Nasıl Hesaplanır?",
     metaTitle: "KDV Nedir, Nasıl Hesaplanır? 2026 Rehber",
     description:
-      "KDV oranları, KDV dahil ve hariç hesaplama, ödenecek ve devreden KDV, KDV beyannamesi mantığı.",
+      "KDV nedir, nasıl hesaplanır? %1, %10, %20 oranları, KDV dahil ve hariç hesaplama formülü, ödenecek ve devreden KDV, beyanname mantığı örneklerle.",
     category: "Vergi",
     icon: "🧮",
     published: "2026-09-11",
