@@ -22,6 +22,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     page("/rehber", "weekly", 0.9),
     /* Resmî rakamlar sayfası: rakam değiştikçe güncellenir */
     page("/guncel-rakamlar", "weekly", 0.9),
+    /* Canlı piyasa sayfaları: fiyatlar dakikalık yenilenir */
+    page("/altin-fiyatlari", "hourly", 0.9),
+    page("/doviz-kurlari", "hourly", 0.9),
 
     /* Hesaplama araçları: sitenin ana arama trafiği bu sayfalardan gelir */
     ...calculators.map((c) => page(`/hesaplamalar/${c.slug}`, "monthly", 0.9)),

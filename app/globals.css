@@ -791,3 +791,42 @@ a.eyebrow:hover { color: var(--brand-dark); text-decoration: underline; }
   .calc-box { box-shadow: none; border-color: #ccc; }
 }
 
+
+/* ============ Canlı altın / döviz panosu ============ */
+.board { overflow: hidden; border: 1px solid #1f3a2b; border-radius: var(--r-lg); background: var(--night); color: #e8f5ec; box-shadow: var(--shadow-md); }
+.board-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 18px; border-bottom: 1px solid #1f3a2b; }
+.board-head > div:first-child { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.board-live { display: inline-flex; align-items: center; gap: 7px; color: #4ade80; font-size: 12px; font-weight: 900; letter-spacing: .08em; }
+.board-live i { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; animation: board-pulse 1.6s ease-in-out infinite; }
+@keyframes board-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, .6); } 50% { box-shadow: 0 0 0 6px rgba(34, 197, 94, 0); } }
+.board-time { color: #9fb8a8; font-size: 13px; }
+.board-tabs { display: inline-flex; padding: 3px; border-radius: var(--r-pill); background: #13271c; }
+.board-tabs button { padding: 7px 16px; border: 0; border-radius: var(--r-pill); background: transparent; color: #9fb8a8; font-weight: 800; cursor: pointer; }
+.board-tabs button[aria-selected="true"] { background: var(--brand); color: #fff; }
+.board-warn { margin: 0; padding: 10px 18px; background: #3b2f0b; color: #fde68a; font-size: 13px; }
+.board-empty { margin: 0; padding: 28px 18px; color: #9fb8a8; text-align: center; }
+.board-scroll { overflow-x: auto; }
+.board-table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.board-table th, .board-table td { padding: 12px 18px; border-bottom: 1px solid #16301f; white-space: nowrap; }
+.board-table thead th { color: #7d9888; font-size: 11px; font-weight: 800; letter-spacing: .06em; text-align: right; text-transform: uppercase; }
+.board-table thead th:first-child, .board-table tbody th { text-align: left; }
+.board-table tbody tr:last-child th, .board-table tbody tr:last-child td { border-bottom: 0; }
+.board-table tbody tr:hover { background: #12241a; }
+.board-table td { text-align: right; font-size: 15px; font-weight: 700; }
+.board-name { display: block; color: #fff; font-size: 15px; font-weight: 800; }
+.board-code { display: block; margin-top: 2px; color: #6b8576; font-size: 11px; font-weight: 700; }
+.board-sell { color: #facc15; }
+.chg-up { color: #4ade80 !important; }
+.chg-down { color: #f87171 !important; }
+.chg-flat { color: #9fb8a8 !important; }
+.board-table tr.flash-up td { animation: flash-up 2.4s ease-out; }
+.board-table tr.flash-down td { animation: flash-down 2.4s ease-out; }
+@keyframes flash-up { 0% { background: rgba(34, 197, 94, .35); } 100% { background: transparent; } }
+@keyframes flash-down { 0% { background: rgba(239, 68, 68, .35); } 100% { background: transparent; } }
+@media (max-width: 560px) {
+  .board-table th, .board-table td { padding: 10px 12px; }
+  .board-table td { font-size: 14px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .board-live i, .board-table tr.flash-up td, .board-table tr.flash-down td { animation: none; }
+}
