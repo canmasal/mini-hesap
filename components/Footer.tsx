@@ -30,6 +30,7 @@ export default function Footer() {
           <Link href="/on-muhasebe">Ön Muhasebe Takip</Link>
           <Link href="/premium">Premium Şablonlar</Link>
           <Link href="/rehber">Rehberler</Link>
+          <Link href="/guncel-rakamlar">2026 Güncel Rakamlar</Link>
           
         </nav>
 

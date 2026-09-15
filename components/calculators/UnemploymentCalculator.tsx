@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 
+import { MINIMUM_WAGE } from "@/data/parameters";
 import ResultRow, { money } from "./ResultRow";
 
 /**
@@ -28,7 +29,7 @@ export default function UnemploymentCalculator() {
   const [premiumDays, setPremiumDays] = useState("600");
   const [last120, setLast120] = useState("evet");
   /** Dönemin brüt asgari ücreti — üst sınır bundan hesaplanır */
-  const [minWage, setMinWage] = useState("26005.50");
+  const [minWage, setMinWage] = useState(String(MINIMUM_WAGE.gross));
   const [stampRate, setStampRate] = useState("0.759");
 
   const result = useMemo(() => {

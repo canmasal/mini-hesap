@@ -8,6 +8,7 @@
 
 import { calisanGuides } from "@/data/guidesCalisan";
 import { finansGuides } from "@/data/guidesFinans";
+import { guncelGuides } from "@/data/guidesGuncel";
 
 export type GuideSection = {
   heading: string;
@@ -565,7 +566,12 @@ const coreGuides: Guide[] = [
 
 /* Diğer hesaplama araçlarının rehberleri ayrı dosyalarda tutulur;
    dışarıya tek liste olarak sunulur. */
-export const guides: Guide[] = [...coreGuides, ...calisanGuides, ...finansGuides];
+export const guides: Guide[] = [
+  ...guncelGuides,
+  ...coreGuides,
+  ...calisanGuides,
+  ...finansGuides,
+];
 
 export function findGuide(slug: string) {
   return guides.find((g) => g.slug === slug);

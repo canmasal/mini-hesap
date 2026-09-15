@@ -452,6 +452,28 @@ a.eyebrow:hover { color: var(--brand-dark); text-decoration: underline; }
   .share-result__actions .btn { width: 100%; }
 }
 
+/* ---------- Güncel rakamlar sayfası ---------- */
+.rates-page { max-width: 900px; }
+.rates-verified { display: inline-block; margin: 6px 0 0; padding: 8px 14px; border: 1px solid var(--brand-line); border-radius: var(--r-pill); background: var(--surface-mint); color: var(--brand-deep); font-size: 14px; }
+.rates-summary { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 26px; }
+.rates-summary > div { padding: 16px; border: 1px solid var(--line); border-radius: var(--r-md); background: #fff; }
+.rates-summary span { display: block; color: var(--muted); font-size: 12px; font-weight: 700; }
+.rates-summary b { display: block; margin-top: 6px; color: var(--brand-deep); font-size: 18px; font-variant-numeric: tabular-nums; }
+.rates-block { margin-top: 34px; }
+.rates-block h2 { margin: 0 0 12px; font-size: clamp(21px, 2.6vw, 26px); }
+.rates-table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--r-md); background: #fff; }
+.rates-table { width: 100%; border-collapse: collapse; font-size: 15px; }
+.rates-table th, .rates-table td { padding: 12px 16px; border-bottom: 1px solid var(--line-soft); text-align: left; }
+.rates-table thead th { background: var(--surface-soft); color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .04em; }
+.rates-table tbody th { font-weight: 600; color: var(--ink-soft); }
+.rates-table td { text-align: right; font-weight: 800; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.rates-table tr:last-child th, .rates-table tr:last-child td { border-bottom: 0; }
+.rates-table tr.is-total th, .rates-table tr.is-total td { background: var(--surface-mint); color: var(--brand-deep); }
+.rates-source { margin: 8px 0 0; color: var(--muted); font-size: 13px; }
+.rates-source a, .rates-links a { color: var(--brand-dark); font-weight: 700; text-decoration: underline; }
+.rates-links { margin: 6px 0 0; font-size: 14px; }
+@media (max-width: 720px) { .rates-summary { grid-template-columns: repeat(2, 1fr); } }
+
 /* ---------- Araç sayfası açıklama bölümleri ---------- */
 .tool-section { margin-top: 20px; padding: 25px; border: 1px solid var(--line); border-radius: 22px; background: #fff; }
 .tool-section h2 { margin: 0 0 12px; font-size: clamp(21px, 2.6vw, 25px); }

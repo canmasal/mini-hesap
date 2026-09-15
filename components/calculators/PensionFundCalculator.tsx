@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 
+import { MINIMUM_WAGE } from "@/data/parameters";
 import ResultRow, { money, percent } from "./ResultRow";
 
 /**
@@ -24,7 +25,7 @@ export default function PensionFundCalculator() {
   const [years, setYears] = useState("10");
   const [annualReturn, setAnnualReturn] = useState("35");
   const [retire, setRetire] = useState("hayir");
-  const [minWage, setMinWage] = useState("26005.50");
+  const [minWage, setMinWage] = useState(String(MINIMUM_WAGE.gross));
 
   const result = useMemo(() => {
     const m = Number(monthly);

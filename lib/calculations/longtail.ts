@@ -5,21 +5,8 @@
  * ziyaretçiye hazır sonuç gider.
  */
 
-/* 2026 dönemi varsayılan parametreleri.
-   Değiştiğinde yalnızca burası güncellenir. */
-export const PARAMS = {
-  sgkIsciOrani: 0.14,
-  issizlikIsciOrani: 0.01,
-  damgaOrani: 0.00759,
-  /** Basitleştirilmiş: ilk dilim oranı */
-  gelirVergisiOrani: 0.15,
-  /** Aylık gelir vergisi istisnası (asgari ücret istisnası) */
-  gelirVergisiIstisnasi: 3315.7,
-  /** Aylık damga vergisi istisnası */
-  damgaIstisnasi: 197.38,
-  /** SGK tavanı (aylık) */
-  sgkTavani: 195041.4,
-};
+import { RATES } from "@/data/parameters";
+import { calculateNetSalary } from "@/lib/calculations/netSalary";
 
 export type NetSalaryBreakdown = {
   gross: number;
@@ -33,37 +20,35 @@ export type NetSalaryBreakdown = {
   employerCost: number;
 };
 
+/**
+ * Ocak ayı net maaş dökümü. Asıl Net Maaş hesaplayıcısıyla aynı motoru
+ * (2026 vergi dilimleri, asgari ücret istisnaları, SGK tavanı) kullanır;
+ * böylece long-tail sayfa ile araç aynı sonucu verir.
+ */
 export function netSalaryOf(gross: number): NetSalaryBreakdown {
-  const base = Math.min(gross, PARAMS.sgkTavani);
+  const r = calculateNetSalary({
+    grossSalary: gross,
+    month: 1,
+    previousCumulativeTaxBase: 0,
+  });
 
-  const sgk = base * PARAMS.sgkIsciOrani;
-  const unemployment = base * PARAMS.issizlikIsciOrani;
-
-  const taxBase = gross - sgk - unemployment;
-
-  const incomeTax = Math.max(
-    taxBase * PARAMS.gelirVergisiOrani - PARAMS.gelirVergisiIstisnasi,
-    0
-  );
-
-  const stampTax = Math.max(
-    gross * PARAMS.damgaOrani - PARAMS.damgaIstisnasi,
-    0
-  );
-
-  const totalDeduction = sgk + unemployment + incomeTax + stampTax;
+  const totalDeduction =
+    r.sgkEmployee + r.unemploymentEmployee + r.incomeTax + r.stampTax;
 
   return {
     gross,
-    sgk,
-    unemployment,
-    taxBase,
-    incomeTax,
-    stampTax,
+    sgk: r.sgkEmployee,
+    unemployment: r.unemploymentEmployee,
+    taxBase: r.incomeTaxBase,
+    incomeTax: r.incomeTax,
+    stampTax: r.stampTax,
     totalDeduction,
-    net: gross - totalDeduction,
-    /* İşveren payları: SGK %20,5 + işsizlik %2 */
-    employerCost: gross + base * 0.205 + base * 0.02,
+    net: r.netSalary,
+    /* İşveren payları: SGK (2 puan indirimli) + işsizlik, SGK tavanına kadar */
+    employerCost:
+      gross +
+      r.sgkBase * RATES.sgkEmployerWithIncentive +
+      r.sgkBase * RATES.unemploymentEmployer,
   };
 }
 

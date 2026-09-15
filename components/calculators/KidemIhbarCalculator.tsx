@@ -2,10 +2,20 @@
 
 import { useMemo, useState } from "react";
 
-const FIRST_HALF_2026_CEILING = 64948.77;
-const SECOND_HALF_2026_CEILING = 73729.87;
+import {
+  INCOME_TAX_BRACKETS_WAGE,
+  RATES,
+  severanceCeilingOn,
+} from "@/data/parameters";
 
-const STAMP_TAX_RATE = 0.00759;
+const STAMP_TAX_RATE = RATES.stampTax;
+
+/** Yerel tarihi YYYY-AA-GG biçimine çevirir (saat dilimi kayması olmadan). */
+function toIsoDate(date: Date): string {
+  const m = String(date.getMonth() + 1).padStart(2, "0");
+  const d = String(date.getDate()).padStart(2, "0");
+  return `${date.getFullYear()}-${m}-${d}`;
+}
 
 const LEAVING_REASONS = [
   "İşveren tarafından fesih",
@@ -180,19 +190,9 @@ function getNoticeWeeks(totalDays: number): number {
   return 8;
 }
 
+/** Çıkış tarihinde geçerli resmî kıdem tavanı (ÇSGB dönem tablosu). */
 function getSeveranceCeiling(endDate: Date): number {
-  const year = endDate.getFullYear();
-  const month = endDate.getMonth() + 1;
-
-  if (year > 2026) {
-    return SECOND_HALF_2026_CEILING;
-  }
-
-  if (year === 2026 && month >= 7) {
-    return SECOND_HALF_2026_CEILING;
-  }
-
-  return FIRST_HALF_2026_CEILING;
+  return severanceCeilingOn(toIsoDate(endDate));
 }
 
 function calculateIncomeTax(taxBase: number): number {
@@ -200,13 +200,7 @@ function calculateIncomeTax(taxBase: number): number {
     return 0;
   }
 
-  const brackets = [
-    { limit: 190000, rate: 0.15 },
-    { limit: 400000, rate: 0.2 },
-    { limit: 1500000, rate: 0.27 },
-    { limit: 5300000, rate: 0.35 },
-    { limit: Infinity, rate: 0.4 },
-  ];
+  const brackets = INCOME_TAX_BRACKETS_WAGE;
 
   let tax = 0;
   let previousLimit = 0;

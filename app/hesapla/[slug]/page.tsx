@@ -263,9 +263,10 @@ function NetSalaryBlock({ gross }: { gross: number }) {
       </div>
 
       <p style={{ color: "var(--ink-soft)", lineHeight: 1.8, marginTop: 18 }}>
-        Bu hesap yılın ilk aylarındaki (%15 vergi dilimi) duruma göre
-        yapılmıştır. Kümülatif vergi matrahınız yıl içinde biriktikçe üst
-        dilime geçersiniz ve net maaşınız düşer. Ayrıntı için{" "}
+        Bu hesap 2026 ocak ayına göre, güncel gelir vergisi dilimleri, asgari
+        ücret istisnaları ve SGK tavanı ile yapılmıştır. Kümülatif vergi
+        matrahınız yıl içinde biriktikçe üst dilime geçersiniz ve net
+        maaşınız düşer. Ayrıntı için{" "}
         <Link
           href="/rehber/brutten-nete-maas-hesaplama"
           style={{ fontWeight: 700, textDecoration: "underline" }}

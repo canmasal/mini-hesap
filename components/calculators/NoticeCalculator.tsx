@@ -2,15 +2,11 @@
 
 import { useMemo, useState } from "react";
 
-const STAMP_TAX_RATE = 0.00759;
+import { INCOME_TAX_BRACKETS_WAGE, RATES } from "@/data/parameters";
 
-const TAX_BRACKETS = [
-  { limit: 190000, rate: 0.15 },
-  { limit: 400000, rate: 0.20 },
-  { limit: 1500000, rate: 0.27 },
-  { limit: 5300000, rate: 0.35 },
-  { limit: Infinity, rate: 0.40 },
-];
+const STAMP_TAX_RATE = RATES.stampTax;
+
+const TAX_BRACKETS = INCOME_TAX_BRACKETS_WAGE;
 
 function parseDate(value: string): Date | null {
   if (!value) {

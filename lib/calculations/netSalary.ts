@@ -26,44 +26,23 @@ export type NetSalaryResult = {
   netSalary: number;
 };
 
-const MINIMUM_WAGE_GROSS = 33030;
+import {
+  INCOME_TAX_BRACKETS_WAGE,
+  MINIMUM_WAGE,
+  RATES,
+  SGK_LIMITS,
+} from "@/data/parameters";
 
-const SGK_EMPLOYEE_RATE = 0.14;
-const UNEMPLOYMENT_EMPLOYEE_RATE = 0.01;
+/* Tüm yıllık rakamlar data/parameters.ts dosyasından gelir. */
+const MINIMUM_WAGE_GROSS = MINIMUM_WAGE.gross;
 
-const STAMP_TAX_RATE = 0.00759;
+const SGK_EMPLOYEE_RATE = RATES.sgkEmployee;
+const UNEMPLOYMENT_EMPLOYEE_RATE = RATES.unemploymentEmployee;
 
-/**
- * 2026 ücret gelirleri gelir vergisi tarifesi.
- *
- * 190.000 TL'ye kadar                         %15
- * 400.000 TL'nin 190.000 TL'si için ...      %20
- * Ücret gelirlerinde 1.500.000 TL'ye kadar   %27
- * 5.300.000 TL'ye kadar                      %35
- * 5.300.000 TL üzeri                         %40
- */
-const TAX_BRACKETS = [
-  {
-    limit: 190000,
-    rate: 0.15,
-  },
-  {
-    limit: 400000,
-    rate: 0.20,
-  },
-  {
-    limit: 1500000,
-    rate: 0.27,
-  },
-  {
-    limit: 5300000,
-    rate: 0.35,
-  },
-  {
-    limit: Infinity,
-    rate: 0.40,
-  },
-] as const;
+const STAMP_TAX_RATE = RATES.stampTax;
+
+/** Ücret gelirleri gelir vergisi tarifesi (190 bin %15 … 5,3 milyon üzeri %40) */
+const TAX_BRACKETS = INCOME_TAX_BRACKETS_WAGE;
 
 const MINIMUM_WAGE_INCOME_TAX_BASE =
   MINIMUM_WAGE_GROSS -
@@ -132,13 +111,10 @@ export function calculateNetSalary(
 
   /**
    * Prime esas kazanç:
-   * Kullanıcının brüt maaşı esas alınır.
-   *
-   * Tam ay normal çalışan için brütün asgari ücret
-   * altında olmaması beklenir. Ancak algoritmayı daha
-   * esnek tutmak için burada doğrudan brütü kullanıyoruz.
+   * Brüt maaş esas alınır, ancak SGK tavanını aşan kısım
+   * için prim kesilmez (2026'da asgari ücretin 9 katı).
    */
-  const sgkBase = grossSalary;
+  const sgkBase = Math.min(grossSalary, SGK_LIMITS.monthlyCeiling);
 
   const sgkEmployee =
     sgkBase * SGK_EMPLOYEE_RATE;
