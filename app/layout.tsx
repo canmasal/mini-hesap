@@ -121,6 +121,8 @@ const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   name: "MiniHesap",
+  /* Google site adı: aynı isimli minihesap.com (portföy takip sitesi) ile karışmaması için */
+  alternateName: ["MiniHesap.net", "Mini Hesap"],
   url: siteUrl,
   inLanguage: "tr-TR",
   description:
@@ -128,6 +130,7 @@ const websiteSchema = {
   publisher: {
     "@type": "Organization",
     name: "MiniHesap",
+    alternateName: "MiniHesap.net",
     url: siteUrl,
     logo: `${siteUrl}/icon.svg`,
   },

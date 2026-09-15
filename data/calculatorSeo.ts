@@ -381,6 +381,101 @@ export const newToolSeo: Record<string, ToolSeo> = {
       },
     ],
   },
+
+  /* ======================== GÜN HESAPLAMA ======================== */
+  "gun-hesaplama": {
+    title: "Gün Hesaplama | İki Tarih Arası Kaç Gün?",
+    description:
+      "İki tarih arası kaç gün, kaç hafta ve kaç iş günü olduğunu hesaplayın. Bir tarihe gün ekleyin veya çıkarın; sadece iş günlerini sayın.",
+    intro:
+      "Gün hesaplama aracı ile iki tarih arasındaki gün farkını; yıl, ay, hafta ve iş günü karşılığıyla birlikte anında görürsünüz. İkinci sekmede bir tarihe gün ekleyerek veya çıkararak vade, teslim, izin dönüşü ya da son başvuru tarihini bulabilirsiniz.",
+    howItWorks: [
+      "“İki tarih arası kaç gün?” sekmesinde başlangıç ve bitiş tarihini seçin.",
+      "Bitiş gününün de sayılmasını istiyorsanız kutucuğu işaretleyin.",
+      "Toplam gün, hafta, iş günü ve hafta sonu günü sayısını görün.",
+      "Bir tarihe gün eklemek veya çıkarmak için ikinci sekmeyi kullanın.",
+    ],
+    sections: [
+      {
+        heading: "İki tarih arasındaki gün farkı nasıl hesaplanır?",
+        body: [
+          "Gün farkı, bitiş tarihinden başlangıç tarihinin çıkarılmasıyla bulunur. Ayların 28, 29, 30 veya 31 çekmesi ve artık yıllar hesaba otomatik olarak dahil edilir.",
+          "Örnek: 1 Ocak 2026 ile 1 Mart 2026 arası <strong>59 gün</strong>dür (Ocak 31 + Şubat 28 gün).",
+          "<strong>Bitiş günü dahil mi?</strong> 10 Temmuz ile 15 Temmuz arası 5 gündür. Ancak otel konaklaması veya izin gibi iki ucun da sayıldığı durumlarda süre 6 gün olarak kabul edilir; bu durumda “bitiş gününü de say” seçeneğini işaretleyin.",
+        ],
+      },
+      {
+        heading: "İş günü nasıl hesaplanır?",
+        body: [
+          "İş günü sayısı, iki tarih arasındaki cumartesi ve pazar günleri çıkarılarak bulunur.",
+          "- 5 iş günü sonrası: Pazartesi başlayan bir sürede aynı haftanın cuma günüdür.",
+          "- Resmî tatiller (1 Ocak, 23 Nisan, 1 Mayıs, 19 Mayıs, 15 Temmuz, 30 Ağustos, 29 Ekim) ve dini bayramlar hafta içine denk geliyorsa sonuçtan ayrıca düşülmelidir.",
+          "Kargo teslim süresi, banka havale süresi ve resmî başvuru sürelerinde genellikle iş günü esas alınır.",
+        ],
+      },
+      {
+        heading: "Tarihe gün ekleme nerelerde kullanılır?",
+        body: [
+          "- Fatura ve çek vadesi: “Düzenleme tarihinden itibaren 30 gün”",
+          "- Cayma hakkı: Mesafeli satışlarda teslimden itibaren 14 gün",
+          "- İzin dönüş tarihi, deneme süresi sonu, abonelik yenileme tarihi",
+          "- “Kaç gün kaldı?” sorusu: Bugünün tarihini başlangıç, hedef tarihi bitiş olarak girin.",
+        ],
+      },
+    ],
+    faqs: [
+      { question: "İki tarih arası kaç gün olduğunu nasıl bulurum?", answer: "Başlangıç ve bitiş tarihini seçmeniz yeterlidir. Araç, artık yıl ve ay uzunluklarını dikkate alarak gün, hafta, yıl-ay-gün ve iş günü karşılığını gösterir." },
+      { question: "Hesaplamaya başlangıç ve bitiş günü dahil mi?", answer: "Varsayılan olarak başlangıç günü dahil, bitiş günü hariçtir. İki günün de sayılması gereken durumlarda “bitiş gününü de say” seçeneğini işaretleyin." },
+      { question: "İş günü hesabında resmî tatiller düşülüyor mu?", answer: "Hayır. Araç yalnızca cumartesi ve pazar günlerini çıkarır. Hafta içine denk gelen resmî tatil ve bayram günlerini ayrıca düşmeniz gerekir." },
+      { question: "Bugünden 90 gün sonrası hangi tarih?", answer: "“Tarihe gün ekle / çıkar” sekmesinde başlangıç tarihini bugün bırakıp gün sayısına 90 yazın; sonuç tarihi ve haftanın günü gösterilir." },
+    ],
+  },
+
+  /* ======================== NOT ORTALAMASI ======================== */
+  "not-ortalamasi": {
+    title: "Not Ortalaması Hesaplama | Lise ve GANO",
+    description:
+      "Lise not ortalamanızı ders saatine göre, üniversite GANO'nuzu kredi ve harf notuna göre hesaplayın. Takdir ve teşekkür belgesi sınırlarını görün.",
+    intro:
+      "Not ortalaması hesaplama aracı, lisede ders notlarınızı haftalık ders saatleriyle ağırlıklandırarak dönem ortalamanızı; üniversitede ise harf notu katsayısı ve ders kredisiyle ağırlıklı genel not ortalamanızı (GANO) hesaplar.",
+    howItWorks: [
+      "Lise / ortaokul veya üniversite sekmesini seçin.",
+      "Her ders için notunuzu (lisede 0–100, üniversitede harf notu) girin.",
+      "Lisede haftalık ders saatini, üniversitede dersin kredisini veya AKTS'sini yazın.",
+      "Ağırlıklı ortalamanız ve belge durumunuz anında hesaplanır.",
+    ],
+    sections: [
+      {
+        heading: "Lise not ortalaması nasıl hesaplanır?",
+        body: [
+          "Lise ve ortaokulda ortalama <strong>ağırlıklı</strong> hesaplanır: her dersin dönem puanı, o dersin haftalık ders saatiyle çarpılır; çıkan sonuçların toplamı toplam ders saatine bölünür.",
+          "Örnek: Matematik 80 (6 saat), Türkçe 90 (4 saat) → (80 × 6 + 90 × 4) ÷ 10 = <strong>84</strong>. Basit ortalama 85 çıkardı; haftalık saati fazla olan ders ortalamayı daha çok etkiler.",
+        ],
+      },
+      {
+        heading: "Takdir ve teşekkür belgesi kaç ortalama ile alınır?",
+        body: [
+          "- <strong>Takdir belgesi:</strong> Dönem ağırlıklı ortalaması 85,00 ve üzeri",
+          "- <strong>Teşekkür belgesi:</strong> Dönem ağırlıklı ortalaması 70,00 – 84,99 arası",
+          "Belge alabilmek için ayrıca davranış notunun tam olması ve ilgili dönemde disiplin cezası almamış olmak gerekir. Resmî sonuç için e-Okul'daki hesap esas alınır.",
+        ],
+      },
+      {
+        heading: "Üniversitede GANO nasıl hesaplanır?",
+        body: [
+          "Her dersin harf notu katsayısı (ör. AA = 4,00, BA = 3,50, BB = 3,00) dersin kredisi veya AKTS'si ile çarpılır. Toplam, alınan derslerin toplam kredisine bölünür.",
+          "Örnek: 5 kredilik dersten BA (3,50), 3 kredilik dersten CC (2,00) → (3,50 × 5 + 2,00 × 3) ÷ 8 = <strong>2,94</strong>",
+          "Harf notu aralıkları ve katsayıları üniversiteden üniversiteye değişebilir; öğrenci işleri yönetmeliğinizi kontrol edin. Birçok üniversitede 3,00 ve üzeri GANO onur, 3,50 ve üzeri yüksek onur öğrencisi sayılır.",
+        ],
+      },
+    ],
+    faqs: [
+      { question: "Not ortalaması neden ders saatine göre hesaplanıyor?", answer: "Haftada daha çok saat işlenen dersler öğrencinin başarısını daha fazla temsil ettiği için ağırlıklı ortalama kullanılır. Bu yüzden 6 saatlik matematik notu, 2 saatlik bir dersten daha etkilidir." },
+      { question: "Takdir belgesi için ortalama kaç olmalı?", answer: "Dönem ağırlıklı not ortalamasının en az 85 olması, davranış notunun tam olması ve disiplin cezası almamış olmak gerekir." },
+      { question: "GANO ile YANO arasındaki fark nedir?", answer: "YANO (yarıyıl ağırlıklı not ortalaması) yalnızca bir dönemin, GANO (genel ağırlıklı not ortalaması) ise o ana kadar alınan tüm derslerin ortalamasıdır. Aracı bir dönemin dersleriyle kullanırsanız YANO, tüm derslerinizle kullanırsanız GANO elde edersiniz." },
+      { question: "4'lük not 100'lük sisteme nasıl çevrilir?", answer: "Dönüşüm doğrusal değildir; YÖK'ün yayımladığı 4'lük – 100'lük not dönüşüm tablosu kullanılmalıdır. Bazı kurumlar kendi dönüşüm tablolarını da uygulayabilir." },
+    ],
+  },
 };
 
 /** Mevcut araç sayfalarına eklenen uzun açıklama bölümleri. */

@@ -46,6 +46,8 @@ import UnemploymentCalculator from "@/components/calculators/UnemploymentCalcula
 import HomeLoanCostCalculator from "@/components/calculators/HomeLoanCostCalculator";
 import FuelCostCalculator from "@/components/calculators/FuelCostCalculator";
 import PensionFundCalculator from "@/components/calculators/PensionFundCalculator";
+import DayCountCalculator from "@/components/calculators/DayCountCalculator";
+import GpaCalculator from "@/components/calculators/GpaCalculator";
 
 /* =========================================================
    HESAPLAMA BİLEŞENLERİ
@@ -73,6 +75,8 @@ const componentMap: Record<string, ComponentType> = {
   "konut-kredisi": HomeLoanCostCalculator,
   "yakit-maliyeti": FuelCostCalculator,
   bes: PensionFundCalculator,
+  "gun-hesaplama": DayCountCalculator,
+  "not-ortalamasi": GpaCalculator,
 
   /* Sınav araçları tek bileşenden, sınav yapılandırmasıyla üretilir */
   ...Object.fromEntries(

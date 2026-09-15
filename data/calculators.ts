@@ -182,6 +182,26 @@ export const calculators = [
   },
 
   {
+    slug: "gun-hesaplama",
+    icon: "📅",
+    title: "Gün Hesaplama",
+    category: "gunluk",
+    keywords: ["gün", "tarih", "iki tarih arası", "iş günü", "kaç gün kaldı", "gün ekleme"],
+    description:
+      "İki tarih arasında kaç gün olduğunu, iş günü sayısını hesaplayın; bir tarihe gün ekleyip çıkarın.",
+  },
+
+  {
+    slug: "not-ortalamasi",
+    icon: "🎓",
+    title: "Not Ortalaması Hesaplama",
+    category: "egitim",
+    keywords: ["not ortalaması", "gano", "karne", "takdir", "teşekkür", "harf notu", "kredi"],
+    description:
+      "Lise ders saatine göre ağırlıklı ortalamanızı, üniversitede kredi ve harf notuyla GANO'nuzu hesaplayın.",
+  },
+
+  {
     slug: "yillik-izin",
     icon: "🏖️",
     title: "Yıllık İzin Hesaplama",
