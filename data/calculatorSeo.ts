@@ -10,6 +10,8 @@
  * <strong> etiketi kullanılabilir.
  */
 
+import { moreToolSections } from "@/data/calculatorSeoMore";
+
 export type SeoSection = { heading: string; body: string[] };
 
 export type ToolSeo = {
@@ -478,8 +480,10 @@ export const newToolSeo: Record<string, ToolSeo> = {
   },
 };
 
-/** Mevcut araç sayfalarına eklenen uzun açıklama bölümleri. */
+/** Mevcut araç sayfalarına eklenen uzun açıklama bölümleri.
+    Ek araçların bölümleri calculatorSeoMore.ts dosyasından birleştirilir. */
 export const toolSections: Record<string, SeoSection[]> = {
+  ...moreToolSections,
   kdv: [
     {
       heading: "KDV hesaplama formülü nedir?",

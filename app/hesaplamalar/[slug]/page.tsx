@@ -101,7 +101,9 @@ const componentMap: Record<string, ComponentType> = {
 function seoFor(slug: string): ToolSeo | undefined {
   const base: ToolSeo | undefined = seoContents[slug] ?? newToolSeo[slug];
   if (!base) return undefined;
-  return { ...base, sections: base.sections ?? toolSections[slug] };
+  /* Aracın kendi bölümleri ile ek açıklama bölümleri birleştirilir */
+  const sections = [...(base.sections ?? []), ...(toolSections[slug] ?? [])];
+  return { ...base, sections };
 }
 
 /** Açıklama gövdesi: "- " ile başlayan ardışık satırlar liste olur. */
