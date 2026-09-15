@@ -9,7 +9,7 @@ import { SITE_URL } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Hesaplama Araçları",
   description:
-    "Net maaş, kıdem tazminatı, ihbar tazminatı, KDV, yüzde, indirim, kira artışı, fazla mesai, yaş, yıllık izin, banka borç takip ve ön muhasebe hesaplama araçlarını tek yerde kullanın.",
+    "Net maaş, kıdem ve ihbar tazminatı, KDV, yüzde, kira artışı, fazla mesai, yaş ve yıllık izin hesaplama araçları tek yerde, ücretsiz.",
   alternates: {
     canonical: "/hesaplamalar",
   },

@@ -15,7 +15,7 @@ import { SITE_URL } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Premium Paketler — Standart, Plus ve Pro",
   description:
-    "Standart, Plus ve Pro paketlerle işletme takibinizi tek seferde kurun. Excel şablonları, Access veritabanı ve Windows programı; abonelik yok, ömür boyu kullanım.",
+    "Standart, Plus ve Pro paketlerle işletme takibinizi kurun: Excel şablonları, Access veritabanı ve Windows programı. Abonelik yok, ömür boyu kullanım.",
   alternates: { canonical: "/premium" },
 };
 
