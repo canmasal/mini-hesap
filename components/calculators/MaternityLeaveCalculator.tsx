@@ -2,15 +2,17 @@
 
 import { useMemo, useState } from "react";
 
+import { MATERNITY_LEAVE as ML } from "@/data/parameters";
 import ResultRow from "./ResultRow";
 
 /**
- * Doğum izni, süt izni ve analık izni hesaplama (4857 sayılı İş Kanunu m.74).
+ * Doğum izni, süt izni ve analık izni hesaplama (4857 sayılı İş Kanunu m.74,
+ * 7578 sayılı Kanun ile 01.05.2026'dan itibaren geçerli süreler).
  *
- * Temel kural: doğumdan önce 8 + sonra 8 = 16 hafta.
- * Çoğul gebelikte doğum öncesi 2 hafta eklenir (10 + 8 = 18 hafta).
- * İşçi isterse doğumdan önceki 3 haftaya kadar çalışabilir; çalışılan süre
- * doğum sonrasına aktarılır.
+ * Temel kural: doğumdan önce 8 + sonra 16 = 24 hafta.
+ * Çoğul gebelikte doğum öncesi 2 hafta eklenir (10 + 16 = 26 hafta).
+ * Doktor onayıyla doğumdan önceki 2 haftaya kadar çalışılabilir; çalışılan
+ * süre doğum sonrasına aktarılır (tekilde en fazla 6, çoğulda 8 hafta).
  */
 
 const DAY = 86400000;
@@ -36,20 +38,23 @@ function fmt(d: Date) {
 export default function MaternityLeaveCalculator() {
   const [dueDate, setDueDate] = useState("");
   const [multiple, setMultiple] = useState(false);
-  /** Doğum öncesi kaç haftayı çalışarak sonraya aktarıyor (en fazla 5) */
+  /** Doğum öncesi kaç haftayı çalışarak sonraya aktarıyor */
   const [transferred, setTransferred] = useState("0");
   const [childOrder, setChildOrder] = useState("1");
 
+  /* Doğum öncesi hak: tekilde 8, çoğul gebelikte 10 hafta */
+  const preWeeksBase = ML.preBirthWeeks + (multiple ? ML.multipleExtraWeeks : 0);
+  /* Doğumdan önceki son 2 hafta çalışılamaz; kalanı sonraya aktarılabilir */
+  const maxTransfer = preWeeksBase - ML.minPreBirthRestWeeks;
+
   const result = useMemo(() => {
     const birth = parseDate(dueDate);
-    const t = Number(transferred);
+    const t = Math.min(Number(transferred), maxTransfer);
 
-    if (!birth || !Number.isFinite(t) || t < 0 || t > 5) return null;
+    if (!birth || !Number.isFinite(t) || t < 0) return null;
 
-    /* Doğum öncesi hak: normal 8, çoğul gebelikte 10 hafta */
-    const preWeeksBase = multiple ? 10 : 8;
     const preWeeks = preWeeksBase - t;
-    const postWeeks = 8 + t;
+    const postWeeks = ML.postBirthWeeks + t;
 
     const leaveStart = addDays(birth, -preWeeks * 7);
     const leaveEnd = addDays(birth, postWeeks * 7 - 1);
@@ -74,7 +79,7 @@ export default function MaternityLeaveCalculator() {
       halfTimeEnd: addDays(leaveEnd, halfTimeDays),
       unpaidEnd,
     };
-  }, [dueDate, multiple, transferred, childOrder]);
+  }, [dueDate, transferred, childOrder, preWeeksBase, maxTransfer]);
 
   function handleClear() {
     setDueDate("");
@@ -113,14 +118,15 @@ export default function MaternityLeaveCalculator() {
             onChange={(e) => setTransferred(e.target.value)}
           >
             <option value="0">Çalışmayacağım (0 hafta)</option>
-            <option value="1">1 hafta</option>
-            <option value="2">2 hafta</option>
-            <option value="3">3 hafta</option>
-            <option value="4">4 hafta</option>
-            <option value="5">5 hafta (en fazla)</option>
+            {Array.from({ length: maxTransfer }, (_, i) => i + 1).map((week) => (
+              <option key={week} value={String(week)}>
+                {week} hafta{week === maxTransfer ? " (en fazla)" : ""}
+              </option>
+            ))}
           </select>
           <span className="field-hint">
-            Çalıştığınız süre doğum sonrası izne eklenir.
+            Doktor onayıyla doğumdan önceki {ML.minPreBirthRestWeeks} haftaya
+            kadar çalışabilirsiniz; çalıştığınız süre doğum sonrası izne eklenir.
           </span>
         </label>
 
@@ -192,9 +198,10 @@ export default function MaternityLeaveCalculator() {
           />
 
           <div className="notice">
-            <strong>Babalık izni:</strong> Eş için 5 gün ücretli izin hakkı
-            vardır (İş Kanunu Ek Madde 2). Evlat edinmede de 3 yaşından küçük
-            çocuk için 8 haftalık izin uygulanır.
+            <strong>Babalık izni:</strong> Eşi doğum yapan işçiye{" "}
+            {ML.paternityLeaveDays} gün ücretli izin verilir (1 Mayıs 2026&apos;dan
+            itibaren; önceden 5 gündü). Doğum izni süreleri de aynı tarihte
+            16 haftadan 24 haftaya çıkarılmıştır (7578 sayılı Kanun).
           </div>
         </div>
       ) : (

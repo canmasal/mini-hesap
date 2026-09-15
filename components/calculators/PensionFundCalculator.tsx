@@ -2,22 +2,22 @@
 
 import { useMemo, useState } from "react";
 
-import { MINIMUM_WAGE } from "@/data/parameters";
+import { MINIMUM_WAGE, PENSION_STATE_CONTRIBUTION as STATE } from "@/data/parameters";
 import ResultRow, { money, percent } from "./ResultRow";
 
 /**
  * BES (Bireysel Emeklilik Sistemi) birikim hesaplama.
  *
- * Devlet katkısı, ödenen katkı payının %30'udur ve yıllık brüt asgari
- * ücretin toplamıyla sınırlıdır. Devlet katkısına hak kazanma kademelidir:
+ * Devlet katkısı, ödenen katkı payının STATE.rate kadarıdır (2026'da %20).
+ * Yıllık devlet katkısı, brüt asgari ücretin yıllık toplamının aynı oranı
+ * kadarını aşamaz (2026: 79.272 TL). Hak kazanma kademelidir:
  *   3 yıl → %15, 6 yıl → %35, 10 yıl → %60, emeklilik → %100
  */
 
+const RATE_TEXT = `%${STATE.rate * 100}`;
+
 function vestingRate(years: number) {
-  if (years >= 10) return 0.6;
-  if (years >= 6) return 0.35;
-  if (years >= 3) return 0.15;
-  return 0;
+  return STATE.vesting.find((step) => years >= step.years)?.rate ?? 0;
 }
 
 export default function PensionFundCalculator() {
@@ -46,10 +46,11 @@ export default function PensionFundCalculator() {
     const months = Math.round(y * 12);
     const monthlyRate = Math.pow(1 + r, 1 / 12) - 1;
 
-    /* Devlet katkısı yıllık üst sınırı: brüt asgari ücretin yıllık toplamı */
-    const annualCap = mw * 12;
+    /* Devlet katkısı yıllık üst sınırı: brüt asgari ücretin yıllık
+       toplamının katkı oranı kadarı (2026: 396.360 × %20 = 79.272 TL) */
+    const annualCap = mw * 12 * STATE.rate;
     const annualContribution = m * 12;
-    const annualStateRaw = annualContribution * 0.3;
+    const annualStateRaw = annualContribution * STATE.rate;
     const annualState = Math.min(annualStateRaw, annualCap);
     const capped = annualStateRaw > annualCap;
     const monthlyState = annualState / 12;
@@ -165,7 +166,7 @@ export default function PensionFundCalculator() {
           <ResultRow
             label="Devlet Katkısı (toplam)"
             value={money(result.stateFund)}
-            hint="Katkı payının %30'u, getirisiyle birlikte"
+            hint={`Katkı payının ${RATE_TEXT}'si, getirisiyle birlikte`}
           />
 
           <ResultRow
@@ -190,8 +191,8 @@ export default function PensionFundCalculator() {
           {result.capped && (
             <div className="notice notice-warn">
               <strong>Devlet katkısı üst sınırı uygulandı.</strong> Yıllık
-              devlet katkısı, brüt asgari ücretin yıllık toplamını
-              ({money(result.annualCap)}) aşamaz. Bu sınırın üzerindeki
+              devlet katkısı, brüt asgari ücretin yıllık toplamının {RATE_TEXT}&apos;sini
+              ({money(result.annualCap)}) aşamaz. Yıllık {money(result.annualCap / STATE.rate)} üzerindeki
               katkı paylarınıza devlet katkısı işlemez.
             </div>
           )}

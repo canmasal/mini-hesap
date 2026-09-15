@@ -15,6 +15,14 @@ import CalculatorCard from "@/components/CalculatorCard";
 import PremiumCta from "@/components/PremiumCta";
 import ShareResult from "@/components/ShareResult";
 import { SITE_URL } from "@/lib/site";
+import {
+  DEPOSIT_WITHHOLDING,
+  PENSION_STATE_CONTRIBUTION,
+  tl,
+} from "@/data/parameters";
+
+/** 0.175 → "%17,5" */
+const pctTr = (rate: number) => `%${(rate * 100).toLocaleString("tr-TR")}`;
 import { guidesForTool } from "@/data/guides";
 import { exams } from "@/data/exams";
 import {
@@ -717,7 +725,7 @@ seoContents.mevduat = {
     {
       question: "Mevduat stopajı ne kadar?",
       answer:
-        "Stopaj yalnızca faiz getirisi üzerinden kesilir, anaparadan kesinti yapılmaz. Oran vade süresine ve mevduat türüne göre değişebildiği için güncel oranı bankanızdan teyit etmeniz gerekir.",
+        `Stopaj yalnızca faiz getirisi üzerinden kesilir, anaparadan kesinti yapılmaz. TL mevduatta güncel oranlar: vadesiz ve 6 aya kadar vadeli hesaplarda ${pctTr(DEPOSIT_WITHHOLDING.upTo6Months)}, 1 yıla kadar vadeli hesaplarda ${pctTr(DEPOSIT_WITHHOLDING.upTo1Year)}, 1 yıldan uzun vadeli hesaplarda ${pctTr(DEPOSIT_WITHHOLDING.over1Year)}. Oranı hesap açılış veya vade yenileme tarihindeki karar belirler.`,
     },
     {
       question: "Vade sonunda elime ne kadar geçer?",
@@ -832,12 +840,12 @@ seoContents["dogum-izni"] = {
     {
       question: "Doğum izni kaç hafta?",
       answer:
-        "Kadın işçiye doğumdan önce 8, doğumdan sonra 8 hafta olmak üzere toplam 16 hafta ücretli izin verilir. Çoğul gebelikte doğum öncesi süreye 2 hafta eklenir ve toplam 18 haftaya çıkar.",
+        "1 Mayıs 2026'dan itibaren (7578 sayılı Kanun) kadın işçiye doğumdan önce 8, doğumdan sonra 16 hafta olmak üzere toplam 24 hafta ücretli izin verilir. Çoğul gebelikte doğum öncesi süreye 2 hafta eklenir ve toplam 26 haftaya çıkar. Önceki düzenlemede süre 16 haftaydı.",
     },
     {
       question: "Doğumdan önce çalışırsam iznim uzar mı?",
       answer:
-        "Evet. Sağlık durumunuz uygunsa ve hekim onay verirse doğumdan önceki 3 haftaya kadar çalışabilirsiniz. Çalıştığınız süre doğum sonrası izninize eklenir.",
+        "Evet. Sağlık durumunuz uygunsa ve hekim onay verirse doğumdan önceki 2 haftaya kadar çalışabilirsiniz (önceden 3 haftaydı). Çalıştığınız süre doğum sonrası izninize eklenir; tekil gebelikte en fazla 6 hafta aktarılabilir.",
     },
     {
       question: "Süt izni ne kadar ve nasıl kullanılır?",
@@ -852,7 +860,7 @@ seoContents["dogum-izni"] = {
     {
       question: "Babalık izni kaç gün?",
       answer:
-        "Eşi doğum yapan işçiye 5 gün ücretli izin verilir. Bu hak İş Kanunu Ek Madde 2 ile düzenlenmiştir.",
+        "1 Mayıs 2026'dan itibaren eşi doğum yapan işçiye 10 gün ücretli babalık izni verilir (önceden 5 gündü). Bu hak İş Kanunu Ek Madde 2 ile düzenlenmiştir.",
     },
     {
       question: "Doğum izninde maaşımı kim öder?",
@@ -1017,7 +1025,7 @@ seoContents.bes = {
     {
       question: "BES devlet katkısı ne kadar?",
       answer:
-        "Ödediğiniz katkı payının %30'u kadar devlet katkısı hesabınıza eklenir. Bir takvim yılında alınabilecek toplam devlet katkısı, o yılın brüt asgari ücretinin yıllık toplamını aşamaz.",
+        `1 Ocak 2026'dan itibaren ödediğiniz katkı payının %${PENSION_STATE_CONTRIBUTION.rate * 100}'si kadar devlet katkısı hesabınıza eklenir (önceden %30'du). Bir takvim yılında alınabilecek devlet katkısı, brüt asgari ücretin yıllık toplamının %${PENSION_STATE_CONTRIBUTION.rate * 100}'sini aşamaz; 2026 için bu üst sınır ${tl(PENSION_STATE_CONTRIBUTION.annualStateCap)}'dir.`,
     },
     {
       question: "Devlet katkısının tamamını ne zaman alırım?",

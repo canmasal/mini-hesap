@@ -2,25 +2,35 @@
 
 import { useMemo, useState } from "react";
 
+import { depositWithholdingRate } from "@/data/parameters";
 import ResultRow, { money, percent } from "./ResultRow";
+
+const pctText = (value: number) => value.toLocaleString("tr-TR", { maximumFractionDigits: 2 });
 
 /**
  * Vadeli mevduat getirisi.
  *
  * Brüt faiz = anapara x yıllık oran x (vade günü / 365)
  * Stopaj brüt faiz üzerinden kesilir; anaparadan kesinti yapılmaz.
+ * Stopaj alanı boş bırakılırsa vadeye göre güncel resmî oran kullanılır.
  */
 export default function DepositCalculator() {
   const [principal, setPrincipal] = useState("");
   const [rate, setRate] = useState("45");
   const [days, setDays] = useState("32");
-  const [withholding, setWithholding] = useState("15");
+  /** Boş = vadeye göre otomatik resmî oran */
+  const [withholding, setWithholding] = useState("");
+
+  const dayCount = Number(days);
+  const autoWithholding =
+    Number.isFinite(dayCount) && dayCount > 0 ? depositWithholdingRate(dayCount) * 100 : 17.5;
+  const effectiveWithholding = withholding === "" ? autoWithholding : Number(withholding);
 
   const result = useMemo(() => {
     const p = Number(principal);
     const r = Number(rate);
     const d = Number(days);
-    const w = Number(withholding);
+    const w = effectiveWithholding;
 
     if (
       !principal ||
@@ -54,13 +64,13 @@ export default function DepositCalculator() {
       netAnnual,
       netSimple: (netInterest / p) * 100,
     };
-  }, [principal, rate, days, withholding]);
+  }, [principal, rate, days, effectiveWithholding]);
 
   function handleClear() {
     setPrincipal("");
     setRate("45");
     setDays("32");
-    setWithholding("15");
+    setWithholding("");
   }
 
   return (
@@ -117,9 +127,11 @@ export default function DepositCalculator() {
             step="0.1"
             value={withholding}
             onChange={(event) => setWithholding(event.target.value)}
+            placeholder={`Otomatik: %${pctText(autoWithholding)}`}
           />
           <span className="field-hint">
-            Vade süresine göre değişir; bankanızdan teyit edin.
+            Boş bırakırsanız vadeye göre güncel oran uygulanır: 6 aya kadar
+            %17,5 · 1 yıla kadar %15 · 1 yıldan uzun %10.
           </span>
         </label>
       </div>
@@ -143,7 +155,7 @@ export default function DepositCalculator() {
           />
 
           <ResultRow
-            label={`Stopaj Kesintisi (%${withholding})`}
+            label={`Stopaj Kesintisi (%${pctText(effectiveWithholding)})`}
             value={`- ${money(result.tax)}`}
             tone="neg"
           />

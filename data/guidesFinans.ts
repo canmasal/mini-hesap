@@ -296,7 +296,7 @@ export const finansGuides: Guide[] = [
     category: "Finans",
     icon: "🏦",
     published: "2026-09-13",
-    updated: "2026-09-13",
+    updated: "2026-09-15",
     readingMinutes: 5,
     tool: { slug: "mevduat", label: "Vadeli Mevduat Getirisi" },
     intro:
@@ -313,11 +313,14 @@ export const finansGuides: Guide[] = [
       {
         heading: "Stopaj ve net getiri",
         body: [
-          "Mevduat faiz gelirinden kaynakta <strong>stopaj</strong> adı verilen vergi kesilir. Oran vadeye göre değişir ve dönem dönem yeniden belirlenir; hesaplama yaparken güncel oranı kullanın.",
-          "Aynı örnekte stopaj oranını <strong>örnek olarak %15</strong> kabul edersek:",
-          "- Stopaj: 3.506,85 × %15 = 526,03 TL",
-          "- Net getiri: <strong>2.980,82 TL</strong>",
-          "- Vade sonu toplam: 102.980,82 TL",
+          "Mevduat faiz gelirinden kaynakta <strong>stopaj</strong> adı verilen vergi kesilir. TL mevduatta güncel oranlar (11444 sayılı Cumhurbaşkanı Kararı ile 31.12.2026'ya kadar):",
+          "- Vadesiz ve 6 aya kadar vadeli: <strong>%17,5</strong>",
+          "- 1 yıla kadar vadeli: <strong>%15</strong>",
+          "- 1 yıldan uzun vadeli: <strong>%10</strong>",
+          "Örnekteki 32 günlük vade 6 ayın altında olduğu için %17,5 uygulanır:",
+          "- Stopaj: 3.506,85 × %17,5 = 613,70 TL",
+          "- Net getiri: <strong>2.893,15 TL</strong>",
+          "- Vade sonu toplam: 102.893,15 TL",
         ],
       },
       {
@@ -566,7 +569,7 @@ export const finansGuides: Guide[] = [
     category: "Finans",
     icon: "🪙",
     published: "2026-09-13",
-    updated: "2026-09-13",
+    updated: "2026-09-15",
     readingMinutes: 6,
     tool: { slug: "bes", label: "BES Birikim Hesaplama" },
     intro:
@@ -575,10 +578,11 @@ export const finansGuides: Guide[] = [
       {
         heading: "Devlet katkısı nasıl işler?",
         body: [
-          "Devlet, ödediğiniz katkı payının belirli bir yüzdesi kadar katkıyı hesabınıza ayrıca yatırır. Oran ve yıllık üst sınır mevzuatla belirlenir ve zaman zaman değişebilir; güncel oranı Emeklilik Gözetim Merkezi'nden (EGM) kontrol edin.",
-          "Örnek: Aylık 2.000 TL katkı payı ödeyen ve devlet katkısı oranının örnek olarak %30 olduğu bir katılımcı için:",
-          "- Aylık devlet katkısı: 2.000 × %30 = 600 TL",
-          "- Yıllık devlet katkısı: 600 × 12 = <strong>7.200 TL</strong>",
+          "Devlet, ödediğiniz katkı payının belirli bir yüzdesi kadar katkıyı hesabınıza ayrıca yatırır. <strong>1 Ocak 2026'dan itibaren bu oran %20'dir</strong> (10811 sayılı Cumhurbaşkanı Kararı; önceden %30'du).",
+          "Yıllık devlet katkısı, brüt asgari ücretin yıllık toplamının %20'sini aşamaz. 2026'da bu üst sınır <strong>79.272 TL</strong>'dir; yani yıllık 396.360 TL'yi aşan katkı paylarına devlet katkısı işlemez.",
+          "Örnek: Aylık 2.000 TL katkı payı ödeyen bir katılımcı için:",
+          "- Aylık devlet katkısı: 2.000 × %20 = 400 TL",
+          "- Yıllık devlet katkısı: 400 × 12 = <strong>4.800 TL</strong>",
           "Devlet katkısı ayrı bir hesapta tutulur ve kendi fonlarında değerlendirilir.",
         ],
       },

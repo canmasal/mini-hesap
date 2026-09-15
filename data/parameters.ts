@@ -146,6 +146,91 @@ export const UNEMPLOYMENT_BENEFIT = {
 } as const;
 
 /* ------------------------------------------------------------------ */
+/* Doğum (analık) ve babalık izni                                      */
+/* ------------------------------------------------------------------ */
+
+export const MATERNITY_LEAVE = {
+  /** 7578 sayılı Kanun ile 01.05.2026'dan itibaren */
+  effectiveFrom: "2026-05-01",
+  preBirthWeeks: 8,
+  postBirthWeeks: 16,
+  /** Çoğul gebelikte doğum öncesine eklenen hafta */
+  multipleExtraWeeks: 2,
+  /** Doktor onayıyla doğumdan önceki bu kadar haftaya kadar çalışılabilir */
+  minPreBirthRestWeeks: 2,
+  paternityLeaveDays: 10,
+  /** Süt izni: çocuk 1 yaşına gelene kadar günlük toplam */
+  nursingHoursPerDay: 1.5,
+  source: {
+    label: "7578 sayılı Kanun (RG 01.05.2026) – Paksoy hukuk notu",
+    url: "https://paksoy.av.tr/2026/05/is-kanununda-dogum-izni-ve-babalik-izni-sureleri-yeniden-duzenlendi/",
+  } satisfies Source,
+} as const;
+
+/* ------------------------------------------------------------------ */
+/* Bireysel emeklilik (BES) devlet katkısı                             */
+/* ------------------------------------------------------------------ */
+
+export const PENSION_STATE_CONTRIBUTION = {
+  /** TL katkı paylarına devlet katkısı oranı (01.01.2026'dan itibaren) */
+  rate: 0.2,
+  effectiveFrom: "2026-01-01",
+  /** Yıllık devlet katkısı üst sınırı: brüt asgari ücretin yıllık toplamının katkı oranı kadarı */
+  annualContributionBase: MINIMUM_WAGE.gross * 12,
+  annualStateCap: Math.round(MINIMUM_WAGE.gross * 12 * 0.2 * 100) / 100,
+  /** Sistemde kalma süresine göre hak ediş */
+  vesting: [
+    { years: 10, rate: 0.6 },
+    { years: 6, rate: 0.35 },
+    { years: 3, rate: 0.15 },
+  ],
+  source: {
+    label: "10811 sayılı Cumhurbaşkanı Kararı (RG 07.01.2026) – AA haberi",
+    url: "https://www.aa.com.tr/tr/ekonomi/bireysel-emeklilik-sisteminde-devlet-katkisi-orani-yuzde-20-oldu/3791853",
+  } satisfies Source,
+} as const;
+
+/* ------------------------------------------------------------------ */
+/* TL mevduat stopaj oranları                                          */
+/* ------------------------------------------------------------------ */
+
+export const DEPOSIT_WITHHOLDING = {
+  /** Vadesiz ve 6 aya kadar vadeli */
+  upTo6Months: 0.175,
+  /** 1 yıla kadar vadeli */
+  upTo1Year: 0.15,
+  /** 1 yıldan uzun vadeli */
+  over1Year: 0.1,
+  validUntil: "2026-12-31",
+  source: {
+    label: "11444 sayılı Cumhurbaşkanı Kararı (RG 20.06.2026) – YMM sirküleri",
+    url: "https://www.yontemymm.com.tr/mali-aciklamalar/2026-041-tl-mevduat-hesaplarinda-uygulanan-stopaj-oranlarinin-suresi-uzatildi",
+  } satisfies Source,
+} as const;
+
+/** Vade gün sayısına göre TL mevduat stopaj oranı (yüzde değil, oran). */
+export function depositWithholdingRate(days: number): number {
+  if (days <= 182) return DEPOSIT_WITHHOLDING.upTo6Months;
+  if (days <= 365) return DEPOSIT_WITHHOLDING.upTo1Year;
+  return DEPOSIT_WITHHOLDING.over1Year;
+}
+
+/* ------------------------------------------------------------------ */
+/* Tüketici kredisi vergi ve fonları                                   */
+/* ------------------------------------------------------------------ */
+
+export const CONSUMER_LOAN_TAXES = {
+  /** İhtiyaç ve taşıt kredisi faizine uygulanan KKDF */
+  kkdf: 0.15,
+  /** Tüketici kredisi faizine uygulanan BSMV (7345 sayılı CK, 07.07.2023) */
+  bsmv: 0.15,
+  source: {
+    label: "TÜRMOB – Tüketici kredilerinde BSMV oranı yükseltildi (7345 sayılı CK)",
+    url: "https://www.turmob.org.tr/ekutuphane/Read/7fea8441-b31e-46fa-91e7-cf9f96b4248c",
+  } satisfies Source,
+} as const;
+
+/* ------------------------------------------------------------------ */
 /* Yardımcılar                                                         */
 /* ------------------------------------------------------------------ */
 

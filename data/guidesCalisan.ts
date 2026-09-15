@@ -361,7 +361,7 @@ export const calisanGuides: Guide[] = [
     category: "Çalışan Hakları",
     icon: "👶",
     published: "2026-09-13",
-    updated: "2026-09-13",
+    updated: "2026-09-15",
     readingMinutes: 6,
     tool: { slug: "dogum-izni", label: "Doğum ve Süt İzni Hesaplama" },
     intro:
@@ -370,11 +370,12 @@ export const calisanGuides: Guide[] = [
       {
         heading: "Doğum izni süreleri",
         body: [
-          "Kadın işçiye toplam <strong>16 hafta</strong> doğum izni verilir:",
+          "<strong>1 Mayıs 2026'dan itibaren</strong> (7578 sayılı Kanun) kadın işçiye toplam <strong>24 hafta</strong> doğum izni verilir:",
           "- Doğumdan önce <strong>8 hafta</strong>",
-          "- Doğumdan sonra <strong>8 hafta</strong>",
-          "<strong>Çoğul gebelikte</strong> doğum öncesi süreye 2 hafta eklenir; toplam izin 18 hafta olur.",
-          "Sağlık durumu uygunsa ve doktor onaylarsa, kadın işçi doğumdan önceki 3 haftaya kadar çalışabilir. Bu durumda çalıştığı süreler doğum sonrası izne eklenir.",
+          "- Doğumdan sonra <strong>16 hafta</strong>",
+          "<strong>Çoğul gebelikte</strong> doğum öncesi süreye 2 hafta eklenir; toplam izin 26 hafta olur.",
+          "Sağlık durumu uygunsa ve doktor onaylarsa, kadın işçi doğumdan önceki <strong>2 haftaya</strong> kadar çalışabilir (önceden 3 haftaydı). Bu durumda çalıştığı süreler doğum sonrası izne eklenir; tekil gebelikte en fazla 6 hafta aktarılabilir.",
+          "Önceki düzenlemede toplam süre 16 haftaydı. 1 Mayıs 2026'da izni devam edenlerin süresi de uzatılmıştır.",
           "Erken doğumda, doğumdan önce kullanılamayan izin süresi doğum sonrasına eklenir.",
         ],
       },
@@ -385,7 +386,8 @@ export const calisanGuides: Guide[] = [
           "Ödenek, günlük kazancın <strong>üçte ikisi</strong> üzerinden ve fiilen çalışılmayan her gün için ödenir. Günlük kazanç, son 12 ayda prim bildirilen son 3 aylık kazanç üzerinden belirlenir.",
           "Örnek: Günlük kazancı 1.500 TL olan bir sigortalı için:",
           "- Günlük analık ödeneği: 1.500 × 2/3 = 1.000 TL",
-          "- 16 hafta (112 gün) için toplam: 1.000 × 112 = <strong>112.000 TL</strong>",
+          "- 24 hafta (168 gün) için toplam: 1.000 × 168 = <strong>168.000 TL</strong>",
+          "SGK'nın analık ödeneği süresi de yeni izin süresine uygun olarak 24 haftaya çıkarılmıştır.",
           "Ödeneğin hesaplanmasında kullanılan günlük kazanca yasal bir üst sınır uygulanır.",
         ],
       },
@@ -403,13 +405,13 @@ export const calisanGuides: Guide[] = [
           "- <strong>Ücretsiz izin:</strong> Doğum sonrası izin bitiminde kadın işçiye talebi hâlinde 6 aya kadar ücretsiz izin verilir.",
           "- <strong>Yarım çalışma:</strong> Doğum sonrası izin bitiminden itibaren belirli bir süre haftalık çalışma süresinin yarısı kadar ücretsiz izin kullanılabilir; bu süre için şartları sağlayanlara ödenek verilir.",
           "- <strong>Kısmi süreli çalışma:</strong> Ebeveynlerden biri, çocuk mecburi ilköğretim çağına gelinceye kadar kısmi süreli çalışma talep edebilir.",
-          "- <strong>Babalık izni:</strong> Eşi doğum yapan erkek işçiye ücretli doğum izni verilir.",
+          "- <strong>Babalık izni:</strong> Eşi doğum yapan işçiye <strong>10 gün</strong> ücretli izin verilir (1 Mayıs 2026'dan önce 5 gündü).",
         ],
       },
       {
         heading: "Önemli not",
         body: [
-          "Doğum ve babalık izni süreleri zaman zaman yasal düzenlemelerle değiştirilebilmektedir. İzin planınızı yapmadan önce güncel süreleri işyerinizin insan kaynakları birimi, SGK veya ALO 170 hattından teyit edin.",
+          "Bu rehberdeki süreler 7578 sayılı Kanun ile 1 Mayıs 2026'da yürürlüğe giren düzenlemeye göredir. Kamu görevlileri (657 sayılı Kanun) için süreler farklı olabilir; kendi kurumunuzdan teyit edin.",
         ],
       },
     ],
@@ -418,6 +420,11 @@ export const calisanGuides: Guide[] = [
         question: "Doğum izninde maaşımı işveren mi öder?",
         answer:
           "Hayır. Doğum izni süresince işveren ücret ödemekle yükümlü değildir. Şartları sağlayan sigortalıya SGK tarafından analık ödeneği verilir. Bazı işverenler toplu veya bireysel sözleşmeyle aradaki farkı ayrıca öder.",
+      },
+      {
+        question: "Doğum izni 2026'da kaç hafta?",
+        answer:
+          "1 Mayıs 2026'dan itibaren doğumdan önce 8, doğumdan sonra 16 hafta olmak üzere toplam 24 haftadır. Çoğul gebelikte 26 haftadır. Babalık izni 10 gündür.",
       },
       {
         question: "Analık ödeneği için kaç gün prim gerekir?",
