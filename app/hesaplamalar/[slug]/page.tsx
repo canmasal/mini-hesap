@@ -53,6 +53,13 @@ import FuelCostCalculator from "@/components/calculators/FuelCostCalculator";
 import PensionFundCalculator from "@/components/calculators/PensionFundCalculator";
 import DayCountCalculator from "@/components/calculators/DayCountCalculator";
 import GpaCalculator from "@/components/calculators/GpaCalculator";
+import BmiCalculator from "@/components/calculators/BmiCalculator";
+import PregnancyCalculator from "@/components/calculators/PregnancyCalculator";
+import CalorieCalculator from "@/components/calculators/CalorieCalculator";
+import NetToGrossCalculator from "@/components/calculators/NetToGrossCalculator";
+import ExamAverageCalculator from "@/components/calculators/ExamAverageCalculator";
+import TitleDeedFeeCalculator from "@/components/calculators/TitleDeedFeeCalculator";
+import ProfitMarginCalculator from "@/components/calculators/ProfitMarginCalculator";
 
 /** 0.175 → "%17,5" */
 const pctTr = (rate: number) => `%${(rate * 100).toLocaleString("tr-TR")}`;
@@ -85,6 +92,13 @@ const componentMap: Record<string, ComponentType> = {
   bes: PensionFundCalculator,
   "gun-hesaplama": DayCountCalculator,
   "not-ortalamasi": GpaCalculator,
+  "vucut-kitle-indeksi": BmiCalculator,
+  "gebelik-haftasi": PregnancyCalculator,
+  "kalori-ihtiyaci": CalorieCalculator,
+  "netten-brute-maas": NetToGrossCalculator,
+  "vize-final-ortalama": ExamAverageCalculator,
+  "tapu-harci": TitleDeedFeeCalculator,
+  "kar-marji": ProfitMarginCalculator,
 
   /* Sınav araçları tek bileşenden, sınav yapılandırmasıyla üretilir */
   ...Object.fromEntries(

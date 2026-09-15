@@ -11,6 +11,7 @@
  */
 
 import { moreToolSections } from "@/data/calculatorSeoMore";
+import { toolSeoBatch2 } from "@/data/calculatorSeoTools2";
 
 export type SeoSection = { heading: string; body: string[] };
 
@@ -27,6 +28,8 @@ const netFormula = (penalty: number) =>
   `Net = Doğru − (Yanlış ÷ ${penalty}). Yani ${penalty} yanlış cevap 1 doğru cevabı götürür; boş bırakılan sorular nete etki etmez.`;
 
 export const newToolSeo: Record<string, ToolSeo> = {
+  ...toolSeoBatch2,
+
   /* ======================== TYT ======================== */
   "tyt-net": {
     title: "TYT Net Hesaplama 2026 | Net ve OBP",

@@ -4,6 +4,7 @@ export const categories = [
   { id: "finans", label: "Finans & Kredi" },
   { id: "gunluk", label: "Günlük Hesaplar" },
   { id: "egitim", label: "Eğitim & Sınav" },
+  { id: "saglik", label: "Sağlık" },
 ] as const;
 
 export type CategoryId = (typeof categories)[number]["id"];
@@ -17,6 +18,46 @@ export const calculators = [
     keywords: ["brüt", "net", "maaş", "ücret", "sgk", "gelir vergisi"],
     description:
       "Brüt maaşınız üzerinden tahmini net maaşınızı ve temel kesinti detaylarını hesaplayın.",
+  },
+
+  {
+    slug: "netten-brute-maas",
+    icon: "🔁",
+    title: "Netten Brüte Maaş Hesaplama",
+    category: "calisan",
+    keywords: ["netten brüte", "brüt maaş", "net maaş", "bordro", "maaş pazarlığı"],
+    description:
+      "Almak istediğiniz net maaşın brüt karşılığını, SGK ve vergi kesintileriyle birlikte hesaplayın.",
+  },
+
+  {
+    slug: "vucut-kitle-indeksi",
+    icon: "⚖️",
+    title: "Vücut Kitle İndeksi (VKİ) Hesaplama",
+    category: "saglik",
+    keywords: ["vki", "bmi", "ideal kilo", "boy kilo", "obezite", "vücut kitle"],
+    description:
+      "Boy ve kilonuza göre VKİ değerinizi, zayıf-normal-obez sınıfınızı ve ideal kilo aralığınızı öğrenin.",
+  },
+
+  {
+    slug: "gebelik-haftasi",
+    icon: "🤰",
+    title: "Gebelik Haftası ve Doğum Tarihi Hesaplama",
+    category: "saglik",
+    keywords: ["gebelik haftası", "doğum tarihi", "hamilelik", "son adet tarihi", "trimester"],
+    description:
+      "Son adet tarihinize göre kaçıncı gebelik haftasında olduğunuzu ve tahmini doğum tarihinizi hesaplayın.",
+  },
+
+  {
+    slug: "kalori-ihtiyaci",
+    icon: "🥗",
+    title: "Günlük Kalori İhtiyacı Hesaplama",
+    category: "saglik",
+    keywords: ["kalori", "bmh", "bazal metabolizma", "diyet", "makro", "protein"],
+    description:
+      "Yaş, boy, kilo ve aktivitenize göre günlük kalori ihtiyacınızı ve protein-yağ-karbonhidrat miktarınızı bulun.",
   },
 
   {
@@ -49,7 +90,37 @@ export const calculators = [
       "İndirim oranına göre indirim tutarını ve indirim sonrası ödenecek fiyatı bulun.",
   },
 
+  {
+    slug: "kar-marji",
+    icon: "📊",
+    title: "Kâr Marjı Hesaplama",
+    category: "finans",
+    keywords: ["kâr marjı", "kar oranı", "markup", "satış fiyatı", "maliyet", "fiyatlandırma"],
+    description:
+      "Maliyet ve satış fiyatına göre kâr marjınızı ve kâr oranınızı, hedef marja göre satış fiyatınızı hesaplayın.",
+  },
+
+  {
+    slug: "tapu-harci",
+    icon: "🏡",
+    title: "Tapu Harcı Hesaplama",
+    category: "finans",
+    keywords: ["tapu harcı", "tapu masrafı", "döner sermaye", "ev alırken", "alıcı satıcı harç"],
+    description:
+      "Satış bedeline göre alıcı ve satıcının ödeyeceği tapu harcını ve toplam tapu masrafını hesaplayın.",
+  },
+
   /* ---------------- Eğitim & Sınav ---------------- */
+
+  {
+    slug: "vize-final-ortalama",
+    icon: "🧑‍🎓",
+    title: "Vize Final Ortalama Hesaplama",
+    category: "egitim",
+    keywords: ["vize final", "finalden kaç almalıyım", "ders ortalaması", "üniversite", "geçme notu"],
+    description:
+      "Vize ve final notlarınızla dönem sonu ortalamanızı ve dersi geçmek için finalden kaç almanız gerektiğini bulun.",
+  },
 
   {
     slug: "tyt-net",
