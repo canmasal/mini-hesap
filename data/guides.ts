@@ -45,7 +45,7 @@ const coreGuides: Guide[] = [
   {
     slug: "kidem-tazminati-nasil-hesaplanir",
     title: "Kıdem Tazminatı Nasıl Hesaplanır?",
-    metaTitle: "Kıdem Tazminatı Nasıl Hesaplanır? 2026 Hesaplama Rehberi",
+    metaTitle: "Kıdem Tazminatı Nasıl Hesaplanır? 2026",
     description:
       "Kıdem tazminatı şartları, giydirilmiş brüt ücret, kıdem tavanı ve vergi kesintileri. Örnek hesaplamalarla adım adım anlatım.",
     category: "Çalışan Hakları",
@@ -173,7 +173,7 @@ const coreGuides: Guide[] = [
   {
     slug: "brutten-nete-maas-hesaplama",
     title: "Brüt Maaştan Net Maaş Nasıl Hesaplanır?",
-    metaTitle: "Brütten Nete Maaş Hesaplama 2026 | Kesintiler Rehberi",
+    metaTitle: "Brütten Nete Maaş Hesaplama 2026 Rehberi",
     description:
       "Brüt maaştan net maaşa giden yol: SGK primi, işsizlik sigortası, gelir vergisi dilimleri, damga vergisi ve asgari ücret istisnası.",
     category: "Çalışan Hakları",
@@ -266,7 +266,7 @@ const coreGuides: Guide[] = [
   {
     slug: "ihbar-tazminati-ve-ihbar-suresi",
     title: "İhbar Tazminatı ve İhbar Süresi",
-    metaTitle: "İhbar Tazminatı Hesaplama 2026 | İhbar Süreleri Rehberi",
+    metaTitle: "İhbar Tazminatı Hesaplama 2026 Rehberi",
     description:
       "İhbar süreleri, ihbar tazminatı hesaplama, kimin kime ödeyeceği ve kıdem tazminatından farkları.",
     category: "Çalışan Hakları",
@@ -364,7 +364,7 @@ const coreGuides: Guide[] = [
   {
     slug: "kdv-nedir-nasil-hesaplanir",
     title: "KDV Nedir, Nasıl Hesaplanır?",
-    metaTitle: "KDV Hesaplama 2026 | KDV Dahil Hariç Hesaplama Rehberi",
+    metaTitle: "KDV Nedir, Nasıl Hesaplanır? 2026 Rehber",
     description:
       "KDV oranları, KDV dahil ve hariç hesaplama, ödenecek ve devreden KDV, KDV beyannamesi mantığı.",
     category: "Vergi",
@@ -470,7 +470,7 @@ const coreGuides: Guide[] = [
   {
     slug: "konut-kredisi-masraflari",
     title: "Ev Alırken Karşılaşacağınız Masraflar",
-    metaTitle: "Konut Kredisi Masrafları 2026 | Ev Alım Maliyeti Rehberi",
+    metaTitle: "Konut Kredisi Masrafları 2026 Rehberi",
     description:
       "Tapu harcı, ekspertiz, DASK, kredi tahsis ücreti ve diğer masraflar. Ev alırken cebinizden çıkacak gerçek tutarı hesaplayın.",
     category: "Finans",

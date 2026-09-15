@@ -15,7 +15,7 @@ export const calisanGuides: Guide[] = [
   {
     slug: "fazla-mesai-ucreti-nasil-hesaplanir",
     title: "Fazla Mesai Ücreti Nasıl Hesaplanır?",
-    metaTitle: "Fazla Mesai Ücreti Nasıl Hesaplanır? %50 Zam ve Örnekler",
+    metaTitle: "Fazla Mesai Ücreti Nasıl Hesaplanır?",
     description:
       "Haftalık 45 saat sınırı, saatlik ücretin bulunması, %50 zamlı fazla mesai ve %25 zamlı fazla süreli çalışma. Örneklerle adım adım.",
     category: "Çalışan Hakları",
@@ -101,7 +101,7 @@ export const calisanGuides: Guide[] = [
   {
     slug: "kidem-ve-ihbar-tazminati-birlikte-hesaplama",
     title: "Kıdem ve İhbar Tazminatı Birlikte Nasıl Hesaplanır?",
-    metaTitle: "Kıdem ve İhbar Tazminatı Birlikte Hesaplama: Toplam Alacak Rehberi",
+    metaTitle: "Kıdem ve İhbar Tazminatı Birlikte Hesaplama",
     description:
       "İşten çıkarılınca kıdem ve ihbar tazminatı birlikte nasıl hesaplanır, vergileri neden farklıdır, toplam net alacak nasıl bulunur? Örnekli anlatım.",
     category: "Çalışan Hakları",
@@ -185,7 +185,7 @@ export const calisanGuides: Guide[] = [
   {
     slug: "yillik-izin-suresi-nasil-hesaplanir",
     title: "Yıllık İzin Süresi Nasıl Hesaplanır?",
-    metaTitle: "Yıllık İzin Süresi Nasıl Hesaplanır? 14, 20 ve 26 Gün Kuralı",
+    metaTitle: "Yıllık İzin Süresi Nasıl Hesaplanır?",
     description:
       "Kıdeme göre 14, 20 ve 26 günlük izin hakları, yaşa bağlı istisnalar, hafta tatili ve resmî tatillerin sayılmaması, kullanılmayan izin ücreti.",
     category: "Çalışan Hakları",
@@ -265,7 +265,7 @@ export const calisanGuides: Guide[] = [
   {
     slug: "emeklilik-ne-zaman-eyt-sartlari",
     title: "Ne Zaman Emekli Olurum? EYT ve Emeklilik Şartları",
-    metaTitle: "Ne Zaman Emekli Olurum? EYT, Prim Günü ve Yaş Şartları Rehberi",
+    metaTitle: "Ne Zaman Emekli Olurum? EYT ve Şartlar",
     description:
       "Sigorta başlangıç tarihine göre emeklilik şartları: EYT kapsamı, prim günü, sigortalılık süresi ve yaş şartı. Borçlanma ile emekliliği öne çekme.",
     category: "Çalışan Hakları",
@@ -355,7 +355,7 @@ export const calisanGuides: Guide[] = [
   {
     slug: "dogum-izni-ve-sut-izni",
     title: "Doğum İzni ve Süt İzni Nasıl Hesaplanır?",
-    metaTitle: "Doğum İzni ve Süt İzni: Süreler, Analık Ödeneği ve Hesaplama",
+    metaTitle: "Doğum İzni ve Süt İzni Rehberi 2026",
     description:
       "Doğum öncesi ve sonrası izin süreleri, çoğul gebelik, süt izni, SGK analık ödeneği ve hesaplanması. Çalışan anneler için adım adım rehber.",
     category: "Çalışan Hakları",
@@ -439,7 +439,7 @@ export const calisanGuides: Guide[] = [
   {
     slug: "issizlik-maasi-sartlari-ve-hesaplama",
     title: "İşsizlik Maaşı Şartları ve Hesaplama",
-    metaTitle: "İşsizlik Maaşı Nasıl Hesaplanır? Şartlar, Süre ve Tutar Rehberi",
+    metaTitle: "İşsizlik Maaşı Nasıl Hesaplanır? 2026",
     description:
       "İşsizlik maaşı için 600 gün prim ve 120 gün kesintisiz çalışma şartı, maaş süreleri, tutarın hesaplanması ve İŞKUR başvurusu. Örnekli anlatım.",
     category: "Çalışan Hakları",

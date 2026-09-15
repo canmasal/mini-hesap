@@ -27,7 +27,7 @@ const netFormula = (penalty: number) =>
 export const newToolSeo: Record<string, ToolSeo> = {
   /* ======================== TYT ======================== */
   "tyt-net": {
-    title: "TYT Net Hesaplama 2026 | Doğru Yanlış ile Net ve OBP",
+    title: "TYT Net Hesaplama 2026 | Net ve OBP",
     description:
       "TYT net hesaplama aracı: Türkçe, sosyal, temel matematik ve fen doğru-yanlış sayılarını girin, netinizi ve diploma notunuzla OBP katkınızı anında görün.",
     intro:
@@ -151,7 +151,7 @@ export const newToolSeo: Record<string, ToolSeo> = {
 
   /* ======================== LGS ======================== */
   "lgs-puan": {
-    title: "LGS Puan Hesaplama 2026 | Net, Ağırlıklı Net ve Tahmini Puan",
+    title: "LGS Puan Hesaplama 2026 | Net ve Puan",
     description:
       "LGS net ve puan hesaplama: ders bazında doğru-yanlış girin, 3 yanlış 1 doğru kuralıyla netinizi, katsayılı ağırlıklı netinizi ve tahmini LGS puanınızı görün.",
     intro:
@@ -216,7 +216,7 @@ export const newToolSeo: Record<string, ToolSeo> = {
 
   /* ======================== KPSS ======================== */
   "kpss-net": {
-    title: "KPSS Net Hesaplama 2026 | Genel Yetenek ve Genel Kültür",
+    title: "KPSS Net Hesaplama 2026 | GY ve GK Net",
     description:
       "KPSS net hesaplama: Türkçe, matematik, tarih, coğrafya, vatandaşlık ve güncel bilgiler doğru-yanlış girin; GY ve GK netlerinizi anında görün.",
     intro:
@@ -302,7 +302,7 @@ export const newToolSeo: Record<string, ToolSeo> = {
 
   /* ======================== DGS ======================== */
   "dgs-net": {
-    title: "DGS Net Hesaplama | Dikey Geçiş Sayısal ve Sözel Net",
+    title: "DGS Net Hesaplama | Sayısal ve Sözel Net",
     description:
       "DGS net hesaplama: sayısal ve sözel testlerinde doğru-yanlış sayılarınızı girin, dikey geçiş netlerinizi anında hesaplayın.",
     intro:
@@ -339,7 +339,7 @@ export const newToolSeo: Record<string, ToolSeo> = {
 
   /* ======================== YDS ======================== */
   "yds-puan": {
-    title: "YDS Puan Hesaplama | Doğru Sayısından YDS Puanı ve Seviye",
+    title: "YDS Puan Hesaplama | Puan ve Seviye",
     description:
       "YDS puan hesaplama: doğru sayınızı girin, her doğrunun 1,25 puan olduğu sistemde YDS puanınızı ve seviyenizi anında öğrenin.",
     intro:

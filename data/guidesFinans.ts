@@ -15,7 +15,7 @@ export const finansGuides: Guide[] = [
   {
     slug: "yuzde-hesaplama-nasil-yapilir",
     title: "Yüzde Hesaplama Nasıl Yapılır?",
-    metaTitle: "Yüzde Hesaplama Nasıl Yapılır? Formüller ve Pratik Örnekler",
+    metaTitle: "Yüzde Hesaplama Nasıl Yapılır? Formüller",
     description:
       "Bir sayının yüzdesi, yüzde artış ve azalış, iki sayı arasındaki yüzde fark. Akılda kalan formüller ve günlük hayattan örnekler.",
     category: "Günlük",
@@ -85,7 +85,7 @@ export const finansGuides: Guide[] = [
   {
     slug: "indirim-hesaplama-nasil-yapilir",
     title: "İndirim Hesaplama: Gerçek İndirim Oranı Nasıl Bulunur?",
-    metaTitle: "İndirim Hesaplama Nasıl Yapılır? Ardışık İndirim ve Gerçek Oran",
+    metaTitle: "İndirim Hesaplama Nasıl Yapılır?",
     description:
       "İndirimli fiyatın bulunması, ardışık indirimlerin gerçek oranı, 'ikinci ürün yarı fiyatına' kampanyalarının hesabı ve sahte indirimi fark etme.",
     category: "Günlük",
@@ -150,7 +150,7 @@ export const finansGuides: Guide[] = [
   {
     slug: "kira-artis-orani-nasil-hesaplanir",
     title: "Kira Artış Oranı Nasıl Hesaplanır?",
-    metaTitle: "Kira Artışı Nasıl Hesaplanır? TÜFE 12 Aylık Ortalama ve Yasal Sınır",
+    metaTitle: "Kira Artışı Nasıl Hesaplanır? 2026 Rehber",
     description:
       "Kira artışında yasal üst sınır, 12 aylık TÜFE ortalamasının kullanımı, 5 yıllık kira süresi sonrası durum ve örnek hesaplama.",
     category: "Günlük",
@@ -221,7 +221,7 @@ export const finansGuides: Guide[] = [
   {
     slug: "yas-hesaplama-nasil-yapilir",
     title: "Yaş Hesaplama: Yıl, Ay ve Gün Olarak Tam Yaş",
-    metaTitle: "Yaş Hesaplama Nasıl Yapılır? Yıl, Ay, Gün ve Toplam Gün",
+    metaTitle: "Yaş Hesaplama Nasıl Yapılır? Yıl, Ay, Gün",
     description:
       "Doğum tarihinden bugüne tam yaşın yıl, ay ve gün olarak bulunması, artık yılların etkisi ve resmî işlemlerde yaşın nasıl sayıldığı.",
     category: "Günlük",
@@ -290,7 +290,7 @@ export const finansGuides: Guide[] = [
   {
     slug: "vadeli-mevduat-getirisi-nasil-hesaplanir",
     title: "Vadeli Mevduat Getirisi Nasıl Hesaplanır?",
-    metaTitle: "Vadeli Mevduat Faizi Nasıl Hesaplanır? Brüt, Net ve Reel Getiri",
+    metaTitle: "Vadeli Mevduat Faizi Nasıl Hesaplanır?",
     description:
       "Mevduat faizinin gün bazında hesaplanması, stopaj kesintisi, net getiri, vade yenilemenin etkisi ve enflasyona göre reel getiri. Örnekli anlatım.",
     category: "Finans",
@@ -362,7 +362,7 @@ export const finansGuides: Guide[] = [
   {
     slug: "taksitli-alisveris-gercek-maliyeti",
     title: "Taksitli Alışverişin Gerçek Maliyeti Nasıl Hesaplanır?",
-    metaTitle: "Taksitli Alışveriş Maliyeti: Vade Farkı ve Gerçek Faiz Oranı",
+    metaTitle: "Taksitli Alışverişin Gerçek Maliyeti",
     description:
       "Peşin fiyat ile taksitli fiyat arasındaki vade farkının gerçek aylık faiz oranına çevrilmesi, faizsiz taksitin avantajı ve karar vermek için pratik yöntem.",
     category: "Finans",
@@ -429,7 +429,7 @@ export const finansGuides: Guide[] = [
   {
     slug: "enflasyon-ve-zam-farki-hesaplama",
     title: "Enflasyon ve Zam Farkı: Maaşım Gerçekten Arttı mı?",
-    metaTitle: "Enflasyon ve Zam Farkı Hesaplama: Reel Maaş Artışı Nasıl Bulunur?",
+    metaTitle: "Enflasyon ve Zam Farkı Hesaplama Rehberi",
     description:
       "Nominal zam ile reel zam arasındaki fark, maaşın satın alma gücünü korumak için gereken zam oranı ve enflasyon farkının hesaplanması.",
     category: "Finans",
@@ -495,7 +495,7 @@ export const finansGuides: Guide[] = [
   {
     slug: "yakit-maliyeti-nasil-hesaplanir",
     title: "Yakıt ve Yol Maliyeti Nasıl Hesaplanır?",
-    metaTitle: "Yakıt Maliyeti Hesaplama: 100 km Tüketim ile Yol Masrafı",
+    metaTitle: "Yakıt Maliyeti Hesaplama: 100 km Masrafı",
     description:
       "Araç tüketimi, mesafe ve yakıt fiyatıyla yolculuk maliyetinin hesaplanması, gidiş-dönüş, otoyol ve köprü ücretleri ve masrafın kişi başı paylaşımı.",
     category: "Günlük",
@@ -560,7 +560,7 @@ export const finansGuides: Guide[] = [
   {
     slug: "bes-birikim-ve-devlet-katkisi",
     title: "BES Birikimi ve Devlet Katkısı Nasıl Hesaplanır?",
-    metaTitle: "BES Hesaplama: Devlet Katkısı, Hak Kazanma Oranları ve Birikim",
+    metaTitle: "BES Devlet Katkısı ve Birikim Rehberi",
     description:
       "Bireysel emeklilik sisteminde devlet katkısının hesaplanması, 3-6-10 yıl hak kazanma oranları, emeklilik şartları ve birikimi etkileyen faktörler.",
     category: "Finans",
@@ -637,7 +637,7 @@ export const finansGuides: Guide[] = [
   {
     slug: "kredi-taksiti-nasil-hesaplanir",
     title: "Kredi Taksiti Nasıl Hesaplanır?",
-    metaTitle: "Kredi Taksiti Nasıl Hesaplanır? Faiz, KKDF, BSMV ve Erken Kapama",
+    metaTitle: "Kredi Taksiti Nasıl Hesaplanır? KKDF, BSMV",
     description:
       "İhtiyaç kredisi taksit formülü, KKDF ve BSMV'nin faize etkisi, toplam geri ödeme, erken kapamada faiz indirimi ve erken ödeme tazminatı.",
     category: "Finans",

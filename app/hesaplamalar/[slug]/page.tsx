@@ -516,7 +516,7 @@ const seoContents: Record<string, SeoContent> = {
 
   yas: {
     title:
-      "Yaş Hesaplama 2026 | Doğum Tarihine Göre Yaşını Hesapla",
+      "Yaş Hesaplama | Doğum Tarihine Göre Yaş",
     description:
       "Yaş hesaplama aracı ile doğum tarihinizi girerek yaşınızı yıl, ay ve gün olarak hesaplayın. Bir sonraki doğum gününüze kalan süreyi görün.",
     intro:
@@ -555,7 +555,7 @@ const seoContents: Record<string, SeoContent> = {
 
   "yillik-izin": {
     title:
-      "Yıllık İzin Hesaplama 2026 | Yıllık Ücretli İzin Hesapla",
+      "Yıllık İzin Hesaplama 2026 | Kaç Gün İzin?",
     description:
       "Yıllık izin hesaplama aracı ile işe giriş tarihinize, hizmet sürenize ve yaşınıza göre yıllık ücretli izin hakkınızı hesaplayın.",
     intro:
@@ -601,7 +601,7 @@ const seoContents: Record<string, SeoContent> = {
 
   "kredi-borc": {
     title:
-      "Kredi ve Banka Borç Hesaplama 2026 | Aylık Taksit ve Geri Ödeme",
+      "Kredi Borç Hesaplama 2026 | Aylık Taksit",
     description:
       "Kredi borç hesaplama aracı ile kredi tutarı, aylık faiz ve vade bilgilerine göre aylık taksit, toplam faiz, toplam geri ödeme ve ödeme planını hesaplayın.",
     intro:
@@ -693,7 +693,7 @@ seoContents.emeklilik = {
 ======================================================= */
 
 seoContents.mevduat = {
-  title: "Vadeli Mevduat Hesaplama 2026 | Net Faiz Getirisi",
+  title: "Vadeli Mevduat Hesaplama 2026 | Net Getiri",
   description:
     "Anapara, yıllık faiz oranı ve vadeye göre stopaj düşülmüş net mevduat getirinizi ve vade sonu toplam tutarınızı hesaplayın.",
   intro:
@@ -733,7 +733,7 @@ seoContents.mevduat = {
 ======================================================= */
 
 seoContents["taksit-maliyeti"] = {
-  title: "Taksitli Alışveriş Maliyeti | Taksit Farkı Hesaplama",
+  title: "Taksit Farkı Hesaplama | Taksit Maliyeti",
   description:
     "Taksitli fiyat ile peşin fiyat arasındaki farkı ve bu farkın gizli aylık ve yıllık faiz karşılığını hesaplayın. Taksit gerçekten farksız mı öğrenin.",
   intro:
@@ -813,7 +813,7 @@ seoContents.enflasyon = {
 ======================================================= */
 
 seoContents["dogum-izni"] = {
-  title: "Doğum İzni Hesaplama 2026 | Süt İzni ve Analık İzni",
+  title: "Doğum İzni Hesaplama 2026 | Süt İzni",
   description:
     "Doğum izni başlangıç ve bitiş tarihlerinizi, süt izni sürenizi, yarım çalışma ödeneği ve ücretsiz izin hakkınızı hesaplayın.",
   intro:
@@ -913,7 +913,7 @@ seoContents["issizlik-maasi"] = {
 ======================================================= */
 
 seoContents["konut-kredisi"] = {
-  title: "Konut Kredisi Hesaplama 2026 | Tapu Harcı ve Masraflar",
+  title: "Konut Kredisi Hesaplama 2026 | Masraflar",
   description:
     "Konut kredisi taksitinizi ve tapu harcı, ekspertiz, DASK, sigorta gibi tüm alım masraflarını hesaplayarak evin size gerçek maliyetini görün.",
   intro:
@@ -998,7 +998,7 @@ seoContents["yakit-maliyeti"] = {
 ======================================================= */
 
 seoContents.bes = {
-  title: "BES Hesaplama 2026 | Devlet Katkılı Birikim Hesaplama",
+  title: "BES Hesaplama 2026 | Devlet Katkısı Hesapla",
   description:
     "Aylık katkı payı, süre ve getiri beklentinize göre devlet katkısı dâhil toplam BES birikiminizi ve hak ediş oranınızı hesaplayın.",
   intro:
