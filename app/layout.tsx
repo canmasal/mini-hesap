@@ -5,7 +5,6 @@ import "./ledger.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import CookieConsent from "@/components/CookieConsent";
-import AdSenseScript from "@/components/AdSenseScript";
 import GoogleAnalytics, { GoogleTagHead } from "@/components/GoogleAnalytics";
 import ChatWidget from "@/components/ChatWidget";
 import { ADSENSE_CLIENT_ID as adsenseClientId } from "@/lib/adsense";
@@ -145,6 +144,12 @@ export default function RootLayout({
     <html lang="tr">
       <head>
         <GoogleTagHead />
+        {/* Google AdSense: onay durumu yukarıdaki Consent Mode ile iletilir */}
+        <script
+          async
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClientId}`}
+          crossOrigin="anonymous"
+        />
       </head>
       <body>
         <a className="skip-link" href="#icerik">
@@ -158,7 +163,6 @@ export default function RootLayout({
         <Footer />
 
         <CookieConsent />
-        <AdSenseScript />
         <GoogleAnalytics />
         <ChatWidget />
 
