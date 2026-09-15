@@ -325,6 +325,41 @@ export default function PremiumOnMuhasebePage() {
           </article>
 
           {/* =====================================================
+              AÇIKLAMA
+          ===================================================== */}
+
+          <div className="prose" style={{ maxWidth: 950, margin: "35px auto 0" }}>
+            <h2>Ön muhasebe nedir, neden önemlidir?</h2>
+            <p>
+              Ön muhasebe; işletmenin günlük gelir ve gider hareketlerinin,
+              kesilen ve alınan faturaların, müşteri ve tedarikçi bakiyelerinin
+              düzenli olarak kayıt altına alınmasıdır. Bu kayıtlar hem mali
+                müşavirinizle çalışmayı kolaylaştırır hem de ay sonunda
+              işletmenin gerçekten kâr edip etmediğini görmenizi sağlar.
+            </p>
+
+            <h2>Excel ile ön muhasebe nasıl çalışır?</h2>
+            <ol>
+              <li>Gelir ve gider kayıtlarınızı tarih, kategori, tutar ve KDV oranıyla girin.</li>
+              <li>Kaydı ilgili cariye (müşteri veya tedarikçi) ve ödeme yöntemine bağlayın.</li>
+              <li>Vadeli işlemlerde vade tarihini yazın; bekleyen tahsilat ve ödemeler ayrışsın.</li>
+              <li>Dashboard üzerinden aylık ve yıllık gelir, gider, KDV ve net kâr durumunu izleyin.</li>
+            </ol>
+
+            <h2>Kimler için uygun?</h2>
+            <ul>
+              <li>Muhasebe programına geçmeden önce kayıtlarını düzene sokmak isteyen küçük işletmeler</li>
+              <li>Gelir ve giderlerini ayrı takip etmek isteyen serbest çalışanlar ve e-ticaret satıcıları</li>
+              <li>Mali müşavirine düzenli ve kategorilere ayrılmış kayıt teslim etmek isteyenler</li>
+            </ul>
+            <p style={{ color: "var(--muted)", fontSize: 14 }}>
+              Excel şablonu kayıt ve takip amaçlıdır; resmî defter tutma ve
+              beyanname yükümlülükleri için mali müşavirinizle çalışmaya devam
+              edin.
+            </p>
+          </div>
+
+          {/* =====================================================
               ALT ÇAĞRI
           ===================================================== */}
 

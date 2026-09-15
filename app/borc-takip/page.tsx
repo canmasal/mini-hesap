@@ -68,6 +68,57 @@ export default function BorcTakipPage() {
 
       <BorcTakipDemo />
 
+      <section className="section" style={{ paddingTop: 25, paddingBottom: 0 }}>
+        <div className="container">
+          <div className="prose" style={{ maxWidth: 900, margin: "0 auto" }}>
+            <h2>Borç takip aracı nasıl kullanılır?</h2>
+            <ol>
+              <li>Her banka veya kredi kartı için bir satır ekleyin.</li>
+              <li>Kalan borç tutarını, varsa kart limitini ve aylık ödeme tutarını girin.</li>
+              <li>Toplam borcunuzu ve aylık ödeme yükünüzü tek bakışta görün.</li>
+              <li>Ödeme yaptıkça tutarları güncelleyerek borcun nasıl azaldığını takip edin.</li>
+            </ol>
+
+            <h2>Borçlarınızı yönetirken nelere dikkat etmelisiniz?</h2>
+            <ul>
+              <li>
+                <strong>Asgari ödeme borcu bitirmez:</strong> Kredi kartında
+                yalnızca asgari tutarı ödediğinizde kalan borca faiz işler ve
+                toplam geri ödeme uzar.
+              </li>
+              <li>
+                <strong>Faizi en yüksek borca öncelik verin:</strong> Ekstre ve
+                kredi sözleşmelerinizdeki aylık faiz oranlarını karşılaştırın;
+                ek ödeme yapabiliyorsanız önce faizi en yüksek olan borcu
+                kapatmak toplam faiz yükünü azaltır.
+              </li>
+              <li>
+                <strong>Limit kullanım oranını izleyin:</strong> Kart
+                limitlerinizin büyük kısmını sürekli dolu tutmak hem bütçenizi
+                zorlar hem de kredi notunuzu olumsuz etkileyebilir.
+              </li>
+              <li>
+                <strong>Ödeme tarihlerini kaçırmayın:</strong> Gecikme faizi ve
+                kredi siciline yansıyan gecikmeler, sonraki kredi başvurularınızı
+                zorlaştırabilir.
+              </li>
+            </ul>
+            <p>
+              Bir kredinin taksitini ve toplam maliyetini hesaplamak için{" "}
+              <Link href="/hesaplamalar/kredi-borc">Kredi Borç Hesaplama</Link>{" "}
+              aracını, kredi kartı taksitlerinin gerçek maliyeti için{" "}
+              <Link href="/hesaplamalar/taksit-maliyeti">Taksit Farkı Hesaplama</Link>{" "}
+              aracını kullanabilirsiniz.
+            </p>
+            <p style={{ color: "var(--muted)", fontSize: 14 }}>
+              Demoya girdiğiniz bilgiler tarayıcınızda işlenir. Sonuçlar
+              bilgilendirme amaçlıdır; kesin tutarlar için bankanızın ekstresini
+              esas alın.
+            </p>
+          </div>
+        </div>
+      </section>
+
       <section className="section" style={{ paddingTop: 25, paddingBottom: 70 }}>
         <div className="container">
           <article

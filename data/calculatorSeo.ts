@@ -434,6 +434,34 @@ export const toolSections: Record<string, SeoSection[]> = {
     },
   ],
 
+  indirim: [
+    {
+      heading: "İndirim hesaplama formülleri",
+      body: [
+        "- <strong>İndirim tutarı:</strong> Normal fiyat × İndirim oranı ÷ 100 → 1.500 TL'nin %30'u = 450 TL",
+        "- <strong>İndirimli fiyat:</strong> Normal fiyat × (1 − Oran ÷ 100) → 1.500 × 0,70 = <strong>1.050 TL</strong>",
+        "- <strong>İndirim oranı kaç?</strong> (Eski fiyat − Yeni fiyat) ÷ Eski fiyat × 100 → 800 TL'den 600 TL'ye düşen üründe %25 indirim",
+        "- <strong>İndirimsiz fiyatı bulma:</strong> İndirimli fiyat ÷ (1 − Oran ÷ 100) → %15 indirimle 1.020 TL'ye satılan ürünün normal fiyatı 1.020 ÷ 0,85 = <strong>1.200 TL</strong>",
+      ],
+    },
+    {
+      heading: "Ardışık indirimler toplanmaz",
+      body: [
+        "“%20 indirim + sepette ek %10” kampanyası toplam %30 indirim anlamına gelmez. İkinci indirim, ilk indirimden sonra kalan fiyata uygulanır.",
+        "Örnek: 1.000 TL'lik ürün → %20 indirimle 800 TL → ek %10 indirimle <strong>720 TL</strong>. Gerçek toplam indirim %28'dir.",
+        "Genel formül: Toplam oran = 1 − (1 − birinci oran) × (1 − ikinci oran). %50 + %20 ek indirim için 1 − 0,50 × 0,80 = <strong>%60</strong>.",
+      ],
+    },
+    {
+      heading: "Kampanyalarda gerçek indirimi kontrol etme",
+      body: [
+        "- Karşılaştırmayı ürünün kampanyadan önceki satış fiyatıyla yapın; üstü çizili fiyat her zaman gerçek satış fiyatı olmayabilir.",
+        "- “2 al 1 öde” birim fiyatta %50, “3 al 2 öde” ise %33,3 indirime denk gelir. Bu kampanyalar yalnızca o kadar ürüne gerçekten ihtiyacınız varsa avantajlıdır.",
+        "- Taksitli alışverişte vade farkı varsa indirimin bir kısmı geri alınmış olur. Toplam ödeyeceğiniz tutarı karşılaştırın.",
+      ],
+    },
+  ],
+
   "net-maas": [
     {
       heading: "Brüt maaştan net maaş nasıl hesaplanır?",

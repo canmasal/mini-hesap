@@ -80,6 +80,43 @@ export default function AboutPage() {
             </li>
           </ul>
 
+          <h2>Hesaplamalar nasıl hazırlanıyor?</h2>
+          <p>
+            Her araç, ilgili konunun yürürlükteki kurallarına ve kamuya açık
+            resmî kaynaklarda yayımlanan oranlara göre hazırlanır. Sayfalarda
+            yalnızca hesap makinesi değil; kullanılan formül, adım adım örnek
+            hesaplama ve sık sorulan sorular da yer alır. Böylece sonucu
+            kontrol edebilir, gerekirse işvereninize, bankanıza veya mali
+            müşavirinize neyi sormanız gerektiğini bilirsiniz.
+          </p>
+          <p>
+            Vergi dilimleri, asgari ücret, kıdem tazminatı tavanı gibi dönemsel
+            olarak değişen değerler güncellendiğinde ilgili araçlar ve rehber
+            yazıları da buna göre düzenlenir.
+          </p>
+
+          <h2>Kimler için?</h2>
+          <ul>
+            <li>
+              <strong>Çalışanlar:</strong> Net maaşını, işten ayrılırken
+              alacağı tazminatı veya yıllık izin hakkını öğrenmek isteyenler.
+            </li>
+            <li>
+              <strong>Küçük işletmeler ve serbest çalışanlar:</strong> KDV,
+              fiyatlandırma ve gelir-gider takibini pratik yoldan yapmak
+              isteyenler.
+            </li>
+            <li>
+              <strong>Öğrenciler:</strong> TYT, AYT, LGS, KPSS, DGS, ALES ve YDS
+              net ve puan hesaplarını hızlıca yapmak isteyenler.
+            </li>
+            <li>
+              <strong>Bütçesini planlayanlar:</strong> Kredi taksiti, mevduat
+              getirisi, kira artışı ve borç takibi için karar vermeden önce
+              rakamları görmek isteyenler.
+            </li>
+          </ul>
+
           <h2>Sorumluluk sınırı</h2>
           <p>
             MiniHesap üzerindeki tüm sonuçlar bilgilendirme amaçlı ve tahminidir.
