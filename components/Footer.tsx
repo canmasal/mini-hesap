@@ -33,6 +33,7 @@ export default function Footer() {
           <Link href="/guncel-rakamlar">2026 Güncel Rakamlar</Link>
           <Link href="/altin-fiyatlari">Canlı Altın Fiyatları</Link>
           <Link href="/doviz-kurlari">Canlı Döviz Kurları</Link>
+          <Link href="/borsa">Canlı Borsa (BIST)</Link>
           
         </nav>
 

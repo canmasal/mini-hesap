@@ -861,3 +861,21 @@ a.eyebrow:hover { color: var(--brand-dark); text-decoration: underline; }
 }
 
 .market-page { max-width: 1140px; }
+
+/* Borsa panosu */
+.board-live.is-closed { color: #9fb8a8; }
+.board-live.is-closed i { background: #6b8576; animation: none; }
+.mover-list { display: grid; gap: 2px; margin: 0; padding: 8px 0; list-style: none; }
+.mover-list li { display: grid; grid-template-columns: 64px minmax(0, 1fr) auto auto; align-items: center; gap: 10px; padding: 10px 18px; font-size: 14px; font-weight: 700; }
+.mover-list li:hover { background: #12241a; }
+.mover-code { color: #fff; font-weight: 900; }
+.mover-name { overflow: hidden; color: #9fb8a8; font-weight: 600; text-overflow: ellipsis; white-space: nowrap; }
+.mover-price { color: #facc15; font-variant-numeric: tabular-nums; }
+.stock-tools { display: flex; flex-wrap: wrap; gap: 10px; padding: 14px 18px 0; }
+.stock-tools input, .stock-tools select { flex: 1 1 180px; padding: 10px 14px; border: 1px solid #1f3a2b; border-radius: var(--r-sm); background: #12241a; color: #e8f5ec; font-size: 14px; font-family: inherit; }
+.stock-tools input::placeholder { color: #6b8576; }
+.stock-tools input:focus, .stock-tools select:focus { border-color: var(--brand); outline: none; }
+@media (max-width: 560px) {
+  .mover-list li { grid-template-columns: 58px minmax(0, 1fr) auto; padding: 10px 12px; }
+  .mover-list .mover-price { display: none; }
+}

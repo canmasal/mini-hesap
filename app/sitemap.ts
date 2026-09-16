@@ -23,7 +23,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     /* Resmî rakamlar sayfası: rakam değiştikçe güncellenir */
     page("/guncel-rakamlar", "weekly", 0.9),
     /* Canlı piyasa sayfaları: fiyatlar dakikalık yenilenir */
+    page("/piyasalar", "hourly", 0.9),
     page("/altin-fiyatlari", "hourly", 0.9),
+    page("/borsa", "hourly", 0.9),
     page("/doviz-kurlari", "hourly", 0.9),
 
     /* Hesaplama araçları: sitenin ana arama trafiği bu sayfalardan gelir */

@@ -8,7 +8,7 @@ const navItems = [
   { href: "/", label: "Ana Sayfa" },
   { href: "/hesaplamalar", label: "Hesaplamalar" },
   { href: "/rehber", label: "Rehberler" },
-  { href: "/altin-fiyatlari", label: "Altın & Döviz" },
+  { href: "/piyasalar", label: "Piyasalar" },
   { href: "/program-talebi", label: "Program İste" },
   { href: "/premium", label: "Premium" },
   { href: "/hakkimizda", label: "Hakkımızda" },
