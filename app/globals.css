@@ -830,3 +830,34 @@ a.eyebrow:hover { color: var(--brand-dark); text-decoration: underline; }
 @media (prefers-reduced-motion: reduce) {
   .board-live i, .board-table tr.flash-up td, .board-table tr.flash-down td { animation: none; }
 }
+
+/* Şerit, öne çıkan kartlar ve panel ızgarası */
+.market { display: grid; gap: 14px; }
+.ticker { position: relative; display: flex; overflow: hidden; padding: 10px 0; border: 1px solid #1f3a2b; border-radius: var(--r-md); background: var(--night); color: #e8f5ec; }
+.ticker:hover .ticker-run { animation-play-state: paused; }
+.ticker-run { display: flex; flex: none; gap: 32px; padding-right: 32px; animation: ticker-slide 42s linear infinite; }
+@keyframes ticker-slide { from { transform: translateX(0); } to { transform: translateX(-100%); } }
+.ticker-item { display: inline-flex; align-items: baseline; gap: 8px; font-size: 14px; white-space: nowrap; }
+.ticker-item b { color: #9fb8a8; font-size: 12px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
+.ticker-item > span:first-of-type { color: #facc15; font-weight: 800; font-variant-numeric: tabular-nums; }
+.market .board-head { border: 1px solid var(--line); border-radius: var(--r-md); background: #fff; }
+.market .board-time { color: var(--muted); }
+.market .board-warn { border-radius: var(--r-md); }
+.board-clock { color: var(--brand-deep); font-size: 20px; font-weight: 900; font-variant-numeric: tabular-nums; letter-spacing: .04em; }
+.hi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; }
+.hi-card { padding: 16px 18px; border: 1px solid var(--line); border-radius: var(--r-md); background: #fff; box-shadow: var(--shadow-sm); }
+.hi-name { display: block; color: var(--muted); font-size: 12px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
+.hi-value { display: block; margin-top: 6px; color: var(--ink); font-size: clamp(22px, 4vw, 28px); font-weight: 900; font-variant-numeric: tabular-nums; }
+.hi-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; margin-top: 6px; font-size: 13px; font-weight: 800; }
+.hi-buy { color: var(--muted); font-weight: 600; }
+.market-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 14px; align-items: start; }
+.market-col { display: grid; gap: 14px; }
+.market-panel { overflow: hidden; border: 1px solid #1f3a2b; border-radius: var(--r-lg); background: var(--night); color: #e8f5ec; }
+.market-panel h3 { margin: 0; padding: 14px 18px; border-bottom: 1px solid #1f3a2b; color: #fff; font-size: 15px; letter-spacing: .02em; }
+.market-panel .board-tabs { margin: 12px 18px 0; }
+.market-panel .board-table thead th { background: transparent; }
+@media (max-width: 860px) {
+  .market-grid { grid-template-columns: minmax(0, 1fr); }
+}
+
+.market-page { max-width: 1140px; }

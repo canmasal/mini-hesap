@@ -111,7 +111,7 @@ export default function MarketPage({ kind, data }: { kind: Kind; data: MarketDat
 
   return (
     <main className="page">
-      <div className="container rates-page">
+      <div className="container rates-page market-page">
         <Breadcrumb items={[{ label: "Ana Sayfa", href: "/" }, { label: title }]} />
 
         <p className="eyebrow">{isGold ? "ALTIN PİYASASI" : "DÖVİZ PİYASASI"}</p>

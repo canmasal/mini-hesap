@@ -24,11 +24,22 @@ export type Quote = {
   change: number;
 };
 
+export type Parity = {
+  code: string;
+  name: string;
+  value: number;
+  change: number;
+};
+
 export type MarketData = {
   /** Kaynağın bildirdiği güncelleme zamanı, ISO (İstanbul saati +03:00) */
   updatedAt: string;
   gold: Quote[];
   currencies: Quote[];
+  /** Kurlardan türetilen pariteler (EUR/USD gibi) */
+  parities: Parity[];
+  /** Ons altın, sepet kur, BIST 100 gibi özet göstergeler */
+  summary: Parity[];
 };
 
 /* Kuyumcu panosundaki sırayla altın türleri */
@@ -47,7 +58,6 @@ const GOLD: Array<[string, string]> = [
   ["YIA", "22 Ayar Bilezik (gram)"],
   ["18AYARALTIN", "18 Ayar Altın (gram)"],
   ["14AYARALTIN", "14 Ayar Altın (gram)"],
-  ["GUMUS", "Gram Gümüş"],
   ["GPL", "Gram Platin"],
 ];
 
@@ -70,6 +80,18 @@ const CURRENCIES: Array<[string, string]> = [
 
 type RawQuote = { Buying?: number; Selling?: number; Change?: number };
 
+/**
+ * Kaynak Japon yenini 100 kat düşük veriyor (1 yen için 0,0031 TL gibi).
+ * Bağımsız kurlarla karşılaştırılıp 100 ile çarpılarak düzeltilir.
+ */
+const SCALE_FIX: Record<string, number> = { JPY: 100 };
+
+/** Türetilmiş göstergelerde yüzde değişimi iki oranın farkından tahmin eder */
+const ratioChange = (a: number, b: number) => ((1 + a / 100) / (1 + b / 100) - 1) * 100;
+
+/** 1 ons = 31,1035 gram */
+const OUNCE_GRAMS = 31.1035;
+
 function pick(raw: Record<string, unknown>, list: Array<[string, string]>): Quote[] {
   const out: Quote[] = [];
   for (const [code, name] of list) {
@@ -78,11 +100,12 @@ function pick(raw: Record<string, unknown>, list: Array<[string, string]>): Quot
     /* Kaynak bazı kalemler için 0 döndürebiliyor; boş satır göstermeyelim */
     if (!q || !Number.isFinite(selling) || selling <= 0) continue;
     const buying = Number(q.Buying);
+    const factor = SCALE_FIX[code] ?? 1;
     out.push({
       code,
       name,
-      buying: Number.isFinite(buying) && buying > 0 ? buying : null,
-      selling,
+      buying: Number.isFinite(buying) && buying > 0 ? buying * factor : null,
+      selling: selling * factor,
       change: Number(q.Change) || 0,
     });
   }
@@ -95,10 +118,77 @@ export function normalizeMarket(raw: Record<string, unknown>): MarketData | null
   const currencies = pick(raw, CURRENCIES);
   if (!gold.length && !currencies.length) return null;
 
+  const at = (list: Quote[], code: string) => list.find((q) => q.code === code) ?? null;
+  const usd = at(currencies, "USD");
+  const eur = at(currencies, "EUR");
+  const gbp = at(currencies, "GBP");
+  const jpy = at(currencies, "JPY");
+  const has = at(gold, "HAS");
+  const silverOunce = Number((raw.GUMUS as RawQuote | undefined)?.Selling) || 0;
+  const silverChange = Number((raw.GUMUS as RawQuote | undefined)?.Change) || 0;
+
+  /* Kaynak gümüşü ons/dolar veriyor; kuyumcunun kullandığı gram TL fiyatını üretiyoruz */
+  if (silverOunce > 0 && usd) {
+    gold.push({
+      code: "GUMUS",
+      name: "Gram Gümüş",
+      buying: null,
+      selling: (silverOunce * usd.selling) / OUNCE_GRAMS,
+      change: silverChange + usd.change,
+    });
+  }
+
+  const parities: Parity[] = [];
+  const addParity = (code: string, name: string, a: Quote | null, b: Quote | null, ratio = 1) => {
+    if (!a || !b) return;
+    parities.push({
+      code,
+      name,
+      value: (a.selling / b.selling) * ratio,
+      change: ratioChange(a.change, b.change),
+    });
+  };
+  addParity("EUR/USD", "Euro / Dolar", eur, usd);
+  addParity("GBP/USD", "Sterlin / Dolar", gbp, usd);
+  addParity("EUR/GBP", "Euro / Sterlin", eur, gbp);
+  addParity("USD/JPY", "Dolar / Japon Yeni", usd, jpy);
+
+  const summary: Parity[] = [];
+  if (has && usd) {
+    summary.push({
+      code: "ONS",
+      name: "Ons altın (dolar)",
+      value: (has.selling * OUNCE_GRAMS) / usd.selling,
+      change: ratioChange(has.change, usd.change),
+    });
+  }
+  if (silverOunce > 0) {
+    summary.push({ code: "ONSGUMUS", name: "Ons gümüş (dolar)", value: silverOunce, change: silverChange });
+  }
+  if (usd && eur) {
+    summary.push({
+      code: "SEPET",
+      name: "Sepet kur (½ dolar + ½ euro)",
+      value: (usd.selling + eur.selling) / 2,
+      change: (usd.change + eur.change) / 2,
+    });
+  }
+  const index = raw.XU100 as RawQuote | undefined;
+  if (index && Number(index.Selling) > 0) {
+    summary.push({
+      code: "XU100",
+      name: "BIST 100 endeksi",
+      value: Number(index.Selling),
+      change: Number(index.Change) || 0,
+    });
+  }
+
   return {
     updatedAt: date ? `${date.replace(" ", "T")}+03:00` : new Date().toISOString(),
     gold,
     currencies,
+    parities,
+    summary,
   };
 }
 
