@@ -59,6 +59,10 @@ import CalorieCalculator from "@/components/calculators/CalorieCalculator";
 import NetToGrossCalculator from "@/components/calculators/NetToGrossCalculator";
 import ExamAverageCalculator from "@/components/calculators/ExamAverageCalculator";
 import TitleDeedFeeCalculator from "@/components/calculators/TitleDeedFeeCalculator";
+import RentalIncomeTaxCalculator from "@/components/calculators/RentalIncomeTaxCalculator";
+import PropertyTaxCalculator from "@/components/calculators/PropertyTaxCalculator";
+import StampTaxCalculator from "@/components/calculators/StampTaxCalculator";
+import VehicleTaxCalculator from "@/components/calculators/VehicleTaxCalculator";
 import ProfitMarginCalculator from "@/components/calculators/ProfitMarginCalculator";
 
 /** 0.175 → "%17,5" */
@@ -98,6 +102,10 @@ const componentMap: Record<string, ComponentType> = {
   "netten-brute-maas": NetToGrossCalculator,
   "vize-final-ortalama": ExamAverageCalculator,
   "tapu-harci": TitleDeedFeeCalculator,
+  "kira-geliri-vergisi": RentalIncomeTaxCalculator,
+  "emlak-vergisi": PropertyTaxCalculator,
+  "damga-vergisi": StampTaxCalculator,
+  mtv: VehicleTaxCalculator,
   "kar-marji": ProfitMarginCalculator,
 
   /* Sınav araçları tek bileşenden, sınav yapılandırmasıyla üretilir */

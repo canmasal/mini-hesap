@@ -12,6 +12,7 @@
 
 import { moreToolSections } from "@/data/calculatorSeoMore";
 import { toolSeoBatch2 } from "@/data/calculatorSeoTools2";
+import { toolSeoVergi } from "@/data/calculatorSeoVergi";
 
 export type SeoSection = { heading: string; body: string[] };
 
@@ -29,6 +30,7 @@ const netFormula = (penalty: number) =>
 
 export const newToolSeo: Record<string, ToolSeo> = {
   ...toolSeoBatch2,
+  ...toolSeoVergi,
 
   /* ======================== TYT ======================== */
   "tyt-net": {

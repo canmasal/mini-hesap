@@ -110,6 +110,46 @@ export const calculators = [
       "Satış bedeline göre alıcı ve satıcının ödeyeceği tapu harcını ve toplam tapu masrafını hesaplayın.",
   },
 
+  {
+    slug: "kira-geliri-vergisi",
+    icon: "🏘️",
+    title: "Kira Geliri Vergisi Hesaplama",
+    category: "finans",
+    keywords: ["kira geliri", "gmsi", "kira vergisi", "mesken istisnası", "götürü gider", "beyanname"],
+    description:
+      "Konut ve işyeri kira gelirinizin vergisini istisna, gider ve vergi dilimleriyle birlikte hesaplayın.",
+  },
+
+  {
+    slug: "emlak-vergisi",
+    icon: "🏠",
+    title: "Emlak Vergisi Hesaplama",
+    category: "finans",
+    keywords: ["emlak vergisi", "bina vergisi", "arsa vergisi", "belediye", "büyükşehir", "taksit"],
+    description:
+      "Konut, işyeri, arsa ve arazi için yıllık emlak vergisini, kültür payını ve taksit tutarını hesaplayın.",
+  },
+
+  {
+    slug: "damga-vergisi",
+    icon: "🧾",
+    title: "Damga Vergisi Hesaplama",
+    category: "finans",
+    keywords: ["damga vergisi", "sözleşme", "kira sözleşmesi", "binde 9,48", "bordro", "nüsha"],
+    description:
+      "Sözleşme, kira sözleşmesi ve bordro için ödenecek damga vergisini ve taraf başına düşen tutarı hesaplayın.",
+  },
+
+  {
+    slug: "mtv",
+    icon: "🚗",
+    title: "MTV Hesaplama (Motorlu Taşıtlar Vergisi)",
+    category: "finans",
+    keywords: ["mtv", "motorlu taşıtlar vergisi", "araç vergisi", "taşıt vergisi", "ocak temmuz taksit"],
+    description:
+      "Motor hacmi, model yılı ve taşıt değerine göre yıllık MTV tutarınızı ve taksitlerinizi hesaplayın.",
+  },
+
   /* ---------------- Eğitim & Sınav ---------------- */
 
   {

@@ -9,6 +9,7 @@
 import { calisanGuides } from "@/data/guidesCalisan";
 import { finansGuides } from "@/data/guidesFinans";
 import { guncelGuides } from "@/data/guidesGuncel";
+import { vergiGuides } from "@/data/guidesVergi";
 
 export type GuideSection = {
   heading: string;
@@ -571,6 +572,7 @@ export const guides: Guide[] = [
   ...coreGuides,
   ...calisanGuides,
   ...finansGuides,
+  ...vergiGuides,
 ];
 
 export function findGuide(slug: string) {

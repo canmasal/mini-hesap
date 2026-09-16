@@ -231,6 +231,78 @@ export const CONSUMER_LOAN_TAXES = {
 } as const;
 
 /* ------------------------------------------------------------------ */
+/* Kira geliri (GMSİ)                                                  */
+/* ------------------------------------------------------------------ */
+
+export const RENTAL_INCOME = {
+  /** Mesken kira geliri istisnası (yıllık, TL) */
+  exemption: 58000,
+  /** Götürü gider oranı (GVK 74); hak kiraya verenler yararlanamaz */
+  lumpSumExpenseRate: 0.15,
+  /** İşyeri kirasında stopaj oranı (GVK 94/5-a) */
+  workplaceWithholding: 0.2,
+  /** Stopaja tabi işyeri kirasında beyan sınırı (tarifenin 2. dilimi) */
+  workplaceDeclarationLimit: 400000,
+  /** Stopajsız işyeri kirasında beyan sınırı (GVK 86/1-d) */
+  workplaceNoWithholdingLimit: 22000,
+  /**
+   * İstisnadan yararlanamama sınırı: beyanı gerekmeyenler hariç toplam brüt
+   * geliri ücret tarifesinin 3. dilimini aşanlar mesken istisnası alamaz.
+   */
+  exemptionIncomeLimit: 1500000,
+  source: {
+    label: "GVK Genel Tebliği Seri No: 332 (RG 31.12.2025) – KPMG özeti",
+    url: "https://kpmgvergi.com/yayinlar/mali-bultenler/vergi/2026-yili-gelir-vergisi-dilimleri-ile-dikkate-alinacak-bazi-had-ve-tutarlar-belirlendi/3351",
+  } satisfies Source,
+} as const;
+
+/* ------------------------------------------------------------------ */
+/* Damga vergisi                                                       */
+/* ------------------------------------------------------------------ */
+
+export const STAMP_TAX = {
+  /** Belli parayı ihtiva eden sözleşme, taahhütname, temlikname */
+  contract: 0.00948,
+  /** Kira sözleşmesi (sözleşme süresi boyunca toplam kira bedeli üzerinden) */
+  rentContract: 0.00189,
+  /** Adi kefilli kira sözleşmesi */
+  rentWithSurety: 0.01137,
+  /** Müteselsil kefilli kira sözleşmesi */
+  rentWithJointSurety: 0.00948,
+  /** Ücret bordrosu */
+  payroll: 0.00759,
+  /** Her bir kâğıttan alınacak azami damga vergisi (2026) */
+  maximum: 29115961.1,
+  source: {
+    label: "Damga Vergisi Kanunu Genel Tebliği Seri No: 71 (RG 31.12.2025)",
+    url: "https://www.alomaliye.com/2025/12/31/damga-vergisi-kanunu-genel-tebligi-seri-no-71-2026-yili-1-sayili-tabloda-yer-alan-maktu-vergiler/",
+  } satisfies Source,
+} as const;
+
+/* ------------------------------------------------------------------ */
+/* Emlak vergisi                                                       */
+/* ------------------------------------------------------------------ */
+
+export const PROPERTY_TAX = {
+  /** Bina, arsa ve arazi vergisi oranları (1319 sayılı Kanun md. 8 ve 18) */
+  rates: {
+    mesken: { normal: 0.001, metropolitan: 0.002 },
+    isyeri: { normal: 0.002, metropolitan: 0.004 },
+    arsa: { normal: 0.003, metropolitan: 0.006 },
+    arazi: { normal: 0.001, metropolitan: 0.002 },
+  },
+  /** Taşınmaz kültür varlıklarının korunmasına katkı payı (verginin %10'u) */
+  culturalContribution: 0.1,
+  /** İndirimli (sıfır) orandan yararlanmada tek mesken yüzölçümü sınırı (m²) */
+  reducedRateMaxArea: 200,
+  installments: "1. taksit mart–mayıs, 2. taksit kasım ayında ödenir.",
+  source: {
+    label: "TÜRMOB – 2026 Yılında Emlak Vergisi Uygulaması (89 Seri No'lu Tebliğ)",
+    url: "https://www.turmob.org.tr/ekutuphane/Read/dcca5a10-3d55-40d7-b531-1244690fea66",
+  } satisfies Source,
+} as const;
+
+/* ------------------------------------------------------------------ */
 /* Yardımcılar                                                         */
 /* ------------------------------------------------------------------ */
 
