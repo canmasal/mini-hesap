@@ -63,6 +63,11 @@ import RentalIncomeTaxCalculator from "@/components/calculators/RentalIncomeTaxC
 import PropertyTaxCalculator from "@/components/calculators/PropertyTaxCalculator";
 import StampTaxCalculator from "@/components/calculators/StampTaxCalculator";
 import VehicleTaxCalculator from "@/components/calculators/VehicleTaxCalculator";
+import IdealWeightCalculator from "@/components/calculators/IdealWeightCalculator";
+import PeriodCalculator from "@/components/calculators/PeriodCalculator";
+import EmployerCostCalculator from "@/components/calculators/EmployerCostCalculator";
+import CreditCardMinimumCalculator from "@/components/calculators/CreditCardMinimumCalculator";
+import LatePaymentCalculator from "@/components/calculators/LatePaymentCalculator";
 import ProfitMarginCalculator from "@/components/calculators/ProfitMarginCalculator";
 
 /** 0.175 → "%17,5" */
@@ -106,6 +111,11 @@ const componentMap: Record<string, ComponentType> = {
   "emlak-vergisi": PropertyTaxCalculator,
   "damga-vergisi": StampTaxCalculator,
   mtv: VehicleTaxCalculator,
+  "ideal-kilo": IdealWeightCalculator,
+  "adet-takvimi": PeriodCalculator,
+  "isveren-maliyeti": EmployerCostCalculator,
+  "kredi-karti-asgari-odeme": CreditCardMinimumCalculator,
+  "gecikme-zammi": LatePaymentCalculator,
   "kar-marji": ProfitMarginCalculator,
 
   /* Sınav araçları tek bileşenden, sınav yapılandırmasıyla üretilir */

@@ -231,6 +231,95 @@ export const CONSUMER_LOAN_TAXES = {
 } as const;
 
 /* ------------------------------------------------------------------ */
+/* İşveren prim oranları                                               */
+/* ------------------------------------------------------------------ */
+
+/**
+ * 2026'da işveren payı iki kalemde arttı: malullük-yaşlılık-ölüm %11'den
+ * %12'ye (7566 sayılı Kanun), kısa vadeli sigorta kolları %2'den %2,25'e.
+ * Toplam işveren yükü bu nedenle %22,75 değil %23,75'tir; ÇSGB'nin asgari
+ * ücret işveren maliyeti tablosu da bu oranla tutmaktadır.
+ */
+export const EMPLOYER_RATES = {
+  /** Kısa vadeli sigorta kolları */
+  shortTerm: 0.0225,
+  /** Malullük, yaşlılık ve ölüm (işveren payı) */
+  pension: 0.12,
+  /** Genel sağlık sigortası (işveren payı) */
+  health: 0.075,
+  /** SGK işveren payı toplamı */
+  sgkTotal: 0.2175,
+  /** İşsizlik sigortası işveren payı */
+  unemployment: 0.02,
+  /** SGK + işsizlik toplam işveren yükü (teşviksiz) */
+  total: 0.2375,
+  /** 5510 sayılı Kanun md. 81/ı indirimleri (MYÖ işveren hissesinden düşer) */
+  incentives: {
+    /** İmalat sektörü: 5 puan */
+    manufacturing: 0.05,
+    /** İmalat dışı sektörler: 2 puan (01.01.2026'dan itibaren) */
+    other: 0.02,
+  },
+  source: {
+    label: "SGK – İşveren Prim Oranları (2026)",
+    url: "https://www.sgk.gov.tr/Content/Post/c7812ea8-5087-413f-aeb5-d3c1d153e11a/Isveren-Prim-Oranlari-2026-01-13-04-52-38",
+  } satisfies Source,
+} as const;
+
+/* ------------------------------------------------------------------ */
+/* Kredi kartı faiz ve asgari ödeme                                    */
+/* ------------------------------------------------------------------ */
+
+/**
+ * TCMB azami kredi kartı faiz oranlarını her ay yeniden ilan eder; oranlar
+ * dönem borcuna göre kademelidir. Tarih bilgisi sayfada gösterilir ki
+ * ziyaretçi güncelliği görebilsin.
+ */
+export const CREDIT_CARD = {
+  validFrom: "2026-09-01",
+  /** Dönem borcuna göre aylık azami akdi ve gecikme faizi */
+  tiers: [
+    { upTo: 30000, contractual: 0.0325, late: 0.0355 },
+    { upTo: 180000, contractual: 0.0375, late: 0.0405 },
+    { upTo: Infinity, contractual: 0.0425, late: 0.0455 },
+  ],
+  /** Nakit çekimde dönem borcuna bakılmaksızın en üst kademe uygulanır */
+  cashAdvance: { contractual: 0.0425, late: 0.0455 },
+  /** BDDK asgari ödeme oranları (kart limitine göre) */
+  minimumPayment: {
+    limitThreshold: 50000,
+    belowThreshold: 0.2,
+    aboveThreshold: 0.4,
+    /** Yeni tahsis edilen kartlarda ilk bir yıl */
+    newCardFirstYear: 0.4,
+  },
+  source: {
+    label: "TCMB – Kredi kartı işlemlerinde azami faiz oranları",
+    url: "https://www.tcmb.gov.tr/wps/wcm/connect/TR/TCMB+TR/Main+Menu/Istatistikler/Bankacilik+Verileri/Kredi_Karti_Islemlerinde_Uygulanacak_Azami_Faiz_Oranlari",
+  } satisfies Source,
+  minimumSource: {
+    label: "BDDK – 10970 sayılı Kurul Kararı (26.09.2024)",
+    url: "https://www.bddk.org.tr/Mevzuat/DokumanGetir/1255",
+  } satisfies Source,
+} as const;
+
+/* ------------------------------------------------------------------ */
+/* Gecikme zammı ve tecil faizi                                        */
+/* ------------------------------------------------------------------ */
+
+export const LATE_PAYMENT = {
+  /** Aylık gecikme zammı (6183 md. 51); gecikme faizi ve pişmanlık zammı da aynı */
+  monthly: 0.037,
+  /** Yıllık tecil faizi (6183 md. 48) */
+  deferralAnnual: 0.39,
+  validFrom: "2025-11-13",
+  source: {
+    label: "10556 sayılı Cumhurbaşkanı Kararı (RG 13.11.2025/33076)",
+    url: "https://www.resmigazete.gov.tr/eskiler/2025/11/20251113-2.pdf",
+  } satisfies Source,
+} as const;
+
+/* ------------------------------------------------------------------ */
 /* Kira geliri (GMSİ)                                                  */
 /* ------------------------------------------------------------------ */
 

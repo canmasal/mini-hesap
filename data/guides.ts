@@ -7,8 +7,10 @@
  */
 
 import { calisanGuides } from "@/data/guidesCalisan";
+import { ekGuides } from "@/data/guidesEk";
 import { finansGuides } from "@/data/guidesFinans";
 import { guncelGuides } from "@/data/guidesGuncel";
+import { saglikGuides } from "@/data/guidesSaglik";
 import { vergiGuides } from "@/data/guidesVergi";
 
 export type GuideSection = {
@@ -23,7 +25,7 @@ export type Guide = {
   /** Sayfa başlığı (SEO) */
   metaTitle: string;
   description: string;
-  category: "Çalışan Hakları" | "Finans" | "Vergi" | "Günlük";
+  category: "Çalışan Hakları" | "Finans" | "Vergi" | "Günlük" | "Sağlık";
   icon: string;
   /** Yayın tarihi (ISO) */
   published: string;
@@ -573,6 +575,8 @@ export const guides: Guide[] = [
   ...calisanGuides,
   ...finansGuides,
   ...vergiGuides,
+  ...saglikGuides,
+  ...ekGuides,
 ];
 
 export function findGuide(slug: string) {

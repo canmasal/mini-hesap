@@ -150,6 +150,56 @@ export const calculators = [
       "Motor hacmi, model yılı ve taşıt değerine göre yıllık MTV tutarınızı ve taksitlerinizi hesaplayın.",
   },
 
+  {
+    slug: "ideal-kilo",
+    icon: "🎯",
+    title: "İdeal Kilo Hesaplama",
+    category: "saglik",
+    keywords: ["ideal kilo", "boya göre kilo", "kaç kilo olmalıyım", "devine", "sağlıklı kilo"],
+    description:
+      "Boy ve cinsiyetinize göre ideal kilonuzu ve VKİ'ye dayalı sağlıklı kilo aralığınızı hesaplayın.",
+  },
+
+  {
+    slug: "adet-takvimi",
+    icon: "🗓️",
+    title: "Adet Günü Hesaplama (Regl Takvimi)",
+    category: "saglik",
+    keywords: ["adet günü", "regl takvimi", "yumurtlama", "doğurgan dönem", "adet gecikmesi", "döngü"],
+    description:
+      "Son adetinize göre sonraki regl tarihinizi, yumurtlama gününüzü ve doğurgan dönemi hesaplayın.",
+  },
+
+  {
+    slug: "isveren-maliyeti",
+    icon: "🏢",
+    title: "İşveren Maliyeti Hesaplama",
+    category: "calisan",
+    keywords: ["işveren maliyeti", "sgk işveren payı", "personel maliyeti", "prim indirimi", "bordro maliyeti"],
+    description:
+      "Brüt maaşa göre bir çalışanın işverene aylık ve yıllık toplam maliyetini prim indirimleriyle hesaplayın.",
+  },
+
+  {
+    slug: "kredi-karti-asgari-odeme",
+    icon: "💳",
+    title: "Kredi Kartı Asgari Ödeme Hesaplama",
+    category: "finans",
+    keywords: ["asgari ödeme", "kredi kartı faizi", "dönem borcu", "kart limiti", "nakit avans"],
+    description:
+      "Kart limitinize göre asgari ödeme tutarını, işleyecek faizi ve borcun kaç ayda biteceğini hesaplayın.",
+  },
+
+  {
+    slug: "gecikme-zammi",
+    icon: "⏰",
+    title: "Gecikme Zammı Hesaplama",
+    category: "finans",
+    keywords: ["gecikme zammı", "vergi borcu", "sgk borcu", "trafik cezası", "gecikme faizi", "tecil"],
+    description:
+      "Vadesinde ödenmeyen vergi, prim ve ceza borçları için gecikme zammını ve toplam ödemeyi hesaplayın.",
+  },
+
   /* ---------------- Eğitim & Sınav ---------------- */
 
   {
