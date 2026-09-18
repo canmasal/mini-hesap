@@ -25,6 +25,8 @@ export type Plan = {
   productSlugs: string[];
   /** Üründen bağımsız, pakete özel vaatler */
   perks: string[];
+  /** Shopier ürün sayfası; yoksa site içi /satin-al akışı kullanılır */
+  shopierUrl?: string;
 };
 
 export const plans: Plan[] = [
@@ -35,6 +37,7 @@ export const plans: Plan[] = [
     tagline: "Kişisel bütçe ve borç takibi",
     audience: "Bireysel kullanım",
     price: 199,
+    shopierUrl: "https://www.shopier.com/miniihesap/50977682",
     productSlugs: [
       "borc-takip",
       "kredi-borc-kapatma",
@@ -55,6 +58,7 @@ export const plans: Plan[] = [
     tagline: "İşletmenizin tüm takibi tek pakette",
     audience: "Küçük işletme ve serbest meslek",
     price: 499,
+    shopierUrl: "https://www.shopier.com/miniihesap/50977886",
     featured: true,
     badge: "En çok tercih edilen",
     productSlugs: [
@@ -86,6 +90,7 @@ export const plans: Plan[] = [
     tagline: "Masaüstü program ve veritabanı dahil",
     audience: "Büyüyen işletmeler",
     price: 999,
+    shopierUrl: "https://www.shopier.com/miniihesap/50977910",
     productSlugs: [
       "borc-takip",
       "kredi-borc-kapatma",

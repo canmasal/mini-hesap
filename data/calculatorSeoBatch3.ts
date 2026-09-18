@@ -23,7 +23,7 @@ export const toolSeoBatch3: Record<string, ToolSeo> = {
   "ideal-kilo": {
     title: "İdeal Kilo Hesaplama | Boya Göre Kaç Kilo Olmalı",
     description:
-      "Boy ve cinsiyete göre ideal kilo hesaplama: Devine, Robinson, Miller ve Hamwi formülleriyle ideal kilonuzu ve VKİ 18,5 – 24,9 aralığındaki sağlıklı kilo aralığınızı öğrenin.",
+      "İdeal kilo hesaplama: boy ve cinsiyetinize göre ideal kilonuzu 4 formülle ve VKİ 18,5–24,9 sağlıklı kilo aralığınızı öğrenin.",
     intro:
       "İdeal kilo, boyunuza göre sağlıklı kabul edilen kilo aralığıdır. Tek bir doğru rakam yoktur: klinikte kullanılan formüller birbirinden birkaç kilo farklı sonuç verir. Hesaplayıcı dört yaygın formülü ve vücut kitle indeksine dayanan sağlıklı kilo aralığını birlikte gösterir.",
     howItWorks: [
@@ -88,7 +88,7 @@ export const toolSeoBatch3: Record<string, ToolSeo> = {
   "adet-takvimi": {
     title: "Adet Günü Hesaplama | Regl ve Yumurtlama Takvimi",
     description:
-      "Adet günü hesaplama: son adetinizin ilk gününü girin, bir sonraki regl tarihinizi, yumurtlama gününüzü ve doğurgan dönemi öğrenin. Sonraki üç döngü tarihi ile birlikte.",
+      "Adet günü hesaplama: son adet tarihinize göre sonraki regl gününüzü, yumurtlama gününüzü ve doğurgan dönemi öğrenin. Üç döngülük takvim.",
     intro:
       "Adet takvimi, son adetinizin ilk günü ve döngü uzunluğunuzdan yola çıkarak bir sonraki regl tarihinizi, yumurtlama gününüzü ve gebelik ihtimalinin yüksek olduğu doğurgan dönemi tahmin eder.",
     howItWorks: [
@@ -158,7 +158,7 @@ export const toolSeoBatch3: Record<string, ToolSeo> = {
   },
   /* ==================== İŞVEREN MALİYETİ ==================== */
   "isveren-maliyeti": {
-    title: `İşveren Maliyeti Hesaplama ${Y} | Brüt Maaşın Gerçek Bedeli`,
+    title: `İşveren Maliyeti Hesaplama ${Y} | SGK Primi`,
     description: `${Y} işveren maliyeti hesaplama: brüt maaşa SGK işveren payı ${pct(
       EMPLOYER_RATES.sgkTotal,
     )} ve işsizlik ${pct(
@@ -254,7 +254,7 @@ export const toolSeoBatch3: Record<string, ToolSeo> = {
 
   /* ==================== KREDİ KARTI ASGARİ ÖDEME ==================== */
   "kredi-karti-asgari-odeme": {
-    title: "Kredi Kartı Asgari Ödeme Hesaplama | Faiz ve Borç Seyri",
+    title: `Kredi Kartı Asgari Ödeme Hesaplama ${Y}`,
     description: `Kredi kartı asgari ödeme tutarı ve faizi: limite göre ${pct(
       CREDIT_CARD.minimumPayment.belowThreshold,
       0,

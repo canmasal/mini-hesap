@@ -446,6 +446,33 @@ export const EARLY_REPAYMENT = {
 } as const;
 
 /* ------------------------------------------------------------------ */
+/* Engelli araç alımında ÖTV istisnası                                 */
+/* ------------------------------------------------------------------ */
+
+/**
+ * ÖTV Kanunu md. 7/2. Tutar sınırı; hesaplanması gereken ÖTV ve diğer
+ * bütün vergiler dâhil satış bedelidir (istisna olmasaydı ödenecek fiyat).
+ */
+export const DISABLED_VEHICLE = {
+  year: 2026,
+  /** ÖTV ve KDV dâhil azami satış bedeli (TL) */
+  priceLimit: 2873900,
+  previousLimit: 2290200,
+  /** Özel tertibat ve bizzat kullanma şartı aranmayan engel oranı */
+  severeDisabilityRate: 0.9,
+  /** Aracın asgari yerli katkı oranı */
+  minLocalContent: 0.4,
+  /** İstisnadan yeniden yararlanma süresi (27.12.2024'ten itibaren) */
+  reuseYears: 10,
+  /** Bu süre dolmadan ÖTV ödenmeden devir ve satış yapılamaz (kanundaki süre) */
+  saleLockYears: 5,
+  source: {
+    label: "16 Seri No.lu ÖTV (II) Sayılı Liste Uygulama Genel Tebliği (RG 31.12.2025/33124 5. Mük.)",
+    url: "https://www.esasdenetim.com/2026-sirkuler/2026-yilinda-engellilerin-arac-alimlarinda-otv-istisnasi-sinirinin-yukseltilmesine-dair-16-seri-nolu-otv-tebligi-yayimlandi-2204",
+  } satisfies Source,
+} as const;
+
+/* ------------------------------------------------------------------ */
 /* Yardımcılar                                                         */
 /* ------------------------------------------------------------------ */
 

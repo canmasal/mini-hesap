@@ -65,7 +65,7 @@ export const toolSeoBatch4: Record<string, ToolSeo> = {
   /* ==================== GELİR VERGİSİ ==================== */
   "gelir-vergisi": {
     title: `Gelir Vergisi Hesaplama ${Y} | Vergi Dilimleri`,
-    description: `Gelir vergisi hesaplama ${Y}: yıllık matrahınızı girin, ${Y} vergi dilimlerine göre ödenecek vergiyi, efektif ve marjinal oranınızı dilim dilim görün. Ücret ve ücret dışı tarife.`,
+    description: `Gelir vergisi hesaplama ${Y}: yıllık matrahınıza göre vergiyi dilim dilim, efektif ve marjinal oranıyla görün. Ücret ve ücret dışı tarife.`,
     intro: `Gelir vergisi artan oranlı bir vergidir: gelirin tamamı en yüksek oranla değil, her dilime düşen kısmı o dilimin oranıyla vergilendirilir. Bu araç ${Y} tarifesiyle yıllık verginizi, ortalama (efektif) oranınızı ve girdiğiniz son dilimi gösterir.`,
     howItWorks: [
       "Yıllık vergi matrahınızı girin (istisna ve indirimler düşülmüş tutar).",
@@ -129,7 +129,7 @@ export const toolSeoBatch4: Record<string, ToolSeo> = {
   /* ==================== SERBEST MESLEK MAKBUZU ==================== */
   "serbest-meslek-makbuzu": {
     title: `Serbest Meslek Makbuzu Hesaplama ${Y} | SMM`,
-    description: `Serbest meslek makbuzu hesaplama ${Y}: netten brüte ve brütten nete SMM, ${pct(FREELANCE_RECEIPT.withholding)} gelir vergisi stopajı ve ${pct(FREELANCE_RECEIPT.vat)} KDV. Makbuza yazılacak tutarı ve hesabınıza geçecek parayı görün.`,
+    description: `SMM hesaplama ${Y}: netten brüte ve brütten nete serbest meslek makbuzu, ${pct(FREELANCE_RECEIPT.withholding)} stopaj ve ${pct(FREELANCE_RECEIPT.vat)} KDV ile hesabınıza geçecek tutar.`,
     intro:
       "Serbest meslek makbuzu (SMM) keserken en sık yapılan hata, anlaşılan ücretin brüt mü net mi olduğunu karıştırmaktır. Bu araç iki yönde de hesaplar: almak istediğiniz netten makbuza yazılacak brüte ya da brütten elinize geçecek nete.",
     howItWorks: [
@@ -191,7 +191,7 @@ export const toolSeoBatch4: Record<string, ToolSeo> = {
   "bilesik-faiz": {
     title: "Bileşik Faiz Hesaplama | Aylık Ek Yatırımlı",
     description:
-      "Bileşik faiz hesaplama: başlangıç tutarı, yıllık oran ve süreye göre birikiminizin yıl yıl nasıl büyüdüğünü görün. Aylık ek yatırım, faiz sıklığı ve efektif yıllık getiri.",
+      "Bileşik faiz hesaplama: başlangıç tutarı, faiz oranı ve süreye göre birikiminizi aylık ek yatırımla birlikte yıl yıl görün.",
     intro:
       "Bileşik faizde kazandığınız faiz anaparaya eklenir ve bir sonraki dönemde o da faiz kazanır. Süre uzadıkça bu etki katlanarak büyür. Araç, düzenli aylık yatırımla birlikte paranızın yıllar içindeki değerini tablo hâlinde gösterir.",
     howItWorks: [
@@ -249,7 +249,7 @@ export const toolSeoBatch4: Record<string, ToolSeo> = {
   /* ==================== KREDİ ERKEN KAPATMA ==================== */
   "kredi-erken-kapatma": {
     title: `Kredi Erken Kapatma Hesaplama ${Y} | Tazminat`,
-    description: `Kredi erken kapatma hesaplama ${Y}: kalan anaparayı, erken ödeme tazminatını ve kurtulacağınız faizi hesaplayın. İhtiyaç, taşıt ve konut kredisinde erken kapama kuralları.`,
+    description: `Kredi erken kapatma hesaplama ${Y}: kalan anaparayı, erken ödeme tazminatını ve kurtulacağınız faizi ihtiyaç, taşıt ve konut kredisi için hesaplayın.`,
     intro:
       "Krediyi vadesinden önce kapattığınızda kalan taksitlerin tamamını değil, yalnızca kalan anaparayı ödersiniz; gelecek ayların faizi silinir. Bu araç bugün kapatırsanız ne ödeyeceğinizi ve ne kadar faizden kurtulacağınızı hesaplar.",
     howItWorks: [

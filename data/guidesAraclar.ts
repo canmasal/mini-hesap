@@ -118,7 +118,7 @@ export const araclarGuides: Guide[] = [
   {
     slug: "serbest-meslek-makbuzu-nasil-kesilir",
     title: "Serbest Meslek Makbuzu Nasıl Kesilir? Stopaj ve KDV",
-    metaTitle: `Serbest Meslek Makbuzu Nasıl Kesilir? ${Y} Stopaj`,
+    metaTitle: `Serbest Meslek Makbuzu Nasıl Kesilir? ${Y}`,
     description: `Serbest meslek makbuzu (e-SMM) nasıl kesilir, stopaj ve KDV nasıl hesaplanır? Netten brüte çevirme, şahsa ve şirkete kesilen makbuz farkı.`,
     category: "Vergi",
     icon: "🧾",
@@ -186,7 +186,7 @@ export const araclarGuides: Guide[] = [
   {
     slug: "bilesik-faiz-nedir-nasil-hesaplanir",
     title: "Bileşik Faiz Nedir, Nasıl Hesaplanır?",
-    metaTitle: "Bileşik Faiz Nedir, Nasıl Hesaplanır? Formül ve Örnek",
+    metaTitle: "Bileşik Faiz Nedir? Formül ve Örnekler",
     description:
       "Bileşik faiz formülü, basit faizle farkı, 72 kuralı ve düzenli yatırımın etkisi. Örneklerle birikiminizin nasıl katlandığını öğrenin.",
     category: "Finans",
@@ -252,7 +252,7 @@ export const araclarGuides: Guide[] = [
   {
     slug: "kredi-erken-kapatma-nasil-hesaplanir",
     title: "Kredi Erken Kapatma Nasıl Hesaplanır? Tazminat ve Faiz İndirimi",
-    metaTitle: `Kredi Erken Kapatma Hesaplama ${Y}: Ceza Var mı?`,
+    metaTitle: `Kredi Erken Kapatma Cezası Var mı? ${Y}`,
     description: `Kredi erken kapatılınca ne kadar ödenir, erken ödeme tazminatı var mı? İhtiyaç, taşıt ve konut kredisinde ${Y} kuralları ve örnek hesaplama.`,
     category: "Finans",
     icon: "🔓",

@@ -13,13 +13,17 @@ type Entry = MetadataRoute.Sitemap[number];
  * derlemede bütün sayfalara "şimdi" yazmak Google'ın lastmod bilgisine
  * güvenmemesine yol açıyordu:
  * - rehberler kendi güncellenme tarihini,
- * - hesaplama sayfaları rakamların son doğrulandığı tarihi,
- * - canlı piyasa ve liste sayfaları derleme anını alır,
- * - yasal metinlerde tarih verilmez.
+ * - hesaplama sayfaları ve güncel rakamlar, rakamların son doğrulandığı tarihi,
+ * - ana sayfa ve listeler, içlerindeki en yeni içeriğin tarihini,
+ * - yalnızca canlı piyasa sayfaları derleme anını alır,
+ * - yasal metinlerde ve ürün sayfalarında tarih verilmez.
  */
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
-  const verified = new Date(`${LAST_VERIFIED}T12:00:00+03:00`);
+  const istanbul = (iso: string) => new Date(`${iso}T12:00:00+03:00`);
+  const verified = istanbul(LAST_VERIFIED);
+  const latestGuide = istanbul(guides.map((g) => g.updated).sort().at(-1) ?? LAST_VERIFIED);
+  const latest = latestGuide > verified ? latestGuide : verified;
   const page = (
     path: string,
     changeFrequency: Entry["changeFrequency"],
@@ -33,11 +37,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
   });
 
   return [
-    page("", "weekly", 1),
-    page("/hesaplamalar", "weekly", 0.9),
-    page("/rehber", "weekly", 0.9),
+    page("", "weekly", 1, latest),
+    page("/hesaplamalar", "weekly", 0.9, verified),
+    page("/rehber", "weekly", 0.9, latestGuide),
     /* Resmî rakamlar sayfası: rakam değiştikçe güncellenir */
-    page("/guncel-rakamlar", "weekly", 0.9),
+    page("/guncel-rakamlar", "weekly", 0.9, verified),
     /* Canlı piyasa sayfaları: fiyatlar dakikalık yenilenir */
     page("/piyasalar", "hourly", 0.9),
     page("/altin-fiyatlari", "hourly", 0.9),
@@ -48,14 +52,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...calculators.map((c) => page(`/hesaplamalar/${c.slug}`, "monthly", 0.9, verified)),
 
     /* Rehber yazıları */
-    ...guides.map((g) => page(`/rehber/${g.slug}`, "monthly", 0.8, new Date(`${g.updated}T12:00:00+03:00`))),
+    ...guides.map((g) => page(`/rehber/${g.slug}`, "monthly", 0.8, istanbul(g.updated))),
 
     /* Uzun kuyruklu hazır hesap sayfaları (ör. "30.000 TL brüt ne kadar net") */
     ...longtailPages.map((p) => page(`/hesapla/${p.slug}`, "monthly", 0.6, verified)),
 
-    page("/borc-takip", "weekly", 0.8),
-    page("/on-muhasebe", "weekly", 0.8),
-    page("/premium", "weekly", 0.8),
+    page("/borc-takip", "monthly", 0.8, null),
+    page("/on-muhasebe", "monthly", 0.8, null),
+    page("/premium", "monthly", 0.8, null),
     page("/premium/borc-takip", "monthly", 0.6, null),
     page("/premium/on-muhasebe", "monthly", 0.6, null),
     page("/program-talebi", "monthly", 0.7, null),

@@ -14,7 +14,7 @@ export const saglikGuides: Guide[] = [
   {
     slug: "ideal-kilo-nasil-hesaplanir",
     title: "İdeal Kilo Nasıl Hesaplanır?",
-    metaTitle: "İdeal Kilo Hesaplama | Formüller ve Sağlıklı Aralık",
+    metaTitle: "İdeal Kilo Nasıl Hesaplanır? Formüller",
     description:
       "Devine, Robinson, Miller ve Hamwi formülleri, VKİ'ye dayalı sağlıklı kilo aralığı, bel çevresi ölçütü ve formüllerin kimlerde yanıltıcı olduğu.",
     category: "Sağlık",
@@ -97,7 +97,7 @@ export const saglikGuides: Guide[] = [
   {
     slug: "adet-dongusu-nasil-hesaplanir",
     title: "Adet Döngüsü ve Yumurtlama Günü Nasıl Hesaplanır?",
-    metaTitle: "Adet Günü Hesaplama | Döngü ve Yumurtlama",
+    metaTitle: "Adet Döngüsü ve Yumurtlama Nasıl Hesaplanır?",
     description:
       "Döngü uzunluğu nasıl ölçülür, yumurtlama günü ve doğurgan dönem nasıl bulunur, gecikme ne zaman normaldir ve hangi durumlarda hekime başvurulmalı.",
     category: "Sağlık",

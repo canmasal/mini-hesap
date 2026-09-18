@@ -6,7 +6,7 @@ import Breadcrumb from "@/components/Breadcrumb";
 import PremiumCta from "@/components/PremiumCta";
 import AdSlot from "@/components/AdSlot";
 export const metadata: Metadata = {
-  title: "Banka Borç Takip",
+  title: "Borç Takip Tablosu: Kredi ve Kart Borçları",
   description:
     "Tüm banka ve kredi kartı borçlarınızı tek tabloda takip edin. MiniHesap borç takip aracını ücretsiz demo olarak deneyin.",
   alternates: {

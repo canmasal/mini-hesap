@@ -19,9 +19,9 @@ export const toolSeoVergi: Record<string, ToolSeo> = {
   /* ==================== KİRA GELİRİ VERGİSİ ==================== */
   "kira-geliri-vergisi": {
     title: `Kira Geliri Vergisi Hesaplama ${Y} | GMSİ`,
-    description: `${Y} kira geliri vergisi hesaplama: mesken istisnası ${tl(
+    description: `Kira geliri vergisi hesaplama ${Y}: ${tl(
       RENTAL_INCOME.exemption,
-    )}, götürü gider %15 ve gelir vergisi dilimleriyle ödeyeceğiniz vergiyi ve net kalan tutarı hesaplayın.`,
+    )} mesken istisnası ve götürü giderle ödeyeceğiniz vergiyi ve net kira gelirinizi bulun.`,
     intro: `Konut veya işyeri kiraya verenler, yıllık kira gelirleri için gayrimenkul sermaye iradı (GMSİ) beyannamesi verir. ${Y} yılında mesken kira gelirinin ${tl(
       RENTAL_INCOME.exemption,
     )} tutarındaki kısmı gelir vergisinden istisnadır. Hesaplayıcı istisnayı, gider indirimini ve vergi dilimlerini birlikte uygulayarak ödeyeceğiniz vergiyi gösterir.`,
@@ -108,7 +108,7 @@ export const toolSeoVergi: Record<string, ToolSeo> = {
   /* ==================== EMLAK VERGİSİ ==================== */
   "emlak-vergisi": {
     title: `Emlak Vergisi Hesaplama ${Y} | Konut ve İşyeri`,
-    description: `${Y} emlak vergisi hesaplama: konut, işyeri, arsa ve arazi için büyükşehir ve diğer belediyelerde geçerli oranlarla yıllık vergiyi, kültür payını ve taksit tutarını hesaplayın.`,
+    description: `Emlak vergisi hesaplama ${Y}: konut, işyeri, arsa ve arazi için yıllık vergiyi, kültür payını ve taksit tutarlarını güncel oranlarla hesaplayın.`,
     intro: `Emlak vergisi, taşınmazın belediye tarafından belirlenen vergi değeri üzerinden her yıl ödenir. Oran taşınmazın türüne ve büyükşehir belediyesi sınırları içinde olup olmamasına göre değişir. Hesaplayıcı ${Y} oranlarıyla yıllık vergiyi ve iki taksit tutarını gösterir.`,
     howItWorks: [
       "Belediyenin bildirdiği emlak vergi değerini girin (satış fiyatı değil).",

@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { premiumForTool, KIND_LABELS } from "@/data/premiumProducts";
+import { buyHref, isExternalBuy, externalLinkProps } from "@/lib/buyLink";
 
 /**
  * Ücretsiz araç sayfalarında gösterilen premium yönlendirme kutusu.
@@ -46,9 +47,13 @@ export default function PremiumCta({ toolHref }: { toolHref: string }) {
           {main.price.toLocaleString("tr-TR")} ₺
         </span>
 
-        <Link className="btn btn-green" href={`/satin-al/${main.slug}`}>
+        <a
+          className="btn btn-green"
+          href={buyHref(main)}
+          {...(isExternalBuy(main) ? externalLinkProps : {})}
+        >
           Satın Al →
-        </Link>
+        </a>
 
         <Link className="btn btn-outline" href="/premium">
           Tüm premium hizmetler
@@ -61,8 +66,9 @@ export default function PremiumCta({ toolHref }: { toolHref: string }) {
           {others.map((p, i) => (
             <span key={p.slug}>
               {i > 0 && " · "}
-              <Link
-                href={`/satin-al/${p.slug}`}
+              <a
+                href={buyHref(p)}
+                {...(isExternalBuy(p) ? externalLinkProps : {})}
                 style={{
                   color: "var(--brand-dark)",
                   fontWeight: 700,
@@ -70,7 +76,7 @@ export default function PremiumCta({ toolHref }: { toolHref: string }) {
                 }}
               >
                 {p.title} ({p.price.toLocaleString("tr-TR")} ₺)
-              </Link>
+              </a>
             </span>
           ))}
         </p>

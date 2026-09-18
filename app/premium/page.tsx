@@ -11,6 +11,7 @@ import {
   planSavingPercent,
 } from "@/data/plans";
 import { SITE_URL } from "@/lib/site";
+import { buyHref, isExternalBuy, externalLinkProps } from "@/lib/buyLink";
 
 export const metadata: Metadata = {
   title: "Premium Paketler — Standart, Plus ve Pro",
@@ -129,7 +130,7 @@ const listSchema = {
     item: productSchema({
       name: `MiniHesap ${plan.name} Paketi`,
       description: `${plan.tagline} — ${plan.audience}.`,
-      url: `${baseUrl}/satin-al/${plan.slug}`,
+      url: plan.shopierUrl ?? `${baseUrl}/satin-al/${plan.slug}`,
       price: plan.price,
     }),
   })),
@@ -146,7 +147,7 @@ const itemsSchema = {
     item: productSchema({
       name: product.title,
       description: product.tagline,
-      url: `${baseUrl}/satin-al/${product.slug}`,
+      url: product.shopierUrl ?? `${baseUrl}/satin-al/${product.slug}`,
       price: product.price,
     }),
   })),
@@ -298,14 +299,15 @@ export default function PremiumPage() {
                       key={plan.id}
                       className={plan.featured ? "is-featured" : undefined}
                     >
-                      <Link
+                      <a
                         className={`btn plan-compare__cta ${
                           plan.featured ? "btn-green" : "btn-dark"
                         }`}
-                        href={`/satin-al/${plan.slug}`}
+                        href={buyHref(plan)}
+                        {...(isExternalBuy(plan) ? externalLinkProps : {})}
                       >
                         Seç
-                      </Link>
+                      </a>
                     </td>
                   ))}
                 </tr>
@@ -362,14 +364,15 @@ export default function PremiumPage() {
                     </p>
                   )}
 
-                  <Link
+                  <a
                     className={`btn plan-card__cta${
                       plan.featured ? " btn-green" : " btn-dark"
                     }`}
-                    href={`/satin-al/${plan.slug}`}
+                    href={buyHref(plan)}
+                    {...(isExternalBuy(plan) ? externalLinkProps : {})}
                   >
                     {plan.name} paketini al →
-                  </Link>
+                  </a>
 
                   <ul className="plan-card__perks">
                     {plan.perks.map((perk) => (
@@ -501,12 +504,13 @@ export default function PremiumPage() {
                   </div>
 
                   <div className="product-card__actions">
-                    <Link
+                    <a
                       className="btn btn-green"
-                      href={`/satin-al/${product.slug}`}
+                      href={buyHref(product)}
+                      {...(isExternalBuy(product) ? externalLinkProps : {})}
                     >
                       Satın Al →
-                    </Link>
+                    </a>
                   </div>
                 </div>
               </article>

@@ -25,7 +25,7 @@ export const ekGuides: Guide[] = [
   {
     slug: `isveren-maliyeti-${Y}-nasil-hesaplanir`,
     title: "Bir Çalışanın İşverene Maliyeti Nasıl Hesaplanır?",
-    metaTitle: `İşveren Maliyeti Hesaplama ${Y} | Prim Oranları`,
+    metaTitle: `İşveren Maliyeti Nasıl Hesaplanır? ${Y}`,
     description: `${Y} işveren prim oranları, 2 ve 5 puanlık indirimler, SGK tavanının etkisi ve asgari ücretin işverene maliyeti. Örnek hesaplamalarla.`,
     category: "Çalışan Hakları",
     icon: "🏢",
@@ -134,7 +134,7 @@ export const ekGuides: Guide[] = [
   {
     slug: "kredi-karti-asgari-odeme-ve-faiz",
     title: "Kredi Kartında Asgari Ödeme ve Faiz Nasıl İşler?",
-    metaTitle: "Kredi Kartı Asgari Ödeme | Oranlar ve Faiz",
+    metaTitle: `Kredi Kartı Asgari Ödeme Oranı ve Faizi ${Y}`,
     description: `Asgari ödeme oranları (${pct(
       CREDIT_CARD.minimumPayment.belowThreshold,
       0,
@@ -241,7 +241,7 @@ export const ekGuides: Guide[] = [
   {
     slug: "gecikme-zammi-nasil-hesaplanir",
     title: "Gecikme Zammı Nasıl Hesaplanır?",
-    metaTitle: "Gecikme Zammı Hesaplama | Oran ve Formül",
+    metaTitle: `Gecikme Zammı Nasıl Hesaplanır? ${Y} Oranı`,
     description: `Aylık ${pct(
       LATE_PAYMENT.monthly,
     )} gecikme zammı, ay kesirlerinin günlük hesabı, gecikme faizi ve pişmanlık zammı farkı, tecil faizi ve yapılandırma.`,

@@ -7,7 +7,7 @@ import PremiumCta from "@/components/PremiumCta";
 import AdSlot from "@/components/AdSlot";
 
 export const metadata: Metadata = {
-  title: "Ön Muhasebe Takip",
+  title: "Ön Muhasebe Programı: Gelir Gider Takibi",
   description:
     "Gelir ve giderlerinizi takip edin, aylık ön muhasebe özetinizi oluşturun. MiniHesap ön muhasebe aracını ücretsiz demo olarak deneyin.",
   alternates: {

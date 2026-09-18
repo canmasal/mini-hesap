@@ -7,7 +7,7 @@ import { calculators } from "@/data/calculators";
 import { SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Hesaplama Araçları",
+  title: "Hesaplama Araçları 2026: Maaş, Vergi, Kredi",
   description:
     "Net maaş, kıdem ve ihbar tazminatı, KDV, yüzde, kira artışı, fazla mesai, yaş ve yıllık izin hesaplama araçları tek yerde, ücretsiz.",
   alternates: {

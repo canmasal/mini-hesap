@@ -25,7 +25,7 @@ export const vergiGuides: Guide[] = [
   {
     slug: `kira-geliri-vergisi-${Y}-nasil-hesaplanir`,
     title: "Kira Geliri Vergisi Nasıl Hesaplanır?",
-    metaTitle: `Kira Geliri Vergisi Hesaplama ${Y} | İstisna ve Beyan`,
+    metaTitle: `Kira Geliri Vergisi ${Y}: İstisna ve Beyan`,
     description: `${Y} kira geliri vergisi: mesken istisnası ${tl(
       RENTAL_INCOME.exemption,
     )}, götürü gider %15, işyeri stopajı ve beyan sınırları. Örnek hesaplamalarla adım adım.`,
@@ -137,7 +137,7 @@ export const vergiGuides: Guide[] = [
   {
     slug: "emlak-vergisi-nasil-hesaplanir",
     title: "Emlak Vergisi Nasıl Hesaplanır?",
-    metaTitle: `Emlak Vergisi Hesaplama ${Y} | Oranlar ve Taksitler`,
+    metaTitle: `Emlak Vergisi Nasıl Hesaplanır? ${Y} Oranları`,
     description: `${Y} emlak vergisi oranları, emlak vergi değeri, büyükşehir farkı, kültür varlıkları katkı payı, ödeme taksitleri ve emekliye sıfır oran şartları.`,
     category: "Vergi",
     icon: "🏠",
@@ -228,7 +228,7 @@ export const vergiGuides: Guide[] = [
   {
     slug: "damga-vergisi-nedir-nasil-hesaplanir",
     title: "Damga Vergisi Nedir, Nasıl Hesaplanır?",
-    metaTitle: `Damga Vergisi Hesaplama ${Y} | Oranlar ve Nüsha`,
+    metaTitle: `Damga Vergisi Nedir, Nasıl Hesaplanır? ${Y}`,
     description: `${Y} damga vergisi oranları: sözleşmelerde ${binde(
       STAMP_TAX.contract,
     )}, kira sözleşmesinde ${binde(
@@ -307,7 +307,7 @@ export const vergiGuides: Guide[] = [
   {
     slug: `mtv-${MTV_YEAR}-nasil-hesaplanir`,
     title: "MTV Nasıl Hesaplanır?",
-    metaTitle: `MTV Hesaplama ${MTV_YEAR} | Yaş, Motor Hacmi, Taksit`,
+    metaTitle: `MTV Nasıl Hesaplanır? ${MTV_YEAR} Tarifesi`,
     description: `${MTV_YEAR} motorlu taşıtlar vergisi: yaş nasıl hesaplanır, (I) ve (I/A) tarifesi farkı, taşıt değeri dilimleri ve ocak-temmuz ödeme takvimi.`,
     category: "Vergi",
     icon: "🚗",

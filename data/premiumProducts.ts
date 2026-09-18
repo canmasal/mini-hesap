@@ -33,6 +33,8 @@ export type PremiumProduct = {
   /** Kendi tanıtım sayfası varsa */
   landingPage?: string;
   price: number;
+  /** Shopier ürün sayfası; yoksa site içi /satin-al akışı kullanılır */
+  shopierUrl?: string;
 };
 
 export const premiumProducts: PremiumProduct[] = [
@@ -66,6 +68,7 @@ export const premiumProducts: PremiumProduct[] = [
     ],
     relatedTool: { href: "/on-muhasebe", label: "Ön Muhasebe Takip aracı" },
     price: 899,
+    shopierUrl: "https://www.shopier.com/miniihesap/50977944",
   },
 
   {
@@ -99,6 +102,7 @@ export const premiumProducts: PremiumProduct[] = [
     ],
     relatedTool: { href: "/on-muhasebe", label: "Ön Muhasebe Takip aracı" },
     price: 599,
+    shopierUrl: "https://www.shopier.com/miniihesap/50977969",
   },
 
   {
@@ -132,6 +136,7 @@ export const premiumProducts: PremiumProduct[] = [
     ],
     relatedTool: { href: "/on-muhasebe", label: "Ön Muhasebe Takip aracı" },
     price: 399,
+    shopierUrl: "https://www.shopier.com/miniihesap/50977994",
   },
 
   {
@@ -165,6 +170,7 @@ export const premiumProducts: PremiumProduct[] = [
       label: "Net Maaş hesaplama aracı",
     },
     price: 299,
+    shopierUrl: "https://www.shopier.com/miniihesap/50978064",
   },
 
   {
@@ -198,6 +204,7 @@ export const premiumProducts: PremiumProduct[] = [
       label: "Kira Artışı hesaplama aracı",
     },
     price: 249,
+    shopierUrl: "https://www.shopier.com/miniihesap/50978099",
   },
 
   {
@@ -226,6 +233,7 @@ export const premiumProducts: PremiumProduct[] = [
       "ACOS (reklam / ciro) ve iade oranı göstergeleri",
     ],
     price: 349,
+    shopierUrl: "https://www.shopier.com/miniihesap/50978043",
   },
 
   {
@@ -259,6 +267,7 @@ export const premiumProducts: PremiumProduct[] = [
       label: "KDV hesaplama aracı",
     },
     price: 279,
+    shopierUrl: "https://www.shopier.com/miniihesap/50978080",
   },
 
   {
@@ -289,6 +298,7 @@ export const premiumProducts: PremiumProduct[] = [
       "Maliyet/sözleşme ve ilerleme oranı göstergeleri",
     ],
     price: 449,
+    shopierUrl: "https://www.shopier.com/miniihesap/50978008",
   },
 
   {
@@ -318,6 +328,7 @@ export const premiumProducts: PremiumProduct[] = [
       "Malzeme fiyatı değişince tüm reçeteler otomatik güncellenir",
     ],
     price: 379,
+    shopierUrl: "https://www.shopier.com/miniihesap/50978023",
   },
 
   {
@@ -360,6 +371,7 @@ export const premiumProducts: PremiumProduct[] = [
     relatedTool: { href: "/on-muhasebe", label: "Ön Muhasebe Takip aracı" },
     landingPage: "/premium/on-muhasebe",
     price: 199,
+    shopierUrl: "https://www.shopier.com/miniihesap/50978858",
   },
 
   {
