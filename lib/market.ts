@@ -100,8 +100,107 @@ const SCALE_FIX: Record<string, number> = { JPY: 100 };
 /** Bölünerek türetilen göstergede (a / b) yüzde değişim */
 const ratioChange = (a: number, b: number) => ((1 + a / 100) / (1 + b / 100) - 1) * 100;
 
+/** Çarpılarak türetilen göstergede (a x b) yüzde değişim */
+const productChange = (a: number, b: number) => ((1 + a / 100) * (1 + b / 100) - 1) * 100;
+
 /** 1 troy ons = 31,1034768 gram */
 const OUNCE_GRAMS = 31.1034768;
+
+/* ---------- Günlük değişim (Yahoo Finance) ---------- */
+
+const YAHOO_SPARK = "https://query1.finance.yahoo.com/v7/finance/spark";
+
+/**
+ * Doğrudan TL çaprazı olan kurlar. Yahoo'da TL çaprazı olmayanlar
+ * (SAR, KWD, RUB, DKK, SEK, NOK) dolar çaprazından türetilir:
+ * XXX/TL değişimi = USD/TL değişimi ÷ USD/XXX değişimi.
+ */
+const TRY_DIRECT = ["USD", "EUR", "GBP", "CHF", "CAD", "AUD", "AED", "JPY"];
+const TRY_VIA_USD = ["SAR", "KWD", "RUB", "DKK", "SEK", "NOK"];
+
+/** Gram TL fiyatı = ons (dolar) x dolar kuru; ons tarafı vadeli kontrattan gelir */
+const METAL_FUTURES = { gold: "GC=F", silver: "SI=F", platinum: "PL=F", palladium: "PA=F" };
+
+const PARITY_SYMBOLS: Record<string, string> = {
+  "EUR/USD": "EURUSD=X",
+  "GBP/USD": "GBPUSD=X",
+  "EUR/GBP": "EURGBP=X",
+  "USD/JPY": "JPY=X",
+};
+
+const YAHOO_SYMBOLS = [
+  ...TRY_DIRECT.map((c) => `${c}TRY=X`),
+  ...TRY_VIA_USD.map((c) => `${c}=X`),
+  ...Object.values(METAL_FUTURES),
+  ...Object.values(PARITY_SYMBOLS),
+];
+
+type YahooQuote = { price: number; change: number };
+
+/** Yahoo spark ucu tek istekte en fazla 20 sembol kabul ediyor */
+async function fetchYahoo(): Promise<Record<string, YahooQuote>> {
+  const chunks: string[][] = [];
+  for (let i = 0; i < YAHOO_SYMBOLS.length; i += 20) chunks.push(YAHOO_SYMBOLS.slice(i, i + 20));
+
+  const out: Record<string, YahooQuote> = {};
+  await Promise.all(
+    chunks.map(async (symbols) => {
+      try {
+        const res = await fetch(`${YAHOO_SPARK}?symbols=${symbols.join(",")}&range=1d&interval=1d`, {
+          next: { revalidate: 60 },
+          headers: FEED_HEADERS,
+          signal: AbortSignal.timeout(8000),
+        });
+        if (!res.ok) return;
+        const json = (await res.json()) as {
+          spark?: { result?: Array<{ symbol?: string; response?: Array<{ meta?: Record<string, unknown> }> }> };
+        };
+        for (const row of json.spark?.result ?? []) {
+          const meta = row.response?.[0]?.meta;
+          const price = Number(meta?.regularMarketPrice);
+          const change = Number(meta?.regularMarketChangePercent);
+          if (row.symbol && Number.isFinite(price) && price > 0 && Number.isFinite(change)) {
+            out[row.symbol] = { price, change };
+          }
+        }
+      } catch {
+        /* Değişim kaynağı düşerse Truncgil'in kendi değişimi kullanılır */
+      }
+    }),
+  );
+  return out;
+}
+
+/** Kalem kodu -> bir önceki kapanışa göre yüzde değişim */
+function dailyChanges(y: Record<string, YahooQuote>) {
+  const changes: Record<string, number> = {};
+  const usdTry = y["USDTRY=X"]?.change;
+
+  for (const code of TRY_DIRECT) {
+    const q = y[`${code}TRY=X`];
+    if (q) changes[code] = q.change;
+  }
+  if (usdTry === undefined) return changes;
+
+  for (const code of TRY_VIA_USD) {
+    const q = y[`${code}=X`];
+    if (q) changes[code] = ratioChange(usdTry, q.change);
+  }
+
+  const metal = (symbol: string) => (y[symbol] ? productChange(y[symbol].change, usdTry) : undefined);
+  const gold = metal(METAL_FUTURES.gold);
+  const byCode: Record<string, number | undefined> = {
+    GUMUS: metal(METAL_FUTURES.silver),
+    GPL: metal(METAL_FUTURES.platinum),
+    PAL: metal(METAL_FUTURES.palladium),
+  };
+  for (const [code] of GOLD) {
+    /* Ziynet ve ayar altınların fiyatı has altından sabit katsayıyla çıkıyor */
+    const value = code in byCode ? byCode[code] : gold;
+    if (value !== undefined) changes[code] = value;
+  }
+  return changes;
+}
 
 function pick(raw: Record<string, unknown>, list: Array<[string, string]>): Quote[] {
   const out: Quote[] = [];
@@ -123,11 +222,20 @@ function pick(raw: Record<string, unknown>, list: Array<[string, string]>): Quot
   return out;
 }
 
-export function normalizeMarket(raw: Record<string, unknown>): MarketData | null {
+export function normalizeMarket(
+  raw: Record<string, unknown>,
+  yahoo: Record<string, YahooQuote> = {},
+  bist: Stock | null = null,
+): MarketData | null {
   const date = typeof raw.Update_Date === "string" ? raw.Update_Date : "";
   const gold = pick(raw, GOLD);
   const currencies = pick(raw, CURRENCIES);
   if (!gold.length && !currencies.length) return null;
+
+  const changes = dailyChanges(yahoo);
+  for (const q of [...gold, ...currencies]) {
+    if (changes[q.code] !== undefined) q.change = changes[q.code];
+  }
 
   const at = (list: Quote[], code: string) => list.find((q) => q.code === code) ?? null;
   const usd = at(currencies, "USD");
@@ -138,13 +246,14 @@ export function normalizeMarket(raw: Record<string, unknown>): MarketData | null
   const silver = at(gold, "GUMUS");
 
   const parities: Parity[] = [];
-  const addParity = (code: string, name: string, a: Quote | null, b: Quote | null, ratio = 1) => {
+  /* Değer tablodaki TL kurlarından türetilir ki sayfadaki rakamlarla birebir tutsun */
+  const addParity = (code: string, name: string, a: Quote | null, b: Quote | null) => {
     if (!a || !b) return;
     parities.push({
       code,
       name,
-      value: (a.selling / b.selling) * ratio,
-      change: ratioChange(a.change, b.change),
+      value: a.selling / b.selling,
+      change: yahoo[PARITY_SYMBOLS[code]]?.change ?? ratioChange(a.change, b.change),
     });
   };
   addParity("EUR/USD", "Euro / Dolar", eur, usd);
@@ -158,7 +267,7 @@ export function normalizeMarket(raw: Record<string, unknown>): MarketData | null
       code: "ONS",
       name: "Ons altın (dolar)",
       value: (has.selling * OUNCE_GRAMS) / usd.selling,
-      change: ratioChange(has.change, usd.change),
+      change: yahoo[METAL_FUTURES.gold]?.change ?? ratioChange(has.change, usd.change),
     });
   }
   /* Gümüş de gram/TL geldiği için ons/dolar karşılığı altınla aynı formülle çıkar */
@@ -167,7 +276,7 @@ export function normalizeMarket(raw: Record<string, unknown>): MarketData | null
       code: "ONSGUMUS",
       name: "Ons gümüş (dolar)",
       value: (silver.selling * OUNCE_GRAMS) / usd.selling,
-      change: ratioChange(silver.change, usd.change),
+      change: yahoo[METAL_FUTURES.silver]?.change ?? ratioChange(silver.change, usd.change),
     });
   }
   if (usd && eur) {
@@ -178,8 +287,11 @@ export function normalizeMarket(raw: Record<string, unknown>): MarketData | null
       change: (usd.change + eur.change) / 2,
     });
   }
+  /* BIST 100, sayfadaki borsa panosuyla aynı istekten gelir; iki tablo birebir tutar */
   const index = raw.XU100 as RawQuote | undefined;
-  if (index && Number(index.Selling) > 0) {
+  if (bist) {
+    summary.push({ code: "XU100", name: "BIST 100 endeksi", value: bist.price, change: bist.change });
+  } else if (index && Number(index.Selling) > 0) {
     summary.push({
       code: "XU100",
       name: "BIST 100 endeksi",
@@ -210,18 +322,29 @@ const FEED_HEADERS = {
 let lastError: string | null = null;
 export const marketLastError = () => lastError;
 
+async function fetchFeed(url: string) {
+  const res = await fetch(url, {
+    next: { revalidate: 60 },
+    headers: FEED_HEADERS,
+    signal: AbortSignal.timeout(8000),
+  });
+  if (!res.ok) throw new Error(`kaynak ${res.status} döndü`);
+  return JSON.parse(await res.text()) as Record<string, unknown>;
+}
+
 export async function fetchMarket(): Promise<MarketData | null> {
   try {
-    const res = await fetch(MARKET_SOURCE.feed, {
-      next: { revalidate: 60 },
-      headers: FEED_HEADERS,
-      signal: AbortSignal.timeout(8000),
-    });
-    if (!res.ok) {
-      lastError = `kaynak ${res.status} döndü`;
-      return null;
-    }
-    const data = normalizeMarket((await res.json()) as Record<string, unknown>);
+    const [raw, yahoo, bist] = await Promise.all([
+      /*
+       * Kaynak zaman zaman yanıtı yarıda kesiyor; bozuk gövde önbelleğe
+       * düşerse bir dakika boyunca pano boş kalıyordu. Bu durumda önbelleği
+       * atlayan ayrı bir adresle bir kez daha denenir.
+       */
+      fetchFeed(MARKET_SOURCE.feed).catch(() => fetchFeed(`${MARKET_SOURCE.feed}?t=${Date.now()}`)),
+      fetchYahoo(),
+      fetchOne("XU100", "BIST 100 endeksi"),
+    ]);
+    const data = normalizeMarket(raw, yahoo, bist?.stock ?? null);
     lastError = data ? null : "yanıt beklenen alanları taşımıyor";
     return data;
   } catch (err) {

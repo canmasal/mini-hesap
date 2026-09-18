@@ -85,7 +85,7 @@ type Meta = {
   previousClose?: number;
 };
 
-async function fetchOne(code: string, name: string): Promise<{ stock: Stock; time: number | null } | null> {
+export async function fetchOne(code: string, name: string): Promise<{ stock: Stock; time: number | null } | null> {
   try {
     const res = await fetch(
       `https://query1.finance.yahoo.com/v8/finance/chart/${code}.IS?range=1d&interval=1d`,
@@ -102,9 +102,17 @@ async function fetchOne(code: string, name: string): Promise<{ stock: Stock; tim
     const price = Number(meta?.regularMarketPrice);
     if (!meta || !Number.isFinite(price) || price <= 0) return null;
 
-    const previousClose = Number(meta.chartPreviousClose ?? meta.previousClose);
-    const change = Number(meta.regularMarketChangePercent) || 0;
+    /*
+     * range=1d yanıtındaki chartPreviousClose bir önceki günün değil, grafiğin
+     * başlangıcından önceki kapanışı veriyor; çoğu gün iki seans geriden kalıyor
+     * (BIST 100 düşerken "önceki kapanış" fiyatın altında görünüyordu). Önceki
+     * kapanış bu yüzden Yahoo'nun günlük değişim yüzdesinden türetilir.
+     */
+    const percent = Number(meta.regularMarketChangePercent);
+    const fallbackClose = Number(meta.previousClose ?? meta.chartPreviousClose);
+    const previousClose = Number.isFinite(percent) ? price / (1 + percent / 100) : fallbackClose;
     const prev = Number.isFinite(previousClose) && previousClose > 0 ? previousClose : null;
+    const change = Number.isFinite(percent) ? percent : prev !== null ? (price / prev - 1) * 100 : 0;
 
     return {
       stock: {
