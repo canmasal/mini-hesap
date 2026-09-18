@@ -90,6 +90,35 @@ const faqs = [
   },
 ];
 
+/**
+ * Satisa acik her kalem icin Product + Offer.
+ *
+ * Eskiden liste yalnizca ad ve adres tasiyordu; Google fiyat, para birimi ve
+ * stok durumu gormedigi icin urun zengin sonucu uretemiyordu. Fiyatlar tek
+ * kaynaktan (plans.ts ve premiumProducts.ts) geldigi icin sema ile vitrin
+ * arasinda fark olusmaz.
+ */
+const productSchema = (args: {
+  name: string;
+  description: string;
+  url: string;
+  price: number;
+}) => ({
+  "@type": "Product",
+  name: args.name,
+  description: args.description,
+  url: args.url,
+  brand: { "@type": "Brand", name: "MiniHesap" },
+  offers: {
+    "@type": "Offer",
+    url: args.url,
+    price: String(args.price),
+    priceCurrency: "TRY",
+    availability: "https://schema.org/InStock",
+    seller: { "@type": "Organization", name: "MiniHesap" },
+  },
+});
+
 const listSchema = {
   "@context": "https://schema.org",
   "@type": "ItemList",
@@ -97,8 +126,29 @@ const listSchema = {
   itemListElement: plans.map((plan, i) => ({
     "@type": "ListItem",
     position: i + 1,
-    name: `MiniHesap ${plan.name}`,
-    url: `${baseUrl}/satin-al/${plan.slug}`,
+    item: productSchema({
+      name: `MiniHesap ${plan.name} Paketi`,
+      description: `${plan.tagline} — ${plan.audience}.`,
+      url: `${baseUrl}/satin-al/${plan.slug}`,
+      price: plan.price,
+    }),
+  })),
+};
+
+/** Paketlerin icindeki tekil urunler de aranabilir kalemler */
+const itemsSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "MiniHesap Premium Ürünler",
+  itemListElement: premiumProducts.map((product, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    item: productSchema({
+      name: product.title,
+      description: product.tagline,
+      url: `${baseUrl}/satin-al/${product.slug}`,
+      price: product.price,
+    }),
   })),
 };
 
@@ -485,6 +535,10 @@ export default function PremiumPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(listSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemsSchema) }}
       />
       <script
         type="application/ld+json"
