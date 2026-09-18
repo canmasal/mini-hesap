@@ -36,6 +36,16 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
 
   /*
+   * Route dosyaları yalnızca TypeScript.
+   *
+   * tsconfig'de allowJs kapalı olduğu için app/ altında kalan bir .js veya
+   * .jsx dosyası route sayılırsa Next onun için tip doğrulaması üretir ve
+   * "Could not find a declaration file" diyerek derlemeyi keser. Uzantıları
+   * burada sınırlamak bu dosyaları route olmaktan çıkarır.
+   */
+  pageExtensions: ["ts", "tsx"],
+
+  /*
    * Derleme çıktısının klasörü.
    *
    * "npm run dev" çalışırken "npm run build" çalıştırılırsa ikisi aynı
