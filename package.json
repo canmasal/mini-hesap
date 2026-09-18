@@ -10,6 +10,7 @@
     "build:check": "BUILD_DIR=.next-build next build"
   },
   "dependencies": {
+    "@vercel/speed-insights": "^2.0.0",
     "next": "^15.5.24",
     "react": "19.1.1",
     "react-dom": "19.1.1"

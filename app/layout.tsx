@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import CookieConsent from "@/components/CookieConsent";
 import GoogleAnalytics, { GoogleTagHead } from "@/components/GoogleAnalytics";
 import ChatWidget from "@/components/ChatWidget";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { ADSENSE_CLIENT_ID as adsenseClientId } from "@/lib/adsense";
 import { SITE_URL } from "@/lib/site";
 
@@ -165,6 +166,7 @@ export default function RootLayout({
         <CookieConsent />
         <GoogleAnalytics />
         <ChatWidget />
+        <SpeedInsights />
 
         <script
           type="application/ld+json"
