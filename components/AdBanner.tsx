@@ -5,6 +5,7 @@ type AdBannerProps = {
 };
 
 import AdSenseUnit from "@/components/AdSenseUnit";
+import { ADSENSE_CLIENT_ID } from "@/lib/adsense";
 import Link from "next/link";
 
 export default function AdBanner({
@@ -12,7 +13,16 @@ export default function AdBanner({
   minHeight = 90,
   slot,
 }: AdBannerProps) {
-  const clientId = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID;
+  /*
+   * Yayinci kimligi lib/adsense.ts uzerinden gelir.
+   *
+   * Burasi eskiden ortam degiskenini dogrudan okuyordu. Degisken canlida
+   * tanimli olmadigi icin kimlik bos kaliyor, bilesen reklam yerine
+   * "Reklam vermek icin iletisime geciniz" baglantisini basiyordu; yani
+   * sayfa basliginda AdSense betigi yukleniyor ama tek bir reklam birimi
+   * olusmuyordu. Tek kaynak kullanmak bu ayrismayi ortadan kaldirir.
+   */
+  const clientId = ADSENSE_CLIENT_ID;
 
   return (
     <div

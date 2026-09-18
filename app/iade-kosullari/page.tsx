@@ -6,7 +6,7 @@ import Breadcrumb from "@/components/Breadcrumb";
 export const metadata: Metadata = {
   title: "İptal ve İade Koşulları",
   description:
-    "MiniHesap dijital ürünlerinde iptal, iade ve destek koşulları.",
+    "MiniHesap dijital ürünlerinde iptal ve iade koşulları: indirme öncesi tam iade, indirme sonrası cayma hakkı ve dosya açılmazsa ücretsiz değişim.",
   alternates: { canonical: "/iade-kosullari" },
 };
 

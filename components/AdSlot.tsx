@@ -1,25 +1,17 @@
 import AdBanner from "@/components/AdBanner";
+import { ADSENSE_SLOTS, type AdPosition } from "@/lib/adsense";
 
-type AdSlotProps = {
-  position?: "top" | "middle" | "bottom";
+/** Reklam alanının konuma göre ayırdığı en az yükseklik */
+const MIN_HEIGHTS: Record<AdPosition, number> = {
+  top: 90,
+  middle: 250,
+  bottom: 90,
 };
 
-export default function AdSlot({ position = "middle" }: AdSlotProps) {
-  const heights = {
-    top: 90,
-    middle: 250,
-    bottom: 90,
-  };
-
-  const slots = {
-    top: process.env.NEXT_PUBLIC_ADSENSE_SLOT_TOP,
-    middle: process.env.NEXT_PUBLIC_ADSENSE_SLOT_MIDDLE,
-    bottom: process.env.NEXT_PUBLIC_ADSENSE_SLOT_BOTTOM,
-  };
-
+export default function AdSlot({ position = "middle" }: { position?: AdPosition }) {
   return (
     <div className="ad-slot" style={{ width: "100%" }}>
-      <AdBanner label="REKLAM" minHeight={heights[position]} slot={slots[position]} />
+      <AdBanner label="REKLAM" minHeight={MIN_HEIGHTS[position]} slot={ADSENSE_SLOTS[position]} />
     </div>
   );
 }

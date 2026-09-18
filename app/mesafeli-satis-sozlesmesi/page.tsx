@@ -6,7 +6,7 @@ import Breadcrumb from "@/components/Breadcrumb";
 export const metadata: Metadata = {
   title: "Mesafeli Satış Sözleşmesi",
   description:
-    "MiniHesap dijital ürün satışlarına ilişkin mesafeli satış sözleşmesi.",
+    "MiniHesap dijital ürün satışlarına ilişkin mesafeli satış sözleşmesi: satıcı bilgileri, ödeme ve elektronik teslimat, cayma hakkı ve uyuşmazlık çözümü.",
   alternates: { canonical: "/mesafeli-satis-sozlesmesi" },
 };
 

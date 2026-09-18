@@ -5,6 +5,7 @@ import Breadcrumb from "@/components/Breadcrumb";
 import StockBoard from "@/components/market/StockBoard";
 import { SITE_URL } from "@/lib/site";
 import { STOCK_SOURCE, fetchStocks } from "@/lib/stocks";
+import AdSlot from "@/components/AdSlot";
 
 export const revalidate = 60;
 
@@ -83,6 +84,8 @@ export default async function StockMarketPage() {
             <Link href="/doviz-kurlari">Döviz kurları</Link>
           </p>
         </section>
+
+        <AdSlot position="middle" />
 
         <section className="lt-section">
           <h2>Endeks ne anlama geliyor?</h2>

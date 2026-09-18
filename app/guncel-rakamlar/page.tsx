@@ -27,6 +27,7 @@ import {
 } from "@/data/parameters";
 import { MTV_SOURCE, MTV_YEAR, TARIFF_I, TARIFF_IA } from "@/data/mtv";
 import { SITE_URL } from "@/lib/site";
+import AdSlot from "@/components/AdSlot";
 
 export const metadata: Metadata = {
   title: `${Y} Güncel Rakamlar: Asgari Ücret, Kıdem Tavanı`,
@@ -158,6 +159,8 @@ export default function CurrentRatesPage() {
         </section>
 
         {/* Gelir vergisi */}
+        <AdSlot position="middle" />
+
         <section className="rates-block" id="gelir-vergisi">
           <h2>{Y} gelir vergisi dilimleri (ücret gelirleri)</h2>
           <div className="rates-table-wrap">
