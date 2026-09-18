@@ -58,7 +58,10 @@ const GOLD: Array<[string, string]> = [
   ["YIA", "22 Ayar Bilezik (gram)"],
   ["18AYARALTIN", "18 Ayar Altın (gram)"],
   ["14AYARALTIN", "14 Ayar Altın (gram)"],
+  /* GUMUS, GPL ve PAL da kaynakta gram ve TL cinsinden geliyor, tıpkı GRA gibi */
+  ["GUMUS", "Gram Gümüş"],
   ["GPL", "Gram Platin"],
+  ["PAL", "Gram Paladyum"],
 ];
 
 const CURRENCIES: Array<[string, string]> = [
@@ -86,11 +89,14 @@ type RawQuote = { Buying?: number; Selling?: number; Change?: number };
  */
 const SCALE_FIX: Record<string, number> = { JPY: 100 };
 
-/** Türetilmiş göstergelerde yüzde değişimi iki oranın farkından tahmin eder */
+/** Bölünerek türetilen göstergede (a / b) yüzde değişim */
 const ratioChange = (a: number, b: number) => ((1 + a / 100) / (1 + b / 100) - 1) * 100;
 
-/** 1 ons = 31,1035 gram */
-const OUNCE_GRAMS = 31.1035;
+/** Çarpılarak türetilen göstergede (a x b) yüzde değişim */
+const productChange = (a: number, b: number) => ((1 + a / 100) * (1 + b / 100) - 1) * 100;
+
+/** 1 troy ons = 31,1034768 gram */
+const OUNCE_GRAMS = 31.1034768;
 
 function pick(raw: Record<string, unknown>, list: Array<[string, string]>): Quote[] {
   const out: Quote[] = [];
@@ -124,19 +130,7 @@ export function normalizeMarket(raw: Record<string, unknown>): MarketData | null
   const gbp = at(currencies, "GBP");
   const jpy = at(currencies, "JPY");
   const has = at(gold, "HAS");
-  const silverOunce = Number((raw.GUMUS as RawQuote | undefined)?.Selling) || 0;
-  const silverChange = Number((raw.GUMUS as RawQuote | undefined)?.Change) || 0;
-
-  /* Kaynak gümüşü ons/dolar veriyor; kuyumcunun kullandığı gram TL fiyatını üretiyoruz */
-  if (silverOunce > 0 && usd) {
-    gold.push({
-      code: "GUMUS",
-      name: "Gram Gümüş",
-      buying: null,
-      selling: (silverOunce * usd.selling) / OUNCE_GRAMS,
-      change: silverChange + usd.change,
-    });
-  }
+  const silver = at(gold, "GUMUS");
 
   const parities: Parity[] = [];
   const addParity = (code: string, name: string, a: Quote | null, b: Quote | null, ratio = 1) => {
@@ -162,8 +156,14 @@ export function normalizeMarket(raw: Record<string, unknown>): MarketData | null
       change: ratioChange(has.change, usd.change),
     });
   }
-  if (silverOunce > 0) {
-    summary.push({ code: "ONSGUMUS", name: "Ons gümüş (dolar)", value: silverOunce, change: silverChange });
+  /* Gümüş de gram/TL geldiği için ons/dolar karşılığı altınla aynı formülle çıkar */
+  if (silver && usd) {
+    summary.push({
+      code: "ONSGUMUS",
+      name: "Ons gümüş (dolar)",
+      value: (silver.selling * OUNCE_GRAMS) / usd.selling,
+      change: ratioChange(silver.change, usd.change),
+    });
   }
   if (usd && eur) {
     summary.push({
@@ -192,15 +192,35 @@ export function normalizeMarket(raw: Record<string, unknown>): MarketData | null
   };
 }
 
+/**
+ * Kaynak, tarayıcı gibi davranmayan isteklere kapalı olabiliyor; bu yüzden
+ * User-Agent ve Accept başlıkları açıkça gönderiliyor.
+ */
+const FEED_HEADERS = {
+  "User-Agent": "Mozilla/5.0 (compatible; MiniHesapBot/1.0; +https://minihesap.net)",
+  Accept: "application/json, text/plain, */*",
+};
+
+/** Son hata sebebi; /api/piyasa geliştirme modunda bunu geri veriyor */
+let lastError: string | null = null;
+export const marketLastError = () => lastError;
+
 export async function fetchMarket(): Promise<MarketData | null> {
   try {
     const res = await fetch(MARKET_SOURCE.feed, {
       next: { revalidate: 60 },
+      headers: FEED_HEADERS,
       signal: AbortSignal.timeout(8000),
     });
-    if (!res.ok) return null;
-    return normalizeMarket((await res.json()) as Record<string, unknown>);
-  } catch {
+    if (!res.ok) {
+      lastError = `kaynak ${res.status} döndü`;
+      return null;
+    }
+    const data = normalizeMarket((await res.json()) as Record<string, unknown>);
+    lastError = data ? null : "yanıt beklenen alanları taşımıyor";
+    return data;
+  } catch (err) {
+    lastError = err instanceof Error ? `${err.name}: ${err.message}` : "bilinmeyen hata";
     return null;
   }
 }
@@ -209,8 +229,8 @@ export function findQuote(data: MarketData | null, code: string) {
   return data ? [...data.gold, ...data.currencies].find((q) => q.code === code) ?? null : null;
 }
 
-/** Fiyat biçimi: büyük tutarlarda 2, kurlarda 4, çok küçük birimlerde 6 hane */
+/** Fiyat biçimi: üç haneli ve üstü tutarlarda 2, kurlarda 4, kuruşun altında 6 hane */
 export function formatPrice(value: number) {
-  const digits = value >= 1000 ? 2 : value >= 1 ? 4 : 6;
+  const digits = value >= 100 ? 2 : value >= 0.01 ? 4 : 6;
   return value.toLocaleString("tr-TR", { minimumFractionDigits: 2, maximumFractionDigits: digits });
 }

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-import { fetchMarket } from "@/lib/market";
+import { fetchMarket, marketLastError } from "@/lib/market";
 
 export const revalidate = 60;
 
@@ -8,7 +8,15 @@ export const revalidate = 60;
 export async function GET() {
   const data = await fetchMarket();
   if (!data) {
-    return NextResponse.json({ error: "Piyasa verisi şu an alınamıyor." }, { status: 503 });
+    const reason = marketLastError();
+    /* Sebep yalnızca geliştirmede dönüyor, canlıda kullanıcıya gösterilmiyor */
+    return NextResponse.json(
+      {
+        error: "Piyasa verisi şu an alınamıyor.",
+        ...(process.env.NODE_ENV !== "production" && reason ? { reason } : {}),
+      },
+      { status: 503 },
+    );
   }
 
   return NextResponse.json(data, {
