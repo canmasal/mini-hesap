@@ -1,7 +1,14 @@
-import { readFile } from "node:fs/promises";
+import { readdir, readFile } from "node:fs/promises";
 
 const source = await readFile(new URL("../data/calculators.ts", import.meta.url), "utf8");
-const pageSource = await readFile(new URL("../app/hesaplamalar/[slug]/page.tsx", import.meta.url), "utf8");
+/* SEO içerikleri sayfa dosyasında ve data/calculatorSeo*.ts dosyalarında durur;
+   sınav araçlarınınki data/exams.ts'ten üretilir */
+const dataDir = new URL("../data/", import.meta.url);
+const seoFiles = (await readdir(dataDir)).filter((f) => /^calculatorSeo.*\.ts$|^exams\.ts$/.test(f));
+const pageSource = [
+  await readFile(new URL("../app/hesaplamalar/[slug]/page.tsx", import.meta.url), "utf8"),
+  ...(await Promise.all(seoFiles.map((f) => readFile(new URL(f, dataDir), "utf8")))),
+].join("\n");
 const slugs = [...source.matchAll(/slug:\s*["']([^"']+)["']/g)].map((match) => match[1]);
 const duplicateSlugs = slugs.filter((slug, index) => slugs.indexOf(slug) !== index);
 

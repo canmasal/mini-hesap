@@ -6,6 +6,7 @@
  * bu sayfalardır.
  */
 
+import { araclarGuides } from "@/data/guidesAraclar";
 import { calisanGuides } from "@/data/guidesCalisan";
 import { ekGuides } from "@/data/guidesEk";
 import { finansGuides } from "@/data/guidesFinans";
@@ -577,6 +578,7 @@ export const guides: Guide[] = [
   ...vergiGuides,
   ...saglikGuides,
   ...ekGuides,
+  ...araclarGuides,
 ];
 
 export function findGuide(slug: string) {

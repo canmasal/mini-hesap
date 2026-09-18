@@ -17,6 +17,7 @@ import ShareResult from "@/components/ShareResult";
 import { SITE_URL } from "@/lib/site";
 import {
   DEPOSIT_WITHHOLDING,
+  LAST_VERIFIED,
   PENSION_STATE_CONTRIBUTION,
   tl,
 } from "@/data/parameters";
@@ -69,6 +70,11 @@ import EmployerCostCalculator from "@/components/calculators/EmployerCostCalcula
 import CreditCardMinimumCalculator from "@/components/calculators/CreditCardMinimumCalculator";
 import LatePaymentCalculator from "@/components/calculators/LatePaymentCalculator";
 import ProfitMarginCalculator from "@/components/calculators/ProfitMarginCalculator";
+import IncomeTaxCalculator from "@/components/calculators/IncomeTaxCalculator";
+import FreelanceReceiptCalculator from "@/components/calculators/FreelanceReceiptCalculator";
+import CompoundInterestCalculator from "@/components/calculators/CompoundInterestCalculator";
+import LoanPrepaymentCalculator from "@/components/calculators/LoanPrepaymentCalculator";
+import WaterIntakeCalculator from "@/components/calculators/WaterIntakeCalculator";
 
 /** 0.175 → "%17,5" */
 const pctTr = (rate: number) => `%${(rate * 100).toLocaleString("tr-TR")}`;
@@ -117,6 +123,11 @@ const componentMap: Record<string, ComponentType> = {
   "kredi-karti-asgari-odeme": CreditCardMinimumCalculator,
   "gecikme-zammi": LatePaymentCalculator,
   "kar-marji": ProfitMarginCalculator,
+  "gelir-vergisi": IncomeTaxCalculator,
+  "serbest-meslek-makbuzu": FreelanceReceiptCalculator,
+  "bilesik-faiz": CompoundInterestCalculator,
+  "kredi-erken-kapatma": LoanPrepaymentCalculator,
+  "su-ihtiyaci": WaterIntakeCalculator,
 
   /* Sınav araçları tek bileşenden, sınav yapılandırmasıyla üretilir */
   ...Object.fromEntries(
@@ -1088,6 +1099,15 @@ seoContents.bes = {
    JSON-LD
 ========================================================= */
 
+/** Araç kategorisine göre schema.org uygulama türü */
+const APP_CATEGORY: Record<string, string> = {
+  calisan: "FinanceApplication",
+  finans: "FinanceApplication",
+  saglik: "HealthApplication",
+  egitim: "EducationalApplication",
+  gunluk: "UtilitiesApplication",
+};
+
 function JsonLd({
   calculator,
   seo,
@@ -1109,6 +1129,7 @@ function JsonLd({
     description: seo.description,
     url: pageUrl,
     inLanguage: "tr-TR",
+    dateModified: LAST_VERIFIED,
 
     isPartOf: {
       "@type": "WebSite",
@@ -1145,7 +1166,7 @@ function JsonLd({
     "@type": "WebApplication",
     name: calculator.title,
     url: pageUrl,
-    applicationCategory: "FinanceApplication",
+    applicationCategory: APP_CATEGORY[calculator.category] ?? "UtilitiesApplication",
     operatingSystem: "Web",
     inLanguage: "tr-TR",
     description: seo.description,

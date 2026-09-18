@@ -200,6 +200,56 @@ export const calculators = [
       "Vadesinde ödenmeyen vergi, prim ve ceza borçları için gecikme zammını ve toplam ödemeyi hesaplayın.",
   },
 
+  {
+    slug: "gelir-vergisi",
+    icon: "🏛️",
+    title: "Gelir Vergisi Hesaplama",
+    category: "finans",
+    keywords: ["gelir vergisi", "vergi dilimi", "vergi dilimleri 2026", "matrah", "marjinal vergi", "efektif vergi"],
+    description:
+      "Yıllık matrahınıza göre 2026 gelir vergisini dilim dilim, efektif ve marjinal oranıyla birlikte hesaplayın.",
+  },
+
+  {
+    slug: "serbest-meslek-makbuzu",
+    icon: "🧾",
+    title: "Serbest Meslek Makbuzu Hesaplama",
+    category: "finans",
+    keywords: ["smm", "serbest meslek makbuzu", "stopaj", "brütten nete", "netten brüte", "freelance", "kdv"],
+    description:
+      "Serbest meslek makbuzunda brüt ücreti, %20 stopajı, KDV'yi ve hesabınıza geçecek net tutarı iki yönlü hesaplayın.",
+  },
+
+  {
+    slug: "bilesik-faiz",
+    icon: "📈",
+    title: "Bileşik Faiz Hesaplama",
+    category: "finans",
+    keywords: ["bileşik faiz", "faiz hesaplama", "yatırım getirisi", "birikim", "aylık yatırım", "efektif faiz"],
+    description:
+      "Başlangıç tutarı, yıllık oran ve süreye göre bileşik faizle birikiminizi, aylık ek yatırımla birlikte yıl yıl hesaplayın.",
+  },
+
+  {
+    slug: "kredi-erken-kapatma",
+    icon: "🔓",
+    title: "Kredi Erken Kapatma Hesaplama",
+    category: "finans",
+    keywords: ["erken kapatma", "erken ödeme", "kredi kapama", "erken ödeme tazminatı", "kalan anapara", "konut kredisi"],
+    description:
+      "Kredinizi bugün kapatırsanız ödeyeceğiniz tutarı, erken ödeme tazminatını ve kurtulacağınız faizi hesaplayın.",
+  },
+
+  {
+    slug: "su-ihtiyaci",
+    icon: "💧",
+    title: "Günlük Su İhtiyacı Hesaplama",
+    category: "saglik",
+    keywords: ["su ihtiyacı", "günde kaç litre su", "kaç bardak su", "sıvı ihtiyacı", "kiloya göre su"],
+    description:
+      "Kilonuza, egzersizinize ve havaya göre günde kaç litre ve kaç bardak su içmeniz gerektiğini hesaplayın.",
+  },
+
   /* ---------------- Eğitim & Sınav ---------------- */
 
   {
@@ -534,10 +584,38 @@ export const calculators = [
 
 export type Calculator = (typeof calculators)[number];
 
+/**
+ * Konuca en yakın araçlar. Kategori sırası yeni eklenen araçları listenin
+ * sonunda bıraktığı için hiçbir sayfadan link almıyorlardı; burada tanımlı
+ * eşleşmeler kategori sırasından önce gelir.
+ */
+const RELATED: Record<string, string[]> = {
+  "net-maas": ["gelir-vergisi", "netten-brute-maas"],
+  "netten-brute-maas": ["gelir-vergisi", "net-maas"],
+  "kira-geliri-vergisi": ["gelir-vergisi", "damga-vergisi"],
+  "gelir-vergisi": ["net-maas", "kira-geliri-vergisi", "serbest-meslek-makbuzu"],
+  "serbest-meslek-makbuzu": ["gelir-vergisi", "kdv"],
+  kdv: ["serbest-meslek-makbuzu", "kar-marji"],
+  "kredi-borc": ["kredi-erken-kapatma", "taksit-maliyeti"],
+  "konut-kredisi": ["kredi-erken-kapatma", "tapu-harci"],
+  "kredi-erken-kapatma": ["kredi-borc", "konut-kredisi", "mevduat"],
+  mevduat: ["bilesik-faiz", "enflasyon"],
+  bes: ["bilesik-faiz", "mevduat"],
+  "bilesik-faiz": ["mevduat", "enflasyon", "bes"],
+  "kalori-ihtiyaci": ["su-ihtiyaci", "ideal-kilo"],
+  "ideal-kilo": ["su-ihtiyaci", "vucut-kitle-indeksi"],
+  "vucut-kitle-indeksi": ["ideal-kilo", "su-ihtiyaci"],
+  "su-ihtiyaci": ["kalori-ihtiyaci", "ideal-kilo", "vucut-kitle-indeksi"],
+};
+
 /** Aynı kategorideki diğer araçlar (iç link + keşif için) */
 export function getRelatedCalculators(slug: string, limit = 3) {
   const current = calculators.find((item) => item.slug === slug);
   if (!current) return [];
+
+  const picked = (RELATED[slug] ?? [])
+    .map((s) => calculators.find((item) => item.slug === s))
+    .filter((item): item is Calculator => Boolean(item));
 
   const sameCategory = calculators.filter(
     (item) => item.slug !== slug && item.category === current.category
@@ -547,5 +625,8 @@ export function getRelatedCalculators(slug: string, limit = 3) {
     (item) => item.slug !== slug && item.category !== current.category
   );
 
-  return [...sameCategory, ...others].slice(0, limit);
+  const seen = new Set<string>();
+  return [...picked, ...sameCategory, ...others]
+    .filter((item) => !seen.has(item.slug) && seen.add(item.slug))
+    .slice(0, limit);
 }

@@ -45,6 +45,51 @@ function formatDate(date: Date) {
 }
 
 /**
+ * EYT (08.09.1999 ve öncesi giriş) kademeli prim gün şartı, 506 sayılı
+ * Kanun geçici 81/B. Şart 5000 günden başlar; kadında 24.05.1985'ten, erkekte
+ * 24.11.1980'den itibaren her kademede 75 gün artarak 5975 güne çıkar.
+ * Kadında kademeler yıllık, erkekte 18 aylıktır.
+ * Tablo: her satır, o tarihten itibaren giriş yapanlara uygulanan gün sayısı.
+ */
+const EYT_DAYS: Record<Gender, Array<[string, number]>> = {
+  kadin: [
+    ["1997-05-24", 5975],
+    ["1996-05-24", 5900],
+    ["1995-05-24", 5825],
+    ["1994-05-24", 5750],
+    ["1993-05-24", 5675],
+    ["1992-05-24", 5600],
+    ["1991-05-24", 5525],
+    ["1990-05-24", 5450],
+    ["1989-05-24", 5375],
+    ["1988-05-24", 5300],
+    ["1987-05-24", 5225],
+    ["1986-05-24", 5150],
+    ["1985-05-24", 5075],
+  ],
+  erkek: [
+    ["1998-11-24", 5975],
+    ["1997-05-24", 5900],
+    ["1995-11-24", 5825],
+    ["1994-05-24", 5750],
+    ["1992-11-24", 5675],
+    ["1991-05-24", 5600],
+    ["1989-11-24", 5525],
+    ["1988-05-24", 5450],
+    ["1986-11-24", 5375],
+    ["1985-05-24", 5300],
+    ["1983-11-24", 5225],
+    ["1982-05-24", 5150],
+    ["1980-11-24", 5075],
+  ],
+};
+
+function eytRequiredDays(start: Date, gender: Gender) {
+  const row = EYT_DAYS[gender].find(([from]) => start >= new Date(`${from}T00:00:00`));
+  return row ? row[1] : 5000;
+}
+
+/**
  * 01.05.2008 sonrası girişliler için kademeli yaş tablosu.
  * Prim günü hangi yılda tamamlanırsa o yılın yaş şartı uygulanır.
  */
@@ -114,7 +159,7 @@ export default function RetirementCalculator() {
 
     /* Prim gün şartı */
     const requiredDays =
-      group === "A" ? 5000 : group === "B" ? 7000 : 7200;
+      group === "A" ? eytRequiredDays(start, gender) : group === "B" ? 7000 : 7200;
 
     /* ---------- PRİM GÜNÜ TAMAMLAMA ---------- */
 
@@ -362,8 +407,9 @@ export default function RetirementCalculator() {
           <div className="notice notice-warn">
             <strong>Önemli:</strong> Bu sonuç 4a (SSK) kapsamındaki genel
             kurallara göre hesaplanan bir <strong>tahmindir</strong>.
-            08.09.1999 öncesi girişlilerde prim gün şartı giriş tarihine göre
-            5.000 ile 5.975 gün arasında kademeli değişebilir; askerlik
+            08.09.1999 öncesi girişlilerde prim gün şartı giriş tarihinize ve
+            cinsiyetinize göre 5.000 ile 5.975 gün arasındaki kademeli tablodan
+            alınmıştır. Askerlik
             borçlanması, yurt dışı borçlanması, 4b/4c hizmetleri, engellilik ve
             ağır işler gibi durumlar sonucu değiştirir. Kesin bilgi için
             e-Devlet üzerinden SGK <em>Emeklilik Tahsis Talebi</em> ekranını

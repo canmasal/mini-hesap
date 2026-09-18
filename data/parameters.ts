@@ -102,6 +102,25 @@ export const INCOME_TAX_BRACKETS_NON_WAGE = [
   { limit: Infinity, rate: 0.4 },
 ] as const;
 
+/** Artan oranlı tarifeyle yıllık gelir vergisi; dilim dökümüyle birlikte. */
+export function incomeTaxOn(
+  base: number,
+  brackets: ReadonlyArray<{ limit: number; rate: number }> = INCOME_TAX_BRACKETS_WAGE,
+) {
+  const rows: { from: number; to: number; rate: number; tax: number }[] = [];
+  let lower = 0;
+  let total = 0;
+  for (const { limit, rate } of brackets) {
+    if (base <= lower) break;
+    const to = Math.min(base, limit);
+    const tax = (to - lower) * rate;
+    rows.push({ from: lower, to, rate, tax });
+    total += tax;
+    lower = limit;
+  }
+  return { rows, total, marginal: rows.length ? rows[rows.length - 1].rate : 0 };
+}
+
 export const INCOME_TAX_SOURCE: Source = {
   label: "GİB – Gelir Vergisi Tarifesi 2026",
   url: "https://cdn.gib.gov.tr/api/gibportal-file/file/getFileResources?objectKey=arsiv%2Fyardim-kaynaklar%2Fyararli-bilgiler%2Fgelir-vergisi-tarifeleri%2Fgelir-vergisi-tarifesi-2026.pdf",
@@ -388,6 +407,41 @@ export const PROPERTY_TAX = {
   source: {
     label: "TÜRMOB – 2026 Yılında Emlak Vergisi Uygulaması (89 Seri No'lu Tebliğ)",
     url: "https://www.turmob.org.tr/ekutuphane/Read/dcca5a10-3d55-40d7-b531-1244690fea66",
+  } satisfies Source,
+} as const;
+
+/* ------------------------------------------------------------------ */
+/* Serbest meslek makbuzu                                              */
+/* ------------------------------------------------------------------ */
+
+export const FREELANCE_RECEIPT = {
+  /** Vergi sorumlusuna kesilen makbuzda gelir vergisi stopajı (GVK 94/2-b) */
+  withholding: 0.2,
+  /** Genel KDV oranı (10.07.2023'ten itibaren) */
+  vat: 0.2,
+  source: {
+    label: "GİB – Serbest Meslek Kazançlarında Vergilendirme Rehberi",
+    url: "https://www.gib.gov.tr/sites/default/files/fileadmin/yayinlar/serbest_meslek_kazanci_rehberi.pdf",
+  } satisfies Source,
+} as const;
+
+/* ------------------------------------------------------------------ */
+/* Kredi erken kapatma                                                 */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Sabit faizli konut kredisinde erken ödeme tazminatı (6502 sayılı Kanun
+ * md. 37). İhtiyaç ve taşıt kredilerinde ve değişken faizli konut
+ * kredilerinde erken ödeme tazminatı alınamaz.
+ */
+export const EARLY_REPAYMENT = {
+  /** Kalan vade bu kadar ay veya daha kısaysa düşük oran uygulanır */
+  thresholdMonths: 36,
+  shortRate: 0.01,
+  longRate: 0.02,
+  source: {
+    label: "6502 sayılı Tüketicinin Korunması Hakkında Kanun, md. 30 ve 37",
+    url: "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=6502&MevzuatTur=1&MevzuatTertip=5",
   } satisfies Source,
 } as const;
 
