@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 
 import {
   MARKET_STALE_MINUTES,
+  formatIndicator,
   formatPrice,
   type MarketData,
   type Parity,
@@ -162,7 +163,7 @@ function ParityTable({ rows, unit }: { rows: Parity[]; unit?: string }) {
               </th>
               <td className="board-sell">
                 {unit === "try" ? "₺" : ""}
-                {formatPrice(row.value)}
+                {formatIndicator(row.value)}
               </td>
               <td className={changeClass(row.change)}>
                 <ChangeTag change={row.change} />
@@ -186,7 +187,6 @@ export default function MarketBoard({
   const [flash, setFlash] = useState<Flash>({});
   const [failed, setFailed] = useState(false);
   const [now, setNow] = useState<number | null>(null);
-  const [tab, setTab] = useState<"gold" | "currency">(view === "currency" ? "currency" : "gold");
   const dataRef = useRef(initial);
 
   useEffect(() => {
@@ -268,9 +268,6 @@ export default function MarketBoard({
     ? ["GRA", "CEYREKALTIN", "TAMALTIN", "USD"]
     : ["USD", "EUR", "GBP", "GRA"];
 
-  const showTabs = view === "all";
-  const active = showTabs ? tab : view;
-
   return (
     <div className="market" aria-live="polite">
       <Ticker data={data} />
@@ -312,22 +309,15 @@ export default function MarketBoard({
             <h3>Pariteler</h3>
             <ParityTable rows={data.parities} />
           </section>
+          {/*
+            İkinci tablo her zaman soldakinin tamamlayıcısı: solda döviz varsa
+            burada altın, solda altın varsa burada döviz. Eskiden buraya bir de
+            Altın/Döviz sekmesi konuyordu; "Döviz" seçilince soldaki tabloyla
+            aynı liste iki kez basılıyor, başlık ise "Altın fiyatları" kalıyordu.
+          */}
           <section className="market-panel">
             <h3>{isGold ? "Döviz kurları" : "Altın fiyatları"}</h3>
-            {showTabs && (
-              <div className="board-tabs" role="tablist">
-                <button type="button" role="tab" aria-selected={tab === "gold"} onClick={() => setTab("gold")}>
-                  Altın
-                </button>
-                <button type="button" role="tab" aria-selected={tab === "currency"} onClick={() => setTab("currency")}>
-                  Döviz
-                </button>
-              </div>
-            )}
-            <QuoteTable
-              quotes={showTabs ? (active === "gold" ? data.gold : data.currencies) : isGold ? data.currencies : data.gold}
-              flash={flash}
-            />
+            <QuoteTable quotes={isGold ? data.currencies : data.gold} flash={flash} />
           </section>
         </div>
       </div>

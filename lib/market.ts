@@ -1,11 +1,19 @@
 /**
  * Canlı altın ve döviz verisi.
  *
- * Kaynak: Truncgil Finans açık JSON beslemesi (ücretsiz, anahtarsız).
+ * Fiyat kaynağı: Truncgil Finans açık JSON beslemesi (ücretsiz, anahtarsız).
+ * Günlük değişim kaynağı: Yahoo Finance. Truncgil'in "Change" alanı kalemden
+ * kaleme farklı bazlara göre hesaplanıyor (gram altın +%0,8 iken aynı anda
+ * bütün ziynet altınlar -%0,1 gibi); bu yüzden değişimler tek bir ortak baza,
+ * bir önceki günün kapanışına göre Yahoo'dan alınır. Yahoo'ya ulaşılamazsa
+ * Truncgil'in kendi değişimine düşülür.
+ *
  * Veri sunucuda çekilir ve 60 saniye önbelleğe alınır; ziyaretçi sayısı ne
  * olursa olsun kaynağa dakikada en fazla bir istek gider. Kaynak yanıt
  * vermezse null döner, sayfa son başarılı veriyi göstermeye devam eder.
  */
+
+import { fetchOne, type Stock } from "./stocks";
 
 export const MARKET_SOURCE = {
   label: "Truncgil Finans",
@@ -91,9 +99,6 @@ const SCALE_FIX: Record<string, number> = { JPY: 100 };
 
 /** Bölünerek türetilen göstergede (a / b) yüzde değişim */
 const ratioChange = (a: number, b: number) => ((1 + a / 100) / (1 + b / 100) - 1) * 100;
-
-/** Çarpılarak türetilen göstergede (a x b) yüzde değişim */
-const productChange = (a: number, b: number) => ((1 + a / 100) * (1 + b / 100) - 1) * 100;
 
 /** 1 troy ons = 31,1034768 gram */
 const OUNCE_GRAMS = 31.1034768;
@@ -227,6 +232,18 @@ export async function fetchMarket(): Promise<MarketData | null> {
 
 export function findQuote(data: MarketData | null, code: string) {
   return data ? [...data.gold, ...data.currencies].find((q) => q.code === code) ?? null : null;
+}
+
+/**
+ * Gösterge biçimi (özet ve parite satırları).
+ *
+ * Fiyat tablolarından ayrı tutuluyor: orada 48,7865 gibi kurlar için dört hane
+ * gerekiyor, burada ise ons gümüş 66,8272 diye basılıyordu. İki haneli ve üstü
+ * göstergelerde 2, paritelerde 4 hane yeterli.
+ */
+export function formatIndicator(value: number) {
+  const digits = value >= 10 ? 2 : 4;
+  return value.toLocaleString("tr-TR", { minimumFractionDigits: 2, maximumFractionDigits: digits });
 }
 
 /** Fiyat biçimi: üç haneli ve üstü tutarlarda 2, kurlarda 4, kuruşun altında 6 hane */
