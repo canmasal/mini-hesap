@@ -7,11 +7,18 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      /* Özel, ödeme ve indirme ulaştırma uç noktaları aramaya kapalı */
+      /*
+       * Arama motorlarına kapalı uç noktalar:
+       * - /api/      → sunucu API uç noktaları
+       * - /siparis/  → her kullanıcıya özel sipariş sayfaları
+       * - /private/  → yetkisiz erişime kapalı içerik
+       *
+       * /satin-al/* burada yok: o sayfalar generateMetadata'da
+       * robots: { index: false } ile kendi kendine kapatılır.
+       */
       disallow: [
         "/api/",
         "/siparis/",
-        "/satin-al/",
         "/private/",
       ],
     },

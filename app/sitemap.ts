@@ -17,13 +17,26 @@ type Entry = MetadataRoute.Sitemap[number];
  * - ana sayfa ve listeler, içlerindeki en yeni içeriğin tarihini,
  * - yalnızca canlı piyasa sayfaları derleme anını alır,
  * - yasal metinlerde ve ürün sayfalarında tarih verilmez.
+ *
+ * Dahil edilmeyen sayfalar:
+ * - /api/* → disallow (robots.ts)
+ * - /siparis/* → dinamik, index:false (her kullanıcıya özel)
+ * - /satin-al/* → checkout akışı, kendi sayfasında index:false
+ * - /private/* → disallow (robots.ts)
  */
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
   const istanbul = (iso: string) => new Date(`${iso}T12:00:00+03:00`);
   const verified = istanbul(LAST_VERIFIED);
-  const latestGuide = istanbul(guides.map((g) => g.updated).sort().at(-1) ?? LAST_VERIFIED);
-  const latest = latestGuide > verified ? latestGuide : verified;
+
+  /* Tüm rehber sayfalarının en güncel tarihi */
+  const latestGuide = istanbul(
+    guides.map((g) => g.updated).sort().at(-1) ?? LAST_VERIFIED,
+  );
+
+  /* Ana sayfa: rehber veya parametre güncellemesinden hangisi daha yeni */
+  const homepageDate = latestGuide > verified ? latestGuide : verified;
+
   const page = (
     path: string,
     changeFrequency: Entry["changeFrequency"],
@@ -37,39 +50,53 @@ export default function sitemap(): MetadataRoute.Sitemap {
   });
 
   return [
-    page("", "weekly", 1, latest),
-    page("/hesaplamalar", "weekly", 0.9, verified),
+    /* ── Ana sayfalar ─────────────────────────────────────────────── */
+    page("", "weekly", 1.0, homepageDate),
+    page("/hesaplamalar", "weekly", 0.95, verified),
     page("/rehber", "weekly", 0.9, latestGuide),
-    /* Resmî rakamlar sayfası: rakam değiştikçe güncellenir */
     page("/guncel-rakamlar", "weekly", 0.9, verified),
-    /* Canlı piyasa sayfaları: fiyatlar dakikalık yenilenir */
-    page("/piyasalar", "hourly", 0.9),
-    page("/altin-fiyatlari", "hourly", 0.9),
-    page("/borsa", "hourly", 0.9),
-    page("/doviz-kurlari", "hourly", 0.9),
+    page("/piyasalar", "hourly", 0.9),       /* Canlı — derleme anı */
+    page("/altin-fiyatlari", "hourly", 0.9), /* Canlı — derleme anı */
+    page("/borsa", "hourly", 0.9),           /* Canlı — derleme anı */
+    page("/doviz-kurlari", "hourly", 0.9),   /* Canlı — derleme anı */
 
-    /* Hesaplama araçları: sitenin ana arama trafiği bu sayfalardan gelir */
-    ...calculators.map((c) => page(`/hesaplamalar/${c.slug}`, "monthly", 0.9, verified)),
+    /* ── Hesaplama araçları (ana trafik kaynağı) ──────────────────── */
+    ...calculators.map((c) =>
+      page(`/hesaplamalar/${c.slug}`, "monthly", 0.9, verified),
+    ),
 
-    /* Rehber yazıları */
-    ...guides.map((g) => page(`/rehber/${g.slug}`, "monthly", 0.8, istanbul(g.updated))),
+    /* ── Rehber yazıları ──────────────────────────────────────────── */
+    ...guides.map((g) =>
+      page(`/rehber/${g.slug}`, "monthly", 0.85, istanbul(g.updated)),
+    ),
 
-    /* Uzun kuyruklu hazır hesap sayfaları (ör. "30.000 TL brüt ne kadar net") */
-    ...longtailPages.map((p) => page(`/hesapla/${p.slug}`, "monthly", 0.6, verified)),
+    /* ── Uzun kuyruklu hazır hesap sayfaları ──────────────────────── */
+    /* "50.000 TL brüt ne kadar net" gibi sık aranan sorulara doğrudan cevap */
+    ...longtailPages.map((p) =>
+      page(`/hesapla/${p.slug}`, "monthly", 0.7, verified),
+    ),
 
-    page("/borc-takip", "monthly", 0.8, null),
-    page("/on-muhasebe", "monthly", 0.8, null),
-    page("/premium", "monthly", 0.8, null),
-    page("/premium/borc-takip", "monthly", 0.6, null),
-    page("/premium/on-muhasebe", "monthly", 0.6, null),
-    page("/program-talebi", "monthly", 0.7, null),
+    /* ── Finans araçları (ücretsiz, üyeliksiz) ────────────────────── */
+    page("/borc-takip", "monthly", 0.85, verified),
+    page("/on-muhasebe", "monthly", 0.85, verified),
+
+    /* ── Premium & satın alma ─────────────────────────────────────── */
+    /* Vitrin sayfaları indekslenir; ödeme akışı (/satin-al/*) index:false */
+    page("/premium", "monthly", 0.85, verified),
+    page("/premium/borc-takip", "monthly", 0.7, verified),
+    page("/premium/on-muhasebe", "monthly", 0.7, verified),
+
+    /* ── Diğer içerik sayfaları ───────────────────────────────────── */
+    page("/program-talebi", "monthly", 0.75, null),
     page("/hakkimizda", "monthly", 0.5, null),
-    page("/iletisim", "monthly", 0.4, null),
-    page("/pazarlama-iletisimi", "yearly", 0.2, null),
+    page("/iletisim", "monthly", 0.45, null),
+
+    /* ── Yasal metinler ───────────────────────────────────────────── */
     page("/gizlilik", "yearly", 0.2, null),
-    page("/on-bilgilendirme", "yearly", 0.2, null),
-    page("/mesafeli-satis-sozlesmesi", "yearly", 0.2, null),
-    page("/iade-kosullari", "yearly", 0.3, null),
     page("/kullanim-sartlari", "yearly", 0.2, null),
+    page("/iade-kosullari", "yearly", 0.3, null),
+    page("/mesafeli-satis-sozlesmesi", "yearly", 0.2, null),
+    page("/on-bilgilendirme", "yearly", 0.2, null),
+    page("/pazarlama-iletisimi", "yearly", 0.1, null),
   ];
 }
