@@ -133,6 +133,15 @@ const websiteSchema = {
     url: siteUrl,
     logo: `${siteUrl}/icon.svg`,
   },
+  /* Google Sitelinks Searchbox için SearchAction */
+  potentialAction: {
+    "@type": "SearchAction",
+    target: {
+      "@type": "EntryPoint",
+      urlTemplate: `${siteUrl}/hesaplamalar?q={search_term_string}`,
+    },
+    "query-input": "required name=search_term_string",
+  },
 };
 
 export default function RootLayout({

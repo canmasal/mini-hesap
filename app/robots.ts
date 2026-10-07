@@ -7,8 +7,13 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      /* Premium indirme uç noktası aramaya kapalı */
-      disallow: ["/api/"],
+      /* Özel, ödeme ve indirme ulaştırma uç noktaları aramaya kapalı */
+      disallow: [
+        "/api/",
+        "/siparis/",
+        "/satin-al/",
+        "/private/",
+      ],
     },
 
     sitemap: `${SITE_URL}/sitemap.xml`,

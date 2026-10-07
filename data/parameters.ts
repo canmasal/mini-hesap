@@ -12,7 +12,7 @@
 export const PARAMETERS_YEAR = 2026;
 
 /** Rakamların resmî kaynaklardan en son kontrol edildiği tarih (ISO). */
-export const LAST_VERIFIED = "2026-09-15";
+export const LAST_VERIFIED = "2026-10-08";
 
 export type Source = { label: string; url: string };
 
