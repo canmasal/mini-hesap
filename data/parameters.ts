@@ -12,7 +12,7 @@
 export const PARAMETERS_YEAR = 2026;
 
 /** Rakamların resmî kaynaklardan en son kontrol edildiği tarih (ISO). */
-export const LAST_VERIFIED = "2026-10-08";
+export const LAST_VERIFIED = "2026-10-12";
 
 export type Source = { label: string; url: string };
 
@@ -295,7 +295,7 @@ export const EMPLOYER_RATES = {
  * ziyaretçi güncelliği görebilsin.
  */
 export const CREDIT_CARD = {
-  validFrom: "2026-09-01",
+  validFrom: "2026-10-01",
   /** Dönem borcuna göre aylık azami akdi ve gecikme faizi */
   tiers: [
     { upTo: 30000, contractual: 0.0325, late: 0.0355 },

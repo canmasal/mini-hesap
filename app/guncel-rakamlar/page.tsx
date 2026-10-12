@@ -17,6 +17,7 @@ import {
   MINIMUM_WAGE_STAMP_TAX_EXEMPTION,
   PARAMETERS_YEAR as Y,
   RATES,
+  RENT_INCREASE,
   SEVERANCE_CEILINGS,
   SEVERANCE_CEILING_SOURCE,
   SGK_LIMITS,
@@ -401,6 +402,23 @@ export default function CurrentRatesPage() {
           <SourceLink source={LATE_PAYMENT.source} />
           <p className="rates-links">
             <Link href="/hesaplamalar/gecikme-zammi">Gecikme zammı hesapla</Link>
+          </p>
+        </section>
+
+        {/* Kira artış sınırı */}
+        <section className="rates-block" id="kira-artisi">
+          <h2>Kira artış sınırı</h2>
+          <div className="rates-table-wrap">
+            <table className="rates-table">
+              <tbody>
+                <tr className="is-total"><th scope="row">{RENT_INCREASE.month} azami kira artışı</th><td>%{RENT_INCREASE.maxRatePercent.toLocaleString("tr-TR")}</td></tr>
+                <tr><th scope="row">Dayanak</th><td>TÜFE 12 aylık ortalaması (TBK md. 344)</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <SourceLink source={RENT_INCREASE.source} />
+          <p className="rates-links">
+            <Link href="/hesaplamalar/kira-artisi">Kira artışı hesapla</Link>
           </p>
         </section>
 

@@ -8,6 +8,7 @@
 
 import type { SeoSection } from "@/data/calculatorSeo";
 import {
+  RENT_INCREASE,
   CONSUMER_LOAN_TAXES,
   DEPOSIT_WITHHOLDING,
   MINIMUM_WAGE,
@@ -233,7 +234,7 @@ export const moreToolSections: Record<string, SeoSection[]> = {
       body: [
         "Yeni kira = Mevcut kira × (1 + Artış oranı ÷ 100)",
         "Konut ve çatılı işyeri kiralarında artış oranı, kira yılının yenilendiği aydan önceki <strong>son 12 ayın TÜFE ortalamasını</strong> geçemez. Bu oran her ay TÜİK enflasyon verisiyle birlikte açıklanır.",
-        "Örnek: 25.000 TL kirada 12 aylık TÜFE ortalaması %30 ise yeni kira en fazla 25.000 × 1,30 = <strong>32.500 TL</strong> olur. Taraflar daha düşük bir oranda anlaşabilir.",
+        `${RENT_INCREASE.month} için açıklanan yasal üst sınır <strong>%${RENT_INCREASE.maxRatePercent.toLocaleString("tr-TR")}</strong> olarak açıklandı. Örnek: 25.000 TL kirada yeni kira en fazla 25.000 × ${(1 + RENT_INCREASE.maxRatePercent / 100).toLocaleString("tr-TR", { maximumFractionDigits: 4 })} = <strong>${(25000 * (1 + RENT_INCREASE.maxRatePercent / 100)).toLocaleString("tr-TR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} TL</strong> olur. Taraflar daha düşük bir oranda anlaşabilir.`,
       ],
     },
     {

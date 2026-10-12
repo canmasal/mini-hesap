@@ -7,6 +7,12 @@
  */
 
 import type { Guide } from "@/data/guides";
+import { LAST_VERIFIED, RENT_INCREASE } from "@/data/parameters";
+
+const rentRate = RENT_INCREASE.maxRatePercent;
+const rentPct = `%${rentRate.toLocaleString("tr-TR")}`;
+const rentExample = (rent: number) =>
+  (rent * (1 + rentRate / 100)).toLocaleString("tr-TR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
 export const finansGuides: Guide[] = [
   /* =======================================================
@@ -156,12 +162,23 @@ export const finansGuides: Guide[] = [
     category: "Günlük",
     icon: "🏠",
     published: "2026-09-13",
-    updated: "2026-09-13",
-    readingMinutes: 5,
+    updated: LAST_VERIFIED,
+    readingMinutes: 6,
     tool: { slug: "kira-artisi", label: "Kira Artışı Hesaplama" },
-    intro:
-      "Konut ve çatılı işyeri kiralarında yenilenen kira yılı için yapılacak artış, yasal olarak bir üst sınıra bağlıdır. Bu sınır, TÜİK'in açıkladığı tüketici fiyatları endeksinin (TÜFE) <strong>son 12 aylık ortalamasıdır</strong>. Taraflar daha düşük bir oranda anlaşabilir, ancak daha yüksek bir oran geçerli olmaz.",
+    intro: `Konut ve çatılı işyeri kiralarında yenilenen kira yılı için yapılacak artış, yasal olarak bir üst sınıra bağlıdır. Bu sınır, TÜİK'in açıkladığı tüketici fiyatları endeksinin (TÜFE) <strong>son 12 aylık ortalamasıdır</strong>. ${RENT_INCREASE.month} için açıklanan sınır <strong>${rentPct}</strong> olarak belirlendi. Taraflar daha düşük bir oranda anlaşabilir, ancak daha yüksek bir oran geçerli olmaz.`,
     sections: [
+      {
+        heading: `${RENT_INCREASE.month} kira artış oranı`,
+        body: [
+          `Kira yılı ${RENT_INCREASE.month} döneminde yenilenen konut ve işyerleri için yasal azami artış oranı <strong>${rentPct}</strong> olarak açıklandı. Bu oran, TÜİK'in eylül enflasyon verisiyle birlikte yayımlanan 12 aylık TÜFE ortalamasıdır.`,
+          "Bu oranla örnek yeni kira tutarları (en fazla):",
+          `- 10.000 TL kira → <strong>${rentExample(10000)} TL</strong>`,
+          `- 15.000 TL kira → <strong>${rentExample(15000)} TL</strong>`,
+          `- 20.000 TL kira → <strong>${rentExample(20000)} TL</strong>`,
+          `- 30.000 TL kira → <strong>${rentExample(30000)} TL</strong>`,
+          "Oran her ay değişir. Kira yılınız başka bir ayda yenileniyorsa, o ayın başında açıklanan oranı kullanmanız gerekir. Kira Artışı Hesaplama aracında güncel oranı tek tıkla uygulayabilirsiniz.",
+        ],
+      },
       {
         heading: "Hangi oran kullanılır?",
         body: [
@@ -196,6 +213,10 @@ export const finansGuides: Guide[] = [
       },
     ],
     faqs: [
+      {
+        question: `${RENT_INCREASE.month} kira artış oranı kaç?`,
+        answer: `${RENT_INCREASE.month} için yasal kira artış sınırı ${rentPct} olarak açıklandı (12 aylık TÜFE ortalaması). Örneğin 20.000 TL kira en fazla ${rentExample(20000)} TL'ye çıkabilir.`,
+      },
       {
         question: "Ev sahibi yasal sınırın üzerinde zam isteyebilir mi?",
         answer:
