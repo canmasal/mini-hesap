@@ -2,11 +2,25 @@
 
 import { useMemo, useState } from "react";
 
+import { CONSUMER_LOAN_TAXES } from "@/data/parameters";
+
+/**
+ * İhtiyaç ve taşıt kredilerinde faize KKDF (%15) ve BSMV (%15) eklenir;
+ * bankaların ilan ettiği taksit bu vergilerle birlikte hesaplanır.
+ * Konut kredisi bu vergilerden muaftır.
+ */
+function loanTaxRate(loanType: string): number {
+  return loanType === "İhtiyaç Kredisi" || loanType === "Taşıt Kredisi"
+    ? CONSUMER_LOAN_TAXES.kkdf + CONSUMER_LOAN_TAXES.bsmv
+    : 0;
+}
+
 type PaymentRow = {
   installment: number;
   date: Date;
   payment: number;
   interest: number;
+  taxes: number;
   principal: number;
   remaining: number;
 };
@@ -15,6 +29,7 @@ type LoanResult = {
   monthlyPayment: number;
   principal: number;
   totalInterest: number;
+  totalTaxes: number;
   totalPayment: number;
   schedule: PaymentRow[];
 };
@@ -85,29 +100,34 @@ function calculateLoan(
   principal: number,
   monthlyRatePercent: number,
   months: number,
-  startDate: Date
+  startDate: Date,
+  taxRate = 0
 ): LoanResult {
   const monthlyRate =
     monthlyRatePercent / 100;
 
+  /* Taksit, vergiler dâhil efektif oranla hesaplanır */
+  const effectiveRate =
+    monthlyRate * (1 + taxRate);
+
   let monthlyPayment = 0;
 
-  if (monthlyRate === 0) {
+  if (effectiveRate === 0) {
     monthlyPayment =
       principal / months;
   } else {
     monthlyPayment =
       principal *
       (
-        monthlyRate *
+        effectiveRate *
         Math.pow(
-          1 + monthlyRate,
+          1 + effectiveRate,
           months
         )
       ) /
       (
         Math.pow(
-          1 + monthlyRate,
+          1 + effectiveRate,
           months
         ) - 1
       );
@@ -136,11 +156,14 @@ function calculateLoan(
         : remaining *
           monthlyRate;
 
+    const taxes =
+      interest * taxRate;
+
     let payment =
       monthlyPayment;
 
     let principalPart =
-      payment - interest;
+      payment - interest - taxes;
 
     /*
      * Son taksitte yuvarlama
@@ -153,7 +176,8 @@ function calculateLoan(
 
       payment =
         principalPart +
-        interest;
+        interest +
+        taxes;
     }
 
     principalPart =
@@ -191,6 +215,10 @@ function calculateLoan(
       payment,
       interest:
         interestRounded,
+      taxes:
+        Math.round(
+          taxes * 100
+        ) / 100,
       principal:
         principalPart,
       remaining,
@@ -211,9 +239,20 @@ function calculateLoan(
       0
     );
 
+  const totalTaxes =
+    schedule.reduce(
+      (sum, row) =>
+        sum + row.taxes,
+      0
+    );
+
   return {
     monthlyPayment,
     principal,
+    totalTaxes:
+      Math.round(
+        totalTaxes * 100
+      ) / 100,
     totalInterest:
       Math.round(
         totalInterest * 100
@@ -315,9 +354,11 @@ export default function BankLoanCalculator() {
       amount,
       rate,
       Math.floor(term),
-      date
+      date,
+      loanTaxRate(loanType)
     );
   }, [
+    loanType,
     principal,
     monthlyRate,
     months,
@@ -396,7 +437,8 @@ export default function BankLoanCalculator() {
         amount,
         rate,
         term,
-        date
+        date,
+        loanTaxRate(loanType)
       )
     );
   }
@@ -664,6 +706,15 @@ export default function BankLoanCalculator() {
               highlight
             />
 
+            {result.totalTaxes > 0 && (
+              <SummaryCard
+                label="KKDF + BSMV"
+                value={formatMoney(
+                  result.totalTaxes
+                )}
+              />
+            )}
+
             <SummaryCard
               label="Toplam Geri Ödeme"
               value={formatMoney(
@@ -744,6 +795,10 @@ export default function BankLoanCalculator() {
                     </th>
 
                     <th style={thStyle}>
+                      KKDF + BSMV
+                    </th>
+
+                    <th style={thStyle}>
                       Anapara
                     </th>
 
@@ -805,6 +860,16 @@ export default function BankLoanCalculator() {
                           }
                         >
                           {formatMoney(
+                            row.taxes
+                          )}
+                        </td>
+
+                        <td
+                          style={
+                            tdStyle
+                          }
+                        >
+                          {formatMoney(
                             row.principal
                           )}
                         </td>
@@ -843,10 +908,12 @@ export default function BankLoanCalculator() {
           >
             ℹ️ Bu hesaplama, kullanıcının
             girdiği aylık faiz oranı üzerinden
-            eşit taksitli temel amortisman
-            yöntemiyle hazırlanmıştır. Banka
-            tahsis ücreti, sigorta, vergi/fon
-            ve diğer masraflar bu ilk sürümde
+            eşit taksitli amortisman
+            yöntemiyle hazırlanmıştır. İhtiyaç
+            ve taşıt kredilerinde faize %15
+            KKDF ve %15 BSMV eklenir; konut
+            kredisi bu vergilerden muaftır.
+            Banka tahsis ücreti ve sigorta
             ayrıca hesaplanmamaktadır.
           </div>
 

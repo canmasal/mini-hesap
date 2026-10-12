@@ -1,6 +1,6 @@
 "use client";
 
-import { useId, useMemo, useState } from "react";
+import { useEffect, useId, useMemo, useState } from "react";
 
 import CalculatorCard from "@/components/CalculatorCard";
 import { calculators, categories, type CategoryId } from "@/data/calculators";
@@ -76,6 +76,17 @@ function normalize(value: string) {
 export default function CalculatorExplorer() {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState<CategoryId>("all");
+
+  /* /hesaplamalar?q=kdv gibi bağlantılar (Google site içi arama kutusu,
+     WebSite şemasındaki SearchAction) aramayı dolu açsın */
+  useEffect(() => {
+    try {
+      const q = new URLSearchParams(window.location.search).get("q");
+      if (q) setQuery(q.slice(0, 80));
+    } catch {
+      /* adres okunamazsa boş arama ile devam */
+    }
+  }, []);
   const searchId = useId();
 
   const results = useMemo(() => {

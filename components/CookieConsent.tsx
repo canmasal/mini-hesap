@@ -10,8 +10,10 @@ type Choice = "kabul" | "reddet";
 /**
  * Çerez onay bandı.
  *
- * Reklam ve ölçümleme script'leri yalnızca kullanıcı "kabul" dedikten
- * sonra yüklenmelidir. Tercih tarayıcıda saklanır; sunucuya gönderilmez.
+ * Google Consent Mode v2 varsayılanı "reddedildi"dir. "Kabul" denirse
+ * analitik ve kişiselleştirilmiş reklam açılır; aksi hâlde reklamlar
+ * kişiselleştirilmeden gösterilir. Tercih tarayıcıda saklanır; sunucuya
+ * gönderilmez.
  *
  * Seçimi başka bileşenlerin okuyabilmesi için "minihesap-cerez" adlı
  * bir CustomEvent yayınlanır.
@@ -77,8 +79,9 @@ export default function CookieConsent() {
           color: "var(--ink-soft)",
         }}
       >
-        Siteyi çalıştırmak için zorunlu çerezler kullanıyoruz. İzin
-        verirseniz reklam ve ölçümleme çerezleri de kullanılır. Hesaplama
+        Siteyi çalıştırmak için zorunlu çerezler kullanıyoruz. Sitedeki
+        reklamlar ücretsiz kalmamızı sağlar; izin verirseniz reklamlar
+        kişiselleştirilir ve ölçümleme çerezleri kullanılır. Hesaplama
         araçlarına girdiğiniz veriler hiçbir durumda sunucuya gönderilmez.{" "}
         <Link href="/gizlilik" style={{ fontWeight: 700, textDecoration: "underline" }}>
           Gizlilik Politikası

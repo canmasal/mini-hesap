@@ -2,6 +2,8 @@
 
 import { useMemo, useState } from "react";
 
+import { RENT_INCREASE } from "@/data/parameters";
+
 export default function RentIncreaseCalculator() {
   const [currentRent, setCurrentRent] = useState("");
   const [increaseRate, setIncreaseRate] = useState("");
@@ -90,9 +92,29 @@ export default function RentIncreaseCalculator() {
           lineHeight: 1.7,
         }}
       >
-        <strong>Bilgi:</strong> Buradaki oranı siz girersiniz.
-        Yasal kira artış oranını otomatik belirleme özelliğini
-        daha sonra güncel resmi verilerle ayrıca ekleyeceğiz.
+        <strong>{RENT_INCREASE.month} yasal kira artış tavanı:</strong>{" "}
+        %{RENT_INCREASE.maxRatePercent.toLocaleString("tr-TR")} (TÜFE 12 aylık
+        ortalaması). Kira yılı bu ay yenilenen konut ve işyerlerinde artış bu
+        oranı geçemez.{" "}
+        <button
+          type="button"
+          onClick={() => setIncreaseRate(String(RENT_INCREASE.maxRatePercent))}
+          style={{
+            border: 0,
+            background: "transparent",
+            padding: 0,
+            color: "inherit",
+            fontWeight: 700,
+            textDecoration: "underline",
+            cursor: "pointer",
+          }}
+        >
+          Bu oranı uygula
+        </button>{" "}
+        ·{" "}
+        <a href={RENT_INCREASE.source.url} target="_blank" rel="noopener noreferrer" style={{ color: "inherit" }}>
+          Kaynak
+        </a>
       </div>
 
       <button

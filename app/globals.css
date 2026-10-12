@@ -882,3 +882,42 @@ a.eyebrow:hover { color: var(--brand-dark); text-decoration: underline; }
   .mover-list li { grid-template-columns: 58px minmax(0, 1fr) auto; padding: 10px 12px; }
   .mover-list .mover-price { display: none; }
 }
+
+/* ------------------------------------------------------------------ */
+/* Reklam alanları                                                     */
+/* ------------------------------------------------------------------ */
+.ad-frame {
+  width: 100%;
+  margin: 24px auto;
+  text-align: center;
+}
+.ad-label {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 11px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.ad-body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.ad-body > ins.adsbygoogle { width: 100%; }
+/* AdSense alanı dolduramazsa çerçeveyi tamamen gizle (boş kutu kalmasın) */
+.ad-frame:has(ins.adsbygoogle[data-ad-status="unfilled"]),
+.ad-slot:has(ins.adsbygoogle[data-ad-status="unfilled"]) { display: none; }
+.ad-frame--house {
+  padding: 14px;
+  border: 1px dashed var(--line);
+  border-radius: 14px;
+  background: #fafcfb;
+}
+.ad-house-link {
+  color: var(--brand-dark);
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+}

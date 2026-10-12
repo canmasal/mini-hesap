@@ -332,7 +332,24 @@ async function fetchFeed(url: string) {
   return JSON.parse(await res.text()) as Record<string, unknown>;
 }
 
+/**
+ * Son başarılı veri. Kaynak anlık koparsa (Vercel'de "fetch failed /
+ * other side closed" hataları görüldü) sunucu örneği açık kaldığı sürece
+ * pano boş dönmek yerine bu veriyi gösterir. Eskime uyarısını updatedAt
+ * üzerinden sayfa zaten veriyor.
+ */
+let lastGood: MarketData | null = null;
+
 export async function fetchMarket(): Promise<MarketData | null> {
+  const data = await fetchMarketFresh();
+  if (data) {
+    lastGood = data;
+    return data;
+  }
+  return lastGood;
+}
+
+async function fetchMarketFresh(): Promise<MarketData | null> {
   try {
     const [raw, yahoo, bist] = await Promise.all([
       /*

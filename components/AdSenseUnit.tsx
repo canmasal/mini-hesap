@@ -4,46 +4,54 @@ import { useEffect, useRef } from "react";
 
 import { ADSENSE_CLIENT_ID } from "@/lib/adsense";
 
+const CONSENT_KEY = "miniHesapCerezTercihi";
+
+type AdsWindow = typeof window & {
+  adsbygoogle?: unknown[] & { requestNonPersonalizedAds?: number };
+};
+
+function hasConsent() {
+  try {
+    return localStorage.getItem(CONSENT_KEY) === "kabul";
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Tek bir AdSense reklam birimi.
+ *
+ * Eskiden reklam yalnızca ziyaretçi çerez bandında "Tümünü kabul et" dedikten
+ * sonra isteniyordu. Bandı kapatmayan ya da "Yalnızca zorunlu" diyen
+ * ziyaretçilerin (çoğunluk) hiçbirine reklam gösterilmiyor, alanlar boş
+ * kalıyordu. Artık reklam her ziyaretçi için istenir:
+ *  - onay varsa kişiselleştirilmiş,
+ *  - onay yoksa kişiselleştirilmemiş reklam (requestNonPersonalizedAds).
+ * Google Consent Mode v2 sinyalleri (GoogleTagHead) ayrıca AdSense'e iletilir.
+ */
 export default function AdSenseUnit({ slot }: { slot: string }) {
   const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    function pushAd() {
-      if (!ref.current) return;
-      try {
-        const ads = (window as typeof window & { adsbygoogle?: unknown[] }).adsbygoogle || [];
-        ads.push({});
-        (window as typeof window & { adsbygoogle?: unknown[] }).adsbygoogle = ads;
-      } catch {
-        /* Reklam sağlayıcısı yüklenemezse sayfa akışı bozulmamalı. */
-      }
-    }
+    const el = ref.current;
+    if (!el || el.getAttribute("data-adsbygoogle-status")) return;
 
-    /* Tarayıcı site verisini engellediğinde localStorage erişimi hata
-       fırlatır; bu durumda onay beklenir, bileşen çökmez. */
     try {
-      if (localStorage.getItem("miniHesapCerezTercihi") === "kabul") {
-        window.setTimeout(pushAd, 250);
-      }
+      const w = window as AdsWindow;
+      const ads: NonNullable<AdsWindow["adsbygoogle"]> = w.adsbygoogle || [];
+      w.adsbygoogle = ads;
+      ads.requestNonPersonalizedAds = hasConsent() ? 0 : 1;
+      ads.push({});
     } catch {
-      /* onay olayı beklenir */
+      /* Reklam sağlayıcısı yüklenemezse (reklam engelleyici vb.) sayfa akışı bozulmamalı. */
     }
-
-    function onConsent(event: Event) {
-      if ((event as CustomEvent<string>).detail === "kabul") {
-        window.setTimeout(pushAd, 250);
-      }
-    }
-
-    window.addEventListener("minihesap-cerez", onConsent);
-    return () => window.removeEventListener("minihesap-cerez", onConsent);
   }, []);
 
   return (
     <ins
       ref={ref as React.RefObject<HTMLModElement>}
       className="adsbygoogle"
-      style={{ display: "block", minHeight: 90, width: "100%" }}
+      style={{ display: "block", width: "100%" }}
       data-ad-client={ADSENSE_CLIENT_ID}
       data-ad-slot={slot}
       data-ad-format="auto"

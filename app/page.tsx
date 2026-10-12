@@ -5,12 +5,12 @@ import { calculators } from "@/data/calculators";
 import AdSlot from "@/components/AdSlot";
 
 export const metadata = {
-  title: { absolute: "Hesaplama Araçları 2026: Maaş, Tazminat, KDV | MiniHesap" },
+  title: { absolute: "MiniHesap: Online Hesaplama Araçları 2026 – Maaş, Tazminat, KDV" },
   description:
-    "Ücretsiz online hesaplama araçları: net maaş, kıdem tazminatı, KDV, yüzde, kredi, TYT ve LGS net hesaplama. 2026 resmî rakamlarıyla, üyeliksiz ve anında.",
+    "MiniHesap ile ücretsiz online hesaplama: net maaş, kıdem tazminatı, KDV, yüzde, kredi, TYT ve LGS net hesaplama. 2026 resmî rakamlarıyla, üyeliksiz ve anında.",
   alternates: { canonical: "/" },
   openGraph: {
-    title: "Hesaplama Araçları 2026: Maaş, Tazminat, KDV | MiniHesap",
+    title: "MiniHesap: Online Hesaplama Araçları 2026 – Maaş, Tazminat, KDV",
     description:
       "Net maaş, kıdem tazminatı, KDV, kredi, TYT ve LGS net hesaplama. 2026 resmî rakamlarıyla ücretsiz araçlar.",
     type: "website" as const,
@@ -45,7 +45,7 @@ export default function HomePage() {
             <p className="badge">⚡ Hızlı • Kolay • Mobil Uyumlu</p>
 
             <h1>
-              Hayatını Kolaylaştıran{" "}
+              MiniHesap: Hayatını Kolaylaştıran{" "}
               <span>Hesaplamalar Tek Yerde!</span>
             </h1>
 

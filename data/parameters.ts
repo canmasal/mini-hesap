@@ -473,6 +473,25 @@ export const DISABLED_VEHICLE = {
 } as const;
 
 /* ------------------------------------------------------------------ */
+/* Kira artışı (TBK md. 344)                                           */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Konut ve işyeri kiralarında yenilenen dönemde artış, bir önceki kira
+ * yılındaki TÜFE'nin 12 aylık ortalamasını geçemez. TÜİK her ayın 3'ünde
+ * açıklar; yeni ay gelince yalnızca bu kayıt güncellenir.
+ */
+export const RENT_INCREASE = {
+  /** Kira dönemi bu ayda yenilenenler için geçerli azami oran (yüzde) */
+  month: "Ekim 2026",
+  maxRatePercent: 31.49,
+  source: {
+    label: "TEDB – 2026 Ekim ayı konut ve işyeri kira artış oranı (TÜİK)",
+    url: "https://www.tedb.org.tr/duyurular/2026-ekim-ayi-konut-ve-isyeri-kira-artis-orani",
+  } satisfies Source,
+} as const;
+
+/* ------------------------------------------------------------------ */
 /* Yardımcılar                                                         */
 /* ------------------------------------------------------------------ */
 

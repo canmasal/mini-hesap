@@ -125,6 +125,28 @@ export default function PrivacyPage() {
             </a>{" "}
             üzerinden yönetebilirsiniz.
           </p>
+          <p>
+            Google dâhil üçüncü taraf satıcılar, kullanıcının bu siteye ve
+            diğer sitelere yaptığı önceki ziyaretlere dayalı reklam sunmak için
+            çerez kullanır. Google&apos;ın reklam çerezlerini kullanması,
+            Google&apos;ın ve iş ortaklarının bu siteye ve/veya internetteki
+            diğer sitelere yapılan ziyaretlere göre reklam sunmasını sağlar.
+            Google&apos;ın iş ortağı sitelerindeki verileri nasıl kullandığını{" "}
+            <a
+              href="https://policies.google.com/technologies/partner-sites"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              buradan
+            </a>{" "}
+            inceleyebilirsiniz.
+          </p>
+          <p>
+            Çerez bandında &quot;Yalnızca zorunlu&quot; seçeneğini
+            işaretlerseniz yine reklam görebilirsiniz; ancak bu reklamlar
+            kişiselleştirilmez ve Google Consent Mode aracılığıyla reklam
+            çerezi yazılmaması istenir.
+          </p>
 
           <h2>5. Verilerin saklanması ve aktarımı</h2>
           <p>

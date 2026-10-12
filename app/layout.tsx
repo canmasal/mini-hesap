@@ -113,27 +113,48 @@ export const viewport: Viewport = {
   colorScheme: "light",
 };
 
-/* Site geneli arama kutusu + kuruluş şeması */
+/* Site geneli yapısal veri: WebSite (site adı + arama) ve Organization (marka) */
 const siteUrl = SITE_URL;
 
-const websiteSchema = {
-  "@context": "https://schema.org",
-  "@type": "WebSite",
+/*
+ * Google "minihesap" aramasında siteyi marka olarak tanısın diye site adı,
+ * yazım varyantları ve PNG logo burada tek kimlik (@id) altında verilir.
+ * Google logo olarak SVG kabul etmez; bu yüzden /logo.png (512x512) kullanılır.
+ * Aynı isimli minihesap.com ile karışmaması için ".net" varyantı da yazılır.
+ */
+const organizationSchema = {
+  "@type": "Organization",
+  "@id": `${siteUrl}/#organization`,
   name: "MiniHesap",
-  /* Google site adı: aynı isimli minihesap.com (portföy takip sitesi) ile karışmaması için */
-  alternateName: ["MiniHesap.net", "Mini Hesap"],
+  alternateName: ["minihesap", "Mini Hesap", "MiniHesap.net", "minihesap.net"],
   url: siteUrl,
+  logo: {
+    "@type": "ImageObject",
+    url: `${siteUrl}/logo.png`,
+    width: 512,
+    height: 512,
+  },
+  image: `${siteUrl}/logo.png`,
+  description:
+    "MiniHesap; net maaş, kıdem tazminatı, KDV, kredi ve sınav net hesaplama gibi ücretsiz online hesaplama araçları sunan Türkçe web sitesidir.",
+  contactPoint: {
+    "@type": "ContactPoint",
+    contactType: "customer support",
+    url: `${siteUrl}/iletisim`,
+    availableLanguage: ["Turkish"],
+  },
+};
+
+const websiteSchema = {
+  "@type": "WebSite",
+  "@id": `${siteUrl}/#website`,
+  name: "MiniHesap",
+  alternateName: ["minihesap", "Mini Hesap", "MiniHesap.net"],
+  url: `${siteUrl}/`,
   inLanguage: "tr-TR",
   description:
     "Net maaş, kıdem tazminatı, KDV, yüzde ve daha fazlası için ücretsiz online hesaplama araçları.",
-  publisher: {
-    "@type": "Organization",
-    name: "MiniHesap",
-    alternateName: "MiniHesap.net",
-    url: siteUrl,
-    logo: `${siteUrl}/icon.svg`,
-  },
-  /* Google Sitelinks Searchbox için SearchAction */
+  publisher: { "@id": `${siteUrl}/#organization` },
   potentialAction: {
     "@type": "SearchAction",
     target: {
@@ -142,6 +163,11 @@ const websiteSchema = {
     },
     "query-input": "required name=search_term_string",
   },
+};
+
+const siteSchema = {
+  "@context": "https://schema.org",
+  "@graph": [organizationSchema, websiteSchema],
 };
 
 export default function RootLayout({
@@ -178,7 +204,7 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(websiteSchema),
+            __html: JSON.stringify(siteSchema),
           }}
         />
       </body>

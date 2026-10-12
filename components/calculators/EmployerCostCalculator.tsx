@@ -46,7 +46,13 @@ export default function EmployerCostCalculator() {
     const unemploymentEmployer = sgkBase * EMPLOYER_RATES.unemployment;
 
     const side = Number(extras.replace(",", ".")) || 0;
-    const net = calculateNetSalary({ grossSalary: salary, month: Number(month), previousCumulativeTaxBase: 0 });
+    /* Seçilen aya kadar aynı brütle çalışıldığı varsayılarak kümülatif matrah yürütülür */
+    let previousBase = 0;
+    let net = calculateNetSalary({ grossSalary: salary, month: 1, previousCumulativeTaxBase: 0 });
+    for (let m = 2; m <= Number(month); m += 1) {
+      previousBase = net.cumulativeTaxBase;
+      net = calculateNetSalary({ grossSalary: salary, month: m, previousCumulativeTaxBase: previousBase });
+    }
     const total = salary + sgkEmployer + unemploymentEmployer + side;
 
     return {

@@ -76,6 +76,22 @@ const nextConfig: NextConfig = {
     "/api/premium/download": ["./private/products/**"],
   },
 
+  /*
+   * www.minihesap.net aynı içeriği ayrıca yayınlıyordu (Vercel'de iki alan
+   * adı da yönlendirmesiz bağlı). Google'a tek adres göstermek için www'lu
+   * her istek kalıcı (308) olarak www'suz köke yönlendirilir.
+   */
+  async redirects() {
+    return [
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.minihesap.net" }],
+        destination: "https://minihesap.net/:path*",
+        permanent: true,
+      },
+    ];
+  },
+
   async headers() {
     return [
       {
