@@ -1,9 +1,12 @@
 import type { CarVersion } from "./types";
 import { renault } from "./renault";
 import { toyota } from "./toyota";
+import { togg } from "./togg";
+import { fiat } from "./fiat";
+import { hyundai } from "./hyundai";
 
 /** Tüm markaların versiyonları; yeni marka dosyaları buraya eklenir. */
-export const cars: CarVersion[] = [...renault, ...toyota].sort(
+export const cars: CarVersion[] = [...renault, ...toyota, ...togg, ...fiat, ...hyundai].sort(
   (a, b) =>
     a.brand.localeCompare(b.brand, "tr") ||
     a.model.localeCompare(b.model, "tr") ||

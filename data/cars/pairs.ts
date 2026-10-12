@@ -17,6 +17,12 @@ const PAIRS: [string, string][] = [
   ["renault-megane-sedan-1-3-tce-140-edc-icon", "renault-megane-e-tech-ev60-techno"],
   ["renault-captur-mild-hybrid-140-edc-techno", "renault-duster-tce-145-edc-evolution"],
   ["renault-austral-full-hybrid-200-esprit-alpine", "renault-rafale-full-hybrid-200-esprit-alpine"],
+  ["renault-clio-1-2-tce-115-edc-evolution-plus", "hyundai-i20-1-0-tgdi-90-style-dct"],
+  ["toyota-corolla-1-5-dream", "fiat-egea-sedan-1-6-mjet-dct-urban"],
+  ["renault-megane-sedan-1-3-tce-140-edc-icon", "toyota-corolla-1-8-hybrid-dream"],
+  ["togg-t10x-v2-rwd-uzun", "renault-scenic-e-tech-ev87-esprit-alpine"],
+  ["toyota-c-hr-1-8-hybrid-flame", "renault-captur-mild-hybrid-140-edc-techno"],
+  ["togg-t10f-v1-rwd-uzun", "toyota-corolla-1-8-hybrid-flame-x-pack"],
 ];
 
 const slugify = (s: string) =>

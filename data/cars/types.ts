@@ -54,5 +54,5 @@ export type CarVersion = {
   priceTl?: number;
   /** Fiyatın ait olduğu ay, "2026-10" */
   priceMonth?: string;
-  sources: string[];
+  sources: readonly string[];
 };
