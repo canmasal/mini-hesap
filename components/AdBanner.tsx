@@ -22,7 +22,7 @@ export default function AdBanner({ label = "Reklam", minHeight = 90, slot }: AdB
   if (!clientId || !slot) {
     return (
       <div className="ad-frame ad-frame--house">
-        <Link href="/iletisim?konu=reklam" className="ad-house-link">
+        <Link href="/reklam" className="ad-house-link">
           Reklam vermek için iletişime geçiniz
         </Link>
       </div>

@@ -90,6 +90,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     page("/program-talebi", "monthly", 0.75, null),
     page("/hakkimizda", "monthly", 0.5, null),
     page("/iletisim", "monthly", 0.45, null),
+    page("/reklam", "monthly", 0.4, null),
 
     /* ── Yasal metinler ───────────────────────────────────────────── */
     page("/gizlilik", "yearly", 0.2, null),

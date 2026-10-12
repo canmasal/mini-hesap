@@ -11,6 +11,7 @@ const navItems = [
   { href: "/piyasalar", label: "Piyasalar" },
   { href: "/program-talebi", label: "Program İste" },
   { href: "/premium", label: "Premium" },
+  { href: "/reklam", label: "Reklam Alanı" },
   { href: "/hakkimizda", label: "Hakkımızda" },
   { href: "/iletisim", label: "İletişim" },
 ];

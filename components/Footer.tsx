@@ -41,6 +41,7 @@ export default function Footer() {
           <strong>Kurumsal</strong>
           <Link href="/hakkimizda">Hakkımızda</Link>
           <Link href="/iletisim">İletişim</Link>
+          <Link href="/reklam">Reklam Alanı</Link>
           <Link href="/gizlilik">Gizlilik Politikası</Link>
           <Link href="/kullanim-sartlari">Kullanım Şartları</Link>
           <Link href="/mesafeli-satis-sozlesmesi">Mesafeli Satış Sözleşmesi</Link>

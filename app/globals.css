@@ -921,3 +921,14 @@ a.eyebrow:hover { color: var(--brand-dark); text-decoration: underline; }
   font-weight: 700;
   text-decoration: none;
 }
+
+/* Menüde 9 sekme var: orta genişlikte sığsın diye aralık daraltılır */
+.nav a { white-space: nowrap; }
+@media (max-width: 1280px) {
+  .nav { gap: 14px; }
+  .nav a { font-size: 13px; }
+}
+@media (max-width: 1140px) {
+  .nav { display: none; }
+  .nav-toggle { display: inline-flex; }
+}
