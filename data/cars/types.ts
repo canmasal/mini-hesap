@@ -9,7 +9,7 @@
  */
 
 export type Fuel = "Benzin" | "Dizel" | "Hibrit" | "Plug-in Hibrit" | "Elektrik" | "Benzin-LPG" | "Hafif Hibrit";
-export type Body = "Hatchback" | "Sedan" | "SUV" | "Crossover" | "Station Wagon" | "MPV" | "Coupe" | "Pick-up";
+export type Body = "Hatchback" | "Sedan" | "SUV" | "Crossover" | "Station Wagon" | "MPV" | "Coupe" | "Cabrio" | "Pick-up";
 export type Drive = "Önden çekiş" | "Arkadan itiş" | "Dört çeker";
 
 export type CarVersion = {
