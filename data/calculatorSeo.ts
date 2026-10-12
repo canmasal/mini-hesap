@@ -15,6 +15,7 @@ import { toolSeoBatch2 } from "@/data/calculatorSeoTools2";
 import { toolSeoBatch3 } from "@/data/calculatorSeoBatch3";
 import { toolSeoBatch4 } from "@/data/calculatorSeoBatch4";
 import { toolSeoVergi } from "@/data/calculatorSeoVergi";
+import { toolSeoBatch5 } from "@/data/calculatorSeoBatch5";
 
 export type SeoSection = { heading: string; body: string[] };
 
@@ -35,6 +36,7 @@ export const newToolSeo: Record<string, ToolSeo> = {
   ...toolSeoVergi,
   ...toolSeoBatch3,
   ...toolSeoBatch4,
+  ...toolSeoBatch5,
 
   /* ======================== TYT ======================== */
   "tyt-net": {

@@ -580,6 +580,76 @@ export const calculators = [
     description:
       "Kredi tutarı, faiz ve vadeye göre aylık taksit, toplam faiz, toplam geri ödeme ve ödeme planını hesaplayın.",
   },
+
+  {
+    slug: "kripto-kar-zarar",
+    icon: "🪙",
+    title: "Kripto Kâr/Zarar ve Ortalama Maliyet",
+    category: "finans",
+    keywords: ["kripto", "bitcoin", "ortalama maliyet", "kâr zarar", "coin", "komisyon", "başa baş"],
+    description:
+      "Farklı fiyatlardan yaptığınız kripto alımlarının ortalama maliyetini, komisyon dahil kâr/zararınızı ve başa baş satış fiyatını hesaplayın.",
+  },
+
+  {
+    slug: "etkilesim-orani",
+    icon: "📣",
+    title: "Sosyal Medya Etkileşim Oranı",
+    category: "gunluk",
+    keywords: ["etkileşim oranı", "engagement rate", "instagram", "tiktok", "takipçi", "beğeni", "influencer"],
+    description:
+      "Beğeni, yorum, paylaşım ve kaydetme sayılarınızla Instagram, TikTok ve diğer platformlardaki etkileşim oranınızı takipçiye ve erişime göre hesaplayın.",
+  },
+
+  {
+    slug: "youtube-geliri",
+    icon: "▶️",
+    title: "YouTube İzlenme Geliri (RPM/CPM)",
+    category: "finans",
+    keywords: ["youtube", "izlenme geliri", "rpm", "cpm", "adsense", "youtuber", "kanal geliri"],
+    description:
+      "Aylık izlenme ve RPM ya da CPM değerinize göre YouTube kanalınızın tahmini günlük, aylık ve yıllık reklam gelirini hesaplayın.",
+  },
+
+  {
+    slug: "arac-deger-kaybi",
+    icon: "📉",
+    title: "Araç Değer Kaybı Hesaplama",
+    category: "gunluk",
+    keywords: ["araç değer kaybı", "araba", "ikinci el", "amortisman", "otomobil", "değer düşüşü"],
+    description:
+      "Aracınızın yıllara göre tahmini değer kaybını, yıl sonu değerini ve toplam kayıp oranını tablo hâlinde hesaplayın.",
+  },
+
+  {
+    slug: "elektrikli-arac-sarj",
+    icon: "🔌",
+    title: "Elektrikli Araç Şarj Maliyeti",
+    category: "gunluk",
+    keywords: ["elektrikli araç", "şarj maliyeti", "ev şarjı", "hızlı şarj", "kwh", "tasarruf", "benzinli karşılaştırma"],
+    description:
+      "Evde ve hızlı şarjda 100 km maliyetini, tam şarj ücretini ve benzinli/dizel araca göre yıllık tasarrufunuzu hesaplayın.",
+  },
+
+  {
+    slug: "arac-karsilastirma",
+    icon: "🚗",
+    title: "Araç Karşılaştırma (Toplam Maliyet)",
+    category: "gunluk",
+    keywords: ["araç karşılaştırma", "araç kıyaslama", "araba kıyasla", "toplam sahip olma maliyeti", "km maliyeti", "hangi araba"],
+    description:
+      "İki aracı alış fiyatı, yakıt, sigorta, MTV, bakım ve değer kaybıyla karşılaştırın; hangisinin toplamda daha ekonomik olduğunu görün.",
+  },
+
+  {
+    slug: "birim-fiyat",
+    icon: "🛒",
+    title: "Market Birim Fiyat Karşılaştırma",
+    category: "gunluk",
+    keywords: ["birim fiyat", "market", "hangisi daha ucuz", "kilogram fiyatı", "litre fiyatı", "indirim karşılaştırma"],
+    description:
+      "Farklı gramaj ve paketlerdeki ürünlerin kilogram, litre veya adet başına fiyatını karşılaştırın; hangisinin daha ucuz olduğunu anında görün.",
+  },
 ] as const;
 
 export type Calculator = (typeof calculators)[number];
@@ -606,6 +676,15 @@ const RELATED: Record<string, string[]> = {
   "ideal-kilo": ["su-ihtiyaci", "vucut-kitle-indeksi"],
   "vucut-kitle-indeksi": ["ideal-kilo", "su-ihtiyaci"],
   "su-ihtiyaci": ["kalori-ihtiyaci", "ideal-kilo", "vucut-kitle-indeksi"],
+  "kripto-kar-zarar": ["bilesik-faiz", "enflasyon", "yuzde"],
+  "etkilesim-orani": ["youtube-geliri", "yuzde"],
+  "youtube-geliri": ["etkilesim-orani", "serbest-meslek-makbuzu", "gelir-vergisi"],
+  "arac-deger-kaybi": ["arac-karsilastirma", "mtv", "enflasyon"],
+  "elektrikli-arac-sarj": ["arac-karsilastirma", "yakit-maliyeti"],
+  "arac-karsilastirma": ["elektrikli-arac-sarj", "arac-deger-kaybi", "mtv"],
+  "birim-fiyat": ["indirim", "yuzde", "kdv"],
+  "yakit-maliyeti": ["elektrikli-arac-sarj", "arac-karsilastirma"],
+  mtv: ["arac-karsilastirma", "arac-deger-kaybi"],
 };
 
 /** Aynı kategorideki diğer araçlar (iç link + keşif için) */

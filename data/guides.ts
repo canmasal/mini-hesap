@@ -8,6 +8,7 @@
 
 import { araclarGuides } from "@/data/guidesAraclar";
 import { calisanGuides } from "@/data/guidesCalisan";
+import { dijitalAracGuides } from "@/data/guidesDijitalArac";
 import { ekGuides } from "@/data/guidesEk";
 import { engelliGuides } from "@/data/guidesEngelli";
 import { finansGuides } from "@/data/guidesFinans";
@@ -581,6 +582,7 @@ export const guides: Guide[] = [
   ...ekGuides,
   ...araclarGuides,
   ...engelliGuides,
+  ...dijitalAracGuides,
 ];
 
 export function findGuide(slug: string) {

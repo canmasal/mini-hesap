@@ -90,9 +90,17 @@ export default async function GuidePage({
     datePublished: guide.published,
     dateModified: guide.updated,
     inLanguage: "tr-TR",
-    author: { "@type": "Organization", name: "MiniHesap", url: baseUrl },
-    publisher: { "@type": "Organization", name: "MiniHesap", url: baseUrl },
-    mainEntityOfPage: `${baseUrl}/rehber/${guide.slug}`,
+    image: `${baseUrl}/logo.png`,
+    author: { "@type": "Organization", "@id": `${baseUrl}/#organization`, name: "MiniHesap", url: baseUrl },
+    publisher: {
+      "@type": "Organization",
+      "@id": `${baseUrl}/#organization`,
+      name: "MiniHesap",
+      url: baseUrl,
+      logo: { "@type": "ImageObject", url: `${baseUrl}/logo.png`, width: 512, height: 512 },
+    },
+    mainEntityOfPage: { "@type": "WebPage", "@id": `${baseUrl}/rehber/${guide.slug}` },
+    articleSection: guide.category,
   };
 
   const faqSchema = {

@@ -14,6 +14,7 @@ import Breadcrumb from "@/components/Breadcrumb";
 import CalculatorCard from "@/components/CalculatorCard";
 import PremiumCta from "@/components/PremiumCta";
 import ShareResult from "@/components/ShareResult";
+import SponsorLink from "@/components/SponsorLink";
 import { SITE_URL } from "@/lib/site";
 import {
   DEPOSIT_WITHHOLDING,
@@ -51,6 +52,13 @@ import MaternityLeaveCalculator from "@/components/calculators/MaternityLeaveCal
 import UnemploymentCalculator from "@/components/calculators/UnemploymentCalculator";
 import HomeLoanCostCalculator from "@/components/calculators/HomeLoanCostCalculator";
 import FuelCostCalculator from "@/components/calculators/FuelCostCalculator";
+import CryptoProfitCalculator from "@/components/calculators/CryptoProfitCalculator";
+import EngagementRateCalculator from "@/components/calculators/EngagementRateCalculator";
+import YoutubeRevenueCalculator from "@/components/calculators/YoutubeRevenueCalculator";
+import VehicleDepreciationCalculator from "@/components/calculators/VehicleDepreciationCalculator";
+import EvChargingCalculator from "@/components/calculators/EvChargingCalculator";
+import VehicleCompareCalculator from "@/components/calculators/VehicleCompareCalculator";
+import UnitPriceCalculator from "@/components/calculators/UnitPriceCalculator";
 import PensionFundCalculator from "@/components/calculators/PensionFundCalculator";
 import DayCountCalculator from "@/components/calculators/DayCountCalculator";
 import GpaCalculator from "@/components/calculators/GpaCalculator";
@@ -128,6 +136,13 @@ const componentMap: Record<string, ComponentType> = {
   "bilesik-faiz": CompoundInterestCalculator,
   "kredi-erken-kapatma": LoanPrepaymentCalculator,
   "su-ihtiyaci": WaterIntakeCalculator,
+  "kripto-kar-zarar": CryptoProfitCalculator,
+  "etkilesim-orani": EngagementRateCalculator,
+  "youtube-geliri": YoutubeRevenueCalculator,
+  "arac-deger-kaybi": VehicleDepreciationCalculator,
+  "elektrikli-arac-sarj": EvChargingCalculator,
+  "arac-karsilastirma": VehicleCompareCalculator,
+  "birim-fiyat": UnitPriceCalculator,
 
   /* Sınav araçları tek bileşenden, sınav yapılandırmasıyla üretilir */
   ...Object.fromEntries(
@@ -1429,6 +1444,8 @@ export default async function CalculatorPage({
         <div style={{ marginTop: 24 }}>
           <AdSlot position="middle" />
         </div>
+
+        <SponsorLink />
 
       </div>
 
