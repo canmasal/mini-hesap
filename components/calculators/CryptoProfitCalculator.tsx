@@ -9,7 +9,12 @@ const n = (s: string) => Number(s.replace(",", ".")) || 0;
 
 /** Kripto fiyatları kuruşun altına inebildiği için birim fiyatta daha fazla hane gösterilir */
 const price = (v: number) =>
-  `${v.toLocaleString("tr-TR", { minimumFractionDigits: 2, maximumFractionDigits: v < 1 ? 8 : 4 })} ₺`;
+  new Intl.NumberFormat("tr-TR", {
+    style: "currency",
+    currency: "TRY",
+    minimumFractionDigits: 2,
+    maximumFractionDigits: v < 1 ? 8 : 4,
+  }).format(v);
 
 type Row = { quantity: string; price: string };
 
