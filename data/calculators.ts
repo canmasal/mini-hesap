@@ -642,6 +642,16 @@ export const calculators = [
   },
 
   {
+    slug: "araba-kiyaslama",
+    icon: "🆚",
+    title: "Araba Kıyaslama (Teknik Özellik ve Fiyat)",
+    category: "gunluk",
+    keywords: ["araba kıyaslama", "araç kıyasla", "araba karşılaştırma", "model karşılaştırma", "teknik özellik", "beygir", "bagaj", "fiyat listesi"],
+    description:
+      "İki aracın motor gücü, torku, tüketimi, ölçüleri, bagaj hacmi ve güncel liste fiyatını yan yana karşılaştırın; hangi özellikte hangisinin önde olduğunu görün.",
+  },
+
+  {
     slug: "birim-fiyat",
     icon: "🛒",
     title: "Market Birim Fiyat Karşılaştırma",
@@ -681,7 +691,8 @@ const RELATED: Record<string, string[]> = {
   "youtube-geliri": ["etkilesim-orani", "serbest-meslek-makbuzu", "gelir-vergisi"],
   "arac-deger-kaybi": ["arac-karsilastirma", "mtv", "enflasyon"],
   "elektrikli-arac-sarj": ["arac-karsilastirma", "yakit-maliyeti"],
-  "arac-karsilastirma": ["elektrikli-arac-sarj", "arac-deger-kaybi", "mtv"],
+  "arac-karsilastirma": ["araba-kiyaslama", "elektrikli-arac-sarj", "arac-deger-kaybi"],
+  "araba-kiyaslama": ["arac-karsilastirma", "elektrikli-arac-sarj", "arac-deger-kaybi"],
   "birim-fiyat": ["indirim", "yuzde", "kdv"],
   "yakit-maliyeti": ["elektrikli-arac-sarj", "arac-karsilastirma"],
   mtv: ["arac-karsilastirma", "arac-deger-kaybi"],

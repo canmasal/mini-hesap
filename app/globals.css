@@ -937,3 +937,20 @@ a.eyebrow:hover { color: var(--brand-dark); text-decoration: underline; }
 @media (max-width: 1400px) {
   .header-actions .btn-green { display: none; }
 }
+
+/* Araç kıyaslama tablosu */
+.car-compare-table thead th { vertical-align: bottom; }
+.car-compare-table td { white-space: normal; }
+.car-compare-table td.car-win { background: var(--surface-mint); color: var(--brand-deep); }
+.car-compare-table tr.car-group-row th {
+  background: var(--surface-soft);
+  color: var(--ink);
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+}
+@media (max-width: 640px) {
+  .car-compare-table { font-size: 13px; }
+  .car-compare-table th, .car-compare-table td { padding: 10px 10px; }
+}

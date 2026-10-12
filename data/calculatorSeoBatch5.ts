@@ -10,6 +10,7 @@
  */
 
 import type { ToolSeo } from "@/data/calculatorSeo";
+import { brandCount, cars, latestPriceMonth, modelCount } from "@/data/cars";
 import {
   cryptoPosition,
   engagementRate,
@@ -20,6 +21,13 @@ import {
   youtubeRevenue,
   YOUTUBE_CREATOR_SHARE,
 } from "@/lib/calculations/newTools";
+
+const carMonth = (() => {
+  const m = latestPriceMonth();
+  if (!m) return "";
+  const [y, mo] = m.split("-").map(Number);
+  return new Date(y, mo - 1, 15).toLocaleDateString("tr-TR", { month: "long", year: "numeric" });
+})();
 
 const tl = (v: number) =>
   `${v.toLocaleString("tr-TR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} TL`;
@@ -72,6 +80,62 @@ const unit = unitPrices([
 ])!;
 
 export const toolSeoBatch5: Record<string, ToolSeo> = {
+  /* ======================== ARABA KIYASLAMA ======================== */
+  "araba-kiyaslama": {
+    title: "Araba Kıyaslama | Araç Karşılaştırma: Teknik Özellik ve Fiyat",
+    description: `Araba kıyaslama aracı: ${brandCount()} marka, ${modelCount()} model ve ${cars.length} versiyonun motor gücü, torku, yakıt tüketimi, ölçüleri, bagaj hacmi ve ${carMonth} liste fiyatlarını yan yana karşılaştırın.`,
+    intro: `Araba kıyaslama, iki aracın motor, performans, tüketim, ölçü ve fiyat bilgilerini aynı tabloda yan yana koyarak hangi özellikte hangisinin önde olduğunu gösterir. Veritabanımızda Türkiye'de satılan ${brandCount()} markanın ${modelCount()} modeline ait ${cars.length} versiyon bulunur; teknik veriler üreticilerin Türkiye teknik belgelerinden, fiyatlar markaların ${carMonth} liste fiyatlarından alınmıştır.`,
+    howItWorks: [
+      "1. araç için marka, model ve versiyonu seçin.",
+      "2. araç için aynı seçimi yapın.",
+      "Tabloda motor, şanzıman, performans, tüketim ve ölçü bilgilerini karşılaştırın; üstün olan değer işaretlenir.",
+      "Karşılaştırmayı adres çubuğundaki bağlantıyla paylaşabilirsiniz.",
+    ],
+    sections: [
+      {
+        heading: "Hangi özellikler karşılaştırılır?",
+        body: [
+          "- <strong>Fiyat:</strong> Markanın ilan ettiği aylık liste fiyatı (kampanyasız).",
+          "- <strong>Motor:</strong> Yakıt türü, motor hacmi, silindir sayısı, beygir gücü ve tork.",
+          "- <strong>Şanzıman:</strong> Şanzıman tipi, vites sayısı ve çekiş sistemi.",
+          "- <strong>Performans:</strong> 0-100 km/s hızlanma ve azami hız.",
+          "- <strong>Tüketim:</strong> WLTP ortalama yakıt veya elektrik tüketimi, menzil, CO₂ ve depo hacmi.",
+          "- <strong>Ölçüler:</strong> Uzunluk, genişlik, yükseklik, aks mesafesi, bagaj hacmi, ağırlık ve koltuk sayısı.",
+        ],
+      },
+      {
+        heading: "Üstünlük nasıl belirlenir?",
+        body: [
+          "Daha yüksek olmasının avantaj sayıldığı alanlarda (beygir, tork, bagaj, menzil) yüksek değer; daha düşük olmasının avantaj sayıldığı alanlarda (fiyat, tüketim, 0-100 süresi, CO₂) düşük değer işaretlenir. Uzunluk, ağırlık veya yakıt türü gibi tercihe bağlı alanlar yalnızca gösterilir.",
+          "Toplam kazanan sayısı bir başlangıç noktasıdır. Şehir içinde kullanacağınız bir araçta tüketim ve boyut, uzun yolda bagaj ve performans daha önemli olabilir; karar verirken sizin için önemli satırlara odaklanın.",
+        ],
+      },
+      {
+        heading: "Verilerin güncelliği",
+        body: [
+          `Liste fiyatları markaların aylık fiyat listelerinden alınır ve her aracın yanında fiyatın ait olduğu ay gösterilir; şu anki veriler ${carMonth} fiyatlarıdır. Kampanyalı fiyatlar, opsiyonel donanımlar ve bayi farkları dahil değildir.`,
+          "Teknik değerler üreticinin Türkiye için yayımladığı broşür ve teknik belgelerden alınır. Belgede yer almayan bilgiler tabloda boş bırakılır; tahmini değer girilmez. Her karşılaştırmanın altında kaynak bağlantıları yer alır.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "İki araba nasıl kıyaslanır?",
+        answer:
+          "Fiyat, motor gücü ve tork, yakıt tüketimi, bagaj hacmi ve iç mekân ölçüleri aynı tabloda karşılaştırılmalıdır. Ardından yakıt, sigorta, MTV ve değer kaybıyla toplam sahip olma maliyetine bakmak, uzun vadede hangisinin ekonomik olduğunu gösterir.",
+      },
+      {
+        question: "Fiyatlar güncel mi?",
+        answer: `Fiyatlar markaların ${carMonth} liste fiyatlarıdır ve her ay güncellenir. Satın almadan önce yetkili bayiden güncel fiyat ve kampanya bilgisini teyit edin.`,
+      },
+      {
+        question: "WLTP tüketimi gerçek tüketimle aynı mı?",
+        answer:
+          "WLTP, araçları aynı koşullarda karşılaştırmak için kullanılan standart test çevrimidir. Gerçek tüketim; sürüş tarzı, trafik, hava sıcaklığı ve yük durumuna göre WLTP değerinden farklı olabilir.",
+      },
+    ],
+  },
+
   /* ======================== KRİPTO ======================== */
   "kripto-kar-zarar": {
     title: "Kripto Kâr Zarar Hesaplama | Ortalama Maliyet Hesapla",

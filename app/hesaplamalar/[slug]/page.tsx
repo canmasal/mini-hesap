@@ -59,6 +59,7 @@ import VehicleDepreciationCalculator from "@/components/calculators/VehicleDepre
 import EvChargingCalculator from "@/components/calculators/EvChargingCalculator";
 import VehicleCompareCalculator from "@/components/calculators/VehicleCompareCalculator";
 import UnitPriceCalculator from "@/components/calculators/UnitPriceCalculator";
+import CarCompare from "@/components/calculators/CarCompare";
 import PensionFundCalculator from "@/components/calculators/PensionFundCalculator";
 import DayCountCalculator from "@/components/calculators/DayCountCalculator";
 import GpaCalculator from "@/components/calculators/GpaCalculator";
@@ -143,6 +144,7 @@ const componentMap: Record<string, ComponentType> = {
   "elektrikli-arac-sarj": EvChargingCalculator,
   "arac-karsilastirma": VehicleCompareCalculator,
   "birim-fiyat": UnitPriceCalculator,
+  "araba-kiyaslama": CarCompare,
 
   /* Sınav araçları tek bileşenden, sınav yapılandırmasıyla üretilir */
   ...Object.fromEntries(

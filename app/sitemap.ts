@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 
 import { calculators } from "@/data/calculators";
 import { guides } from "@/data/guides";
+import { carPairs } from "@/data/cars/pairs";
 import { LAST_VERIFIED } from "@/data/parameters";
 import { SITE_URL } from "@/lib/site";
 
@@ -87,6 +88,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     page("/hakkimizda", "monthly", 0.5, null),
     page("/iletisim", "monthly", 0.45, null),
     page("/reklam", "monthly", 0.4, null),
+
+    /* Hazır araç karşılaştırmaları */
+    ...carPairs().map((p) => page(`/araba-karsilastirma/${p.slug}`, "monthly", 0.6, verified)),
 
     /* ── Yasal metinler ───────────────────────────────────────────── */
     page("/gizlilik", "yearly", 0.2, null),
