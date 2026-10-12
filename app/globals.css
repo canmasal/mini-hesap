@@ -932,3 +932,8 @@ a.eyebrow:hover { color: var(--brand-dark); text-decoration: underline; }
   .nav { display: none; }
   .nav-toggle { display: inline-flex; }
 }
+/* 9 sekmeli menüde başlıktaki düğme iki satıra kaymasın; dar ekranda gizlenir */
+.header-actions .btn { white-space: nowrap; }
+@media (max-width: 1400px) {
+  .header-actions .btn-green { display: none; }
+}
