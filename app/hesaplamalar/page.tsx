@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 
-import AdSlot from "@/components/AdSlot";
 import Breadcrumb from "@/components/Breadcrumb";
 import CalculatorExplorer from "@/components/CalculatorExplorer";
 import { calculators } from "@/data/calculators";
@@ -76,9 +75,6 @@ export default function HesaplamalarPage() {
         </div>
       </section>
 
-      <div className="container">
-        <AdSlot position="middle" />
-      </div>
 
       {/* SEO METNİ */}
       <section className="section" style={{ paddingTop: 35, paddingBottom: 40 }}>
@@ -111,9 +107,6 @@ export default function HesaplamalarPage() {
         </div>
       </section>
 
-      <div className="container">
-        <AdSlot position="bottom" />
-      </div>
 
       <script
         type="application/ld+json"

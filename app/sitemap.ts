@@ -2,7 +2,6 @@ import type { MetadataRoute } from "next";
 
 import { calculators } from "@/data/calculators";
 import { guides } from "@/data/guides";
-import { longtailPages } from "@/data/longtail";
 import { LAST_VERIFIED } from "@/data/parameters";
 import { SITE_URL } from "@/lib/site";
 
@@ -70,11 +69,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
       page(`/rehber/${g.slug}`, "monthly", 0.85, istanbul(g.updated)),
     ),
 
-    /* ── Uzun kuyruklu hazır hesap sayfaları ──────────────────────── */
-    /* "50.000 TL brüt ne kadar net" gibi sık aranan sorulara doğrudan cevap */
-    ...longtailPages.map((p) =>
-      page(`/hesapla/${p.slug}`, "monthly", 0.7, verified),
-    ),
+    /* Uzun kuyruklu hazır hesap sayfaları (/hesapla/*) noindex olduğu için
+       site haritasında yer almaz. */
 
     /* ── Finans araçları (ücretsiz, üyeliksiz) ────────────────────── */
     page("/borc-takip", "monthly", 0.85, verified),

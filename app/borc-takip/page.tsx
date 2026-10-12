@@ -4,7 +4,6 @@ import Link from "next/link";
 import BorcTakipDemo from "@/components/BorcTakipDemo";
 import Breadcrumb from "@/components/Breadcrumb";
 import PremiumCta from "@/components/PremiumCta";
-import AdSlot from "@/components/AdSlot";
 export const metadata: Metadata = {
   title: "Borç Takip Tablosu: Kredi ve Kart Borçları",
   description:
@@ -196,7 +195,6 @@ export default function BorcTakipPage() {
 
       <div className="container">
         <PremiumCta toolHref="/borc-takip" />
-        <AdSlot position="bottom" />
       </div>
     </main>
   );

@@ -4,7 +4,6 @@ import Link from "next/link";
 import OnMuhasebeDemo from "@/components/OnMuhasebeDemo";
 import Breadcrumb from "@/components/Breadcrumb";
 import PremiumCta from "@/components/PremiumCta";
-import AdSlot from "@/components/AdSlot";
 
 export const metadata: Metadata = {
   title: "Ön Muhasebe Programı: Gelir Gider Takibi",
@@ -171,7 +170,6 @@ export default function OnMuhasebePage() {
 
       <div className="container">
         <PremiumCta toolHref="/on-muhasebe" />
-        <AdSlot position="bottom" />
       </div>
     </main>
   );

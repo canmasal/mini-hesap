@@ -5,7 +5,6 @@ import { MARKET_SOURCE, findQuote, formatPrice, type MarketData } from "@/lib/ma
 import { SITE_URL } from "@/lib/site";
 import MarketBoard from "./MarketBoard";
 import MarketConverter from "./MarketConverter";
-import AdSlot from "@/components/AdSlot";
 
 /**
  * /altin-fiyatlari ve /doviz-kurlari sayfalarının ortak şablonu.
@@ -151,7 +150,6 @@ export default function MarketPage({ kind, data }: { kind: Kind; data: MarketDat
           <MarketConverter initial={data} />
         </section>
 
-        <AdSlot position="middle" />
 
         <section className="lt-section">
           {isGold ? (

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
-import AdSlot from "@/components/AdSlot";
 import Breadcrumb from "@/components/Breadcrumb";
 import { guides } from "@/data/guides";
 import { calculators, categories } from "@/data/calculators";
@@ -106,9 +105,6 @@ export default function GuidesPage() {
           ))}
         </div>
 
-        <div style={{ marginTop: 40 }}>
-          <AdSlot position="bottom" />
-        </div>
 
         <section className="section section-white" style={{ marginTop: 48, padding: "52px 0" }}>
           <div className="section-head">

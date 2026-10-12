@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 
-import AdSlot from "@/components/AdSlot";
 import Breadcrumb from "@/components/Breadcrumb";
 import {
   longtailPages,
@@ -201,6 +200,12 @@ export async function generateMetadata({
     description,
     alternates: { canonical: `/hesapla/${slug}` },
     openGraph: { title, description, url: `/hesapla/${slug}` },
+    /*
+     * Tek şablondan üretilen 58 hazır hesap sayfası, AdSense incelemesinde
+     * "düşük değerli içerik" kararına yol açan kalıp sayfa örüntüsü. Ziyaretçi
+     * için sayfalar kalıyor ama arama motoruna kapalı; reklam da gösterilmiyor.
+     */
+    robots: { index: false, follow: true },
   };
 }
 
@@ -263,10 +268,6 @@ export default async function LongtailPage({
               data={loanContent(page.input.amount, page.input.months)}
             />
           )}
-
-          <div style={{ marginTop: 26 }}>
-            <AdSlot position="middle" />
-          </div>
 
           {/* SSS */}
           <section className="lt-section">

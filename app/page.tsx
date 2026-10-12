@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import CalculatorCard from "@/components/CalculatorCard";
 import { calculators } from "@/data/calculators";
-import AdSlot from "@/components/AdSlot";
+import { PARAMETERS_YEAR, lastVerifiedText } from "@/data/parameters";
 
 export const metadata = {
   title: { absolute: "MiniHesap: Online Hesaplama Araçları 2026 – Maaş, Tazminat, KDV" },
@@ -108,9 +108,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      <div className="container ad-slot">
-        <AdSlot position="top" />
-      </div>
 
       <section className="section section-white" id="araclar">
         <div className="container">
@@ -203,6 +200,45 @@ export default function HomePage() {
 
       <section className="section">
         <div className="container">
+          <div className="prose" style={{ margin: "0 auto" }}>
+            <p className="eyebrow">MİNİHESAP HAKKINDA</p>
+            <h2 style={{ marginTop: 6 }}>Hesaplamalarımız nasıl hazırlanıyor?</h2>
+            <p>
+              MiniHesap; maaş bordrosu, tazminat, vergi, kredi ve sınav puanı gibi
+              günlük hayatta sıkça karşılaşılan hesapları tek yerde toplayan,
+              ücretsiz ve üyeliksiz bir Türkçe hesaplama sitesidir. Her araç,
+              yalnızca sonucu değil sonuca giden adımları da gösterir: net maaş
+              hesabında SGK primi, işsizlik sigortası, gelir vergisi dilimi ve
+              asgari ücret istisnası ayrı ayrı listelenir; kredi hesabında her
+              taksitin faiz, vergi ve anapara payı tablo hâlinde verilir.
+            </p>
+            <p>
+              Hesaplarda kullanılan asgari ücret, gelir vergisi dilimleri, SGK
+              tavanı, kıdem tazminatı tavanı, mevduat stopajı ve kredi kartı faiz
+              oranları gibi rakamlar Resmî Gazete, Çalışma ve Sosyal Güvenlik
+              Bakanlığı, Gelir İdaresi, SGK ve TCMB gibi birincil kaynaklardan
+              alınır ve tek bir dosyada tutulur. Bir oran değiştiğinde bütün
+              araçlar ve rehberler aynı anda güncellenir. Rakamların en son{" "}
+              {lastVerifiedText()} tarihinde kontrol edildiğini ve kaynaklarını{" "}
+              <Link href="/guncel-rakamlar">{PARAMETERS_YEAR} güncel rakamlar</Link>{" "}
+              sayfasında görebilirsiniz.
+            </p>
+            <p>
+              Araçların yanında, hesabın arkasındaki kuralları anlatan{" "}
+              <Link href="/rehber">rehberler</Link> bulunur: kıdem tazminatına kimin
+              hak kazandığı, işsizlik maaşına nasıl başvurulduğu ya da kira
+              artışında yasal sınırın nasıl belirlendiği gibi. Hesaplamalar
+              tarayıcınızda yapılır; girdiğiniz maaş veya borç bilgileri
+              sunucumuza gönderilmez. Sonuçlar bilgilendirme amaçlıdır; resmî
+              bordro veya beyanname yerine geçmez. Bir hata fark ederseniz{" "}
+              <Link href="/iletisim">bize bildirin</Link>, kontrol edip düzeltiriz.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container">
           <div className="section-head">
             <p className="eyebrow">İHTİYACINIZA GÖRE</p>
             <h2>Aradığınız program burada yok mu?</h2>
@@ -216,9 +252,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      <div className="container ad-slot">
-        <AdSlot position="bottom" />
-      </div>
     </main>
   );
 }

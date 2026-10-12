@@ -9,6 +9,7 @@
 
 import type { Guide } from "@/data/guides";
 import {
+  EMPLOYER_RATES,
   INCOME_TAX_BRACKETS_WAGE,
   LAST_VERIFIED,
   MINIMUM_WAGE,
@@ -293,7 +294,7 @@ export const guncelGuides: Guide[] = [
     category: "Çalışan Hakları",
     icon: "🛡️",
     ...common,
-    readingMinutes: 3,
+    readingMinutes: 5,
     tool: { slug: "net-maas", label: "Net Maaş Hesaplama" },
     intro: `${Y} yılında SGK prime esas kazanç <strong>tabanı ${tl(SGK_LIMITS.monthlyFloor)}</strong> (brüt asgari ücret), <strong>tavanı ${tl(SGK_LIMITS.monthlyCeiling)}</strong>'dir. Tavan, brüt asgari ücretin <strong>${SGK_LIMITS.ceilingMultiplier} katı</strong> olarak belirlenmiştir.`,
     sections: [
@@ -309,6 +310,30 @@ export const guncelGuides: Guide[] = [
         heading: "Taban ne anlama gelir?",
         body: [
           "Tam ay çalışan bir sigortalı için SGK'ya bildirilecek kazanç, brüt asgari ücretten düşük olamaz. Kısmi çalışmalarda bildirim çalışılan gün sayısına göre yapılır.",
+        ],
+      },
+      {
+        heading: "Günlük taban ve tavan",
+        body: [
+          `SGK bildirimleri gün üzerinden yapılır; bir ay 30 gün sayılır. ${Y} yılında günlük taban <strong>${tl(MINIMUM_WAGE.dailyGross)}</strong>, günlük tavan <strong>${tl(round2(MINIMUM_WAGE.dailyGross * SGK_LIMITS.ceilingMultiplier))}</strong>'dir.`,
+          `Ay içinde 20 gün çalışıp ayrılan bir çalışan için taban 20 × ${tl(MINIMUM_WAGE.dailyGross)} = ${tl(round2(MINIMUM_WAGE.dailyGross * 20))}, tavan ise bunun ${SGK_LIMITS.ceilingMultiplier} katıdır. Eksik günlü aylarda hem taban hem tavan gün sayısıyla orantılı küçülür.`,
+        ],
+      },
+      {
+        heading: "Hangi ödemeler prime esas kazanca girer?",
+        body: [
+          "Prime esas kazanç yalnızca çıplak ücretten oluşmaz. Aşağıdaki ödemeler de tavan hesabında dikkate alınır:",
+          "- Hak edilen ücretler ve fazla mesai ücreti",
+          "- Prim, ikramiye ve bu nitelikteki her türlü ödeme",
+          "- Düzenli ödenen ve sosyal yardım sayılmayan yan ödemeler",
+          "Kıdem ve ihbar tazminatı, ölüm, doğum ve evlenme yardımları gibi ödemeler ise prime esas kazanca dahil edilmez. Yemek, çocuk ve aile yardımlarında kanunda belirlenen tutara kadar olan kısım istisnadır, aşan kısım prime tabidir.",
+        ],
+      },
+      {
+        heading: "İşveren tarafında tavanın etkisi",
+        body: [
+          `Tavan yalnızca çalışanın kesintisini değil, işverenin ödediği primi de sınırlar. Teşviksiz toplam işveren yükü %${(EMPLOYER_RATES.total * 100).toLocaleString("tr-TR")} olduğundan, tavanı aşan bir maaş için işverenin ödeyeceği en yüksek aylık SGK + işsizlik primi ${tl(SGK_LIMITS.monthlyCeiling)} × %${(EMPLOYER_RATES.total * 100).toLocaleString("tr-TR")} = <strong>${tl(round2(SGK_LIMITS.monthlyCeiling * EMPLOYER_RATES.total))}</strong>'dir.`,
+          "Bu yüzden yüksek ücretlerde brüt maaş arttıkça işveren maliyeti, tavanın altındaki ücretlere göre daha yavaş artar. Ayrıntılı hesap için İşveren Maliyeti aracını kullanabilirsiniz.",
         ],
       },
     ],
@@ -336,7 +361,7 @@ export const guncelGuides: Guide[] = [
     category: "Çalışan Hakları",
     icon: "🛟",
     ...common,
-    readingMinutes: 3,
+    readingMinutes: 5,
     tool: { slug: "issizlik-maasi", label: "İşsizlik Maaşı Hesaplama" },
     intro: `İşsizlik maaşı, son 4 aylık brüt kazanç ortalamasının %40'ıdır; ancak brüt asgari ücretin %80'ini geçemez. ${Y} yılında bu üst sınır <strong>brüt ${tl(ubCap)}</strong>, damga vergisi düşüldükten sonra <strong>net ${tl(ubNet)}</strong>'dir.`,
     sections: [
@@ -356,6 +381,32 @@ export const guncelGuides: Guide[] = [
           "- Son 3 yılda 600 gün prim: 180 gün",
           "- 900 gün prim: 240 gün",
           "- 1.080 gün prim: 300 gün",
+        ],
+      },
+      {
+        heading: "Kimler işsizlik maaşı alabilir?",
+        body: [
+          "Tutar ve süre kadar önemli olan, işten ayrılış şeklidir. Ödenek, işini kendi isteği ve kusuru dışında kaybedenlere verilir:",
+          "- İşveren tarafından, ahlak ve iyi niyet kurallarına aykırılık dışındaki bir nedenle işten çıkarılanlar",
+          "- Ücretinin ödenmemesi gibi haklı bir nedenle iş sözleşmesini fesheden çalışanlar",
+          "- Belirli süreli sözleşmesi sona erenler, işyeri kapanan veya el değiştirdiği için işini kaybedenler",
+          "Kendi isteğiyle (haklı bir neden olmadan) istifa eden veya devamsızlık gibi kusurlu bir davranış nedeniyle çıkarılan çalışan ödenek alamaz. İşten ayrılış nedeni, işverenin SGK'ya bildirdiği çıkış koduyla belirlenir.",
+        ],
+      },
+      {
+        heading: "Başvuru nasıl yapılır?",
+        body: [
+          "Başvuru İŞKUR'a, işten ayrıldıktan sonraki <strong>30 gün içinde</strong> yapılmalıdır. e-Devlet üzerinden İŞKUR'un işsizlik ödeneği başvuru hizmetiyle ya da en yakın İŞKUR birimine giderek başvurabilirsiniz.",
+          "30 günlük süre geçirilirse başvuru reddedilmez, ancak geciken gün sayısı toplam hak süresinden düşülür. Bu nedenle başvuruyu işten ayrıldıktan hemen sonra yapmak en doğrusudur.",
+        ],
+      },
+      {
+        heading: "Ödeme süresince bilinmesi gerekenler",
+        body: [
+          "- Ödenek aylık olarak, her ayın sonunda ödenir.",
+          "- Ödenek alınan süre boyunca genel sağlık sigortası primi İŞKUR tarafından ödenir; sağlık hizmetlerinden yararlanmaya devam edersiniz.",
+          "- Yeni bir işe girdiğinizde veya emekli aylığı almaya başladığınızda ödeme kesilir.",
+          "- İŞKUR'un önerdiği uygun işi veya mesleki eğitimi haklı bir neden olmadan reddetmek ödeneğin kesilmesine yol açabilir.",
         ],
       },
     ],
