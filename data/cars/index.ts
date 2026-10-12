@@ -1,8 +1,9 @@
 import type { CarVersion } from "./types";
 import { renault } from "./renault";
+import { toyota } from "./toyota";
 
 /** Tüm markaların versiyonları; yeni marka dosyaları buraya eklenir. */
-export const cars: CarVersion[] = [...renault].sort(
+export const cars: CarVersion[] = [...renault, ...toyota].sort(
   (a, b) =>
     a.brand.localeCompare(b.brand, "tr") ||
     a.model.localeCompare(b.model, "tr") ||
@@ -26,3 +27,7 @@ export function carTree() {
 
 export const brandCount = () => new Set(cars.map((c) => c.brand)).size;
 export const modelCount = () => new Set(cars.map((c) => `${c.brand}|${c.model}`)).size;
+
+/** Fiyatların en son güncellendiği ay ("2026-10") */
+export const latestPriceMonth = () =>
+  cars.reduce((m, c) => (c.priceMonth && c.priceMonth > m ? c.priceMonth : m), "");
