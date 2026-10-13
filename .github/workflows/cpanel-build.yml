@@ -1,0 +1,61 @@
+name: cPanel paketi
+
+# main'e her push'ta cPanel (Node.js / Passenger) için çalışır hâlde paket üretir
+# ve "cpanel-paket" dalına minihesap-cpanel.zip olarak koyar.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: cpanel-build
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - name: Derle (standalone)
+        run: npm run build
+        env:
+          STANDALONE: "1"
+          NEXT_PUBLIC_SITE_URL: https://minihesap.net
+          NEXT_PUBLIC_CONTACT_EMAIL: minihesap@gmail.com
+          NEXT_TELEMETRY_DISABLED: "1"
+      - name: Paketi hazırla
+        run: |
+          set -e
+          mkdir -p pkg
+          cp -a .next/standalone/. pkg/
+          mkdir -p pkg/.next
+          cp -a .next/static pkg/.next/static
+          cp -a public pkg/public
+          mkdir -p pkg/private
+          [ -d private/products ] && cp -a private/products pkg/private/ || true
+          rm -f pkg/private/orders.json pkg/private/requests.json
+          cp deploy/cpanel/app.js pkg/app.js
+          cp deploy/cpanel/KURULUM.md pkg/KURULUM.md
+          echo "$(git rev-parse --short HEAD) $(date -u +%Y-%m-%dT%H:%MZ)" > pkg/SURUM.txt
+          (cd pkg && zip -qr -y ../minihesap-cpanel.zip .)
+          ls -lh minihesap-cpanel.zip
+      - name: cpanel-paket dalına yayınla
+        run: |
+          set -e
+          mkdir out && cp minihesap-cpanel.zip out/ && cp pkg/SURUM.txt out/
+          cd out
+          git init -q -b cpanel-paket
+          git config user.name "github-actions"
+          git config user.email "github-actions@users.noreply.github.com"
+          git add . && git commit -qm "cPanel paketi $(cat SURUM.txt)"
+          git push -qf "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" cpanel-paket

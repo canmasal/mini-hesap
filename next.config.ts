@@ -36,6 +36,13 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
 
   /*
+   * cPanel (Passenger) gibi klasik Node.js barındırma için tek klasörlük,
+   * node_modules gerektirmeyen çıktı. Vercel derlemesini etkilememesi için
+   * yalnızca STANDALONE=1 verildiğinde açılır (.github/workflows/cpanel-build.yml).
+   */
+  output: process.env.STANDALONE === "1" ? "standalone" : undefined,
+
+  /*
    * Route dosyaları yalnızca TypeScript.
    *
    * tsconfig'de allowJs kapalı olduğu için app/ altında kalan bir .js veya
