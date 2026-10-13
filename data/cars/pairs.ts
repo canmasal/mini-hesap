@@ -26,7 +26,7 @@ const PAIRS: [string, string][] = [
   ["volkswagen-golf-1-5-etsi-116-ps-dsg-life", "opel-astra-1-5-130-hp-dizel-at8-edition"],
   ["volkswagen-golf-1-5-etsi-116-ps-dsg-life", "peugeot-308-allure-1-5-bluehdi-130-hp-eat8"],
   ["skoda-octavia-1-5-e-tec-150-ps-dsg-premium", "toyota-corolla-1-8-hybrid-dream"],
-  ["volkswagen-passat-1-5-etsi-150-ps-dsg-business", "skoda-superb-combi-prestige"],
+  ["volkswagen-passat-1-5-etsi-150-ps-dsg-business", "skoda-superb-combi-1-5-e-tec-150-ps-dsg-prestige"],
   ["kia-sportage-1-6l-150-ps-dct-cool", "hyundai-tucson-1-6-t-gdi-180-ps-dct-prime"],
   ["volkswagen-tiguan-1-5-etsi-act-150-ps-dsg-life", "ford-kuga-1-5-ecoboost-186-ps-titanium"],
   ["nissan-qashqai-1-3-dig-t-mild-hybrid-158-ps-designpack", "peugeot-3008-allure-1-2-hybrid-145-hp-edcs6"],
