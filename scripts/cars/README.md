@@ -1,6 +1,6 @@
 # Araç fiyat kataloğu
 
-`araclo.csv` → `data/cars/catalog.ts` (Renault, Toyota, Togg, Fiat, Hyundai i20 ile Volkswagen Golf ve T-Roc hariç; onlar kendi dosyalarında).
+`araclo.csv` → `data/cars/catalog.ts` (Renault, Toyota, Togg, Fiat, Hyundai i20, Volkswagen Golf ve T-Roc ile Kia Sportage ve Stonic hariç; onlar kendi dosyalarında).
 
 Satır biçimi: `marka;model;versiyon;yakıt;şanzıman(Manuel|Otomatik|DSG|DCT|AMT);motor_l;beygir;liste_fiyatı_tl`
 Kaynak: https://www.araclo.com/sifir-arac-fiyatlari (marka sayfaları: `/sifir-arac-fiyatlari/ekim-2026-<marka>-sifir-arac-fiyatlari`).
