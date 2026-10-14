@@ -86,7 +86,7 @@ export default function CarVisual({ car }: { car: CarVersion }) {
   return (
     <figure className="car-visual">
       <Illustration body={car.body} color={BRAND_COLORS[car.brand] ?? "#475569"} title={`${name} (${car.body.toLocaleLowerCase("tr-TR")} kasa, temsilî çizim)`} />
-      <figcaption>Temsilî {car.body.toLocaleLowerCase("tr-TR")} çizimi</figcaption>
+      <figcaption>Temsilî çizim · {car.body}</figcaption>
     </figure>
   );
 }
