@@ -155,7 +155,7 @@ export default function CurrentRatesPage() {
           <p className="rates-links">
             <Link href={`/rehber/kidem-tazminati-tavani-${Y}`}>Kıdem tavanı rehberi</Link>
             {" · "}
-            <Link href="/hesaplamalar/kidem">Kıdem tazminatı hesapla</Link>
+            <Link href="/hesaplamalar/kidem-ihbar">Kıdem tazminatı hesapla</Link>
           </p>
         </section>
 

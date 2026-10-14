@@ -89,7 +89,38 @@ const nextConfig: NextConfig = {
    * her istek kalıcı (308) olarak www'suz köke yönlendirilir.
    */
   async redirects() {
+    /*
+     * Kaldırılan / birleştirilen sayfalar (14.10.2026): kalıcı 301 ile en
+     * yakın sayfaya gider; arama motorları eski adresleri yeni adrese taşır.
+     */
+    const removedTools = [
+      "vucut-kitle-indeksi", "gebelik-haftasi", "kalori-ihtiyaci", "ideal-kilo",
+      "adet-takvimi", "su-ihtiyaci", "etkilesim-orani", "youtube-geliri",
+      "kripto-kar-zarar", "arac-karsilastirma", "araba-kiyaslama",
+    ];
+    const removedGuides = [
+      "ideal-kilo-nasil-hesaplanir", "adet-dongusu-nasil-hesaplanir", "gunde-kac-litre-su-icilmeli",
+      "kripto-ortalama-maliyet-nasil-hesaplanir", "etkilesim-orani-nedir-nasil-hesaplanir",
+      "youtube-ne-kadar-para-veriyor-rpm-cpm", "araba-alirken-toplam-maliyet-nasil-hesaplanir",
+    ];
     return [
+      ...["kidem", "ihbar"].map((slug) => ({
+        source: `/hesaplamalar/${slug}`,
+        destination: "/hesaplamalar/kidem-ihbar",
+        statusCode: 301 as const,
+      })),
+      ...removedTools.map((slug) => ({
+        source: `/hesaplamalar/${slug}`,
+        destination: "/hesaplamalar",
+        statusCode: 301 as const,
+      })),
+      ...removedGuides.map((slug) => ({
+        source: `/rehber/${slug}`,
+        destination: "/rehber",
+        statusCode: 301 as const,
+      })),
+      { source: "/araba-karsilastirma", destination: "/hesaplamalar", statusCode: 301 as const },
+      { source: "/araba-karsilastirma/:pair*", destination: "/hesaplamalar", statusCode: 301 as const },
       {
         source: "/:path*",
         has: [{ type: "host", value: "www.minihesap.net" }],

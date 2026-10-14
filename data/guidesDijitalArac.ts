@@ -62,208 +62,10 @@ const deterjan = unitPrices([
 
 export const dijitalAracGuides: Guide[] = [
   /* ======================== KRİPTO ======================== */
-  {
-    slug: "kripto-ortalama-maliyet-nasil-hesaplanir",
-    title: "Kripto Ortalama Maliyet Nasıl Hesaplanır?",
-    metaTitle: "Kripto Ortalama Maliyet ve Kâr/Zarar Nasıl Hesaplanır?",
-    description:
-      "Kripto alımlarında ortalama maliyet, komisyonun etkisi, başa baş fiyatı ve düzenli alım (maliyet ortalaması) yönteminin örnekli anlatımı.",
-    category: "Finans",
-    icon: "🪙",
-    ...common,
-    readingMinutes: 6,
-    tool: { slug: "kripto-kar-zarar", label: "Kripto Kâr/Zarar Hesaplama" },
-    intro:
-      "Bir kripto varlığı farklı zamanlarda ve farklı fiyatlardan aldığınızda, elinizdeki pozisyonun gerçek maliyeti tek tek alım fiyatlarının basit ortalaması değildir. Doğru ortalama maliyet, her alımın miktarıyla ağırlıklandırılır ve ödenen komisyonları da içerir. Kâr ya da zararınızı doğru görmek için önce bu rakamı bilmeniz gerekir.",
-    sections: [
-      {
-        heading: "Ağırlıklı ortalama neden önemli?",
-        body: [
-          "Örneğin 1.000 TL'ye 1 adet, 500 TL'ye 3 adet aldıysanız ortalama fiyatınız (1.000 + 500) ÷ 2 = 750 TL değildir. Toplam ödediğiniz 2.500 TL'yi 4 adede böldüğünüzde ortalama maliyetiniz <strong>625 TL</strong> olur. Daha çok miktar aldığınız fiyat, ortalamayı kendine doğru çeker.",
-          "Formül: Ortalama maliyet = (Σ miktar × fiyat + alış komisyonları) ÷ toplam miktar",
-        ],
-      },
-      {
-        heading: "Komisyon kârı nasıl etkiler?",
-        body: [
-          "Kripto platformları hem alışta hem satışta işlem tutarının belli bir yüzdesini komisyon olarak keser. Alış komisyonu maliyetinizi artırır, satış komisyonu ise satıştan elinize geçen tutarı azaltır. Bu yüzden zarar etmeden çıkabileceğiniz fiyat (başa baş fiyatı), ortalama maliyetinizin biraz üzerindedir.",
-          "Sık ve küçük tutarlı işlemlerde komisyonların toplamı küçümsenmeyecek bir maliyete dönüşebilir. Platformların komisyon oranları, piyasa yapıcı/alıcı ayrımı ve işlem hacmine göre değişebilir; kendi oranınızı hesap ayarlarınızdan kontrol edin.",
-        ],
-      },
-      {
-        heading: "Örnek: üç ayrı alım",
-        body: [
-          "Bir varlıktan 0,005 adet 2.600.000 TL'den, 0,005 adet 2.300.000 TL'den ve 0,005 adet 2.000.000 TL'den alındığını, komisyonun %0,2 olduğunu varsayalım:",
-          `- Toplam maliyet: ${tl(dca.totalCost)}`,
-          `- Ortalama maliyet: <strong>${tl(dca.averageCost)}</strong>`,
-          `- Başa baş satış fiyatı: ${tl(dca.breakEven)}`,
-          `- Fiyat 2.400.000 TL iken: ${dca.current!.profit >= 0 ? "kâr" : "zarar"} <strong>${tl(Math.abs(dca.current!.profit))}</strong> (${pc(dca.current!.profitPercent)})`,
-          "İlk alım fiyatı 2.600.000 TL olmasına rağmen, düşüşte yapılan ek alımlar ortalamayı aşağı çektiği için fiyat 2.400.000 TL'deyken pozisyon kâra geçmiştir.",
-        ],
-      },
-      {
-        heading: "Düzenli alım (maliyet ortalaması) yöntemi",
-        body: [
-          "Belirli aralıklarla (örneğin her ay) sabit bir tutarla alım yapmaya maliyet ortalaması denir. Fiyat düştüğünde aynı tutarla daha çok, yükseldiğinde daha az birim alınır. Yöntemin amacı \"doğru zamanı yakalama\" baskısını azaltmaktır.",
-          "Bu yöntem riski ortadan kaldırmaz: Varlığın değeri uzun vadede düşerse ortalama maliyet ne kadar düşük olursa olsun zarar oluşur. Yatırım kararlarınızı kendi risk durumunuza göre verin.",
-        ],
-      },
-      {
-        heading: "Kayıt tutmanın önemi",
-        body: [
-          "Her alım ve satımın tarihini, miktarını, fiyatını ve komisyonunu bir tabloda tutmak hem kâr/zarar takibini hem de ileride doğabilecek vergi beyanlarını kolaylaştırır. Platformların işlem geçmişi raporlarını düzenli olarak indirip saklayın.",
-        ],
-      },
-    ],
-    faqs: [
-      {
-        question: "Kripto ortalama maliyete komisyon eklenir mi?",
-        answer:
-          "Evet. Alış sırasında ödenen komisyon, varlığı edinme maliyetinin parçasıdır ve ortalama maliyete eklenmelidir. Satış komisyonu ise satıştan elinize geçen tutardan düşülür.",
-      },
-      {
-        question: "Ortalama maliyetin altında satarsam ne olur?",
-        answer:
-          "Satılan miktar için zarar gerçekleşir. Ortalama maliyet yöntemiyle kalan pozisyonunuzun birim maliyeti değişmez; yalnızca miktarı azalır.",
-      },
-    ],
-    related: ["bilesik-faiz-nedir-nasil-hesaplanir", "enflasyon-ve-zam-farki-hesaplama"],
-  },
 
   /* ======================== ETKİLEŞİM ======================== */
-  {
-    slug: "etkilesim-orani-nedir-nasil-hesaplanir",
-    title: "Etkileşim Oranı Nedir, Nasıl Hesaplanır?",
-    metaTitle: "Etkileşim Oranı (Engagement Rate) Nedir, Nasıl Hesaplanır?",
-    description:
-      "Instagram ve TikTok etkileşim oranı formülleri, takipçiye ve erişime göre hesaplama farkı, iyi oran aralıkları ve oranı yükseltmenin yolları.",
-    category: "Günlük",
-    icon: "📣",
-    ...common,
-    readingMinutes: 6,
-    tool: { slug: "etkilesim-orani", label: "Etkileşim Oranı Hesaplama" },
-    intro:
-      "Etkileşim oranı (engagement rate), bir sosyal medya hesabının takipçileriyle ne kadar güçlü bir bağ kurduğunu gösteren en yaygın ölçüdür. Takipçi sayısı tek başına bir hesabın etkisini anlatmaz; 10.000 takipçili aktif bir hesap, 100.000 takipçili ama kimsenin etkileşime girmediği bir hesaptan daha değerli olabilir. Markalar iş birliği seçerken de bu orana bakar.",
-    sections: [
-      {
-        heading: "Üç farklı hesaplama yöntemi",
-        body: [
-          "- <strong>Takipçiye göre:</strong> (beğeni + yorum + paylaşım + kaydetme) ÷ takipçi × 100. En yaygın ve hesaplar arası kıyas için en kullanışlı yöntemdir.",
-          "- <strong>Erişime göre:</strong> toplam etkileşim ÷ erişim × 100. İçeriği gören kişilerin ne kadarının harekete geçtiğini gösterir; içerik kalitesini ölçmek için daha doğrudur.",
-          "- <strong>Gösterime göre:</strong> toplam etkileşim ÷ gösterim × 100. Aynı kişinin içeriği birden çok kez görmesini de sayar, bu yüzden oran en düşük çıkan yöntemdir.",
-          "Erişim ve gösterim verileri yalnızca hesap sahibinin istatistik ekranında görünür; dışarıdan bir hesabı incelerken takipçiye göre oran kullanılır.",
-        ],
-      },
-      {
-        heading: "Hesap büyüklüğü oranı nasıl etkiler?",
-        body: [
-          "Takipçi sayısı arttıkça etkileşim oranı genellikle düşer. Küçük hesaplarda takipçilerin çoğu hesap sahibini tanır veya içeriğe gerçekten ilgi duyar; büyük hesaplarda ise pasif takipçi oranı artar.",
-          `Örneğin 8.000 takipçili bir hesabın 470 beğeni, 25 yorum, 10 paylaşım ve 15 kaydetme alan gönderisinin oranı <strong>${pc(smallAcc.byFollowers)}</strong> olur. 500.000 takipçili bir hesabın 10.000 etkileşim alan gönderisinin oranı ise <strong>${pc(bigAcc.byFollowers)}</strong>'dir; ancak ulaştığı mutlak kişi sayısı çok daha fazladır.`,
-          "Bu nedenle bir hesabı değerlendirirken oranı, benzer büyüklükteki ve aynı alandaki hesaplarla karşılaştırmak gerekir.",
-        ],
-      },
-      {
-        heading: "Hangi etkileşim daha değerli?",
-        body: [
-          "Tüm etkileşimler aynı ağırlıkta değildir. Beğeni en kolay verilen tepkidir. Yorum, içeriğe zaman ayrıldığını gösterir. Kaydetme, içeriğin tekrar dönülecek kadar faydalı bulunduğunu; paylaşım ise başkalarına önerilecek kadar değerli görüldüğünü gösterir. Platformların içerik dağıtımında da kaydetme ve paylaşımın etkili olduğu bilinmektedir.",
-        ],
-      },
-      {
-        heading: "Oranı yükseltmenin yolları",
-        body: [
-          "- Kaydedilmeye değer içerik üretin: kontrol listeleri, kısa rehberler, karşılaştırmalar.",
-          "- Gönderiden sonraki ilk saatlerde yorumlara yanıt verin.",
-          "- İstatistiklerden takipçilerinizin en aktif olduğu saatleri bulun.",
-          "- Soru soran, görüş isteyen açıklamalar yazın.",
-          "- Takipçi veya beğeni satın almayın: Etkileşime girmeyen takipçiler oranı düşürür ve hesabın güvenilirliğine zarar verir.",
-        ],
-      },
-    ],
-    faqs: [
-      {
-        question: "Etkileşim oranı için kaç gönderi kullanılmalı?",
-        answer:
-          "Tek bir gönderi yanıltıcı olabilir. Son 10–12 gönderinin etkileşimlerini toplayıp gönderi sayısına bölmek daha güvenilir bir ortalama verir. Hesaplama aracında gönderi sayısını girerek ortalamayı otomatik alabilirsiniz.",
-      },
-      {
-        question: "Video izlenmeleri etkileşime dahil mi?",
-        answer:
-          "Genellikle hayır. İzlenme, erişim/gösterim türünden bir ölçüdür. Etkileşim; beğeni, yorum, paylaşım ve kaydetme gibi kullanıcının bilinçli bir eylemde bulunduğu tepkileri kapsar.",
-      },
-    ],
-    related: ["youtube-ne-kadar-para-veriyor-rpm-cpm", "yuzde-hesaplama-nasil-yapilir"],
-  },
 
   /* ======================== YOUTUBE ======================== */
-  {
-    slug: "youtube-ne-kadar-para-veriyor-rpm-cpm",
-    title: "YouTube Ne Kadar Para Veriyor? RPM ve CPM Rehberi",
-    metaTitle: "YouTube 1.000 İzlenmeye Ne Kadar Öder? RPM ve CPM Nedir?",
-    description:
-      "YouTube reklam gelirinin nasıl paylaşıldığı, RPM ile CPM farkı, geliri artıran etkenler ve izlenme başına kazancı hesaplama yöntemi.",
-    category: "Finans",
-    icon: "▶️",
-    ...common,
-    readingMinutes: 6,
-    tool: { slug: "youtube-geliri", label: "YouTube Geliri Hesaplama" },
-    intro:
-      "\"YouTube 1.000 izlenmeye ne kadar veriyor?\" sorusunun tek bir cevabı yoktur. Kazanç; izleyicinin hangi ülkeden geldiğine, kanalın konusuna, videonun uzunluğuna ve yılın hangi döneminde olunduğuna göre birkaç kat değişebilir. Doğru tahmin için iki kavramı bilmek gerekir: CPM ve RPM.",
-    sections: [
-      {
-        heading: "Reklam geliri nasıl paylaşılır?",
-        body: [
-          `YouTube İş Ortağı Programı'ndaki kanallarda, uzun videolarda gösterilen reklamlardan elde edilen net gelirin <strong>%${SHARE}'i</strong> içerik üreticisine, kalanı YouTube'a kalır. Shorts videolarında ise gelir farklı bir havuz modeliyle paylaştırılır.`,
-          "Ödemeler AdSense hesabı üzerinden ve dolar cinsinden yapılır; bu nedenle TL karşılığı kura göre değişir.",
-        ],
-      },
-      {
-        heading: "CPM ve RPM farkı",
-        body: [
-          "<strong>CPM</strong>, reklamverenin 1.000 reklam gösterimi için ödediği bedeldir. Kanal sahibinin değil, reklamverenin bakış açısını yansıtır.",
-          "<strong>RPM</strong>, kanalın her 1.000 izlenmeden eline geçen toplam gelirdir. Reklam gösterilmeyen izlenmeleri, YouTube'un payını ve kanal üyeliği gibi diğer gelirleri de içerir. Bu yüzden RPM, CPM'den belirgin şekilde düşüktür ve gerçek kazancı tahmin etmek için daha doğru göstergedir.",
-          "Kendi RPM değerinizi YouTube Studio'da Analytics > Gelir sekmesinde görebilirsiniz.",
-        ],
-      },
-      {
-        heading: "Örnek: aynı izlenme, farklı RPM",
-        body: [
-          "Aylık 200.000 izlenme alan iki kanal düşünelim. Biri eğlence içerikli ve RPM'i 15 TL, diğeri finans içerikli ve RPM'i 45 TL olsun (örnek değerler):",
-          `- Eğlence kanalı: aylık <strong>${tl(ytLow.monthly)}</strong>`,
-          `- Finans kanalı: aylık <strong>${tl(ytHigh.monthly)}</strong>`,
-          "Aynı izlenme sayısına rağmen gelir üç katı farklıdır. Bu nedenle kanallar arası kıyasta izlenme sayısından çok RPM'e bakmak gerekir.",
-        ],
-      },
-      {
-        heading: "Geliri artıran etkenler",
-        body: [
-          "- <strong>Konu:</strong> Finans, yazılım, eğitim ve sigorta gibi alanlarda reklamverenler daha yüksek ücret öder.",
-          "- <strong>Video süresi:</strong> 8 dakikadan uzun videolara video ortası reklam eklenebilir.",
-          "- <strong>İzleyici ülkesi:</strong> Reklam pazarının büyük olduğu ülkelerden gelen izlenmeler daha değerlidir.",
-          "- <strong>Sezon:</strong> Yılın son çeyreğinde reklam bütçeleri arttığı için CPM'ler genellikle yükselir, yılın başında düşer.",
-          "- <strong>Gelir çeşitliliği:</strong> Kanal üyeliği, Super Thanks ve sponsorluklar reklam gelirine ek kazanç sağlar.",
-        ],
-      },
-      {
-        heading: "Vergilendirme",
-        body: [
-          "YouTube'dan elde edilen kazanç gelir vergisine tabidir. Türkiye'de sosyal içerik üreticileri için, belirli şartlarla bankalar aracılığıyla stopaj yoluyla vergilendirilen bir kazanç istisnası düzenlemesi bulunur. İstisnanın sınırları ve şartları yıllara göre değişebildiği için beyan yükümlülüğünüzü bir mali müşavirle netleştirin.",
-        ],
-      },
-    ],
-    faqs: [
-      {
-        question: "YouTube'dan para kazanmak için kaç abone gerekir?",
-        answer:
-          "Reklam gelirine erişmek için YouTube İş Ortağı Programı'na kabul edilmek gerekir. Programın abone ve izlenme süresi şartlarını YouTube belirler ve zaman zaman günceller; güncel şartları YouTube yardım merkezinden kontrol edin.",
-      },
-      {
-        question: "1 milyon izlenme kaç TL kazandırır?",
-        answer:
-          "1 milyon izlenme, RPM × 1.000 kadar gelir getirir. RPM'iniz 20 TL ise yaklaşık 20.000 TL, 40 TL ise yaklaşık 40.000 TL kazanırsınız. Kendi RPM'inizle hesaplamak için YouTube Geliri aracını kullanın.",
-      },
-    ],
-    related: ["etkilesim-orani-nedir-nasil-hesaplanir", "serbest-meslek-makbuzu-nasil-kesilir"],
-  },
 
   /* ======================== DEĞER KAYBI ======================== */
   {
@@ -330,7 +132,7 @@ export const dijitalAracGuides: Guide[] = [
           "Evet. Kusuru olmayan araç sahibi, kazanın aracın piyasa değerinde yarattığı düşüşü karşı tarafın trafik sigortasından talep edebilir. Bu, zamana bağlı olağan değer kaybından farklı bir tazminattır.",
       },
     ],
-    related: ["araba-alirken-toplam-maliyet-nasil-hesaplanir", `mtv-${MTV_YEAR}-nasil-hesaplanir`],
+    related: [`mtv-${MTV_YEAR}-nasil-hesaplanir`],
   },
 
   /* ======================== ELEKTRİKLİ ARAÇ ======================== */
@@ -394,68 +196,10 @@ export const dijitalAracGuides: Guide[] = [
           "Ara sıra hızlı şarj normaldir ve araçlar buna göre tasarlanır. Ancak sürekli ve yüksek sıcaklıkta hızlı şarj, batarya yaşlanmasını hızlandırabilir. Günlük kullanımda yavaş şarj tercih etmek önerilir.",
       },
     ],
-    related: ["araba-alirken-toplam-maliyet-nasil-hesaplanir", "yakit-maliyeti-nasil-hesaplanir"],
+    related: ["yakit-maliyeti-nasil-hesaplanir"],
   },
 
   /* ======================== TOPLAM MALİYET ======================== */
-  {
-    slug: "araba-alirken-toplam-maliyet-nasil-hesaplanir",
-    title: "Araba Alırken Toplam Maliyet Nasıl Hesaplanır?",
-    metaTitle: "Araç Karşılaştırma: Araba Alırken Toplam Maliyet Nasıl Hesaplanır?",
-    description:
-      "İki aracı doğru karşılaştırmak için toplam sahip olma maliyeti: değer kaybı, yakıt, sigorta, MTV ve bakımın birlikte hesaplanması, örnek karşılaştırma.",
-    category: "Günlük",
-    icon: "🚗",
-    ...common,
-    readingMinutes: 6,
-    tool: { slug: "arac-karsilastirma", label: "Araç Karşılaştırma" },
-    intro:
-      "Araç seçerken en sık yapılan hata, yalnızca etiket fiyatını karşılaştırmaktır. Oysa bir aracın size gerçek maliyeti, kullandığınız süre boyunca ödediğiniz her şeyin toplamıdır. Bu yaklaşıma <strong>toplam sahip olma maliyeti</strong> denir ve iki aracı adil biçimde karşılaştırmanın en sağlam yoludur.",
-    sections: [
-      {
-        heading: "Toplam sahip olma maliyetinin kalemleri",
-        body: [
-          "- <strong>Değer kaybı:</strong> Alış fiyatı ile satarken alacağınız fiyat arasındaki fark. Çoğu araçta en büyük kalemdir.",
-          "- <strong>Yakıt veya elektrik:</strong> Yıllık kilometre × 100 km tüketim × birim fiyat ÷ 100.",
-          "- <strong>Sigorta ve kasko:</strong> Aracın değeri, modeli ve sürücü profiline göre değişir.",
-          "- <strong>MTV:</strong> Motor hacmi (elektriklilerde motor gücü), yaş ve taşıt değerine göre belirlenir.",
-          "- <strong>Bakım ve lastik:</strong> Periyodik bakım, fren, lastik ve beklenmeyen onarımlar.",
-          "- <strong>Finansman:</strong> Krediyle alıyorsanız faiz ve vergiler de maliyete eklenir.",
-        ],
-      },
-      {
-        heading: "Örnek: ucuz ama çok yakan araç mı, pahalı ama tasarruflu araç mı?",
-        body: [
-          "Yılda 20.000 km ve 5 yıllık kullanım için iki araç (örnek rakamlar):",
-          `- <strong>A aracı</strong>: 1.100.000 TL, 100 km'de 7,5 L, 5 yıl sonra %50 değer. Toplam maliyet <strong>${tl(tcoCheap.total)}</strong>, km başına ${tl(tcoCheap.perKm)}.`,
-          `- <strong>B aracı</strong>: 1.350.000 TL, 100 km'de 5 L, 5 yıl sonra %60 değer. Toplam maliyet <strong>${tl(tcoPricey.total)}</strong>, km başına ${tl(tcoPricey.perKm)}.`,
-          `Etiket fiyatı 250.000 TL yüksek olmasına rağmen ${tcoPricey.total < tcoCheap.total ? `B aracı 5 yılın sonunda ${tl(tcoCheap.total - tcoPricey.total)} daha ekonomik olur` : `A aracı yine de ${tl(tcoPricey.total - tcoCheap.total)} daha ekonomik kalır`}. Düşük tüketim ve daha iyi korunan ikinci el değeri, alış fiyatı farkını telafi edebilir.`,
-        ],
-      },
-      {
-        heading: "Doğru karşılaştırma için ipuçları",
-        body: [
-          "- Katalog tüketimi yerine gerçek kullanım verilerine (sürücü yorumları, kendi deneyiminiz) dayanın.",
-          "- Kasko tekliflerini satın almadan önce her iki araç için alın; modeller arasında belirgin fark olabilir.",
-          "- Satış değeri tahmini için ikinci el ilanlarında aynı modelin planladığınız yaştaki fiyatına bakın.",
-          "- Aracı uzun süre kullanacaksanız işletme giderlerinin, kısa süre kullanacaksanız değer kaybının ağırlığı artar.",
-        ],
-      },
-    ],
-    faqs: [
-      {
-        question: "Araç alırken en önemli maliyet kalemi hangisi?",
-        answer:
-          "Çoğu araç için değer kaybıdır. Yüksek kilometre yapan sürücülerde ise yakıt gideri değer kaybına yaklaşabilir veya onu geçebilir.",
-      },
-      {
-        question: "Araç kıyaslamada yakıt fiyatı artışı nasıl hesaba katılır?",
-        answer:
-          "Gelecekteki fiyatlar bilinemediği için karşılaştırma bugünkü fiyatlarla yapılır. Yakıt fiyatının artması, tüketimi düşük olan aracın avantajını büyütür; farklı fiyatlarla birkaç senaryo deneyebilirsiniz.",
-      },
-    ],
-    related: ["araba-yilda-ne-kadar-deger-kaybeder", "elektrikli-arac-sarj-maliyeti-ev-mi-istasyon-mu"],
-  },
 
   /* ======================== BİRİM FİYAT ======================== */
   {

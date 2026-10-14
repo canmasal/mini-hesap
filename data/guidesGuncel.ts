@@ -141,7 +141,7 @@ export const guncelGuides: Guide[] = [
     icon: "📈",
     ...common,
     readingMinutes: 4,
-    tool: { slug: "kidem", label: "Kıdem Tazminatı Hesaplama" },
+    tool: { slug: "kidem-ihbar", label: "Kıdem ve İhbar Tazminatı Hesaplama" },
     intro: `<strong>${dmy(currentCeiling.from)} – ${dmy(currentCeiling.to)}</strong> döneminde kıdem tazminatı tavanı <strong>${tl(currentCeiling.amount)}</strong>'dir. Bir önceki dönemde (${dmy(previousCeiling.from)} – ${dmy(previousCeiling.to)}) bu tutar ${tl(previousCeiling.amount)} idi. Tavan, her çalışma yılı için ödenebilecek en yüksek kıdem tazminatını belirler.`,
     sections: [
       {
@@ -197,7 +197,7 @@ export const guncelGuides: Guide[] = [
     icon: "🧮",
     ...common,
     readingMinutes: 4,
-    tool: { slug: "kidem", label: "Kıdem Tazminatı Hesaplama" },
+    tool: { slug: "kidem-ihbar", label: "Kıdem ve İhbar Tazminatı Hesaplama" },
     intro: `Asgari ücretle çalışan ve kıdem tazminatına hak kazanan bir işçi, yan hakları yoksa her tam çalışma yılı için <strong>brüt ${tl(MINIMUM_WAGE.gross)}</strong> alır. Kıdem tazminatından yalnızca damga vergisi kesildiği için bir yılın neti <strong>${tl(minWageSeveranceNet)}</strong>'dir.`,
     sections: [
       {

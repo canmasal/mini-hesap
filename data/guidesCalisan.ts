@@ -109,7 +109,7 @@ export const calisanGuides: Guide[] = [
     published: "2026-09-13",
     updated: "2026-09-13",
     readingMinutes: 6,
-    tool: { slug: "kidem-ihbar", label: "Kıdem + İhbar Birlikte Hesaplama" },
+    tool: { slug: "kidem-ihbar", label: "Kıdem ve İhbar Tazminatı Hesaplama" },
     intro:
       "İşveren tarafından haklı bir neden olmadan ve bildirim süresine uyulmadan işten çıkarılan çalışan, çoğu zaman kıdem ve ihbar tazminatını birlikte alır. İkisi aynı ücret üzerinden hesaplansa da şartları ve vergileri farklıdır. Toplam alacağı doğru görmek için ikisini ayrı hesaplayıp sonra birleştirmek gerekir.",
     sections: [

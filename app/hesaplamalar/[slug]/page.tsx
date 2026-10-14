@@ -38,8 +38,6 @@ import KdvCalculator from "@/components/calculators/KdvCalculator";
 import DiscountCalculator from "@/components/calculators/DiscountCalculator";
 import RentIncreaseCalculator from "@/components/calculators/RentIncreaseCalculator";
 import OvertimeCalculator from "@/components/calculators/OvertimeCalculator";
-import SeveranceCalculator from "@/components/calculators/SeveranceCalculator";
-import NoticeCalculator from "@/components/calculators/NoticeCalculator";
 import KidemIhbarCalculator from "@/components/calculators/KidemIhbarCalculator";
 import AgeCalculator from "@/components/calculators/AgeCalculator";
 import AnnualLeaveCalculator from "@/components/calculators/AnnualLeaveCalculator";
@@ -52,20 +50,12 @@ import MaternityLeaveCalculator from "@/components/calculators/MaternityLeaveCal
 import UnemploymentCalculator from "@/components/calculators/UnemploymentCalculator";
 import HomeLoanCostCalculator from "@/components/calculators/HomeLoanCostCalculator";
 import FuelCostCalculator from "@/components/calculators/FuelCostCalculator";
-import CryptoProfitCalculator from "@/components/calculators/CryptoProfitCalculator";
-import EngagementRateCalculator from "@/components/calculators/EngagementRateCalculator";
-import YoutubeRevenueCalculator from "@/components/calculators/YoutubeRevenueCalculator";
 import VehicleDepreciationCalculator from "@/components/calculators/VehicleDepreciationCalculator";
 import EvChargingCalculator from "@/components/calculators/EvChargingCalculator";
-import VehicleCompareCalculator from "@/components/calculators/VehicleCompareCalculator";
 import UnitPriceCalculator from "@/components/calculators/UnitPriceCalculator";
-import CarCompare from "@/components/calculators/CarCompare";
 import PensionFundCalculator from "@/components/calculators/PensionFundCalculator";
 import DayCountCalculator from "@/components/calculators/DayCountCalculator";
 import GpaCalculator from "@/components/calculators/GpaCalculator";
-import BmiCalculator from "@/components/calculators/BmiCalculator";
-import PregnancyCalculator from "@/components/calculators/PregnancyCalculator";
-import CalorieCalculator from "@/components/calculators/CalorieCalculator";
 import NetToGrossCalculator from "@/components/calculators/NetToGrossCalculator";
 import ExamAverageCalculator from "@/components/calculators/ExamAverageCalculator";
 import TitleDeedFeeCalculator from "@/components/calculators/TitleDeedFeeCalculator";
@@ -73,8 +63,6 @@ import RentalIncomeTaxCalculator from "@/components/calculators/RentalIncomeTaxC
 import PropertyTaxCalculator from "@/components/calculators/PropertyTaxCalculator";
 import StampTaxCalculator from "@/components/calculators/StampTaxCalculator";
 import VehicleTaxCalculator from "@/components/calculators/VehicleTaxCalculator";
-import IdealWeightCalculator from "@/components/calculators/IdealWeightCalculator";
-import PeriodCalculator from "@/components/calculators/PeriodCalculator";
 import EmployerCostCalculator from "@/components/calculators/EmployerCostCalculator";
 import CreditCardMinimumCalculator from "@/components/calculators/CreditCardMinimumCalculator";
 import LatePaymentCalculator from "@/components/calculators/LatePaymentCalculator";
@@ -83,7 +71,6 @@ import IncomeTaxCalculator from "@/components/calculators/IncomeTaxCalculator";
 import FreelanceReceiptCalculator from "@/components/calculators/FreelanceReceiptCalculator";
 import CompoundInterestCalculator from "@/components/calculators/CompoundInterestCalculator";
 import LoanPrepaymentCalculator from "@/components/calculators/LoanPrepaymentCalculator";
-import WaterIntakeCalculator from "@/components/calculators/WaterIntakeCalculator";
 
 /** 0.175 → "%17,5" */
 const pctTr = (rate: number) => `%${(rate * 100).toLocaleString("tr-TR")}`;
@@ -99,8 +86,6 @@ const componentMap: Record<string, ComponentType> = {
   indirim: DiscountCalculator,
   "kira-artisi": RentIncreaseCalculator,
   "fazla-mesai": OvertimeCalculator,
-  kidem: SeveranceCalculator,
-  ihbar: NoticeCalculator,
   "kidem-ihbar": KidemIhbarCalculator,
   yas: AgeCalculator,
   "yillik-izin": AnnualLeaveCalculator,
@@ -116,9 +101,6 @@ const componentMap: Record<string, ComponentType> = {
   bes: PensionFundCalculator,
   "gun-hesaplama": DayCountCalculator,
   "not-ortalamasi": GpaCalculator,
-  "vucut-kitle-indeksi": BmiCalculator,
-  "gebelik-haftasi": PregnancyCalculator,
-  "kalori-ihtiyaci": CalorieCalculator,
   "netten-brute-maas": NetToGrossCalculator,
   "vize-final-ortalama": ExamAverageCalculator,
   "tapu-harci": TitleDeedFeeCalculator,
@@ -126,8 +108,6 @@ const componentMap: Record<string, ComponentType> = {
   "emlak-vergisi": PropertyTaxCalculator,
   "damga-vergisi": StampTaxCalculator,
   mtv: VehicleTaxCalculator,
-  "ideal-kilo": IdealWeightCalculator,
-  "adet-takvimi": PeriodCalculator,
   "isveren-maliyeti": EmployerCostCalculator,
   "kredi-karti-asgari-odeme": CreditCardMinimumCalculator,
   "gecikme-zammi": LatePaymentCalculator,
@@ -136,15 +116,9 @@ const componentMap: Record<string, ComponentType> = {
   "serbest-meslek-makbuzu": FreelanceReceiptCalculator,
   "bilesik-faiz": CompoundInterestCalculator,
   "kredi-erken-kapatma": LoanPrepaymentCalculator,
-  "su-ihtiyaci": WaterIntakeCalculator,
-  "kripto-kar-zarar": CryptoProfitCalculator,
-  "etkilesim-orani": EngagementRateCalculator,
-  "youtube-geliri": YoutubeRevenueCalculator,
   "arac-deger-kaybi": VehicleDepreciationCalculator,
   "elektrikli-arac-sarj": EvChargingCalculator,
-  "arac-karsilastirma": VehicleCompareCalculator,
   "birim-fiyat": UnitPriceCalculator,
-  "araba-kiyaslama": CarCompare,
 
   /* Sınav araçları tek bileşenden, sınav yapılandırmasıyla üretilir */
   ...Object.fromEntries(
@@ -464,23 +438,25 @@ const seoContents: Record<string, SeoContent> = {
     ],
   },
 
+
+
   /* =======================================================
-     KIDEM
+     KIDEM + İHBAR
   ======================================================= */
 
-  kidem: {
+  "kidem-ihbar": {
     title:
-      "Kıdem Tazminatı Hesaplama 2026",
+      "Kıdem ve İhbar Tazminatı Hesaplama 2026",
     description:
-      "Kıdem tazminatı hesaplama aracı ile işe giriş ve çıkış tarihleri, brüt ücret ve düzenli yan haklara göre tahmini kıdem tazminatınızı hesaplayın.",
+      "Kıdem tazminatı ve ihbar tazminatı hesaplama 2026: çalışma süresi, güncel kıdem tavanı, ihbar süresi ve toplam tahmini tazminatı tek ekranda görün.",
     intro:
-      "Kıdem hesabında çalışma süresi, kıdeme esas ücret, düzenli yan haklar ve ilgili dönemdeki kıdem tazminatı tavanı önemlidir.",
+      "Kıdem ve ihbar tazminatı hesaplama aracımız; işe giriş-çıkış tarihi, brüt ücret ve düzenli yan haklara göre kıdem tazminatınızı (güncel tavanla), kanuni ihbar sürenizi ve ihbar tazminatınızı tek ekranda ayrı ayrı ve toplam olarak gösterir. Yalnızca kıdem ya da yalnızca ihbar tutarına bakmak için ilgili satırı izlemeniz yeterlidir.",
     howItWorks: [
       "Son brüt ücretinizi girin.",
       "İşe giriş ve çıkış tarihlerini seçin.",
-      "Varsa düzenli yan haklarınızı girin.",
-      "Çalışma süresini yıl, ay ve gün olarak görüntüleyin.",
-      "Kıdem tazminatı detaylarını inceleyin.",
+      "Varsa düzenli yan hakları girin.",
+      "Gerekliyse kümülatif vergi matrahını girin.",
+      "Kıdem, ihbar ve toplam sonuçları görüntüleyin.",
     ],
     faqs: [
       {
@@ -501,28 +477,6 @@ const seoContents: Record<string, SeoContent> = {
         answer:
           "Düzenli olarak sağlanan ve para veya para ile ölçülebilen bazı menfaatler koşullarına göre hesaba dahil edilebilir.",
       },
-    ],
-  },
-
-  /* =======================================================
-     İHBAR
-  ======================================================= */
-
-  ihbar: {
-    title:
-      "İhbar Tazminatı Hesaplama 2026",
-    description:
-      "İhbar tazminatı hesaplama aracı ile çalışma süresine göre ihbar süresini ve tahmini ihbar tazminatını hesaplayın.",
-    intro:
-      "Hizmet sürenizi ve ücret bilgilerinizi girerek temel ihbar sürenizi ve tahmini ihbar tazminatınızı hesaplayabilirsiniz.",
-    howItWorks: [
-      "Brüt ücretinizi girin.",
-      "İşe giriş ve çıkış tarihlerini seçin.",
-      "Varsa düzenli yan haklarınızı girin.",
-      "İhbar süresini otomatik olarak görüntüleyin.",
-      "Tahmini tazminat tutarını inceleyin.",
-    ],
-    faqs: [
       {
         question:
           "İhbar süresi nasıl belirlenir?",
@@ -541,28 +495,6 @@ const seoContents: Record<string, SeoContent> = {
         answer:
           "İhbar tazminatı ücret niteliğinde değerlendirilebildiğinden ilgili vergi ve kesintiler ödeme koşullarına göre değişebilir.",
       },
-    ],
-  },
-
-  /* =======================================================
-     KIDEM + İHBAR
-  ======================================================= */
-
-  "kidem-ihbar": {
-    title:
-      "Kıdem ve İhbar Tazminatı Hesaplama 2026",
-    description:
-      "Kıdem ve ihbar tazminatınızı tek ekranda hesaplayın. Çalışma süresi, kıdeme esas ücret, ihbar süresi ve toplam tahmini tazminatı görün.",
-    intro:
-      "Kıdem + İhbar hesaplama aracımız, iki tazminatı aynı ekranda ayrı ayrı değerlendirmenize yardımcı olur.",
-    howItWorks: [
-      "Son brüt ücretinizi girin.",
-      "İşe giriş ve çıkış tarihlerini seçin.",
-      "Varsa düzenli yan hakları girin.",
-      "Gerekliyse kümülatif vergi matrahını girin.",
-      "Kıdem, ihbar ve toplam sonuçları görüntüleyin.",
-    ],
-    faqs: [
       {
         question:
           "Kıdem ve ihbar tazminatı aynı şey midir?",
@@ -1120,7 +1052,6 @@ seoContents.bes = {
 const APP_CATEGORY: Record<string, string> = {
   calisan: "FinanceApplication",
   finans: "FinanceApplication",
-  saglik: "HealthApplication",
   egitim: "EducationalApplication",
   gunluk: "UtilitiesApplication",
 };

@@ -19,7 +19,7 @@ export default function Footer() {
         <nav aria-label="Hesaplama araçları">
           <strong>Popüler Araçlar</strong>
           <Link href="/hesaplamalar/net-maas">Net Maaş Hesaplama</Link>
-          <Link href="/hesaplamalar/kidem">Kıdem Tazminatı</Link>
+          <Link href="/hesaplamalar/kidem-ihbar">Kıdem Tazminatı</Link>
           <Link href="/hesaplamalar/kdv">KDV Hesaplama</Link>
           <Link href="/hesaplamalar/kredi-borc">Kredi Hesaplama</Link>
         </nav>

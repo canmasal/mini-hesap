@@ -4,7 +4,6 @@ export const categories = [
   { id: "finans", label: "Finans & Kredi" },
   { id: "gunluk", label: "Günlük Hesaplar" },
   { id: "egitim", label: "Eğitim & Sınav" },
-  { id: "saglik", label: "Sağlık" },
 ] as const;
 
 export type CategoryId = (typeof categories)[number]["id"];
@@ -30,35 +29,8 @@ export const calculators = [
       "Almak istediğiniz net maaşın brüt karşılığını, SGK ve vergi kesintileriyle birlikte hesaplayın.",
   },
 
-  {
-    slug: "vucut-kitle-indeksi",
-    icon: "⚖️",
-    title: "Vücut Kitle İndeksi (VKİ) Hesaplama",
-    category: "saglik",
-    keywords: ["vki", "bmi", "ideal kilo", "boy kilo", "obezite", "vücut kitle"],
-    description:
-      "Boy ve kilonuza göre VKİ değerinizi, zayıf-normal-obez sınıfınızı ve ideal kilo aralığınızı öğrenin.",
-  },
 
-  {
-    slug: "gebelik-haftasi",
-    icon: "🤰",
-    title: "Gebelik Haftası ve Doğum Tarihi Hesaplama",
-    category: "saglik",
-    keywords: ["gebelik haftası", "doğum tarihi", "hamilelik", "son adet tarihi", "trimester"],
-    description:
-      "Son adet tarihinize göre kaçıncı gebelik haftasında olduğunuzu ve tahmini doğum tarihinizi hesaplayın.",
-  },
 
-  {
-    slug: "kalori-ihtiyaci",
-    icon: "🥗",
-    title: "Günlük Kalori İhtiyacı Hesaplama",
-    category: "saglik",
-    keywords: ["kalori", "bmh", "bazal metabolizma", "diyet", "makro", "protein"],
-    description:
-      "Yaş, boy, kilo ve aktivitenize göre günlük kalori ihtiyacınızı ve protein-yağ-karbonhidrat miktarınızı bulun.",
-  },
 
   {
     slug: "yuzde",
@@ -150,25 +122,7 @@ export const calculators = [
       "Motor hacmi, model yılı ve taşıt değerine göre yıllık MTV tutarınızı ve taksitlerinizi hesaplayın.",
   },
 
-  {
-    slug: "ideal-kilo",
-    icon: "🎯",
-    title: "İdeal Kilo Hesaplama",
-    category: "saglik",
-    keywords: ["ideal kilo", "boya göre kilo", "kaç kilo olmalıyım", "devine", "sağlıklı kilo"],
-    description:
-      "Boy ve cinsiyetinize göre ideal kilonuzu ve VKİ'ye dayalı sağlıklı kilo aralığınızı hesaplayın.",
-  },
 
-  {
-    slug: "adet-takvimi",
-    icon: "🗓️",
-    title: "Adet Günü Hesaplama (Regl Takvimi)",
-    category: "saglik",
-    keywords: ["adet günü", "regl takvimi", "yumurtlama", "doğurgan dönem", "adet gecikmesi", "döngü"],
-    description:
-      "Son adetinize göre sonraki regl tarihinizi, yumurtlama gününüzü ve doğurgan dönemi hesaplayın.",
-  },
 
   {
     slug: "isveren-maliyeti",
@@ -240,15 +194,6 @@ export const calculators = [
       "Kredinizi bugün kapatırsanız ödeyeceğiniz tutarı, erken ödeme tazminatını ve kurtulacağınız faizi hesaplayın.",
   },
 
-  {
-    slug: "su-ihtiyaci",
-    icon: "💧",
-    title: "Günlük Su İhtiyacı Hesaplama",
-    category: "saglik",
-    keywords: ["su ihtiyacı", "günde kaç litre su", "kaç bardak su", "sıvı ihtiyacı", "kiloya göre su"],
-    description:
-      "Kilonuza, egzersizinize ve havaya göre günde kaç litre ve kaç bardak su içmeniz gerektiğini hesaplayın.",
-  },
 
   /* ---------------- Eğitim & Sınav ---------------- */
 
@@ -352,34 +297,16 @@ export const calculators = [
       "Aylık brüt ücret, fazla mesai saati ve katsayı üzerinden tahmini fazla mesai ücretini hesaplayın.",
   },
 
-  {
-    slug: "kidem",
-    icon: "💼",
-    title: "Kıdem Tazminatı",
-    category: "calisan",
-    keywords: ["kıdem", "tazminat", "işten çıkış", "hizmet süresi"],
-    description:
-      "Çalışma süresi, brüt ücret ve düzenli yan haklara göre tahmini kıdem tazminatınızı hesaplayın.",
-  },
 
-  {
-    slug: "ihbar",
-    icon: "📋",
-    title: "İhbar Tazminatı",
-    category: "calisan",
-    keywords: ["ihbar", "tazminat", "bildirim süresi", "fesih"],
-    description:
-      "Çalışma sürenize ve ücretinize göre tahmini ihbar tazminatınızı hesaplayın.",
-  },
 
   {
     slug: "kidem-ihbar",
     icon: "🤝",
-    title: "Kıdem + İhbar Birlikte",
+    title: "Kıdem ve İhbar Tazminatı",
     category: "calisan",
-    keywords: ["kıdem", "ihbar", "tazminat", "toplam"],
+    keywords: ["kıdem", "kıdem tazminatı", "ihbar", "ihbar tazminatı", "ihbar süresi", "tazminat", "işten çıkış", "fesih"],
     description:
-      "Kıdem ve ihbar tazminatınızı aynı ekranda ayrı ayrı ve birlikte hesaplayın.",
+      "Kıdem tazminatınızı, ihbar sürenizi ve ihbar tazminatınızı tek ekranda ayrı ayrı ve toplam olarak hesaplayın.",
   },
 
   {
@@ -581,35 +508,8 @@ export const calculators = [
       "Kredi tutarı, faiz ve vadeye göre aylık taksit, toplam faiz, toplam geri ödeme ve ödeme planını hesaplayın.",
   },
 
-  {
-    slug: "kripto-kar-zarar",
-    icon: "🪙",
-    title: "Kripto Kâr/Zarar ve Ortalama Maliyet",
-    category: "finans",
-    keywords: ["kripto", "bitcoin", "ortalama maliyet", "kâr zarar", "coin", "komisyon", "başa baş"],
-    description:
-      "Farklı fiyatlardan yaptığınız kripto alımlarının ortalama maliyetini, komisyon dahil kâr/zararınızı ve başa baş satış fiyatını hesaplayın.",
-  },
 
-  {
-    slug: "etkilesim-orani",
-    icon: "📣",
-    title: "Sosyal Medya Etkileşim Oranı",
-    category: "gunluk",
-    keywords: ["etkileşim oranı", "engagement rate", "instagram", "tiktok", "takipçi", "beğeni", "influencer"],
-    description:
-      "Beğeni, yorum, paylaşım ve kaydetme sayılarınızla Instagram, TikTok ve diğer platformlardaki etkileşim oranınızı takipçiye ve erişime göre hesaplayın.",
-  },
 
-  {
-    slug: "youtube-geliri",
-    icon: "▶️",
-    title: "YouTube İzlenme Geliri (RPM/CPM)",
-    category: "finans",
-    keywords: ["youtube", "izlenme geliri", "rpm", "cpm", "adsense", "youtuber", "kanal geliri"],
-    description:
-      "Aylık izlenme ve RPM ya da CPM değerinize göre YouTube kanalınızın tahmini günlük, aylık ve yıllık reklam gelirini hesaplayın.",
-  },
 
   {
     slug: "arac-deger-kaybi",
@@ -631,25 +531,7 @@ export const calculators = [
       "Evde ve hızlı şarjda 100 km maliyetini, tam şarj ücretini ve benzinli/dizel araca göre yıllık tasarrufunuzu hesaplayın.",
   },
 
-  {
-    slug: "arac-karsilastirma",
-    icon: "🚗",
-    title: "Araç Karşılaştırma (Toplam Maliyet)",
-    category: "gunluk",
-    keywords: ["araç karşılaştırma", "araç kıyaslama", "araba kıyasla", "toplam sahip olma maliyeti", "km maliyeti", "hangi araba"],
-    description:
-      "İki aracı alış fiyatı, yakıt, sigorta, MTV, bakım ve değer kaybıyla karşılaştırın; hangisinin toplamda daha ekonomik olduğunu görün.",
-  },
 
-  {
-    slug: "araba-kiyaslama",
-    icon: "🆚",
-    title: "Araba Kıyaslama (Teknik Özellik ve Fiyat)",
-    category: "gunluk",
-    keywords: ["araba kıyaslama", "araç kıyasla", "araba karşılaştırma", "model karşılaştırma", "teknik özellik", "beygir", "bagaj", "fiyat listesi"],
-    description:
-      "İki aracın motor gücü, torku, tüketimi, ölçüleri, bagaj hacmi ve güncel liste fiyatını yan yana karşılaştırın; hangi özellikte hangisinin önde olduğunu görün.",
-  },
 
   {
     slug: "birim-fiyat",
@@ -682,20 +564,11 @@ const RELATED: Record<string, string[]> = {
   mevduat: ["bilesik-faiz", "enflasyon"],
   bes: ["bilesik-faiz", "mevduat"],
   "bilesik-faiz": ["mevduat", "enflasyon", "bes"],
-  "kalori-ihtiyaci": ["su-ihtiyaci", "ideal-kilo"],
-  "ideal-kilo": ["su-ihtiyaci", "vucut-kitle-indeksi"],
-  "vucut-kitle-indeksi": ["ideal-kilo", "su-ihtiyaci"],
-  "su-ihtiyaci": ["kalori-ihtiyaci", "ideal-kilo", "vucut-kitle-indeksi"],
-  "kripto-kar-zarar": ["bilesik-faiz", "enflasyon", "yuzde"],
-  "etkilesim-orani": ["youtube-geliri", "yuzde"],
-  "youtube-geliri": ["etkilesim-orani", "serbest-meslek-makbuzu", "gelir-vergisi"],
-  "arac-deger-kaybi": ["arac-karsilastirma", "mtv", "enflasyon"],
-  "elektrikli-arac-sarj": ["arac-karsilastirma", "yakit-maliyeti"],
-  "arac-karsilastirma": ["araba-kiyaslama", "elektrikli-arac-sarj", "arac-deger-kaybi"],
-  "araba-kiyaslama": ["arac-karsilastirma", "elektrikli-arac-sarj", "arac-deger-kaybi"],
+  "arac-deger-kaybi": ["mtv", "enflasyon"],
+  "elektrikli-arac-sarj": ["yakit-maliyeti"],
   "birim-fiyat": ["indirim", "yuzde", "kdv"],
-  "yakit-maliyeti": ["elektrikli-arac-sarj", "arac-karsilastirma"],
-  mtv: ["arac-karsilastirma", "arac-deger-kaybi"],
+  "yakit-maliyeti": ["elektrikli-arac-sarj"],
+  mtv: ["arac-deger-kaybi"],
 };
 
 /** Aynı kategorideki diğer araçlar (iç link + keşif için) */

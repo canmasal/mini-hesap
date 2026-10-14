@@ -14,7 +14,7 @@ function fallbackReply(message: string) {
     return "Net maaşınızı hesaplamak için brüt maaş, ay ve varsa kümülatif vergi matrahı bilgisi gerekir. MiniHesap'taki Net Maaş Hesaplama aracını açıp sonucu kontrol edebilirsiniz. Hesap sonucu tahminidir; bordronuz için işvereninizin bordro birimine danışın.";
   }
   if (text.includes("kıdem") || text.includes("kidem") || text.includes("tazminat")) {
-    return "Kıdem hesabında çalışma süresi, giydirilmiş brüt ücret ve güncel kıdem tavanı önemlidir. Kıdem Tazminatı Hesaplama aracımızla tahmini sonucu görebilirsiniz. İşten ayrılış nedeni ve resmi kayıtlar sonucu değiştirebilir.";
+    return "Kıdem hesabında çalışma süresi, giydirilmiş brüt ücret ve güncel kıdem tavanı önemlidir. Kıdem ve İhbar Tazminatı Hesaplama aracımızla tahmini sonucu görebilirsiniz. İşten ayrılış nedeni ve resmi kayıtlar sonucu değiştirebilir.";
   }
   if (text.includes("kdv") || text.includes("vergi")) {
     return "KDV hesabında tutarın dahil mi hariç mi olduğu ve uygulanacak oran belirleyicidir. KDV Hesaplama aracında bu iki seçeneği ayrı ayrı inceleyebilirsiniz.";

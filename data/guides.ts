@@ -13,7 +13,6 @@ import { ekGuides } from "@/data/guidesEk";
 import { engelliGuides } from "@/data/guidesEngelli";
 import { finansGuides } from "@/data/guidesFinans";
 import { guncelGuides } from "@/data/guidesGuncel";
-import { saglikGuides } from "@/data/guidesSaglik";
 import { vergiGuides } from "@/data/guidesVergi";
 
 export type GuideSection = {
@@ -28,7 +27,7 @@ export type Guide = {
   /** Sayfa başlığı (SEO) */
   metaTitle: string;
   description: string;
-  category: "Çalışan Hakları" | "Finans" | "Vergi" | "Günlük" | "Sağlık";
+  category: "Çalışan Hakları" | "Finans" | "Vergi" | "Günlük";
   icon: string;
   /** Yayın tarihi (ISO) */
   published: string;
@@ -60,7 +59,7 @@ const coreGuides: Guide[] = [
     published: "2026-09-11",
     updated: "2026-09-11",
     readingMinutes: 7,
-    tool: { slug: "kidem", label: "Kıdem Tazminatı Hesaplama" },
+    tool: { slug: "kidem-ihbar", label: "Kıdem ve İhbar Tazminatı Hesaplama" },
     intro:
       "Kıdem tazminatı, en az bir yıl çalıştıktan sonra iş sözleşmesi kanunda sayılan nedenlerle sona eren işçiye ödenen toplu paradır. Tutarı belirleyen üç şey vardır: çalışma süreniz, giydirilmiş brüt ücretiniz ve dönemin kıdem tavanı. Bu rehberde üçünü de örneklerle açıklıyoruz.",
     sections: [
@@ -281,7 +280,7 @@ const coreGuides: Guide[] = [
     published: "2026-09-11",
     updated: "2026-09-11",
     readingMinutes: 5,
-    tool: { slug: "ihbar", label: "İhbar Tazminatı Hesaplama" },
+    tool: { slug: "kidem-ihbar", label: "Kıdem ve İhbar Tazminatı Hesaplama" },
     intro:
       "İhbar tazminatı, iş sözleşmesini bildirim süresine uymadan sona erdiren tarafın diğer tarafa ödediği tutardır. Kıdem tazminatının aksine bu tazminat çift yönlüdür: usulsüz ayrılan işçi de işverene ihbar tazminatı ödemek zorunda kalabilir.",
     sections: [
@@ -578,7 +577,6 @@ export const guides: Guide[] = [
   ...calisanGuides,
   ...finansGuides,
   ...vergiGuides,
-  ...saglikGuides,
   ...ekGuides,
   ...araclarGuides,
   ...engelliGuides,
