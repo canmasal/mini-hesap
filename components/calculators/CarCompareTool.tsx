@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 
 import type { CarVersion } from "@/data/cars/types";
+import CarVisual from "@/components/cars/CarVisual";
 import { carLabel, compareField, FIELD_GROUPS, formatField, isEmptyForBoth, score } from "@/lib/cars/compare";
 
 type Tree = { brand: string; models: { model: string; versions: CarVersion[] }[] }[];
@@ -40,59 +41,82 @@ function Picker({
   const versions = models.find((m) => m.model === model)?.versions ?? [];
 
   return (
-    <fieldset style={{ border: "1px solid var(--line)", borderRadius: 16, padding: 16, margin: 0, display: "grid", gap: 12 }}>
-      <legend style={{ fontWeight: 800, padding: "0 6px" }}>{title}</legend>
-      <label className="field">
-        Marka
-        <select
-          value={brand}
-          onChange={(e) => {
-            setBrand(e.target.value);
-            setModel("");
-            onChange(null);
-          }}
-        >
-          <option value="">Marka seçin</option>
-          {tree.map((b) => (
-            <option key={b.brand} value={b.brand}>{b.brand}</option>
-          ))}
-        </select>
-      </label>
-      <label className="field">
-        Model
-        <select
-          value={model}
-          disabled={!brand}
-          onChange={(e) => {
-            const m = e.target.value;
-            setModel(m);
-            const list = models.find((x) => x.model === m)?.versions ?? [];
-            onChange(list.length === 1 ? list[0] : null);
-          }}
-        >
-          <option value="">Model seçin</option>
-          {models.map((m) => (
-            <option key={m.model} value={m.model}>{m.model}</option>
-          ))}
-        </select>
-      </label>
-      <label className="field">
-        Versiyon
-        <select
-          value={value?.id ?? ""}
-          disabled={!model}
-          onChange={(e) => onChange(versions.find((v) => v.id === e.target.value) ?? null)}
-        >
-          <option value="">Versiyon seçin</option>
-          {versions.map((v) => (
-            <option key={v.id} value={v.id}>
-              {v.version}
-              {v.priceTl ? ` – ${v.priceTl.toLocaleString("tr-TR")} TL` : ""}
-            </option>
-          ))}
-        </select>
-      </label>
-    </fieldset>
+    <section className="car-card" aria-label={title}>
+      <div className="car-card-label">{title}</div>
+      {value ? (
+        <div className="car-card-head">
+          <CarVisual car={value} />
+          <div className="car-card-name">{value.brand} {value.model}</div>
+          <div className="car-card-version">{value.version}</div>
+          <div className="car-card-tags">
+            {value.priceTl ? <span className="car-tag car-tag-price">{value.priceTl.toLocaleString("tr-TR")} TL</span> : null}
+            <span className="car-tag">{value.fuel}</span>
+            {value.powerHp ? <span className="car-tag">{value.powerHp} HP</span> : null}
+            <span className="car-tag">{value.body}</span>
+          </div>
+        </div>
+      ) : (
+        <div className="car-card-empty">
+          <span className="car-card-search" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
+          </span>
+          <strong>Araba seç</strong>
+          <span>Aşağıdan marka, model ve versiyonu seçin</span>
+        </div>
+      )}
+      <div className="car-card-selects">
+        <label className="field">
+          Marka
+          <select
+            value={brand}
+            onChange={(e) => {
+              setBrand(e.target.value);
+              setModel("");
+              onChange(null);
+            }}
+          >
+            <option value="">Marka seçin</option>
+            {tree.map((b) => (
+              <option key={b.brand} value={b.brand}>{b.brand}</option>
+            ))}
+          </select>
+        </label>
+        <label className="field">
+          Model
+          <select
+            value={model}
+            disabled={!brand}
+            onChange={(e) => {
+              const m = e.target.value;
+              setModel(m);
+              const list = models.find((x) => x.model === m)?.versions ?? [];
+              onChange(list.length === 1 ? list[0] : null);
+            }}
+          >
+            <option value="">Model seçin</option>
+            {models.map((m) => (
+              <option key={m.model} value={m.model}>{m.model}</option>
+            ))}
+          </select>
+        </label>
+        <label className="field car-field-wide">
+          Versiyon
+          <select
+            value={value?.id ?? ""}
+            disabled={!model}
+            onChange={(e) => onChange(versions.find((v) => v.id === e.target.value) ?? null)}
+          >
+            <option value="">Versiyon seçin</option>
+            {versions.map((v) => (
+              <option key={v.id} value={v.id}>
+                {v.version}
+                {v.priceTl ? ` – ${v.priceTl.toLocaleString("tr-TR")} TL` : ""}
+              </option>
+            ))}
+          </select>
+        </label>
+      </div>
+    </section>
   );
 }
 
@@ -144,26 +168,24 @@ export default function CarCompareTool({
   const result = a && b ? score(a, b) : null;
 
   return (
-    <div className="calc-box">
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 16 }}>
-        <Picker tree={tree} value={a} onChange={setA} title="1. araç" />
-        <Picker tree={tree} value={b} onChange={setB} title="2. araç" />
+    <div className="calc-box car-compare-box">
+      <div className="car-duel">
+        <Picker tree={tree} value={a} onChange={setA} title="1. araba" />
+        <button
+          type="button"
+          className="car-swap"
+          aria-label="Araçların yerini değiştir"
+          title="Yer değiştir"
+          disabled={!a && !b}
+          onClick={() => {
+            setA(b);
+            setB(a);
+          }}
+        >
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 4 3 8l4 4" /><path d="M3 8h13" /><path d="m17 20 4-4-4-4" /><path d="M21 16H8" /></svg>
+        </button>
+        <Picker tree={tree} value={b} onChange={setB} title="2. araba" />
       </div>
-      {a && b && (
-        <div style={{ marginTop: 12 }}>
-          <button
-            type="button"
-            className="btn btn-outline"
-            style={{ padding: "9px 14px", fontSize: 14 }}
-            onClick={() => {
-              setA(b);
-              setB(a);
-            }}
-          >
-            ⇄ Yer değiştir
-          </button>
-        </div>
-      )}
 
       {a && b && result ? (
         <div style={{ marginTop: 22, display: "grid", gap: 14 }}>
