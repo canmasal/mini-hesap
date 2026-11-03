@@ -12,7 +12,7 @@
 export const PARAMETERS_YEAR = 2026;
 
 /** Rakamların resmî kaynaklardan en son kontrol edildiği tarih (ISO). */
-export const LAST_VERIFIED = "2026-10-31";
+export const LAST_VERIFIED = "2026-11-03";
 
 export type Source = { label: string; url: string };
 
@@ -483,11 +483,11 @@ export const DISABLED_VEHICLE = {
  */
 export const RENT_INCREASE = {
   /** Kira dönemi bu ayda yenilenenler için geçerli azami oran (yüzde) */
-  month: "Ekim 2026",
-  maxRatePercent: 31.49,
+  month: "Kasım 2026",
+  maxRatePercent: 31.23,
   source: {
-    label: "TEDB – 2026 Ekim ayı konut ve işyeri kira artış oranı (TÜİK)",
-    url: "https://www.tedb.org.tr/duyurular/2026-ekim-ayi-konut-ve-isyeri-kira-artis-orani",
+    label: "TÜİK Ekim 2026 TÜFE – 12 aylık ortalama değişim %31,23 (CNBC-e)",
+    url: "https://www.cnbce.com/veriler/tuik-duyurdu-ekim-ayi-enflasyon-verisi-belli-oldu-h40884",
   } satisfies Source,
 } as const;
 
