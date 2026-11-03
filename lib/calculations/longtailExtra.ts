@@ -236,7 +236,7 @@ export function creditCardOf(amount: number, minRate: number) {
 
 /* ---------------- Kira artışı ---------------- */
 
-export function rentIncreaseOf(rent: number, ratePct = RENT_INCREASE.maxRatePercent) {
+export function rentIncreaseOf(rent: number, ratePct: number = RENT_INCREASE.maxRatePercent) {
   const increase = rent * (ratePct / 100);
   return { rate: ratePct, increase, newRent: rent + increase, yearlyDifference: increase * 12 };
 }
