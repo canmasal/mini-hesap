@@ -26,6 +26,7 @@ import {
   yearlyNetOf,
 } from "@/lib/calculations/longtail";
 import { SITE_URL } from "@/lib/site";
+import { extraContentFor } from "./extra";
 
 /* Listede olmayan adresler gerçek 404 döner (soft 404 önlenir). */
 export const dynamicParams = false;
@@ -152,7 +153,9 @@ function loanContent(amount: number, months: number) {
   return { answer, faqs, table, ref, schedule, terms };
 }
 
-function contentFor(page: LongtailPage) {
+function contentFor(page: LongtailPage): { answer: string; faqs: Faq[] } {
+  const extra = extraContentFor(page);
+  if (extra) return extra;
   if (page.kind === "net-maas") return netSalaryContent(page.input.gross);
   if (page.kind === "kdv") return kdvContent(page.input.amount);
   return loanContent(page.input.amount, page.input.months);
@@ -170,11 +173,14 @@ export async function generateMetadata({
 
   /* Başlık ve açıklama arama sonucunda doğrudan cevabı gösterir
      (tıklama oranı için); aramalarda "TL" yazıldığı için ₺ yerine TL. */
+  const extra = extraContentFor(page);
   const { answer } = contentFor(page);
   const toTl = (text: string) => text.replace(/ ₺/g, " TL");
   const description = toTl(
     `${answer} ${
-      page.kind === "net-maas"
+      extra
+        ? extra.descSuffix
+        : page.kind === "net-maas"
         ? "Aylık net maaş tablosu ve kesinti dökümü."
         : page.kind === "kdv"
           ? "%1, %10, %20 tabloları."
@@ -184,7 +190,9 @@ export async function generateMetadata({
 
   const short = (value: number) => `${Math.round(value).toLocaleString("tr-TR")} TL`;
   let title = page.metaTitle;
-  if (page.kind === "net-maas") {
+  if (extra) {
+    title = extra.title;
+  } else if (page.kind === "net-maas") {
     title = `${trNum(page.input.gross)} TL Brüt Kaç Net? ${Y}: ${short(netSalaryOf(page.input.gross).net)}`;
   } else if (page.kind === "kdv") {
     const r20 = kdvTableOf(page.input.amount).find((r) => r.rate === 20)!;
@@ -201,7 +209,7 @@ export async function generateMetadata({
     alternates: { canonical: `/hesapla/${slug}` },
     openGraph: { title, description, url: `/hesapla/${slug}` },
     /*
-     * Tek şablondan üretilen 58 hazır hesap sayfası, AdSense incelemesinde
+     * Tek şablondan üretilen hazır hesap sayfaları, AdSense incelemesinde
      * "düşük değerli içerik" kararına yol açan kalıp sayfa örüntüsü. Ziyaretçi
      * için sayfalar kalıyor ama arama motoruna kapalı; reklam da gösterilmiyor.
      */
@@ -220,6 +228,7 @@ export default async function LongtailPage({
   if (!page) notFound();
 
   const others = neighbours(page);
+  const extra = extraContentFor(page);
   const content = contentFor(page);
 
   const faqSchema = {
@@ -261,6 +270,7 @@ export default async function LongtailPage({
                 .sort((a, b) => a - b)}
             />
           )}
+          {extra?.block}
           {page.kind === "kredi" && (
             <LoanBlock
               amount={page.input.amount}
