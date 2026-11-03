@@ -5,6 +5,7 @@ import Link from "next/link";
 import AdSlot from "@/components/AdSlot";
 import Breadcrumb from "@/components/Breadcrumb";
 import { guides, findGuide } from "@/data/guides";
+import { longtailPages } from "@/data/longtail";
 import { SITE_URL } from "@/lib/site";
 
 /* Listede olmayan adresler render edilmeden gerçek 404 döner. Aksi hâlde
@@ -112,6 +113,9 @@ export default async function GuidePage({
       acceptedAnswer: { "@type": "Answer", text: f.answer },
     })),
   };
+
+  /* Rehberin aracına ait hazır örnek hesap sayfaları (/hesapla/*) */
+  const examples = longtailPages.filter((p) => p.tool === guide.tool.slug).slice(0, 8);
 
   const related = guide.related
     .map((s) => findGuide(s))
@@ -253,6 +257,19 @@ export default async function GuidePage({
               {guide.tool.label} →
             </Link>
           </div>
+
+          {examples.length > 0 && (
+            <section style={{ marginTop: 34 }}>
+              <h2 style={{ fontSize: 20 }}>Hazır örnek hesaplamalar</h2>
+              <ul className="lt-links">
+                {examples.map((p) => (
+                  <li key={p.slug}>
+                    <Link href={`/hesapla/${p.slug}`}>{p.question}</Link>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
 
           <p className="notice notice-warn" style={{ marginTop: 26 }}>
             <strong>Bilgilendirme:</strong> Bu rehber genel bilgilendirme

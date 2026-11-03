@@ -13,6 +13,7 @@ import { ekGuides } from "@/data/guidesEk";
 import { engelliGuides } from "@/data/guidesEngelli";
 import { finansGuides } from "@/data/guidesFinans";
 import { guncelGuides } from "@/data/guidesGuncel";
+import { hesapGuides } from "@/data/guidesHesap";
 import { vergiGuides } from "@/data/guidesVergi";
 
 export type GuideSection = {
@@ -263,7 +264,7 @@ const coreGuides: Guide[] = [
           "Evet. Brüt maaşı ne olursa olsun tüm ücretliler, asgari ücrete karşılık gelen kısım için gelir vergisi ve damga vergisi istisnasından yararlanır.",
       },
     ],
-    related: ["kidem-tazminati-nasil-hesaplanir", "kdv-nedir-nasil-hesaplanir"],
+    related: ["netten-brute-maas-nasil-hesaplanir", "kidem-tazminati-nasil-hesaplanir", "kdv-nedir-nasil-hesaplanir"],
   },
 
   /* =======================================================
@@ -565,7 +566,7 @@ const coreGuides: Guide[] = [
           "Tapu harcı, ekspertiz, sigortalar ve banka masrafları toplamda konut bedelinin %4-6'sını bulur. Emlakçı komisyonu, taşınma ve tadilat da eklendiğinde %8-10'a çıkabilir.",
       },
     ],
-    related: ["kdv-nedir-nasil-hesaplanir", "brutten-nete-maas-hesaplama"],
+    related: ["tapu-harci-nasil-hesaplanir", "kdv-nedir-nasil-hesaplanir", "brutten-nete-maas-hesaplama"],
   },
 ];
 
@@ -581,6 +582,7 @@ export const guides: Guide[] = [
   ...araclarGuides,
   ...engelliGuides,
   ...dijitalAracGuides,
+  ...hesapGuides,
 ];
 
 export function findGuide(slug: string) {
