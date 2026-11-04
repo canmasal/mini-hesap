@@ -3,8 +3,7 @@ import { NextResponse } from "next/server";
 import { ENV_SITE_URL } from "@/lib/site";
 import { getOrderStore } from "@/lib/orders/store";
 import { safeEqual } from "@/lib/orders/tokens";
-import { DOWNLOAD_WINDOW_DAYS } from "@/lib/orders/types";
-import { sendOrderEmail } from "@/lib/mail/send";
+import { confirmOrderPayment } from "@/lib/orders/confirm";
 
 /**
  * Havale/EFT siparişini elle onaylama.
@@ -79,23 +78,10 @@ async function handle(request: Request) {
     });
   }
 
-  const expires = new Date();
-  expires.setDate(expires.getDate() + DOWNLOAD_WINDOW_DAYS);
-
-  const updated = await store.update(orderId, {
-    status: "odendi",
-    providerRef: `havale_${orderId}`,
-    paidAt: new Date().toISOString(),
-    downloadExpiresAt: expires.toISOString(),
-  });
-
   const baseUrl =
     ENV_SITE_URL ?? new URL(request.url).origin;
 
-  const mail = await sendOrderEmail(
-    updated ?? order,
-    `${baseUrl}/siparis/${orderId}`
-  );
+  const { expires, emailSent } = await confirmOrderPayment(order, baseUrl);
 
   return NextResponse.json({
     success: true,
@@ -106,7 +92,7 @@ async function handle(request: Request) {
       amount: order.amountKurus / 100,
       email: order.email,
     },
-    emailSent: mail.sent,
+    emailSent,
     downloadUntil: expires.toISOString().slice(0, 10),
   });
 }

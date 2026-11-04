@@ -12,6 +12,7 @@ export default function robots(): MetadataRoute.Robots {
        * - /api/      → sunucu API uç noktaları
        * - /siparis/  → her kullanıcıya özel sipariş sayfaları
        * - /private/  → yetkisiz erişime kapalı içerik
+       * - /yonetim/  → şifreli yönetim paneli (sayfaları ayrıca noindex)
        *
        * /satin-al/* burada yok: o sayfalar generateMetadata'da
        * robots: { index: false } ile kendi kendine kapatılır.
@@ -20,6 +21,7 @@ export default function robots(): MetadataRoute.Robots {
         "/api/",
         "/siparis/",
         "/private/",
+        "/yonetim/",
       ],
     },
 
